@@ -1,0 +1,3 @@
+HeroSiege
+HeroSiege.dll
+HeroSiege.Game1
