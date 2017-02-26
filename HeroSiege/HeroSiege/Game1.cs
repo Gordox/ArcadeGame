@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HeroSiege.GameWorld.map;
+using HeroSiege.Manager;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,6 +13,9 @@ namespace HeroSiege
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 #else
+
+        Tile test;
+
 		public override string GameDisplayName { get { return "HeroSiege"; } }
 #endif
 
@@ -35,7 +40,9 @@ namespace HeroSiege
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 #endif
+            ResourceManager.LoadResouces(Content);
 
+            test = new Tile(ResourceManager.GetTexture("BaseLayer",0), 32,32,32);
         }
 
       
@@ -59,7 +66,11 @@ namespace HeroSiege
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            
+            spriteBatch.Begin();
+
+            test.Draw(spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

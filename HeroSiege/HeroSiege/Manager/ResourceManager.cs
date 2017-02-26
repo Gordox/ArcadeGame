@@ -36,7 +36,7 @@ namespace HeroSiege.Manager
 
         public static TextureRegion GetTexture(string name, int id)
         {
-            return textures.GetTextureRegion(name);
+            return textures.GetTextureRegion(name, id);
         }
 
         public static SpriteFont GetFont(string name)
