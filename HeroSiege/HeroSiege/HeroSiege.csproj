@@ -75,8 +75,20 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AISystems\FUSM\" />
+    <Folder Include="AISystems\PathFinding\" />
+    <Folder Include="FEntity\Buildings\" />
+    <Folder Include="FEntity\Controllers\" />
+    <Folder Include="FEntity\Enemies\" />
+    <Folder Include="FEntity\Player\" />
+    <Folder Include="FGameObject\Items\NewFolder1\" />
+    <Folder Include="FGameObject\Projectiles\" />
+    <Folder Include="FInterFace\GUI\" />
+    <Folder Include="FInterFace\UI\" />
+    <Folder Include="Globals\" />
     <Folder Include="NewFolder1\" />
     <Folder Include="Scenes\" />
+    <Folder Include="Tools\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
