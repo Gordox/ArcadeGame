@@ -1,3 +1,36 @@
 ﻿Get textures from here:
 https://www.spriters-resource.com/pc_computer/warcraft2/
 
+Modes:
+easy, normal, Hard, extream
+__________________________________
+Player hero:
+Archer, Mage, Gryphon Rider, All melee later
+__________________________________
+Enimy units:
+
+__________________________________
+Settings:
+Volume?
+__________________________________
+Scenes:
+Start scene
+Game scene
+Win / lose scene white score
+Score scene
+__________________________________
+Sounds & Music:
+__________________________________
+In Game: (Change name later)
+Shop
+Teleport
+mini bosses
+__________________________________
+Buildnings:
+Hero castle
+Tower (Deffends the hero tower)
+Blockade for tower (will be the first to eat upp damage before the tower)
+Shop
+Enemy tower
+Enemy castle
+__________________________________

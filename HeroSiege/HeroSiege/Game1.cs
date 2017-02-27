@@ -14,7 +14,8 @@ namespace HeroSiege
         SpriteBatch spriteBatch;
 #else
 
-        Tile test;
+        //Tile test;
+        TileMap Test;
 
 		public override string GameDisplayName { get { return "HeroSiege"; } }
 #endif
@@ -42,7 +43,8 @@ namespace HeroSiege
 #endif
             ResourceManager.LoadResouces(Content);
 
-            test = new Tile(ResourceManager.GetTexture("BaseLayer",0), 32,32,32);
+            //test = new Tile(ResourceManager.GetTexture("BaseLayer",0), 32,32,32);
+            Test = new TileMap(80, 150);
         }
 
       
@@ -68,7 +70,9 @@ namespace HeroSiege
 
             spriteBatch.Begin();
 
-            test.Draw(spriteBatch);
+            //test.Draw(spriteBatch);
+
+            Test.DrawMapTexture(spriteBatch);
 
             spriteBatch.End();
 

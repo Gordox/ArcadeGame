@@ -25,3 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Texture/Tiles/Wc2-Tiles.png
 
+#begin Assets/Maps/Map1.xml
+/copy:Assets/Maps/Map1.xml
+

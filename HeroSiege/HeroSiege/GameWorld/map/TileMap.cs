@@ -28,7 +28,8 @@ namespace HeroSiege.GameWorld.map
         {
             this.MapWakeblePath = new Tile[width, height];
             this.BackGroundTexture = new List<Tile>();
-
+            TileSize = 32;
+            LoadMapDataFromXMLFile("Name here later");
         }
 
 
@@ -70,7 +71,7 @@ namespace HeroSiege.GameWorld.map
 
         public void LoadMapDataFromXMLFile(string mapName)
         {
-            XDocument map = XDocument.Load(@"Content\MAPHERE");
+            XDocument map = XDocument.Load(@"Content\Assets\Maps\Map1.xml");
 
             var allElements = (from e in map.Descendants("data")
                                select new { name = e.Parent.Attribute("name").Value, data = (e.HasElements ? "" : e.Value) }).ToList();
@@ -99,7 +100,7 @@ namespace HeroSiege.GameWorld.map
 
                     switch (layername)
                     {
-                        case "Base":
+                        case "BaseLayer":
                             BackGroundTexture.Add(CreteTile(layername, id, x, y));
                             break;
                         default:

@@ -14,7 +14,9 @@ namespace HeroSiege.Manager.Resource
         private Dictionary<Tuple<string, int>, TextureRegion> tileTextureRegion; // Used only to store tile texture region
         private Texture2D tileTextureSummer;
 
+        //Layer Name for the Tile Texure
         const string BASE_LAYER_NAME = "BaseLayer";
+        const string HITBOX_LAYER_NAME = "HitBoxLayer";
 
         public void Load(ContentManager content)
         {
@@ -25,11 +27,11 @@ namespace HeroSiege.Manager.Resource
 
         private void LoadAssets(ContentManager content)
         {
-            //Load in all sprite sheets
+            //Load in all sprite sheets and Textures
 
             tileTextureSummer = content.Load<Texture2D>(@"Assets\Texture\Tiles\Wc2-Tiles");
 
-
+            //Add all textures and sprite to Dict
             AddTextureRegionToDict();
         }
 
@@ -39,15 +41,15 @@ namespace HeroSiege.Manager.Resource
             //Exapmle:
             //textureRegion["night"] = new TextureRegion(standTiles, 0, 0, 1, 1);
 
-
-
             //UI
 
             //Tiles
             AddAllTileRegionsToDict();
-            //Street
 
-            //farmland
+            //Player Heros
+
+
+
         }
 
         private void AddAllTileRegionsToDict()
