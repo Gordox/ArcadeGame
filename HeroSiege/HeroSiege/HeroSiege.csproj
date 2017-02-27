@@ -37,6 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FEntity\Entity.cs" />
+    <Compile Include="FEntity\StatsData.cs" />
     <Compile Include="FTexture2D\FAnimation\Animation.cs" />
     <Compile Include="FTexture2D\FAnimation\Animations.cs" />
     <Compile Include="FTexture2D\FAnimation\FrameAnimation.cs" />

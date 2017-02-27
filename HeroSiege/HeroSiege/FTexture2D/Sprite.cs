@@ -29,6 +29,8 @@ namespace HeroSiege.FTexture2D
 
         public float Rotation { get; set; }
 
+        public bool PauseAnimation { get; set; }
+
         private Vector2 SizeScale { get; set; }
 
         private Vector2 size;
@@ -59,10 +61,9 @@ namespace HeroSiege.FTexture2D
         public virtual void Update(float delta)
         {
             Animations.Update(delta);
-            if (Animations.HasNext())
-            {
+
+            if (Animations.HasNext() && !PauseAnimation)
                 SetRegion(Animations.GetRegion());
-            }
         }
 
         public virtual void Draw(SpriteBatch batch)
