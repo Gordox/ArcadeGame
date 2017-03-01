@@ -89,9 +89,9 @@
     <Folder Include="FEntity\Player\" />
     <Folder Include="FGameObject\Items\NewFolder1\" />
     <Folder Include="FGameObject\Projectiles\" />
-    <Folder Include="FInterFace\GUI\" />
-    <Folder Include="FInterFace\UI\" />
     <Folder Include="Globals\" />
+    <Folder Include="InterFace\GUI\" />
+    <Folder Include="InterFace\UI\" />
     <Folder Include="NewFolder1\" />
     <Folder Include="Scenes\" />
   </ItemGroup>
