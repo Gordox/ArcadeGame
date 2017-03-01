@@ -20,19 +20,25 @@ namespace HeroSiege.GameWorld.map
         /// </summary>
         public Tile[,] MapWakeblePath { get; private set; }
 
+        /// <summary>
+        /// Fog of war
+        /// </summary>
+        public Tile[,] FogOfWar { get; private set; }
+
         public string MapName { get; private set; }
 
         public int TileSize { get; private set; }
+        public int FogOfWarTileSize { get; private set; }
 
-        public TileMap(int width, int height, string mapName = null)
+        //----- Constructor -----//
+        public TileMap(string mapName = null)
         {
-            this.MapWakeblePath = new Tile[width, height];
-            this.BackGroundTexture = new List<Tile>();
             TileSize = 32;
-            LoadMapDataFromXMLFile("Name here later");
+            FogOfWarTileSize = 64;
+            LoadMapDataFromXMLFile(mapName);
         }
 
-
+        //----- Draw Map, fogofwar, wakeble tiles -----//
         public void DrawMapTexture(SpriteBatch SB)
         {
             foreach (Tile t in BackGroundTexture)
@@ -43,49 +49,53 @@ namespace HeroSiege.GameWorld.map
             }
         }
 
-
-        /// <summary>
-        /// The width of the wakeble path.
-        /// </summary>
-        public int Width
+        public void DrawFogOfWar(SpriteBatch SB)
         {
-            get { return MapWakeblePath.GetLength(1); }
-        }
+            for (int y = 0; y < FogOfWar.GetLength(0); y++)
+            {
+                for (int x = 0; x < FogOfWar.GetLength(1); x++)
+                {
+                    if (FogOfWar[y, x] == null)
+                        continue;
 
-        /// <summary>
-        /// The height of the wakeble path.
-        /// </summary>
-        public int Height
-        {
-            get { return MapWakeblePath.GetLength(0); }
-        }
-
-        public bool GetIfWakeble(int cellX, int cellY)
-        {
-            if (cellX < 0 || cellX > Width - 1 || cellY < 0 || cellY > Height - 1)
-                return false;
-
-            return MapWakeblePath[cellX, cellY].Wakeble;
+                    if (FogOfWar[x, y].Visibility == FogOfWarState.unexplored || 
+                        FogOfWar[x, y].Visibility == FogOfWarState.explored)
+                        FogOfWar[x, y].Draw(SB);
+                }
+            }
         }
 
 
+
+        //----- Initiator and Loadings -----//
         public void LoadMapDataFromXMLFile(string mapName)
         {
             XDocument map = XDocument.Load(@"Content\Assets\Maps\Map1.xml");
 
+            var mapSize = (from e in map.Descendants("map")
+                           select new { Width = e.Attribute("width").Value, Height = e.Attribute("height").Value }).ToList();
+
             var allElements = (from e in map.Descendants("data")
                                select new { name = e.Parent.Attribute("name").Value, data = (e.HasElements ? "" : e.Value) }).ToList();
+
+            InitMap(Int32.Parse(mapSize[0].Width), Int32.Parse(mapSize[0].Height));
 
             for (int i = 0; i < allElements.Count; i++)
             {
                 List<string> lines = allElements[i].data.Split('\n').ToList();
                 CreateMapFromXmlFile(allElements[i].name, lines);
             }
-
-
-
-            //CreateMapFromXmlFile(allElements); 0
         }
+
+        public void InitMap(int width, int height)
+        {
+            this.BackGroundTexture = new List<Tile>();
+            this.MapWakeblePath = new Tile[width, height];
+            this.FogOfWar = new Tile[width, height];
+        }
+
+
+        //----- Create Map, fogofwar, wakeble tiles -----//
         private void CreateMapFromXmlFile(string layername, List<string> lines) //Not done
         {
             for (int y = 0; y < lines.Count; y++)
@@ -101,29 +111,99 @@ namespace HeroSiege.GameWorld.map
                     switch (layername)
                     {
                         case "BaseLayer":
-                            BackGroundTexture.Add(CreteTile(layername, id, x, y));
+                            BackGroundTexture.Add(CreateTile(layername, id, x, y));
+                            break;
+
+                        case "IsWakeble":
+                            
+                            break;
+
+                        case "SomethingHere":
+
                             break;
                         default:
                             break;
                     }
+                }
+            }
+        }
 
-                    //Not done
+        private void CreateFogOfWar()
+        {
+            for (int y = 0; y < FogOfWar.GetLength(0); y++)
+            {
+                for (int x = 0; x < FogOfWar.GetLength(1); x++)
+                {
+                    FogOfWar[x, y] = CreateTile("FogOfWar",x,y); //Fix later
                 }
             }
         }
 
 
-        private Tile CreteTile(string Tilename, int id, int x, int y)
+        //----- Create Tile functions -----//
+        /// <summary>
+        /// Create a background tile
+        /// </summary>
+        /// <param name="Tilename"></param>
+        /// <param name="id"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private Tile CreateTile(string Tilename, int id, int x, int y)
         {
             return new Tile(ResourceManager.GetTexture(Tilename, id), x * TileSize + TileSize / 2,
                                                                  y * TileSize + TileSize / 2, TileSize);
         }
-        private Tile CreteTile(string Tilename, int x, int y)
+        /// <summary>
+        /// Creates a wakeble and non-wakeble tile
+        /// </summary>
+        /// <param name="Tilename"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="isWakeble"></param>
+        /// <returns></returns>
+        private Tile CreateTile(string Tilename, int x, int y, bool isWakeble)
         {
             return new Tile(ResourceManager.GetTexture(Tilename), x * TileSize + TileSize / 2,
-                                                                 y * TileSize + TileSize / 2, TileSize);
+                                                                 y * TileSize + TileSize / 2, TileSize, isWakeble);
+        }
+        /// <summary>
+        /// Create a fog of war tile
+        /// </summary>
+        /// <param name="Tilename"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private Tile CreateTile(string Tilename, int x, int y)
+        {
+            return new Tile(ResourceManager.GetTexture(Tilename), x * TileSize + TileSize / 2,
+                                                                 y * TileSize + TileSize / 2, TileSize, FogOfWarState.unexplored);
         }
 
 
+        //----- Geter or returners -----//
+        /// <summary>
+        /// The width of the wakeble path.
+        /// </summary>
+        public int Width
+        {
+            get { return MapWakeblePath.GetLength(1); }
+        }
+
+        /// <summary>
+        /// The height of the wakeble path.
+        /// </summary>
+        public int Height
+        {
+            get { return MapWakeblePath.GetLength(0); }
+        }
+        
+        public bool GetIfWakeble(int cellX, int cellY)
+        {
+            if (cellX < 0 || cellX > Width - 1 || cellY < 0 || cellY > Height - 1)
+                return false;
+
+            return MapWakeblePath[cellX, cellY].Wakeble;
+        }
     }
 }

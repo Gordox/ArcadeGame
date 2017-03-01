@@ -28,3 +28,9 @@
 #begin Assets/Maps/Map1.xml
 /copy:Assets/Maps/Map1.xml
 
+#begin Assets/Fonts/Arial_Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Assets/Fonts/Arial_Font.spritefont
+

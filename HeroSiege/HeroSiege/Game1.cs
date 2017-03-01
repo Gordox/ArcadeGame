@@ -1,5 +1,6 @@
 ﻿using HeroSiege.GameWorld.map;
 using HeroSiege.Manager;
+using HeroSiege.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,10 +14,9 @@ namespace HeroSiege
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 #else
-
         //Tile test;
         TileMap Test;
-
+        FPS_Counter fpsCounter;
 		public override string GameDisplayName { get { return "HeroSiege"; } }
 #endif
 
@@ -41,10 +41,10 @@ namespace HeroSiege
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 #endif
+            fpsCounter = new FPS_Counter();
             ResourceManager.LoadResouces(Content);
 
-            //test = new Tile(ResourceManager.GetTexture("BaseLayer",0), 32,32,32);
-            Test = new TileMap(80, 150);
+            Test = new TileMap();
         }
 
       
@@ -59,7 +59,10 @@ namespace HeroSiege
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 #endif
-           
+
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+
             base.Update(gameTime);
         }
 
@@ -74,6 +77,14 @@ namespace HeroSiege
 
             Test.DrawMapTexture(spriteBatch);
 
+            spriteBatch.End();
+
+            //Draw stats info ONLY!
+            spriteBatch.Begin();
+            if (DevTools.DevDebugMode)
+            {
+                fpsCounter.DrawFpsCount(gameTime, spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

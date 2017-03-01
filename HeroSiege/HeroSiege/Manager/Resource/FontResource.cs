@@ -11,10 +11,6 @@ namespace HeroSiege.Manager.Resource
     {
         private Dictionary<string, SpriteFont> fonts;
 
-        //EX
-        //public static SpriteFont DebugFont_Arial_12 { get; private set; }
-
-
         public void Load(ContentManager content)
         {
             this.fonts = new Dictionary<string, SpriteFont>();
@@ -24,6 +20,8 @@ namespace HeroSiege.Manager.Resource
         {
             //Exaple:
             //fonts["Arial_Font"] = content.Load<SpriteFont>(@"Assets\Fonts\Arial_Font");
+
+            fonts["Arial_Font"] = content.Load<SpriteFont>(@"Assets\Fonts\Arial_Font");
 
 
         }
