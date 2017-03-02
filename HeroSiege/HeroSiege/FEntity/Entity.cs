@@ -15,7 +15,7 @@ namespace HeroSiege.FEntity
 
         public Vector2 velocity { get; protected set; }
 
-        protected bool IsAlive { get; set; }
+        public bool IsAlive { get; set; }
 
         public Entity(TextureRegion region, float x, float y, float width, float height)
             : base(region, x, y, width, height)
@@ -23,6 +23,8 @@ namespace HeroSiege.FEntity
             this.IsAlive = true;
         }
 
+
+        //----- Updates-----//
         public override void Update(float delta)
         {
             base.Update(delta);
@@ -82,6 +84,9 @@ namespace HeroSiege.FEntity
             if (velocity.Length() > 0.0001f)
                 sprite.Rotation = (float)Math.Atan2(rotation.Y, rotation.X);// +Globals.ROT_OFFSET + rotationOffset;
         }
+
+
+
         private void CheckIsAlive()
         {
             if (Stats.Health <= 0)

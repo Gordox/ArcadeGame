@@ -49,7 +49,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="FGameObject\GameObject.cs" />
     <Compile Include="GameWorld\map\TileTypes.cs" />
-    <Compile Include="GameWorld\world.cs" />
+    <Compile Include="GameWorld\World.cs" />
     <Compile Include="Manager\ResourceManager.cs" />
     <Compile Include="Manager\Resource\FontResource.cs" />
     <Compile Include="Manager\Resource\SoundResource.cs" />
@@ -57,8 +57,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameWorld\map\Tile.cs" />
     <Compile Include="GameWorld\map\TileMap.cs" />
+    <Compile Include="Render\WorldRender.cs" />
+    <Compile Include="Scenes\GameScene.cs" />
+    <Compile Include="Scenes\OptionScene.cs" />
     <Compile Include="Scenes\SceneSystem\Scene.cs" />
     <Compile Include="Scenes\SceneSystem\SceneManager.cs" />
+    <Compile Include="Scenes\ScoreScene.cs" />
+    <Compile Include="Scenes\StartScene.cs" />
     <Compile Include="Tools\DevTools.cs" />
     <Compile Include="Tools\FPS_Counter.cs" />
     <Compile Include="Tools\GameSettings.cs" />

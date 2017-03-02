@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HeroSiege.Scenes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace HeroSiege.FEntity.Controllers
 {
-    public class Control
+    class Control
     {
         public GameScene scene { get; private set; }
         public Entity entity;

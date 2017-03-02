@@ -22,6 +22,8 @@ namespace HeroSiege.Tools
         public CharacterType playerOne { get; set; }
         public CharacterType playerTwo { get; set; }
 
+        public string MapName { get; set; }
+
         public float MasterVolym { get; set; }
 
         public GameSettings()
@@ -29,6 +31,7 @@ namespace HeroSiege.Tools
             playerOne = CharacterType.None;
             playerTwo = CharacterType.None;
             MasterVolym = 0.55f;
+
         }
 
 

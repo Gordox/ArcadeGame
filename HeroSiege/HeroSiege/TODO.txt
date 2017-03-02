@@ -10,13 +10,15 @@ __________________________________
 Enimy units:
 
 __________________________________
-Settings:
+Settings and game info:
 Volume?
+Player info about characters and enemies
+Player control
 __________________________________
 Scenes:
 Start scene
-Game scene
-Win / lose scene white score
+Option scene
+Game scene (Working on it)
 Score scene
 __________________________________
 Sounds & Music:
