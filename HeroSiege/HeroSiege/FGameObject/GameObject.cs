@@ -62,5 +62,22 @@ namespace HeroSiege.FGameObject
             return boundingBox;
         }
 
+        public bool CheckCollision(List<GameObject> objects)
+        {
+            foreach (var ob in objects)
+            {
+                if (true /*Check here so it will not look at it self */)
+                {
+                    
+                    if (ob.GetBounds().Intersects(this.GetBounds()))
+                    {
+                        return true;
+                    }
+                }
+                
+            }
+            return false;
+        }
+
     }
 }
