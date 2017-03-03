@@ -13,12 +13,12 @@ __________________________________
 Settings and game info:
 Volume?
 Player info about characters and enemies
-Player control
+Player controls
 __________________________________
 Scenes:
 Start scene
 Option scene
-Game scene (Working on it)
+Game scene (almost done? basic stuff)
 Score scene
 __________________________________
 Sounds & Music:
@@ -37,4 +37,11 @@ Enemy tower
 Enemy castle
 __________________________________
 HUD / UI / GUI:
+
+__________________________________
+Need to fix and do:
+Fix the tile glitch between each tile --Fixed
+Fix player movment system
+Make a base class for the player hero and the enemies, called "Hero" & "Enemy" that inherent from entity
+
 __________________________________

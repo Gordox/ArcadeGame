@@ -1,4 +1,4 @@
-﻿using HeroSiege.Scenes;
+﻿using HeroSiege.GameWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +8,13 @@ namespace HeroSiege.FEntity.Controllers
 {
     class Control
     {
-        public GameScene scene { get; private set; }
+        public World world { get; private set; }
         public Entity entity;
 
-        public Control(GameScene scene, Entity entity)
+        public Control(World world, Entity entity)
         {
             this.entity = entity;
-            this.scene = scene;
+            this.world = world;
         }
 
         public virtual void Update(float delta) { }

@@ -17,7 +17,7 @@ namespace HeroSiege.Scenes
         public WorldRender Renderer { get; private set; }
         public GameSettings GameSettings { get; private set; }
 
-        public GameScene(GameSettings gameSettings) : base() { this.GameSettings = gameSettings; Init();  }
+        public GameScene(GameSettings gameSettings, GraphicsDeviceArcade graphics) : base() { this.GameSettings = gameSettings; Graphics = graphics; Init();  }
 
         public override void Init()
         {
@@ -27,8 +27,8 @@ namespace HeroSiege.Scenes
 
         public override void Update(float delta, bool otherSceneHasFocus, bool coveredByOtherScene)
         {
-            World.Update(delta);
             Renderer.Update(delta);
+            World.Update(delta);
 
             base.Update(delta, otherSceneHasFocus, coveredByOtherScene);
         }

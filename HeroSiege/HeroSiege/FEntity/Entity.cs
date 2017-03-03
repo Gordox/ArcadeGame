@@ -5,15 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using HeroSiege.FEntity.Controllers;
+using HeroSiege.GameWorld;
 
 namespace HeroSiege.FEntity
 {
     class Entity : GameObject
     {
-        //public Control Control { get; protected set; }
+        public Control Control { get; protected set; }
+
         public StatsData Stats { get; protected set; }
 
-        public Vector2 velocity { get; protected set; }
+        public Vector2 velocity;
 
         public bool IsAlive { get; set; }
 
@@ -21,6 +24,7 @@ namespace HeroSiege.FEntity
             : base(region, x, y, width, height)
         {
             this.IsAlive = true;
+            velocity = Vector2.Zero;
         }
 
 
@@ -30,12 +34,18 @@ namespace HeroSiege.FEntity
             base.Update(delta);
             CheckIsAlive();
 
-           /*
-            * if (Stats.Speed < 1.0f)
-                 sprite.PauseAnimation = true;
-            else
-                sprite.PauseAnimation = false;
-           */
+            if (Control != null)
+                Control.Update(delta);
+
+            /*
+             * if (Stats.Speed < 1.0f)
+                  sprite.PauseAnimation = true;
+             else
+                 sprite.PauseAnimation = false;
+            */
+           
+            
+
         }
         public void UpdatePlayerMovement(float delta, List<GameObject> objects)
         {
@@ -93,6 +103,34 @@ namespace HeroSiege.FEntity
                 IsAlive = false;
         }
 
-        
+        protected virtual void InitStats() { }
+
+        //----- Movment -----//
+        public void NoMovementX()
+        {
+            //velocity.X = velocity.X * Globals.SLOWDOWN_WEIGHT;
+        }
+        public void NoMovementY()
+        {
+            //velocity.Y = velocity.Y * Globals.SLOWDOWN_WEIGHT;
+        }
+        public virtual void MoveUp(float delta) { position.Y -= Stats.Speed * delta; }
+        public virtual void MoveDown(float delta) { position.Y += Stats.Speed * delta; }
+        public virtual void MoveLeft(float delta) { position.X -= Stats.Speed * delta; }
+        public virtual void MoveRight(float delta) { position.X += Stats.Speed * delta; }
+
+        //----- Button Input -----//
+        public virtual void GreenButton(World parent) { } //Key G or numpad 4
+        public virtual void BlueButton(World parent) { } //Key H or numpad 5
+        public virtual void YellowButton(World parent) { }  //Key B or numpad 1
+        public virtual void RedButton(World parent) { } //Key N or numpad 2
+        public virtual void AButton(World parent) { } //Key M or numpad 3
+        public virtual void BButton(World parent) { }  //Key J or numpad 6
+
+
+        public void SetControl(Control control)
+        {
+            this.Control = control;
+        }
     }
 }

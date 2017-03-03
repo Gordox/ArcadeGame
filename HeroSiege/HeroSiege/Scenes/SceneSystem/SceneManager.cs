@@ -69,7 +69,6 @@ namespace HeroSiege.Scenes.SceneSystem
 
         public static void AddScene(Scene scene)
         {
-            scene.Graphics = GraphicsDevice;
             scenes.Add(scene);
         }
 

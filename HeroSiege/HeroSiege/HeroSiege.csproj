@@ -40,6 +40,7 @@
     <Compile Include="FEntity\Controllers\Control.cs" />
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
     <Compile Include="FEntity\Entity.cs" />
+    <Compile Include="FEntity\Player\TestPlayer.cs" />
     <Compile Include="FEntity\StatsData.cs" />
     <Compile Include="FTexture2D\FAnimation\Animation.cs" />
     <Compile Include="FTexture2D\FAnimation\Animations.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Scenes\SceneSystem\SceneManager.cs" />
     <Compile Include="Scenes\ScoreScene.cs" />
     <Compile Include="Scenes\StartScene.cs" />
+    <Compile Include="Tools\Camera2D.cs" />
     <Compile Include="Tools\DevTools.cs" />
     <Compile Include="Tools\FPS_Counter.cs" />
     <Compile Include="Tools\GameSettings.cs" />
@@ -92,9 +94,9 @@
   <ItemGroup>
     <Folder Include="AISystems\FUSM\" />
     <Folder Include="AISystems\PathFinding\" />
+    <Folder Include="Buildnings\" />
     <Folder Include="FEntity\Buildings\" />
     <Folder Include="FEntity\Enemies\" />
-    <Folder Include="FEntity\Player\" />
     <Folder Include="FGameObject\Items\NewFolder1\" />
     <Folder Include="FGameObject\Projectiles\" />
     <Folder Include="Globals\" />

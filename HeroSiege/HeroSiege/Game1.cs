@@ -48,7 +48,7 @@ namespace HeroSiege
             ResourceManager.LoadResouces(Content);
 
             SceneManager.Initialize(this);
-            SceneManager.AddScene(new GameScene(new GameSettings()));
+            SceneManager.AddScene(new GameScene(new GameSettings(), GraphicsDevice));
         }
 
       
@@ -74,7 +74,7 @@ namespace HeroSiege
        
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(40, 84, 12));
 
             // ----- Draw scene -----//
             SceneManager.Draw(spriteBatch);

@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 using HeroSiege.FEntity;
 using HeroSiege.FGameObject;
 using Microsoft.Xna.Framework;
+using HeroSiege.FEntity.Player;
+using HeroSiege.Manager;
+using HeroSiege.FEntity.Controllers;
 
 namespace HeroSiege.GameWorld
 {
@@ -28,7 +31,7 @@ namespace HeroSiege.GameWorld
 
         public List<Rectangle> Hitboxes { get; private set; }
 
-
+        //----- Constructor -----//
         public World(string mapName) 
         {
             Initmap(mapName);
@@ -51,17 +54,22 @@ namespace HeroSiege.GameWorld
 
             if (Map != null)
             {
-                
+                InitPlayerOne();
             }
         }
 
-        public void InitPlayerOne() { }
+        public void InitPlayerOne()
+        {
+            PlayerOne = new TestPlayer(ResourceManager.GetTexture("BaseLayer", 320), 32*40,32*80, 32,32);
+            PlayerOne.SetControl(new HumanControler(PlayerIndex.One, PlayerOne, this));
+        }
         public void InitPlayerTwo() { }
-
 
         //----- Updates-----//
         public void Update(float delta)
         {
+            PlayerOne.Update(delta);
+            //PlayerOne.
 
             UpdateEnemies(delta);
         }
@@ -83,7 +91,5 @@ namespace HeroSiege.GameWorld
         }
 
         //----- Functions-----//
-
-
     }
 }
