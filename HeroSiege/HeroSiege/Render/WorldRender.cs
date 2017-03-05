@@ -1,5 +1,7 @@
 ﻿using HeroSiege.GameWorld;
+using HeroSiege.Manager;
 using HeroSiege.Tools;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -34,7 +36,7 @@ namespace HeroSiege.Render
 
         public void Draw(SpriteBatch SB)
         {
-            ////World
+            //World
             SB.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
                 SamplerState.PointClamp,
@@ -45,10 +47,29 @@ namespace HeroSiege.Render
             World.Map.DrawMapTexture(SB);
             World.PlayerOne.Draw(SB);
 
+            //Debug draw
+            if (DevTools.DevDebugMode)
+            {
+                foreach (Rectangle r in World.Map.Hitboxes)
+                {
+                    SB.Draw(ResourceManager.GetTexture("BaseLayer", 250), r, Color.Red);
+                }
+
+            }
+            
             SB.End();
 
             //UI
             SB.Begin();
+
+
+
+
+            //Debug draw Text
+            if (DevTools.DevDebugMode)
+            {
+                SB.DrawString(ResourceManager.GetFont("Arial_Font"), "" + World.PlayerOne.MovingDirection, new Vector2(50, 0), Color.Black);
+            }
             SB.End();
         }
     }

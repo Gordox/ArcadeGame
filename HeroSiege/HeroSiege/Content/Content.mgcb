@@ -34,3 +34,6 @@
 /processorParam:TextureFormat=Compressed
 /build:Assets/Fonts/Arial_Font.spritefont
 
+#begin Assets/Maps/Map1.1.xml
+/copy:Assets/Maps/Map1.1.xml
+

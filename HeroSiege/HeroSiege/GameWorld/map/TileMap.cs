@@ -1,4 +1,5 @@
 ﻿using HeroSiege.Manager;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,12 @@ namespace HeroSiege.GameWorld.map
         /// Fog of war
         /// </summary>
         public Tile[,] FogOfWar { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Rectangle> Hitboxes { get; private set; }
+
 
         public string MapName { get; private set; }
 
@@ -70,13 +77,21 @@ namespace HeroSiege.GameWorld.map
         //----- Initiator and Loadings -----//
         public void LoadMapDataFromXMLFile(string mapName)
         {
-            XDocument map = XDocument.Load(@"Content\Assets\Maps\Map1.xml");
+            XDocument map = XDocument.Load(@"Content\Assets\Maps\Map1.1.xml");
 
             var mapSize = (from e in map.Descendants("map")
                            select new { Width = e.Attribute("width").Value, Height = e.Attribute("height").Value }).ToList();
 
             var allElements = (from e in map.Descendants("data")
                                select new { name = e.Parent.Attribute("name").Value, data = (e.HasElements ? "" : e.Value) }).ToList();
+
+            var hitboxes = (from e in map.Descendants("object")
+                               select new { name = e.Parent.Attribute("name").Value,
+                                   X = e.Attribute("x").Value,
+                                   Y = e.Attribute("y").Value,
+                                   Width = e.Attribute("width").Value,
+                                   Height = e.Attribute("height").Value}).ToList();
+
 
             InitMap(Int32.Parse(mapSize[0].Width), Int32.Parse(mapSize[0].Height));
 
@@ -85,6 +100,18 @@ namespace HeroSiege.GameWorld.map
                 List<string> lines = allElements[i].data.Split('\n').ToList();
                 CreateMapFromXmlFile(allElements[i].name, lines);
             }
+
+
+            for (int i = 0; i < 1/*hitboxes.Count*/; i++)
+            {
+                if (hitboxes[i].name.Equals("HitBoxes"))
+                {
+                    Hitboxes.Add(new Rectangle(Int32.Parse(hitboxes[i].X), 
+                                               Int32.Parse(hitboxes[i].Y),
+                                               Int32.Parse(hitboxes[i].Width),
+                                               Int32.Parse(hitboxes[i].Height)));
+                }
+            }
         }
 
         public void InitMap(int width, int height)
@@ -92,6 +119,7 @@ namespace HeroSiege.GameWorld.map
             this.BackGroundTexture = new List<Tile>();
             this.MapWakeblePath = new Tile[width, height];
             this.FogOfWar = new Tile[width, height];
+            this.Hitboxes = new List<Rectangle>();
         }
 
 

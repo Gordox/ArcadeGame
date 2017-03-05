@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace HeroSiege.FEntity.Player
 {
@@ -23,11 +24,21 @@ namespace HeroSiege.FEntity.Player
         protected override void InitStats()
         {
             Stats = new StatsData();
-            Stats.MaxSpeed = 200;
+            Stats.MaxSpeed = 400;
+            Stats.Speed = 200;
             Stats.Health = 1;
             Stats.Mana = 1;
             base.InitStats();
+
+           
         }
 
+
+        public override void Draw(SpriteBatch SB)
+        {
+            base.Draw(SB);
+
+            DrawBoundingBox(SB);
+        }
     }
 }

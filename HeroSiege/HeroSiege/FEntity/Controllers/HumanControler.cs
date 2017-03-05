@@ -20,7 +20,6 @@ namespace HeroSiege.FEntity.Controllers
             if (entity == null)
                 return;
 
-            UpdateJoystick(delta);
             UpdateButtons();
         }
 
@@ -45,7 +44,7 @@ namespace HeroSiege.FEntity.Controllers
                 entity.BButton(world);
         }
 
-        private void UpdateJoystick(float delta)
+        public void UpdateJoystick(float delta)
         {
             if (ButtonDown(PlayerInput.Up))
             {
@@ -79,10 +78,37 @@ namespace HeroSiege.FEntity.Controllers
             else
                 keysactive[3] = false;
 
-            if (!keysactive[0] && !keysactive[1])
-                entity.NoMovementY();
-            if (!keysactive[2] && !keysactive[3])
-                entity.NoMovementX();
+            UpdateMovingDirecion();
+
+            if (!keysactive[0] && !keysactive[1] && !keysactive[2] && !keysactive[3])
+                entity.SetPauseAnimation = true;
+            else
+                entity.SetPauseAnimation = false;
+
+        }
+
+        public void UpdateMovingDirecion()
+        {
+            if (keysactive[0] && keysactive[3])
+                entity.MovingDirection = Direction.North_East;
+            else if (keysactive[0] && keysactive[2])
+                entity.MovingDirection = Direction.North_West;
+            else if (keysactive[1] && keysactive[3])
+                entity.MovingDirection = Direction.South_East;
+            else if (keysactive[1] && keysactive[2])
+                entity.MovingDirection = Direction.South_West;
+
+            else if (keysactive[0])
+                entity.MovingDirection = Direction.North;
+            else if (keysactive[3])
+                entity.MovingDirection = Direction.East;
+            else if (keysactive[1])
+                entity.MovingDirection = Direction.South;
+            else if (keysactive[2])
+                entity.MovingDirection = Direction.West;
+
+
+            
         }
 
         public bool ButtonDown(PlayerInput button)

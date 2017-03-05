@@ -10,6 +10,18 @@ using HeroSiege.GameWorld;
 
 namespace HeroSiege.FEntity
 {
+    public enum Direction
+    {
+        North,
+        North_East,
+        East,
+        South_East,
+        South,
+        South_West,
+        West,
+        North_West
+    }
+
     class Entity : GameObject
     {
         public Control Control { get; protected set; }
@@ -17,6 +29,8 @@ namespace HeroSiege.FEntity
         public StatsData Stats { get; protected set; }
 
         public Vector2 velocity;
+
+        public Direction MovingDirection { get; set; }
 
         public bool IsAlive { get; set; }
 
@@ -37,57 +51,26 @@ namespace HeroSiege.FEntity
             if (Control != null)
                 Control.Update(delta);
 
-            /*
-             * if (Stats.Speed < 1.0f)
-                  sprite.PauseAnimation = true;
-             else
-                 sprite.PauseAnimation = false;
-            */
-           
-            
-
         }
-        public void UpdatePlayerMovement(float delta, List<GameObject> objects)
+
+
+        public void UpdatePlayerMovement(float delta, List<Rectangle> objects)
         {
-            if (!CheckCollision(objects))
-            {
+            velocity = Vector2.Zero;
 
+            ((HumanControler)Control).UpdateJoystick(delta);
+
+            int futureposX = (int)(position.X + velocity.X * delta);
+            int futureposY = (int)(position.Y + velocity.Y * delta);
+
+            if (Control != null && !CheckCollision(new Rectangle(futureposX, futureposY, GetBounds().Width, GetBounds().Height), objects))
+            {
+                position.X += velocity.X * delta;
+                position.Y += velocity.Y * delta;
             }
         }
 
-        /*
-        public void UpdateMovement(float delta)
-        {
-            // Keeps entity within map boundaries
-            if (velocity.Length() >= Globals.MAX_SPEED)
-            {
-                var vel = new Vector2(velocity.X, velocity.Y);
-                vel.Normalize();
-
-                velocity.X = vel.X * Globals.MAX_SPEED;
-                velocity.Y = vel.Y * Globals.MAX_SPEED; //MathHelper.Clamp(velocity.Y, -Globals.MAX_SPEED, Globals.MAX_SPEED);
-            }
-
-            position += velocity * delta;
-            position.X = MathHelper.Clamp(position.X, 500, 2650);
-            position.Y = MathHelper.Clamp(position.Y, 500, 2200);
-
-            // Check collision
-            if (Control == null)
-                return;
-            List<Rectangle> hitboxes = Control.scene.Hitboxes;
-            for (int i = 0; i < hitboxes.Count; i++)
-            {
-                if (this.Hitbox.Intersects(hitboxes[i]))
-                {
-                    position = prePosition - preVelocity * delta * 2;
-                    velocity = new Vector2();
-                }
-            }
-        }
-        */
-
-        private void UpdateRotation() //NOT DONE
+        private void UpdateRotation() //NOT DONE //Might not use
         {
             Vector2 rotation = new Vector2(velocity.X, velocity.Y);
             rotation.Normalize();
@@ -106,18 +89,10 @@ namespace HeroSiege.FEntity
         protected virtual void InitStats() { }
 
         //----- Movment -----//
-        public void NoMovementX()
-        {
-            //velocity.X = velocity.X * Globals.SLOWDOWN_WEIGHT;
-        }
-        public void NoMovementY()
-        {
-            //velocity.Y = velocity.Y * Globals.SLOWDOWN_WEIGHT;
-        }
-        public virtual void MoveUp(float delta) { position.Y -= Stats.Speed * delta; }
-        public virtual void MoveDown(float delta) { position.Y += Stats.Speed * delta; }
-        public virtual void MoveLeft(float delta) { position.X -= Stats.Speed * delta; }
-        public virtual void MoveRight(float delta) { position.X += Stats.Speed * delta; }
+        public virtual void MoveUp(float delta) { velocity.Y = -Stats.Speed; }
+        public virtual void MoveDown(float delta) { velocity.Y = Stats.Speed; }
+        public virtual void MoveLeft(float delta) { velocity.X = -Stats.Speed; }
+        public virtual void MoveRight(float delta) { velocity.X = Stats.Speed; }
 
         //----- Button Input -----//
         public virtual void GreenButton(World parent) { } //Key G or numpad 4
@@ -131,6 +106,13 @@ namespace HeroSiege.FEntity
         public void SetControl(Control control)
         {
             this.Control = control;
+        }
+
+
+        public bool SetPauseAnimation
+        {
+            get { return sprite.PauseAnimation; }
+            set { sprite.PauseAnimation = value; }
         }
     }
 }

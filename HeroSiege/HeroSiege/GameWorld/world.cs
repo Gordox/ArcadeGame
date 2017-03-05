@@ -27,9 +27,7 @@ namespace HeroSiege.GameWorld
         public List<GameObject> GameObjects { get; private set; }
         public List<GameObject> EnemyObjects { get; private set; }
         public List<GameObject> DeadObjects { get; private set; }
-
-
-        public List<Rectangle> Hitboxes { get; private set; }
+  
 
         //----- Constructor -----//
         public World(string mapName) 
@@ -50,7 +48,7 @@ namespace HeroSiege.GameWorld
             GameObjects = new List<GameObject>();
             EnemyObjects = new List<GameObject>();
             DeadObjects = new List<GameObject>();
-            Hitboxes = new List<Rectangle>();
+
 
             if (Map != null)
             {
@@ -60,7 +58,7 @@ namespace HeroSiege.GameWorld
 
         public void InitPlayerOne()
         {
-            PlayerOne = new TestPlayer(ResourceManager.GetTexture("BaseLayer", 320), 32*40,32*80, 32,32);
+            PlayerOne = new TestPlayer(ResourceManager.GetTexture("BaseLayer", 320), 32*40,32*90, 32,32);
             PlayerOne.SetControl(new HumanControler(PlayerIndex.One, PlayerOne, this));
         }
         public void InitPlayerTwo() { }
@@ -68,8 +66,10 @@ namespace HeroSiege.GameWorld
         //----- Updates-----//
         public void Update(float delta)
         {
+            //Player One
             PlayerOne.Update(delta);
-            //PlayerOne.
+            PlayerOne.UpdatePlayerMovement(delta, Map.Hitboxes);
+            //Player Two
 
             UpdateEnemies(delta);
         }
