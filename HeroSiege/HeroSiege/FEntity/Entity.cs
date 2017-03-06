@@ -53,21 +53,21 @@ namespace HeroSiege.FEntity
 
         }
 
-
         public void UpdatePlayerMovement(float delta, List<Rectangle> objects)
         {
             velocity = Vector2.Zero;
 
-            ((HumanControler)Control).UpdateJoystick(delta);
+            if(Control != null)
+                ((HumanControler)Control).UpdateJoystick(delta);
 
             int futureposX = (int)(position.X + velocity.X * delta);
             int futureposY = (int)(position.Y + velocity.Y * delta);
 
-            if (Control != null && !CheckCollision(new Rectangle(futureposX, futureposY, GetBounds().Width, GetBounds().Height), objects))
-            {
+            if (!CheckCollision(new Rectangle(futureposX, (int)position.Y, this.GetBounds().Width, this.GetBounds().Height), objects))
                 position.X += velocity.X * delta;
+                
+            if (!CheckCollision(new Rectangle((int)position.X, futureposY, this.GetBounds().Width, this.GetBounds().Height), objects))
                 position.Y += velocity.Y * delta;
-            }
         }
 
         private void UpdateRotation() //NOT DONE //Might not use
@@ -75,7 +75,7 @@ namespace HeroSiege.FEntity
             Vector2 rotation = new Vector2(velocity.X, velocity.Y);
             rotation.Normalize();
             if (velocity.Length() > 0.0001f)
-                sprite.Rotation = (float)Math.Atan2(rotation.Y, rotation.X);// +Globals.ROT_OFFSET + rotationOffset;
+                sprite.Rotation = (float)Math.Atan2(rotation.Y, rotation.X);
         }
 
 
@@ -107,7 +107,6 @@ namespace HeroSiege.FEntity
         {
             this.Control = control;
         }
-
 
         public bool SetPauseAnimation
         {

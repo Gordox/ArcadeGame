@@ -41,6 +41,7 @@ namespace HeroSiege.GameWorld
         {
             this.Map = new TileMap(mapName);
         }
+
         public void InitEntitys()
         {
             Enimies = new List<Entity>();

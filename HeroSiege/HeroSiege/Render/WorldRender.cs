@@ -23,6 +23,8 @@ namespace HeroSiege.Render
             this.graphicsDev = graphicsDev;
         }
 
+
+        //----- Updates -----//
         public void Update(float delta)
         {
             CameraUpdate();
@@ -34,6 +36,7 @@ namespace HeroSiege.Render
             Camera.Update();
         }
 
+        //----- Draws -----//
         public void Draw(SpriteBatch SB)
         {
             //World
@@ -47,30 +50,37 @@ namespace HeroSiege.Render
             World.Map.DrawMapTexture(SB);
             World.PlayerOne.Draw(SB);
 
-            //Debug draw
-            if (DevTools.DevDebugMode)
-            {
-                foreach (Rectangle r in World.Map.Hitboxes)
-                {
-                    SB.Draw(ResourceManager.GetTexture("BaseLayer", 250), r, Color.Red);
-                }
-
-            }
-            
             SB.End();
+
 
             //UI
             SB.Begin();
 
+            DebugDraw(SB);
 
+            SB.End();
+        }
 
-
-            //Debug draw Text
+        private void DebugDraw(SpriteBatch SB)
+        {
+           
             if (DevTools.DevDebugMode)
             {
-                SB.DrawString(ResourceManager.GetFont("Arial_Font"), "" + World.PlayerOne.MovingDirection, new Vector2(50, 0), Color.Black);
+                //----- Hitboxes -----//
+                foreach (Rectangle r in World.Map.Hitboxes)
+                {
+                    SB.Draw(ResourceManager.GetTexture("BaseLayer", 250), new Rectangle(r.X - World.Map.TileSize / 2, r.Y - World.Map.TileSize / 2, r.Width, r.Height), Color.Red);
+                }
+
+
+                //----- PLayer ONE Direcion -----//
+                if (DevTools.DevDebugMode)
+                {
+                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "" + World.PlayerOne.MovingDirection, new Vector2(50, 0), Color.Black);
+                }
+
+
             }
-            SB.End();
         }
     }
 }

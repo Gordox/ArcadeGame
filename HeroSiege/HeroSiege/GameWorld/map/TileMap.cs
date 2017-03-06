@@ -102,12 +102,12 @@ namespace HeroSiege.GameWorld.map
             }
 
 
-            for (int i = 0; i < 1/*hitboxes.Count*/; i++)
+            for (int i = 0; i < hitboxes.Count; i++)
             {
                 if (hitboxes[i].name.Equals("HitBoxes"))
                 {
-                    Hitboxes.Add(new Rectangle(Int32.Parse(hitboxes[i].X), 
-                                               Int32.Parse(hitboxes[i].Y),
+                    Hitboxes.Add(new Rectangle(Int32.Parse(hitboxes[i].X) + TileSize / 2,
+                                               Int32.Parse(hitboxes[i].Y) + (int)(TileSize * 1.5f),
                                                Int32.Parse(hitboxes[i].Width),
                                                Int32.Parse(hitboxes[i].Height)));
                 }

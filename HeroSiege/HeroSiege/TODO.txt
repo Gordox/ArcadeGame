@@ -40,8 +40,6 @@ HUD / UI / GUI:
 
 __________________________________
 Need to fix and do:
-Fix the tile glitch between each tile --Fixed
-Fix player movment system
-Make a base class for the player hero and the enemies, called "Hero" & "Enemy" that inherent from entity
+Make a base class for the player hero and the enemies, called "Hero" & "Enemy" that inherent from entity (Maybe do this)
 
 __________________________________

@@ -37,6 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FEntity\Buildings\Building.cs" />
     <Compile Include="FEntity\Controllers\Control.cs" />
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
     <Compile Include="FEntity\Entity.cs" />
@@ -95,7 +96,8 @@
     <Folder Include="AISystems\FUSM\" />
     <Folder Include="AISystems\PathFinding\" />
     <Folder Include="Buildnings\" />
-    <Folder Include="FEntity\Buildings\" />
+    <Folder Include="FEntity\Buildings\EnemyBuildings\" />
+    <Folder Include="FEntity\Buildings\HEroBuildings\" />
     <Folder Include="FEntity\Enemies\" />
     <Folder Include="FGameObject\Items\NewFolder1\" />
     <Folder Include="FGameObject\Projectiles\" />
