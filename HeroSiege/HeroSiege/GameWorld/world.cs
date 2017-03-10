@@ -59,7 +59,7 @@ namespace HeroSiege.GameWorld
 
         public void InitPlayerOne()
         {
-            PlayerOne = new TestPlayer(ResourceManager.GetTexture("BaseLayer", 320), 32*40,32*90, 32,32);
+            PlayerOne = new TestPlayer(32 * 40, 32 * 90, 32, 32);
             PlayerOne.SetControl(new HumanControler(PlayerIndex.One, PlayerOne, this));
         }
         public void InitPlayerTwo() { }

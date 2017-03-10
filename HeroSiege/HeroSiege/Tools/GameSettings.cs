@@ -16,11 +16,19 @@ namespace HeroSiege.Tools
         Knight,
         None
     }
+    public enum Difficult
+    {
+        Easy,
+        Normal,
+        Hard,
+        Extream
+    }
 
     public class GameSettings
     {
         public CharacterType playerOne { get; set; }
         public CharacterType playerTwo { get; set; }
+        public Difficult GameDifficulty { get; set; }
 
         public string MapName { get; set; }
 

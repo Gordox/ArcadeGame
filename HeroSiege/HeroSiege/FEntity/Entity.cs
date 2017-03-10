@@ -63,6 +63,10 @@ namespace HeroSiege.FEntity
             int futureposX = (int)(position.X + velocity.X * delta);
             int futureposY = (int)(position.Y + velocity.Y * delta);
 
+            if (MovingDirection == Direction.North_East || MovingDirection == Direction.North_West ||
+                MovingDirection == Direction.South_East || MovingDirection == Direction.South_West)
+                velocity *= 0.75f; //hard coded value so the player moves at the same speed side ways
+
             if (!CheckCollision(new Rectangle(futureposX, (int)position.Y, this.GetBounds().Width, this.GetBounds().Height), objects))
                 position.X += velocity.X * delta;
                 

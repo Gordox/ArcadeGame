@@ -13,7 +13,7 @@ namespace HeroSiege.FGameObject
         protected Sprite sprite;
 
         public Vector2 Position { get { return position; } }
-        public Vector2 Direction { get { return direction; } }
+        //public Vector2 Direction { get { return direction; } }
 
         protected Rectangle boundingBox;
         protected Vector2 position, direction;

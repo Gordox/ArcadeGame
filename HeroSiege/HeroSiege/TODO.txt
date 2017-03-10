@@ -2,10 +2,10 @@
 https://www.spriters-resource.com/pc_computer/warcraft2/
 
 Modes:
-easy, normal, Hard, extream
+easy, normal, Hard, extream // put in to an enum
 __________________________________
 Player hero:
-Archer, Mage, Gryphon Rider, All melee later
+Archer, Mage, Gryphon Rider, All melee later // put in to an enum
 __________________________________
 Enimy units:
 
@@ -23,10 +23,11 @@ Score scene
 __________________________________
 Sounds & Music:
 __________________________________
-In Game: (Change name later)
+In Game: (Change name later maybe)
 Shop
-Teleport
+Teleport to mini bosses
 mini bosses
+End boss
 __________________________________
 Buildnings:
 Hero castle

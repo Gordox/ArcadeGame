@@ -10,7 +10,7 @@ namespace HeroSiege.Manager.Resource
     {
         private Dictionary<string, TextureRegion> textureRegion; // Used for all the rest f the textures
         private Dictionary<Tuple<string, int>, TextureRegion> tileTextureRegion; // Used only to store tile texture region
-        private Texture2D tileTextureSummer;
+        private Texture2D tileTextureSummer, mageHeroSpriteSheet;
 
         //Layer Name for the Tile Texure
         const string BASE_LAYER_NAME = "BaseLayer";
@@ -28,6 +28,7 @@ namespace HeroSiege.Manager.Resource
             //Load in all sprite sheets and Textures
 
             tileTextureSummer = content.Load<Texture2D>(@"Assets\Texture\Tiles\Wc2-Tiles");
+            mageHeroSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\MageHero");
 
             //Add all textures and sprite to Dict
             AddTextureRegionToDict();
@@ -45,7 +46,7 @@ namespace HeroSiege.Manager.Resource
             AddAllTileRegionsToDict();
 
             //Player Heros
-
+            textureRegion["MageSheet"] = new TextureRegion(mageHeroSpriteSheet, 0, 0, mageHeroSpriteSheet.Width, mageHeroSpriteSheet.Height);
 
 
         }

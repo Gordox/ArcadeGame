@@ -41,6 +41,7 @@
     <Compile Include="FEntity\Controllers\Control.cs" />
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
     <Compile Include="FEntity\Entity.cs" />
+    <Compile Include="FEntity\Player\Mage.cs" />
     <Compile Include="FEntity\Player\TestPlayer.cs" />
     <Compile Include="FEntity\StatsData.cs" />
     <Compile Include="FTexture2D\FAnimation\Animation.cs" />

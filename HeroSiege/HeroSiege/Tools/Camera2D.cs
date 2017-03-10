@@ -25,7 +25,7 @@ namespace HeroSiege.Tools
         /// <param name="viewport"></param>
         public Camera2D(Viewport viewport)
         {
-            zoom = 1.0f;
+            zoom = 2.0f;
             pos = Vector2.Zero;
             ViewPort = viewport;
         }

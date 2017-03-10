@@ -50,20 +50,36 @@ namespace HeroSiege.Render
             World.Map.DrawMapTexture(SB);
             World.PlayerOne.Draw(SB);
 
+
+            DebugHitboxesDraw(SB);
             SB.End();
 
 
             //UI
             SB.Begin();
 
-            DebugDraw(SB);
+            DebugTextDraw(SB);
 
             SB.End();
         }
 
-        private void DebugDraw(SpriteBatch SB)
+        private void DebugTextDraw(SpriteBatch SB)
         {
            
+            if (DevTools.DevDebugMode)
+            {
+                //----- PLayer ONE Direcion -----//
+                if (DevTools.DevDebugMode)
+                {
+                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "" + World.PlayerOne.MovingDirection, new Vector2(50, 0), Color.Black);
+                }
+
+
+            }
+        }
+        private void DebugHitboxesDraw(SpriteBatch SB)
+        {
+
             if (DevTools.DevDebugMode)
             {
                 //----- Hitboxes -----//
@@ -71,14 +87,6 @@ namespace HeroSiege.Render
                 {
                     SB.Draw(ResourceManager.GetTexture("BaseLayer", 250), new Rectangle(r.X - World.Map.TileSize / 2, r.Y - World.Map.TileSize / 2, r.Width, r.Height), Color.Red);
                 }
-
-
-                //----- PLayer ONE Direcion -----//
-                if (DevTools.DevDebugMode)
-                {
-                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "" + World.PlayerOne.MovingDirection, new Vector2(50, 0), Color.Black);
-                }
-
 
             }
         }
