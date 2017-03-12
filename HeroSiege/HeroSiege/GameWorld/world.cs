@@ -10,16 +10,20 @@ using Microsoft.Xna.Framework;
 using HeroSiege.FEntity.Player;
 using HeroSiege.Manager;
 using HeroSiege.FEntity.Controllers;
+using HeroSiege.Tools;
 
 namespace HeroSiege.GameWorld
 {
     class World
     {
+        GameSettings gameSettings;
+
         public TileMap Map { get; private set; }
 
         //----- Entities -----//
         public List<Entity> Enimies { get; private set; }
         private List<Entity> deadEnimies;
+
         public Entity PlayerOne { get; private set; }
         public Entity PlayerTwo { get; private set; }
 
@@ -30,9 +34,12 @@ namespace HeroSiege.GameWorld
   
 
         //----- Constructor -----//
-        public World(string mapName) 
+        public World(GameSettings gameSettings) 
         {
-            Initmap(mapName);
+            this.gameSettings = gameSettings;
+
+            Initmap(gameSettings.MapName);
+
             InitEntitys();
         }
 
@@ -54,26 +61,92 @@ namespace HeroSiege.GameWorld
             if (Map != null)
             {
                 InitPlayerOne();
+                InitPlayerTwo();
             }
         }
 
         public void InitPlayerOne()
         {
-            PlayerOne = new TestPlayer(32 * 40, 32 * 90, 32, 32);
+            switch (gameSettings.playerOne)
+            {
+                case CharacterType.ElvenArcher:
+                    break;
+                case CharacterType.Mage:
+                    break;
+                case CharacterType.Gryphon_Rider:
+                    break;
+                case CharacterType.FootMan:
+                    break;
+                case CharacterType.Dwarven:
+                    break;
+                case CharacterType.Gnomish_Flying_Machine:
+                    break;
+                case CharacterType.Knight:
+                    break;
+                case CharacterType.None:
+                    break;
+                default:
+                    break;
+            }
+            PlayerOne = new TestPlayer(32 * 40, 32 * 90, 64, 64);
             PlayerOne.SetControl(new HumanControler(PlayerIndex.One, PlayerOne, this));
+            
         }
-        public void InitPlayerTwo() { }
+        public void InitPlayerTwo()
+        {
+            switch (gameSettings.playerTwo)
+            {
+                case CharacterType.ElvenArcher:
+                    break;
+                case CharacterType.Mage:
+                    break;
+                case CharacterType.Gryphon_Rider:
+                    break;
+                case CharacterType.FootMan:
+                    break;
+                case CharacterType.Dwarven:
+                    break;
+                case CharacterType.Gnomish_Flying_Machine:
+                    break;
+                case CharacterType.Knight:
+                    break;
+                case CharacterType.None:
+                    break;
+                default:
+                    break;
+            }
+
+            PlayerTwo = new TestPlayer(32 * 40, 32 * 105, 64, 64);
+            PlayerTwo.SetControl(new HumanControler(PlayerIndex.Two, PlayerTwo, this));
+        }
 
         //----- Updates-----//
         public void Update(float delta)
         {
-            //Player One
-            PlayerOne.Update(delta);
-            PlayerOne.UpdatePlayerMovement(delta, Map.Hitboxes);
-            //Player Two
+            UpdatePlayers(delta);
 
+
+            //Enemies
             UpdateEnemies(delta);
         }
+
+        private void UpdatePlayers(float delta)
+        {
+
+            //Player One
+            if (PlayerOne != null)
+            {
+                PlayerOne.Update(delta);
+                PlayerOne.UpdatePlayerMovement(delta, Map.Hitboxes);
+            }
+            //Player Two
+            if (PlayerOne != null)
+            {
+                PlayerTwo.Update(delta);
+                PlayerTwo.UpdatePlayerMovement(delta, Map.Hitboxes);
+            }
+        }
+
         private void UpdateEnemies(float delta)
         {
             foreach (var enemy in Enimies)

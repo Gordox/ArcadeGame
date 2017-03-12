@@ -12,7 +12,14 @@ namespace HeroSiege.FEntity.Player
 {
     class TestPlayer : Entity
     {
+        const float FRAME_DURATION_MOVEMNT = 0.05f;
+        const float FRAME_DURATION_ATTACK_1 = 0.05f;
+        const float FRAME_DURATION_ATTACK_2 = 0.05f;
+        const float FRAME_DURATION_ATTACK_3 = 0.05f;
+        const float FRAME_DURATION_ATTACK_4 = 0.05f;
+        
         Direction olddir;
+
         public TestPlayer(float x, float y, float width, float height)
             : base(null, x, y, width, height)
         {
@@ -20,15 +27,16 @@ namespace HeroSiege.FEntity.Player
             AddSpriteAnimations();
             sprite.SetAnimation("MoveNorth");
             olddir = MovingDirection;
+            boundingBox = new Rectangle((int)x, (int)y, 32, 32);
         }
 
         private void AddSpriteAnimations()
         {
-            sprite.AddAnimation("MoveNorth", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 0, 0, 64, 64, 5, 0.075f, new Point(1, 5)));
-            sprite.AddAnimation("MoveNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 64, 0, 64, 64, 5, 0.075f, new Point(1, 5)));
-            sprite.AddAnimation("MoveWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 128, 0, 64, 64, 5, 0.075f, new Point(1, 5)));
-            sprite.AddAnimation("MoveSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 192, 0, 64, 64, 5, 0.075f, new Point(1, 5)));
-            sprite.AddAnimation("MoveSouth", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 256, 0, 64, 64, 5, 0.075f, new Point(1, 5)));
+            sprite.AddAnimation("MoveNorth",         new FrameAnimation(ResourceManager.GetTexture("MageSheet"),   0, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"),  64, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveWestEast",      new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 128, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 192, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveSouth",         new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 256, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
         }
 
         public override void Update(float delta)
@@ -49,8 +57,6 @@ namespace HeroSiege.FEntity.Player
             Stats.Health = 1;
             Stats.Mana = 1;
             base.InitStats();
-
-           
         }
 
 

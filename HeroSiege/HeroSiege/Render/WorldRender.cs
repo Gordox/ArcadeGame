@@ -46,12 +46,17 @@ namespace HeroSiege.Render
                 null, null, null,
                 Camera.Transform);
 
-
             World.Map.DrawMapTexture(SB);
-            World.PlayerOne.Draw(SB);
 
+            if(World.PlayerOne != null)
+                World.PlayerOne.Draw(SB);
+            if (World.PlayerTwo != null)
+                World.PlayerTwo.Draw(SB);
 
+            //Debug
             DebugHitboxesDraw(SB);
+
+
             SB.End();
 
 

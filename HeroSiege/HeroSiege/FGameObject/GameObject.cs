@@ -72,8 +72,7 @@ namespace HeroSiege.FGameObject
                     {
                         return true;
                     }
-                }
-                
+                }  
             }
             return false;
         }

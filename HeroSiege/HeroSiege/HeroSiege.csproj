@@ -38,6 +38,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FEntity\Buildings\Building.cs" />
+    <Compile Include="FEntity\Buildings\HeroBuildings\HeroCastle.cs" />
+    <Compile Include="FEntity\Buildings\HeroBuildings\HeroTower.cs" />
+    <Compile Include="FEntity\Buildings\Shop.cs" />
     <Compile Include="FEntity\Controllers\Control.cs" />
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
     <Compile Include="FEntity\Entity.cs" />
@@ -53,6 +56,7 @@
     <Compile Include="FGameObject\GameObject.cs" />
     <Compile Include="GameWorld\map\TileTypes.cs" />
     <Compile Include="GameWorld\World.cs" />
+    <Compile Include="InterFace\GUI\Inventory.cs" />
     <Compile Include="Manager\ResourceManager.cs" />
     <Compile Include="Manager\Resource\FontResource.cs" />
     <Compile Include="Manager\Resource\SoundResource.cs" />
@@ -98,12 +102,11 @@
     <Folder Include="AISystems\PathFinding\" />
     <Folder Include="Buildnings\" />
     <Folder Include="FEntity\Buildings\EnemyBuildings\" />
-    <Folder Include="FEntity\Buildings\HEroBuildings\" />
     <Folder Include="FEntity\Enemies\" />
-    <Folder Include="FGameObject\Items\NewFolder1\" />
+    <Folder Include="FGameObject\Items\Armor\" />
+    <Folder Include="FGameObject\Items\Weapon\" />
     <Folder Include="FGameObject\Projectiles\" />
     <Folder Include="Globals\" />
-    <Folder Include="InterFace\GUI\" />
     <Folder Include="InterFace\UI\" />
     <Folder Include="NewFolder1\" />
   </ItemGroup>

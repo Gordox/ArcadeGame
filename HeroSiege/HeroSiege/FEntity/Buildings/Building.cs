@@ -7,9 +7,21 @@ using System.Text;
 
 namespace HeroSiege.FEntity.Buildings
 {
-    class Building : GameObject
+    enum BuildingLevel
     {
+        Level_1,
+        Level_2,
+        Level_3
+    }
+
+    abstract class Building : GameObject
+    {
+
+        protected bool isUpgrading;
+
         public StatsData Stats { get; protected set; }
+
+        protected BuildingLevel buildingLevel;
 
         public Building(TextureRegion region, float x, float y)
             : base(region, x, y, region.region.Width, region.region.Height)
@@ -17,8 +29,9 @@ namespace HeroSiege.FEntity.Buildings
 
         }
 
+        public abstract void Init();
 
-
+        public abstract bool LevelUp(float delta);
 
 
     }

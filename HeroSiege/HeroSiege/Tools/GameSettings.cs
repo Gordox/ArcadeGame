@@ -16,12 +16,16 @@ namespace HeroSiege.Tools
         Knight,
         None
     }
+
     public enum Difficult
     {
         Easy,
         Normal,
         Hard,
-        Extream
+        Extream,
+        Insane,
+        Hell
+
     }
 
     public class GameSettings

@@ -65,7 +65,7 @@ namespace HeroSiege.FEntity
 
             if (MovingDirection == Direction.North_East || MovingDirection == Direction.North_West ||
                 MovingDirection == Direction.South_East || MovingDirection == Direction.South_West)
-                velocity *= 0.75f; //hard coded value so the player moves at the same speed side ways
+                velocity *= 0.75f; //hard coded value so the player moves at the same speed side ways somewhat 
 
             if (!CheckCollision(new Rectangle(futureposX, (int)position.Y, this.GetBounds().Width, this.GetBounds().Height), objects))
                 position.X += velocity.X * delta;
@@ -116,6 +116,12 @@ namespace HeroSiege.FEntity
         {
             get { return sprite.PauseAnimation; }
             set { sprite.PauseAnimation = value; }
+        }
+
+
+        public void Hit(float damage)
+        {
+            Stats.Health = Stats.Health - (damage - (damage * (Stats.Armor / 1000)));
         }
     }
 }

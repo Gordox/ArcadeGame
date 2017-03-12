@@ -21,7 +21,7 @@ namespace HeroSiege.Scenes
 
         public override void Init()
         {
-            this.World = new World(GameSettings.MapName);
+            this.World = new World(GameSettings);
             this.Renderer = new WorldRender(World, Graphics);
         }
 

@@ -27,9 +27,16 @@ namespace HeroSiege.GameWorld.map
         public Tile[,] FogOfWar { get; private set; }
 
         /// <summary>
-        /// 
+        /// Contains the bounderies were the player cant walk cross
         /// </summary>
         public List<Rectangle> Hitboxes { get; private set; }
+
+        //--- Entitis Spawn ---//
+        public Vector2 PlayerOneSpawn { get; private set; }
+        public Vector2 PlayerTwoSpawn { get; private set; }
+
+        public List<Vector2> EnemieTowerPos { get; private set; }
+        public List<Vector2> EnemieSpawnerPos { get; private set; }
 
 
         public string MapName { get; private set; }

@@ -2,13 +2,27 @@
 https://www.spriters-resource.com/pc_computer/warcraft2/
 
 Modes:
-easy, normal, Hard, extream // put in to an enum
+easy, normal, Hard, extream
 __________________________________
 Player hero:
-Archer, Mage, Gryphon Rider, All melee later // put in to an enum
+Mage
+ElvenArcher
+Gryphon_Rider
+FootMan
+Dwarven
+Gnomish_Flying_Machine
+Knight
 __________________________________
 Enimy units:
-
+DeathKnight
+Dragon
+Goblin sappers
+Goblin Zepilin
+Grunt
+Orge
+Peon
+SKeleton
+AxeThrower
 __________________________________
 Settings and game info:
 Volume?
@@ -44,3 +58,31 @@ Need to fix and do:
 Make a base class for the player hero and the enemies, called "Hero" & "Enemy" that inherent from entity (Maybe do this)
 
 __________________________________
+Sprite sheets:
+//---Heros---//
+Mage - 50% done
+ElvenArcher
+Gryphon_Rider
+FootMan
+Dwarven
+Gnomish_Flying_Machine
+Knight
+//---Enemies---//
+DeathKnight
+Dragon
+Goblin sappers
+Goblin Zepilin
+Grunt
+Orge
+Peon
+SKeleton
+AxeThrower
+//---Bosses---//
+Demon
+//--- Hero buildings ---//
+Castle lvl 1 - Done
+Castle lvl 2 - Done
+Tower -Done
+//--- Enemies buildings ---//
+Tower
+Spwaner (Dark portal sprite or Devil sumoner sprite)
