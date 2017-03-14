@@ -7,7 +7,7 @@ namespace HeroSiege.FTexture2D.FAnimation
 {
     public abstract class Animation
     {
-        protected int currentFrame;
+        public int currentFrame { get; protected set; }
         protected int lastFrame = -1;
 
         public abstract void Update(float delta);

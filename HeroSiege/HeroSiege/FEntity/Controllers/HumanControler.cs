@@ -80,7 +80,7 @@ namespace HeroSiege.FEntity.Controllers
 
             UpdateMovingDirecion();
 
-            if (!keysactive[0] && !keysactive[1] && !keysactive[2] && !keysactive[3])
+            if (!keysactive[0] && !keysactive[1] && !keysactive[2] && !keysactive[3] && !entity.isAttaking)
                 entity.SetPauseAnimation = true;
             else
                 entity.SetPauseAnimation = false;

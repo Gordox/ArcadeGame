@@ -33,11 +33,13 @@ namespace HeroSiege.FEntity
         public Direction MovingDirection { get; set; }
 
         public bool IsAlive { get; set; }
+        public bool isAttaking { get; protected set; }
 
         public Entity(TextureRegion region, float x, float y, float width, float height)
             : base(region, x, y, width, height)
         {
             this.IsAlive = true;
+            this.isAttaking = false;
             velocity = Vector2.Zero;
         }
 
@@ -48,7 +50,7 @@ namespace HeroSiege.FEntity
             base.Update(delta);
             CheckIsAlive();
 
-            if (Control != null)
+            if (Control != null && IsAlive)
                 Control.Update(delta);
 
         }

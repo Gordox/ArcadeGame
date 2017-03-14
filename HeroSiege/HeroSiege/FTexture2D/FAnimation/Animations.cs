@@ -18,10 +18,11 @@ namespace HeroSiege.FTexture2D.FAnimation
 
         public void Update(float delta)
         {
-            foreach (var animation in animations)
-            {
-                animation.Value.Update(delta);
-            }
+            //foreach (var animation in animations)
+            //{
+            //    animation.Value.Update(delta);
+            //}
+            CurrentAnimation.Update(delta);
         }
 
         public TextureRegion GetRegion()

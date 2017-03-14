@@ -61,7 +61,7 @@ namespace HeroSiege.GameWorld
             if (Map != null)
             {
                 InitPlayerOne();
-                InitPlayerTwo();
+                //InitPlayerTwo();
             }
         }
 
@@ -140,7 +140,7 @@ namespace HeroSiege.GameWorld
                 PlayerOne.UpdatePlayerMovement(delta, Map.Hitboxes);
             }
             //Player Two
-            if (PlayerOne != null)
+            if (PlayerTwo != null)
             {
                 PlayerTwo.Update(delta);
                 PlayerTwo.UpdatePlayerMovement(delta, Map.Hitboxes);

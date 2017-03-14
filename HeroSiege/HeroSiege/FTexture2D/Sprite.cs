@@ -40,7 +40,7 @@ namespace HeroSiege.FTexture2D
             set { size = value; UpdateSizeScale(); }
         }
 
-        protected Animations Animations { get; set; }
+        public Animations Animations { get; protected set; }
 
 
         public Sprite(TextureRegion region, float x, float y, float width, float height)

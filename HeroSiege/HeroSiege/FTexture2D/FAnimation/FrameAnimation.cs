@@ -16,6 +16,7 @@ namespace HeroSiege.FTexture2D.FAnimation
         private float stateTime;
         private int width;
         private int height;
+        private int frameCounter;
         private int frames;
         private float frameDuration;
         private bool reversed;
@@ -47,6 +48,7 @@ namespace HeroSiege.FTexture2D.FAnimation
             this.frames = frames;
             this.frameDuration = frameDuration;
             this.texture = tex;
+            this.frameCounter = 0;
         }
 
         public override bool HasNext()
@@ -84,6 +86,12 @@ namespace HeroSiege.FTexture2D.FAnimation
                     if (walkerAt.Y >= walker.Y)
                         walkerAt.Y = 0;
                 }
+                ++frameCounter;
+            }
+            if(frameCounter >= frames)
+            {
+                this.walkerAt = new Point(0, 0);
+                frameCounter = 0;
             }
 
             if (currentFrame < lastFrame)
