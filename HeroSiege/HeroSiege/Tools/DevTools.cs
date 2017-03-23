@@ -7,7 +7,7 @@ namespace HeroSiege.Tools
 {
     static class DevTools
     {
-        public static bool DevDebugMode = true;
+        public static bool DevDebugMode = false;
         //more here later
     }
 }

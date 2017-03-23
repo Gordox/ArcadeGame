@@ -7,8 +7,8 @@ namespace HeroSiege.GameWorld.map
 {
     public enum TileType
     {
-        Wakeble,
-        Hitbox
+        Walkable,
+        Obstacle
     }
 
     public enum FogOfWarState

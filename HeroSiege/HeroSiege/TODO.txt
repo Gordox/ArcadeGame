@@ -60,7 +60,7 @@ Make a base class for the player hero and the enemies, called "Hero" & "Enemy" t
 __________________________________
 Sprite sheets:
 //---Heros---//
-Mage - 50% done
+Mage - Done
 ElvenArcher
 Gryphon_Rider
 FootMan

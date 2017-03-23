@@ -31,6 +31,7 @@ namespace HeroSiege.FEntity
         public Vector2 velocity;
 
         public Direction MovingDirection { get; set; }
+        private Direction olddir;
 
         public bool IsAlive { get; set; }
         public bool isAttaking { get; protected set; }
@@ -40,9 +41,11 @@ namespace HeroSiege.FEntity
         {
             this.IsAlive = true;
             this.isAttaking = false;
-            velocity = Vector2.Zero;
+            this.velocity = Vector2.Zero;
+            this.olddir = MovingDirection;
         }
 
+        protected virtual void InitStats() { }
 
         //----- Updates-----//
         public override void Update(float delta)
@@ -59,7 +62,7 @@ namespace HeroSiege.FEntity
         {
             velocity = Vector2.Zero;
 
-            if(Control != null)
+            if (Control != null && IsAlive)
                 ((HumanControler)Control).UpdateJoystick(delta);
 
             int futureposX = (int)(position.X + velocity.X * delta);
@@ -76,29 +79,39 @@ namespace HeroSiege.FEntity
                 position.Y += velocity.Y * delta;
         }
 
-        private void UpdateRotation() //NOT DONE //Might not use
+        protected void UpdateAnimation()
         {
-            Vector2 rotation = new Vector2(velocity.X, velocity.Y);
-            rotation.Normalize();
-            if (velocity.Length() > 0.0001f)
-                sprite.Rotation = (float)Math.Atan2(rotation.Y, rotation.X);
+            if (olddir != MovingDirection && !isAttaking)
+            {
+                SetMovmentAnimations();
+                olddir = MovingDirection;
+            }
+
+            if (isAttaking && sprite.Animations.CurrentAnimation.currentFrame == 2)
+            {
+                isAttaking = false;
+                SetMovmentAnimations();
+            }
         }
 
-
-
+        //----- NAME HERE -----//
         private void CheckIsAlive()
         {
             if (Stats.Health <= 0)
                 IsAlive = false;
         }
 
-        protected virtual void InitStats() { }
 
         //----- Movment -----//
         public virtual void MoveUp(float delta) { velocity.Y = -Stats.Speed; }
         public virtual void MoveDown(float delta) { velocity.Y = Stats.Speed; }
         public virtual void MoveLeft(float delta) { velocity.X = -Stats.Speed; }
         public virtual void MoveRight(float delta) { velocity.X = Stats.Speed; }
+
+        //----- Movment & Attack Animation -----//
+        protected virtual void SetMovmentAnimations() { }
+        protected virtual void SetAttckAnimations() { }
+
 
         //----- Button Input -----//
         public virtual void GreenButton(World parent) { } //Key G or numpad 4
@@ -108,7 +121,14 @@ namespace HeroSiege.FEntity
         public virtual void AButton(World parent) { } //Key M or numpad 3
         public virtual void BButton(World parent) { }  //Key J or numpad 6
 
+        //----- Death -----//
+        protected virtual void Death()
+        {
+            SetPauseAnimation = false;
 
+        }
+
+        //----- Setter and getter -----//
         public void SetControl(Control control)
         {
             this.Control = control;
@@ -120,10 +140,12 @@ namespace HeroSiege.FEntity
             set { sprite.PauseAnimation = value; }
         }
 
-
+        //----- Other -----//
         public void Hit(float damage)
         {
             Stats.Health = Stats.Health - (damage - (damage * (Stats.Armor / 1000)));
         }
+
+
     }
 }

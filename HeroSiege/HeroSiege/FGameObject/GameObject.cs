@@ -16,7 +16,7 @@ namespace HeroSiege.FGameObject
         //public Vector2 Direction { get { return direction; } }
 
         protected Rectangle boundingBox;
-        protected Vector2 position, direction;
+        protected Vector2 position, direction, offSetBound;
 
 
         public GameObject(TextureRegion region, float x, float y, float width, float height)
@@ -24,6 +24,7 @@ namespace HeroSiege.FGameObject
             this.sprite = new Sprite(region, x, y, width, height);
             this.position = new Vector2(x, y);
             this.boundingBox = new Rectangle((int)x, (int)y, (int)width, (int)height);
+            this.offSetBound = Vector2.Zero;
         }
 
         public virtual void Update(float delta)
@@ -47,8 +48,8 @@ namespace HeroSiege.FGameObject
 
         public void UpdateBounds()
         {
-            boundingBox.X = (int)(position.X - (boundingBox.Width / 2));
-            boundingBox.Y = (int)(position.Y - (boundingBox.Height / 2));
+            boundingBox.X = (int)(position.X - (boundingBox.Width / 2) + offSetBound.X);
+            boundingBox.Y = (int)(position.Y - (boundingBox.Height / 2) + offSetBound.Y);
         }
 
         public void SetPosition(Vector2 pos)

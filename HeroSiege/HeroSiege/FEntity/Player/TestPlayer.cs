@@ -14,10 +14,10 @@ namespace HeroSiege.FEntity.Player
     class TestPlayer : Entity
     {
         const float FRAME_DURATION_MOVEMNT = 0.05f;
-        const float FRAME_DURATION_ATTACK = 1.18f;
-        const float FRAME_DURATION_DEATH = 0.7f;
+        const float FRAME_DURATION_ATTACK = 0.08f;
+        const float FRAME_DURATION_DEATH = 0.15f;
         
-        Direction olddir;
+        
         
 
         public TestPlayer(float x, float y, float width, float height)
@@ -26,8 +26,8 @@ namespace HeroSiege.FEntity.Player
             InitStats();
             AddSpriteAnimations();
             sprite.SetAnimation("MoveNorth");
-            olddir = MovingDirection;
             boundingBox = new Rectangle((int)x, (int)y, 32, 32);
+            offSetBound = new Vector2(0, 5);
         }
 
         private void AddSpriteAnimations()
@@ -47,30 +47,8 @@ namespace HeroSiege.FEntity.Player
             sprite.AddAnimation("AttckSouth",          new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 256, 320, 64, 64, 3, FRAME_DURATION_ATTACK, new Point(1, 3)));
 
             //--- Death animation ---//
-            sprite.AddAnimation("Death", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 0, 512, 64, 64, 7, FRAME_DURATION_DEATH, new Point(5, 2), true));
+            sprite.AddAnimation("Death", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 0, 512, 64, 64, 7, FRAME_DURATION_DEATH, new Point(5, 2), false));
 
-        }
-
-        public override void Update(float delta)
-        {
-            UpdateAnimation();
-
-            base.Update(delta);
-        }
-
-        private void UpdateAnimation()
-        {
-            if (olddir != MovingDirection && !isAttaking)
-            {
-                ChangeMovmentAnimations();
-                olddir = MovingDirection;
-            }
-
-            if (isAttaking && sprite.Animations.CurrentAnimation.currentFrame == 2)
-            {
-                //isAttaking = false;
-                //UpdateMovmentAnimations();
-            }
         }
 
         protected override void InitStats()
@@ -83,14 +61,22 @@ namespace HeroSiege.FEntity.Player
             base.InitStats();
         }
 
+
+        public override void Update(float delta)
+        {
+            UpdateAnimation();
+
+            base.Update(delta);
+        }
+
         public override void Draw(SpriteBatch SB)
         {
             base.Draw(SB);
 
-            DrawBoundingBox(SB);
+            //DrawBoundingBox(SB);
         }
 
-        private void ChangeMovmentAnimations()
+        protected override void SetMovmentAnimations()
         {
             switch (MovingDirection)
             {
@@ -131,7 +117,7 @@ namespace HeroSiege.FEntity.Player
             }
         }
 
-        private void UpdateAttckAnimation()
+        protected override void SetAttckAnimations()
         {
             switch (MovingDirection)
             {
@@ -185,15 +171,28 @@ namespace HeroSiege.FEntity.Player
         public override void GreenButton(World parent)
         {
             base.GreenButton(parent);
-            isAttaking = true;
+            //isAttaking = true;
             //UpdateAttckAnimation();
-            sprite.SetAnimation("Death");
+            Death();
         }
+
         public override void BlueButton(World parent)
         {
             base.BlueButton(parent);
+            if (!isAttaking)
+            {
+                SetAttckAnimations();
+                sprite.Animations.CurrentAnimation.ResetAnimation();
+                isAttaking = true;
+            }
+        }
 
-            isAttaking = false;
+        protected override void Death()
+        {
+            base.Death();
+            IsAlive = false;
+            sprite.SetAnimation("Death");
+            sprite.Animations.CurrentAnimation.ResetAnimation();
         }
     }
 }

@@ -17,5 +17,7 @@ namespace HeroSiege.FTexture2D.FAnimation
         public abstract float GetPercent();
 
         public abstract bool HasNext();
+
+        public abstract void ResetAnimation();
     }
 }

@@ -38,6 +38,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FEntity\Buildings\Building.cs" />
+    <Compile Include="FEntity\Buildings\EnemyBuildings\EnimeSpawnerTower.cs" />
+    <Compile Include="FEntity\Buildings\EnemyBuildings\EnimeTower.cs" />
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroCastle.cs" />
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroTower.cs" />
     <Compile Include="FEntity\Buildings\Shop.cs" />
@@ -101,7 +103,6 @@
     <Folder Include="AISystems\FUSM\" />
     <Folder Include="AISystems\PathFinding\" />
     <Folder Include="Buildnings\" />
-    <Folder Include="FEntity\Buildings\EnemyBuildings\" />
     <Folder Include="FEntity\Enemies\" />
     <Folder Include="FGameObject\Items\Armor\" />
     <Folder Include="FGameObject\Items\Weapon\" />

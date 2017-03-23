@@ -125,5 +125,14 @@ namespace HeroSiege.FTexture2D.FAnimation
                 height
            );
         }
+
+
+        public override void ResetAnimation()
+        {
+            lastFrame = -1;
+            frameCounter  = currentFrame = 0;
+            stateTime = 0;
+            this.walkerAt = new Point(0, 0);
+        }
     }
 }
