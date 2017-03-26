@@ -11,6 +11,8 @@ using HeroSiege.FEntity.Player;
 using HeroSiege.Manager;
 using HeroSiege.FEntity.Controllers;
 using HeroSiege.Tools;
+using HeroSiege.FEntity.Buildings;
+using HeroSiege.FEntity.Buildings.HeroBuildings;
 
 namespace HeroSiege.GameWorld
 {
@@ -27,11 +29,16 @@ namespace HeroSiege.GameWorld
         public Entity PlayerOne { get; private set; }
         public Entity PlayerTwo { get; private set; }
 
+        //----- Buildings -----//
+        public List<Building> HeroBuildings { get; private set; }
+
         //----- Game objects -----//
         public List<GameObject> GameObjects { get; private set; }
         public List<GameObject> EnemyObjects { get; private set; }
         public List<GameObject> DeadObjects { get; private set; }
-  
+
+        public List<Rectangle> Hitboxes { get; private set; }
+
 
         //----- Constructor -----//
         public World(GameSettings gameSettings) 
@@ -39,6 +46,7 @@ namespace HeroSiege.GameWorld
             this.gameSettings = gameSettings;
 
             Initmap(gameSettings.MapName);
+            InitBuildings();
 
             InitEntitys();
         }
@@ -47,6 +55,7 @@ namespace HeroSiege.GameWorld
         public void Initmap(string mapName)
         {
             this.Map = new TileMap(mapName);
+            Hitboxes = Map.Hitboxes;
         }
 
         public void InitEntitys()
@@ -120,6 +129,24 @@ namespace HeroSiege.GameWorld
             PlayerTwo.SetControl(new HumanControler(PlayerIndex.Two, PlayerTwo, this));
         }
 
+        public void InitBuildings()
+        {
+            HeroBuildings = new List<Building>();
+
+            if (Map != null)
+            { }
+
+            for (int i = 0; i < Map.HeroTowerPos.Count; i++)
+                HeroBuildings.Add(new HeroTower(Map.HeroTowerPos[i].X, Map.HeroTowerPos[i].Y));
+
+            HeroBuildings.Add(new HeroCastle(Map.HeroCastle.X, Map.HeroCastle.Y));
+
+            foreach (Building b in HeroBuildings)
+            {
+                Hitboxes.Add(b.GetHitbox());
+            }
+        }
+
         //----- Updates-----//
         public void Update(float delta)
         {
@@ -137,7 +164,7 @@ namespace HeroSiege.GameWorld
             if (PlayerOne != null)
             {
                 PlayerOne.Update(delta);
-                PlayerOne.UpdatePlayerMovement(delta, Map.Hitboxes);
+                PlayerOne.UpdatePlayerMovement(delta, Hitboxes);
             }
             //Player Two
             if (PlayerTwo != null)

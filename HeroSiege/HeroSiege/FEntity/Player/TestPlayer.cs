@@ -58,7 +58,7 @@ namespace HeroSiege.FEntity.Player
             Stats.Speed = 200;
             Stats.Health = 1;
             Stats.Mana = 1;
-            base.InitStats();
+            AttackFrame = 2;
         }
 
 
@@ -156,16 +156,6 @@ namespace HeroSiege.FEntity.Player
                 default:
                     break;
             }
-
-            //if(isAttaking)
-            //{
-            //    if (sprite.Animations.CurrentAnimation.GetRegion().region.X == 0)
-            //    {
-            //        isAttaking = false;
-            //        UpdateMovmentAnimations();
-            //    }
-            //
-            //}
         }
 
         public override void GreenButton(World parent)

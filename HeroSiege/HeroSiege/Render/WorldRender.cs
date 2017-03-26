@@ -1,4 +1,5 @@
-﻿using HeroSiege.GameWorld;
+﻿using HeroSiege.FEntity.Buildings;
+using HeroSiege.GameWorld;
 using HeroSiege.Manager;
 using HeroSiege.Tools;
 using Microsoft.Xna.Framework;
@@ -23,7 +24,6 @@ namespace HeroSiege.Render
             this.graphicsDev = graphicsDev;
         }
 
-
         //----- Updates -----//
         public void Update(float delta)
         {
@@ -46,16 +46,22 @@ namespace HeroSiege.Render
                 null, null, null,
                 Camera.Transform);
 
+            //Background
             World.Map.DrawMapTexture(SB);
 
-            if(World.PlayerOne != null)
-                World.PlayerOne.Draw(SB);
-            if (World.PlayerTwo != null)
-                World.PlayerTwo.Draw(SB);
+            //Buildings
+            DrawAllBuildings(SB);
+
+            //GameObjects
+
+            //Enemies
+
+
+            //PLayers
+            DrawPlayers(SB);
 
             //Debug
             DebugHitboxesDraw(SB);
-
 
             SB.End();
 
@@ -63,11 +69,28 @@ namespace HeroSiege.Render
             //UI
             SB.Begin();
 
+            SB.DrawString(ResourceManager.GetFont("Arial_Font"), "" + Camera.Position, new Vector2(50, 0), Color.Black);
             DebugTextDraw(SB);
 
             SB.End();
         }
 
+        private void DrawPlayers(SpriteBatch SB)
+        {
+            if (World.PlayerOne != null)
+                World.PlayerOne.Draw(SB);
+            if (World.PlayerTwo != null)
+                World.PlayerTwo.Draw(SB);
+        }
+        private void DrawAllBuildings(SpriteBatch SB)
+        {
+            foreach (Building b in World.HeroBuildings)
+            {
+                b.Draw(SB);
+            }
+        }
+
+        //----- Debug draw -----//
         private void DebugTextDraw(SpriteBatch SB)
         {
            
@@ -95,5 +118,7 @@ namespace HeroSiege.Render
 
             }
         }
+
+
     }
 }

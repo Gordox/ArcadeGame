@@ -1,4 +1,5 @@
 ﻿using HeroSiege.FTexture2D;
+using HeroSiege.Manager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -15,7 +16,7 @@ namespace HeroSiege.FGameObject
         public Vector2 Position { get { return position; } }
         //public Vector2 Direction { get { return direction; } }
 
-        protected Rectangle boundingBox;
+        protected Rectangle boundingBox, hitBox;
         protected Vector2 position, direction, offSetBound;
 
 
@@ -42,9 +43,13 @@ namespace HeroSiege.FGameObject
 
         public virtual void DrawBoundingBox(SpriteBatch SB)
         {
-            SB.Draw(sprite.Region, boundingBox, Color.Red);
+            SB.Draw(ResourceManager.GetTexture("WhitePixel"), boundingBox, Color.Red);
         }
 
+        public virtual void DrawHitBox(SpriteBatch SB)
+        {
+            SB.Draw(ResourceManager.GetTexture("WhitePixel"), hitBox, Color.Red);
+        }
 
         public void UpdateBounds()
         {
@@ -62,8 +67,17 @@ namespace HeroSiege.FGameObject
         {
             return boundingBox;
         }
+        public Rectangle GetHitbox()
+        {
+            return hitBox;
+        }
 
-        public bool CheckCollision(Rectangle _this ,List<GameObject> objects)
+        public Rectangle SetHitbox
+        {
+            set { hitBox = value; }
+        }
+
+        public bool CheckCollision(Rectangle _this, List<GameObject> objects)
         {
             foreach (var ob in objects)
             {

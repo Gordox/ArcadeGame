@@ -35,9 +35,13 @@ namespace HeroSiege.GameWorld.map
         public Vector2 PlayerOneSpawn { get; private set; }
         public Vector2 PlayerTwoSpawn { get; private set; }
 
+        //--- Buildings ---//
         public List<Vector2> EnemieTowerPos { get; private set; }
         public List<Vector2> EnemieSpawnerPos { get; private set; }
 
+        public List<Vector2> HeroTowerPos { get; private set; }
+        public Vector2 HeroCastle { get; private set; }
+        
 
         public string MapName { get; private set; }
 
@@ -84,15 +88,15 @@ namespace HeroSiege.GameWorld.map
         //----- Initiator and Loadings -----//
         public void LoadMapDataFromXMLFile(string mapName)
         {
-            XDocument map = XDocument.Load(@"Content\Assets\Maps\Map1.1.xml");
+            XDocument map = XDocument.Load(@"Content\Assets\Maps\Map_2.0.xml");
 
             var mapSize = (from e in map.Descendants("map")
                            select new { Width = e.Attribute("width").Value, Height = e.Attribute("height").Value }).ToList();
 
-            var allElements = (from e in map.Descendants("data")
+            var allTileLayers = (from e in map.Descendants("data")
                                select new { name = e.Parent.Attribute("name").Value, data = (e.HasElements ? "" : e.Value) }).ToList();
 
-            var hitboxes = (from e in map.Descendants("object")
+            var allObjects = (from e in map.Descendants("object")
                                select new { name = e.Parent.Attribute("name").Value,
                                    X = e.Attribute("x").Value,
                                    Y = e.Attribute("y").Value,
@@ -102,22 +106,28 @@ namespace HeroSiege.GameWorld.map
 
             InitMap(Int32.Parse(mapSize[0].Width), Int32.Parse(mapSize[0].Height));
 
-            for (int i = 0; i < allElements.Count; i++)
+            for (int i = 0; i < allTileLayers.Count; i++)
             {
-                List<string> lines = allElements[i].data.Split('\n').ToList();
-                CreateMapFromXmlFile(allElements[i].name, lines);
+                List<string> lines = allTileLayers[i].data.Split('\n').ToList();
+                CreateMapFromXmlFile(allTileLayers[i].name, lines);
             }
 
 
-            for (int i = 0; i < hitboxes.Count; i++)
+            for (int i = 0; i < allObjects.Count; i++)
             {
-                if (hitboxes[i].name.Equals("HitBoxes"))
-                {
-                    Hitboxes.Add(new Rectangle(Int32.Parse(hitboxes[i].X) + TileSize / 2,
-                                               Int32.Parse(hitboxes[i].Y) + (int)(TileSize * 1.5f),
-                                               Int32.Parse(hitboxes[i].Width),
-                                               Int32.Parse(hitboxes[i].Height)));
-                }
+                int xPos = Int32.Parse(allObjects[i].X) + TileSize / 2;
+                int yPos = Int32.Parse(allObjects[i].Y) + TileSize / 2;
+
+                if (allObjects[i].name.Equals("HitBoxes"))
+                    Hitboxes.Add(new Rectangle(xPos, Int32.Parse(allObjects[i].Y) + (int)(TileSize * 1.5f), //1.5 is a value to make it work
+                                                     Int32.Parse(allObjects[i].Width),
+                                                     Int32.Parse(allObjects[i].Height)));
+
+                if (allObjects[i].name.Equals("HeroTower"))
+                    HeroTowerPos.Add(new Vector2(xPos, yPos + TileSize));
+                if (allObjects[i].name.Equals("HeroCastle"))
+                    HeroCastle = (new Vector2(xPos, yPos + TileSize));
+
             }
         }
 
@@ -127,6 +137,7 @@ namespace HeroSiege.GameWorld.map
             this.MapWakeblePath = new Tile[width, height];
             this.FogOfWar = new Tile[width, height];
             this.Hitboxes = new List<Rectangle>();
+            this.HeroTowerPos = new List<Vector2>();
         }
 
 

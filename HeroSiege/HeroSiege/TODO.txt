@@ -5,7 +5,7 @@ Modes:
 easy, normal, Hard, extream
 __________________________________
 Player hero:
-Mage
+Mage - working on it
 ElvenArcher
 Gryphon_Rider
 FootMan
