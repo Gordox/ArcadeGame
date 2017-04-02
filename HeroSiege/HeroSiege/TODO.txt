@@ -61,15 +61,13 @@ __________________________________
 Sprite sheets:
 //---Heros---//
 Mage - Done
-ElvenArcher
-Gryphon_Rider
-FootMan
+ElvenArcher - Done
+Gryphon_Rider - Done
+FootMan - Done
 Dwarven
 Gnomish_Flying_Machine
-Knight
+Knight - Done
 //---Enemies---//
-DeathKnight
-Dragon
 Goblin sappers
 Goblin Zepilin
 Grunt
@@ -78,11 +76,19 @@ Peon
 SKeleton
 AxeThrower
 //---Bosses---//
-Demon
+Dragon (Final boss)
+Demon (mini boss)
+DeathKnight (spawner boss)
+//--- Other ---//
+Ballista - Done
+Portal - Done
 //--- Hero buildings ---//
 Castle lvl 1 - Done
 Castle lvl 2 - Done
 Tower -Done
 //--- Enemies buildings ---//
-Tower
-Spwaner (Dark portal sprite or Devil sumoner sprite)
+Tower - Done
+Spwaner (Dark portal sprite or Devil sumoner sprite) - Done
+__________________________________
+Fun stuff if I have time
+- Have code combination in start screen that will do funny thing if pressed correcly (ex: green, green, blue, red and a sound will be heard)

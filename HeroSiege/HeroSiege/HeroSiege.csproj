@@ -38,8 +38,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FEntity\Buildings\Building.cs" />
-    <Compile Include="FEntity\Buildings\EnemyBuildings\EnimeSpawnerTower.cs" />
-    <Compile Include="FEntity\Buildings\EnemyBuildings\EnimeTower.cs" />
+    <Compile Include="FEntity\Buildings\EnemyBuildings\EnemySpawnerTower.cs" />
+    <Compile Include="FEntity\Buildings\EnemyBuildings\EnemyTower.cs" />
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroCastle.cs" />
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroTower.cs" />
     <Compile Include="FEntity\Buildings\Shop.cs" />

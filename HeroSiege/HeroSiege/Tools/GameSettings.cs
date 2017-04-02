@@ -25,7 +25,6 @@ namespace HeroSiege.Tools
         Extream,
         Insane,
         Hell
-
     }
 
     public class GameSettings

@@ -37,7 +37,7 @@ namespace HeroSiege.FEntity
         public bool IsAlive { get; set; }
         public bool isAttaking { get; protected set; }
 
-        protected int AttackFrame; //Which frame the attack shall we used
+        protected int AttackFrame; //Which frame the attack shall be used
 
         //----- Constructor -----//
         public Entity(TextureRegion region, float x, float y, float width, float height)

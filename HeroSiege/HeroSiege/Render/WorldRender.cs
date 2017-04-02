@@ -88,6 +88,11 @@ namespace HeroSiege.Render
             {
                 b.Draw(SB);
             }
+
+            foreach (Building b in World.EnemyBuildings)
+            {
+                b.Draw(SB);
+            }
         }
 
         //----- Debug draw -----//

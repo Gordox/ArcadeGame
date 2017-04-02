@@ -13,6 +13,7 @@ using HeroSiege.FEntity.Controllers;
 using HeroSiege.Tools;
 using HeroSiege.FEntity.Buildings;
 using HeroSiege.FEntity.Buildings.HeroBuildings;
+using HeroSiege.FEntity.Buildings.EnemyBuildings;
 
 namespace HeroSiege.GameWorld
 {
@@ -31,6 +32,7 @@ namespace HeroSiege.GameWorld
 
         //----- Buildings -----//
         public List<Building> HeroBuildings { get; private set; }
+        public List<Building> EnemyBuildings { get; private set; }
 
         //----- Game objects -----//
         public List<GameObject> GameObjects { get; private set; }
@@ -132,16 +134,37 @@ namespace HeroSiege.GameWorld
         public void InitBuildings()
         {
             HeroBuildings = new List<Building>();
+            EnemyBuildings = new List<Building>();
 
             if (Map != null)
-            { }
+            {
+                InitHeroBuildings();
+                InitEnemyBuildings();
+            }
 
+        }
+
+        private void InitHeroBuildings()
+        {
             for (int i = 0; i < Map.HeroTowerPos.Count; i++)
                 HeroBuildings.Add(new HeroTower(Map.HeroTowerPos[i].X, Map.HeroTowerPos[i].Y));
 
             HeroBuildings.Add(new HeroCastle(Map.HeroCastle.X, Map.HeroCastle.Y));
 
             foreach (Building b in HeroBuildings)
+            {
+                Hitboxes.Add(b.GetHitbox());
+            }
+        }
+        private void InitEnemyBuildings()
+        {
+            for (int i = 0; i < Map.EnemieTowerPos.Count; i++)
+                EnemyBuildings.Add(new EnemyTower(Map.EnemieTowerPos[i].X, Map.EnemieTowerPos[i].Y));
+
+            for (int i = 0; i < Map.EnemieSpawnerPos.Count; i++)
+                EnemyBuildings.Add(new EnemySpawnerTower(Map.EnemieSpawnerPos[i].X, Map.EnemieSpawnerPos[i].Y));
+
+            foreach (Building b in EnemyBuildings)
             {
                 Hitboxes.Add(b.GetHitbox());
             }

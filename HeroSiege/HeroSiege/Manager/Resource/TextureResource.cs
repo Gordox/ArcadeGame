@@ -14,8 +14,8 @@ namespace HeroSiege.Manager.Resource
         private Texture2D tileTextureSummer;
         //Heros
         private Texture2D mageHeroSpriteSheet;
-        //HeroBuildings
-        private Texture2D heroBuildings;
+        //Buildings
+        private Texture2D heroBuildings, enemieBuildnings;
         //Other
         private Texture2D blackPixel, whitePixel;
 
@@ -36,6 +36,8 @@ namespace HeroSiege.Manager.Resource
             tileTextureSummer = content.Load<Texture2D>(@"Assets\Texture\Tiles\Wc2-Tiles");
             mageHeroSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\MageHero");
             heroBuildings = content.Load<Texture2D>(@"Assets\Texture\Buildings\HeroBuildings");
+            enemieBuildnings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EnemieBuildings");
+
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
             //Add all textures and sprite to Dict
@@ -70,6 +72,15 @@ namespace HeroSiege.Manager.Resource
             textureRegion["HTower_2"] = new TextureRegion(heroBuildings, 320,  0, 64, 64);
             textureRegion["HTower_3"] = new TextureRegion(heroBuildings, 256, 64, 64, 64);
 
+            //Enemie Buildings
+            textureRegion["Portal_1"] =      new TextureRegion(enemieBuildnings,   0,   0, 128, 128);
+            textureRegion["Portal_2"] =      new TextureRegion(enemieBuildnings, 128,   0, 128, 128);
+            textureRegion["Portal_Broken"] = new TextureRegion(enemieBuildnings, 256,   0, 128, 128);
+
+            textureRegion["Spawn_Altar"] =   new TextureRegion(enemieBuildnings,   0, 128,  98,  98);
+
+            textureRegion["ETower"] =        new TextureRegion(enemieBuildnings,  98, 128,  64,  64);
+            textureRegion["ETower_Broken"] = new TextureRegion(enemieBuildnings, 162, 128,  64,  64);
 
         }
 

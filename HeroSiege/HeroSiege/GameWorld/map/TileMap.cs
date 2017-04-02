@@ -127,6 +127,10 @@ namespace HeroSiege.GameWorld.map
                     HeroTowerPos.Add(new Vector2(xPos, yPos + TileSize));
                 if (allObjects[i].name.Equals("HeroCastle"))
                     HeroCastle = (new Vector2(xPos, yPos + TileSize));
+                if (allObjects[i].name.Equals("EnemieTower"))
+                    EnemieTowerPos.Add(new Vector2(xPos, yPos + TileSize));
+                if (allObjects[i].name.Equals("EnemieSpawner"))
+                    EnemieSpawnerPos.Add(new Vector2(xPos, yPos + TileSize));
 
             }
         }
@@ -138,6 +142,8 @@ namespace HeroSiege.GameWorld.map
             this.FogOfWar = new Tile[width, height];
             this.Hitboxes = new List<Rectangle>();
             this.HeroTowerPos = new List<Vector2>();
+            this.EnemieTowerPos = new List<Vector2>();
+            this.EnemieSpawnerPos = new List<Vector2>();
         }
 
 
