@@ -5,10 +5,12 @@ using System.Text;
 
 namespace HeroSiege.GameWorld.map
 {
-    public enum TileType
+    public enum WalkTypes
     {
         Walkable,
-        Obstacle
+        Grass,
+        Obstacle,
+        None
     }
 
     public enum FogOfWarState

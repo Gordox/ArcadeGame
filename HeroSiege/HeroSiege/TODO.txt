@@ -42,14 +42,15 @@ Shop
 Teleport to mini bosses
 mini bosses
 End boss
+UI
 __________________________________
 Buildnings:
 Hero castle
 Tower (Deffends the hero tower)
 Blockade for tower (will be the first to eat upp damage before the tower)
 Shop
-Enemy tower
-Enemy castle
+Enemy tower -
+Enemy castle -
 __________________________________
 HUD / UI / GUI:
 

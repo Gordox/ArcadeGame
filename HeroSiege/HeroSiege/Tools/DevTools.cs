@@ -8,6 +8,7 @@ namespace HeroSiege.Tools
     static class DevTools
     {
         public static bool DevDebugMode = false;
+        public static bool DevDrawWalkbleTiles = true;
         //more here later
     }
 }

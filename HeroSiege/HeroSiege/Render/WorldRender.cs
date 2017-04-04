@@ -46,8 +46,12 @@ namespace HeroSiege.Render
                 null, null, null,
                 Camera.Transform);
 
-            //Background
+            //--- World map ---//
             World.Map.DrawMapTexture(SB);
+
+            //--- Debug Wakeble tiles ---//
+            if (DevTools.DevDebugMode || DevTools.DevDrawWalkbleTiles)
+                World.Map.DrawWakebleTiles(SB);
 
             //Buildings
             DrawAllBuildings(SB);

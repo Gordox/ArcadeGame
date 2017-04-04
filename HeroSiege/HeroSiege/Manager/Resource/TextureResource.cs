@@ -18,10 +18,13 @@ namespace HeroSiege.Manager.Resource
         private Texture2D heroBuildings, enemieBuildnings;
         //Other
         private Texture2D blackPixel, whitePixel;
+        //Debug
+        private Texture2D debugWalkTile;
 
         //Layer Name for the Tile Texure
         const string BASE_LAYER_NAME = "BaseLayer";
         const string HITBOX_LAYER_NAME = "HitBoxLayer";
+        const string WALKEBLE_TILE_LAYER = "WalkebleLayer";
 
         public void Load(ContentManager content)
         {
@@ -37,6 +40,7 @@ namespace HeroSiege.Manager.Resource
             mageHeroSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\MageHero");
             heroBuildings = content.Load<Texture2D>(@"Assets\Texture\Buildings\HeroBuildings");
             enemieBuildnings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EnemieBuildings");
+            debugWalkTile = content.Load<Texture2D>(@"Assets\Debug\debugsheet");
 
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
@@ -54,10 +58,13 @@ namespace HeroSiege.Manager.Resource
             textureRegion["BlackPixel"] = new TextureRegion(blackPixel, 0, 0, 1, 1);
             textureRegion["WhitePixel"] = new TextureRegion(whitePixel, 0, 0, 1, 1);
 
+            //Debug
+            AddSpriteSheetRegionsToDict(WALKEBLE_TILE_LAYER, debugWalkTile);
+
             //UI
 
             //Tiles
-            AddAllTileRegionsToDict();
+            AddSpriteSheetRegionsToDict(BASE_LAYER_NAME, tileTextureSummer);
 
             //Player Heros
             textureRegion["MageSheet"] = new TextureRegion(mageHeroSpriteSheet, 0, 0, mageHeroSpriteSheet.Width, mageHeroSpriteSheet.Height);
@@ -84,19 +91,18 @@ namespace HeroSiege.Manager.Resource
 
         }
 
-        private void AddAllTileRegionsToDict()
+        private void AddSpriteSheetRegionsToDict(string LayerName, Texture2D spriteSheet)
         {
-            //Summer Tile;
             int id = 0;
-            for (int y = 0; y < tileTextureSummer.Height / 32; y++)
+            for (int y = 0; y < spriteSheet.Height / 32; y++)
             {
-                for (int x = 0; x < tileTextureSummer.Width / 32; x++)
+                for (int x = 0; x < spriteSheet.Width / 32; x++)
                 {
-                    tileTextureRegion[Tuple.Create(BASE_LAYER_NAME, id)] = new TextureRegion(tileTextureSummer, x * 32, y * 32, 32, 32);
+                    tileTextureRegion[Tuple.Create(LayerName, id)] = new TextureRegion(spriteSheet, x * 32, y * 32, 32, 32);
                     id++;
                 }
             }
-            
+
         }
 
         public TextureRegion GetTextureRegion(string name)

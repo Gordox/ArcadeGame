@@ -83,6 +83,18 @@ namespace HeroSiege.GameWorld.map
             }
         }
 
+        public void DrawWakebleTiles(SpriteBatch SB)
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    if (MapWakeblePath[x, y] != null)
+                        MapWakeblePath[x, y].Draw(SB);
+                }
+            }
+        }
+
 
 
         //----- Initiator and Loadings -----//
@@ -109,6 +121,8 @@ namespace HeroSiege.GameWorld.map
             for (int i = 0; i < allTileLayers.Count; i++)
             {
                 List<string> lines = allTileLayers[i].data.Split('\n').ToList();
+                lines.RemoveAt(0);
+                lines.RemoveAt(lines.Count - 1);
                 CreateMapFromXmlFile(allTileLayers[i].name, lines);
             }
 
@@ -119,18 +133,18 @@ namespace HeroSiege.GameWorld.map
                 int yPos = Int32.Parse(allObjects[i].Y) + TileSize / 2;
 
                 if (allObjects[i].name.Equals("HitBoxes"))
-                    Hitboxes.Add(new Rectangle(xPos, Int32.Parse(allObjects[i].Y) + (int)(TileSize * 1.5f), //1.5 is a value to make it work
+                    Hitboxes.Add(new Rectangle(xPos, Int32.Parse(allObjects[i].Y), //1.5 is a value to make it work
                                                      Int32.Parse(allObjects[i].Width),
                                                      Int32.Parse(allObjects[i].Height)));
 
                 if (allObjects[i].name.Equals("HeroTower"))
-                    HeroTowerPos.Add(new Vector2(xPos, yPos + TileSize));
+                    HeroTowerPos.Add(new Vector2(xPos, yPos));
                 if (allObjects[i].name.Equals("HeroCastle"))
-                    HeroCastle = (new Vector2(xPos, yPos + TileSize));
+                    HeroCastle = (new Vector2(xPos, yPos));
                 if (allObjects[i].name.Equals("EnemieTower"))
-                    EnemieTowerPos.Add(new Vector2(xPos, yPos + TileSize));
+                    EnemieTowerPos.Add(new Vector2(xPos, yPos));
                 if (allObjects[i].name.Equals("EnemieSpawner"))
-                    EnemieSpawnerPos.Add(new Vector2(xPos, yPos + TileSize));
+                    EnemieSpawnerPos.Add(new Vector2(xPos, yPos));
 
             }
         }
@@ -156,6 +170,8 @@ namespace HeroSiege.GameWorld.map
 
                 for (int x = 0; x < lineHolder.Count(); x++)
                 {
+                    if (lineHolder[x] == "-1")
+                        continue;
 
                     int id = 0;
                     try { id = Int32.Parse(lineHolder[x]); } catch { }
@@ -166,8 +182,8 @@ namespace HeroSiege.GameWorld.map
                             BackGroundTexture.Add(CreateTile(layername, id, x, y));
                             break;
 
-                        case "IsWakeble":
-                            
+                        case "WalkebleLayer":
+                            MapWakeblePath[x, y] = CreateWalkebleTile(layername, id, x, y);
                             break;
 
                         case "SomethingHere":
@@ -214,10 +230,19 @@ namespace HeroSiege.GameWorld.map
         /// <param name="y"></param>
         /// <param name="isWakeble"></param>
         /// <returns></returns>
-        private Tile CreateTile(string Tilename, int x, int y, bool isWakeble)
+        private Tile CreateWalkebleTile(string layerName, int id, int x, int y)
         {
-            return new Tile(ResourceManager.GetTexture(Tilename), x * TileSize + TileSize / 2,
-                                                                 y * TileSize + TileSize / 2, TileSize, isWakeble);
+            if (id == 0)
+                return new Tile(ResourceManager.GetTexture(layerName, id), x * TileSize + TileSize / 2,
+                                                                           y * TileSize + TileSize / 2, TileSize, WalkTypes.Walkable);
+            else if (id == 1)
+                return new Tile(ResourceManager.GetTexture(layerName, id), x * TileSize + TileSize / 2,
+                                                                           y * TileSize + TileSize / 2, TileSize, WalkTypes.Grass);
+            else if (id == 2)
+                return new Tile(ResourceManager.GetTexture(layerName, id), x * TileSize + TileSize / 2,
+                                                                           y * TileSize + TileSize / 2, TileSize, WalkTypes.Obstacle, false);
+            else
+                return null;
         }
         /// <summary>
         /// Create a fog of war tile
@@ -239,7 +264,7 @@ namespace HeroSiege.GameWorld.map
         /// </summary>
         public int Width
         {
-            get { return MapWakeblePath.GetLength(1); }
+            get { return MapWakeblePath.GetLength(0); }
         }
 
         /// <summary>
@@ -247,7 +272,7 @@ namespace HeroSiege.GameWorld.map
         /// </summary>
         public int Height
         {
-            get { return MapWakeblePath.GetLength(0); }
+            get { return MapWakeblePath.GetLength(1); }
         }
         
         public bool GetIfWakeble(int cellX, int cellY)
@@ -256,6 +281,18 @@ namespace HeroSiege.GameWorld.map
                 return false;
 
             return MapWakeblePath[cellX, cellY].Wakeble;
+        }
+
+        public WalkTypes GetTileType(int cellX, int cellY)
+        {
+            if (cellX < 0 || cellX > Width - 1 || cellY < 0 || cellY > Height - 1)
+                return WalkTypes.None;
+
+            if (MapWakeblePath[cellX, cellY] == null)
+                return WalkTypes.None;
+
+            return MapWakeblePath[cellX, cellY].WalkType;
+
         }
     }
 }

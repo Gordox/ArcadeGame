@@ -1,14 +1,13 @@
 ﻿using HeroSiege.FTexture2D;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace HeroSiege.GameWorld.map
 {
     class Tile : Sprite
     {
         public FogOfWarState Visibility { get; set; }
+        public WalkTypes WalkType { get; private set; }
+
         public bool Wakeble { get; set; }
 
         public int TileSize { get { return tileSize; } }
@@ -28,14 +27,14 @@ namespace HeroSiege.GameWorld.map
         /// <param name="y"></param>
         /// <param name="tileSize"></param>
         /// <param name="wakeble"></param>
-        public Tile(TextureRegion region, float x, float y, int tileSize, bool wakeble)
+        public Tile(TextureRegion region, float x, float y, int tileSize, WalkTypes type, bool wakeble = true)
             : base(region, x, y, tileSize, tileSize)
         {
             this.tileSize = tileSize;
             this.Wakeble = wakeble;
+            this.WalkType = type;
 
-            if (!Wakeble)
-                Color = Microsoft.Xna.Framework.Color.Red;
+            Color = Color.White * 0.2f;
         }
 
         /// <summary>
