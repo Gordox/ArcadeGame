@@ -7,6 +7,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using HeroSiege.FEntity.Controllers;
 using HeroSiege.GameWorld;
+using Microsoft.Xna.Framework.Graphics;
+using HeroSiege.Tools;
 
 namespace HeroSiege.FEntity
 {
@@ -34,7 +36,6 @@ namespace HeroSiege.FEntity
         public Direction MovingDirection { get; set; }
         private Direction olddir;
 
-        public bool IsAlive { get; set; }
         public bool isAttaking { get; protected set; }
 
         protected int AttackFrame; //Which frame the attack shall be used
@@ -98,6 +99,15 @@ namespace HeroSiege.FEntity
             }
         }
 
+        //----- Draw -----//
+        public override void Draw(SpriteBatch SB)
+        {
+            base.Draw(SB);
+
+            if (DevTools.DevDebugMode == true)
+                DrawBoundingBox(SB);
+        }
+
         //----- NAME HERE -----//
         private void CheckIsAlive()
         {
@@ -105,7 +115,7 @@ namespace HeroSiege.FEntity
                 IsAlive = false;
         }
 
-        //----- Movment -----//
+        //----- Movment (Player only)  -----//
         public virtual void MoveUp(float delta) { velocity.Y = -Stats.Speed; }
         public virtual void MoveDown(float delta) { velocity.Y = Stats.Speed; }
         public virtual void MoveLeft(float delta) { velocity.X = -Stats.Speed; }
@@ -114,8 +124,9 @@ namespace HeroSiege.FEntity
         //----- Movment & Attack Animation -----//
         protected virtual void SetMovmentAnimations() { }
         protected virtual void SetAttckAnimations() { }
+        protected virtual void AddSpriteAnimations() { }
 
-        //----- Button Input -----//
+        //----- Button Input (Player only) -----//
         public virtual void GreenButton(World parent) { } //Key G or numpad 4
         public virtual void BlueButton(World parent) { } //Key H or numpad 5
         public virtual void YellowButton(World parent) { }  //Key B or numpad 1

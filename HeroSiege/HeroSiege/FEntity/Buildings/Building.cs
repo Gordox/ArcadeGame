@@ -1,5 +1,6 @@
 ﻿using HeroSiege.FGameObject;
 using HeroSiege.FTexture2D;
+using HeroSiege.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -45,7 +46,8 @@ namespace HeroSiege.FEntity.Buildings
         {
             base.Draw(SB);
 
-            //DrawBoundingBox(SB);
+            if (DevTools.DevDebugMode == true)
+                DrawBoundingBox(SB);
         }
 
         //----- NAME HERE -----//

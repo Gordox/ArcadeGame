@@ -39,10 +39,14 @@ Sounds & Music:
 __________________________________
 In Game: (Change name later maybe)
 Shop
-Teleport to mini bosses
+Teleport to mini bosses - DONE
 mini bosses
 End boss
 UI
+__________________________________
+Systems:
+A*(Astar) - Working on
+SpawnController - Working on
 __________________________________
 Buildnings:
 Hero castle
@@ -68,6 +72,7 @@ FootMan - Done
 Dwarven
 Gnomish_Flying_Machine
 Knight - Done
+
 //---Enemies---//
 Goblin sappers
 Goblin Zepilin
@@ -76,17 +81,21 @@ Orge
 Peon
 SKeleton
 AxeThrower
+
 //---Bosses---//
 Dragon (Final boss)
 Demon (mini boss)
 DeathKnight (spawner boss)
+
 //--- Other ---//
 Ballista - Done
 Portal - Done
+
 //--- Hero buildings ---//
 Castle lvl 1 - Done
 Castle lvl 2 - Done
 Tower -Done
+
 //--- Enemies buildings ---//
 Tower - Done
 Spwaner (Dark portal sprite or Devil sumoner sprite) - Done

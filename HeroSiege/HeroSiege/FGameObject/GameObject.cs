@@ -13,8 +13,9 @@ namespace HeroSiege.FGameObject
     {
         protected Sprite sprite;
 
+        public bool IsAlive { get; set; }
+
         public Vector2 Position { get { return position; } }
-        //public Vector2 Direction { get { return direction; } }
 
         protected Rectangle boundingBox, hitBox;
         protected Vector2 position, direction, offSetBound;

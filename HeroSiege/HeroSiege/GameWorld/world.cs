@@ -14,12 +14,16 @@ using HeroSiege.Tools;
 using HeroSiege.FEntity.Buildings;
 using HeroSiege.FEntity.Buildings.HeroBuildings;
 using HeroSiege.FEntity.Buildings.EnemyBuildings;
+using HeroSiege.AISystems;
+using HeroSiege.FEntity.Enemies;
 
 namespace HeroSiege.GameWorld
 {
     class World
     {
         GameSettings gameSettings;
+
+        SpawnController spawnController;
 
         public TileMap Map { get; private set; }
 
@@ -72,10 +76,13 @@ namespace HeroSiege.GameWorld
             if (Map != null)
             {
                 InitPlayerOne();
-                //InitPlayerTwo();
+                InitPlayerTwo();
+                InitGameObjects();
+
+                //----- TEST -----//
+                InitEnemy();
             }
         }
-
         public void InitPlayerOne()
         {
             switch (gameSettings.playerOne)
@@ -127,8 +134,21 @@ namespace HeroSiege.GameWorld
                     break;
             }
 
-            PlayerTwo = new TestPlayer(32 * 40, 32 * 105, 64, 64);
+            PlayerTwo = new TestPlayer(32 * 40, 32 * 100, 64, 64);
             PlayerTwo.SetControl(new HumanControler(PlayerIndex.Two, PlayerTwo, this));
+        }
+
+        //----- TEST -----//
+        public void InitEnemy()
+        {
+            Enimies.Add(new TestEnemy(Map.EnemieSpawnerPos[0].X, Map.EnemieSpawnerPos[0].Y, 64, 64, AttackType.Melee));
+            Enimies[0].SetControl(new AIController(this, (TestEnemy)Enimies[0]));
+        }
+
+        public void InitGameObjects()
+        {
+            GameObjects.Add(new Portal(ResourceManager.GetTexture("Portal"), Map.Portal[0].X, Map.Portal[0].Y, 64, 64) { SetDestination = Map.Portal[1] });
+            GameObjects.Add(new Portal(ResourceManager.GetTexture("Portal"), Map.Portal[1].X, Map.Portal[1].Y, 64, 64) { SetDestination = Map.Portal[0] });
         }
 
         public void InitBuildings()
@@ -143,7 +163,6 @@ namespace HeroSiege.GameWorld
             }
 
         }
-
         private void InitHeroBuildings()
         {
             for (int i = 0; i < Map.HeroTowerPos.Count; i++)
@@ -175,7 +194,7 @@ namespace HeroSiege.GameWorld
         {
             UpdatePlayers(delta);
 
-
+            UpdateGameObjects(delta);
             //Enemies
             UpdateEnemies(delta);
         }
@@ -212,6 +231,27 @@ namespace HeroSiege.GameWorld
                 Enimies.Remove(deadEntity);
             }
             deadEnimies.Clear();
+        }
+
+        private void UpdateGameObjects(float delta)
+        {
+            foreach (var obj in GameObjects)
+            {
+                if(obj is Portal)
+                    IntreactionPortal((Portal)obj, delta);
+
+                if (!obj.IsAlive)
+                    DeadObjects.Add(obj);
+            }
+        }
+
+        private void IntreactionPortal(Portal p, float delta)
+        {
+            if (PlayerOne != null)
+                p.PlayerOnTeleporter(delta, PlayerOne);
+
+            if (PlayerTwo != null)
+                p.PlayerOnTeleporter(delta, PlayerTwo);
         }
 
         //----- Functions-----//

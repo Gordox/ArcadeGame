@@ -15,7 +15,7 @@ namespace HeroSiege.Manager.Resource
         //Heros
         private Texture2D mageHeroSpriteSheet;
         //Buildings
-        private Texture2D heroBuildings, enemieBuildnings;
+        private Texture2D heroBuildings, enemieBuildnings, etcBuildings;
         //Other
         private Texture2D blackPixel, whitePixel;
         //Debug
@@ -41,6 +41,7 @@ namespace HeroSiege.Manager.Resource
             heroBuildings = content.Load<Texture2D>(@"Assets\Texture\Buildings\HeroBuildings");
             enemieBuildnings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EnemieBuildings");
             debugWalkTile = content.Load<Texture2D>(@"Assets\Debug\debugsheet");
+            etcBuildings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EtcBuildnings");
 
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
@@ -80,14 +81,17 @@ namespace HeroSiege.Manager.Resource
             textureRegion["HTower_3"] = new TextureRegion(heroBuildings, 256, 64, 64, 64);
 
             //Enemie Buildings
-            textureRegion["Portal_1"] =      new TextureRegion(enemieBuildnings,   0,   0, 128, 128);
-            textureRegion["Portal_2"] =      new TextureRegion(enemieBuildnings, 128,   0, 128, 128);
-            textureRegion["Portal_Broken"] = new TextureRegion(enemieBuildnings, 256,   0, 128, 128);
+            textureRegion["DarkPortal_1"] =      new TextureRegion(enemieBuildnings,   0,   0, 128, 128);
+            textureRegion["DarkPortal_2"] =      new TextureRegion(enemieBuildnings, 128,   0, 128, 128);
+            textureRegion["DarkPortal_Broken"] = new TextureRegion(enemieBuildnings, 256,   0, 128, 128);
 
             textureRegion["Spawn_Altar"] =   new TextureRegion(enemieBuildnings,   0, 128,  98,  98);
 
             textureRegion["ETower"] =        new TextureRegion(enemieBuildnings,  98, 128,  64,  64);
             textureRegion["ETower_Broken"] = new TextureRegion(enemieBuildnings, 162, 128,  64,  64);
+
+            //ETC Buildings
+            textureRegion["Portal"] = new TextureRegion(etcBuildings, 0, 0, 64, 64);
 
         }
 

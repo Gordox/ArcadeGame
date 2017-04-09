@@ -41,7 +41,10 @@ namespace HeroSiege.GameWorld.map
 
         public List<Vector2> HeroTowerPos { get; private set; }
         public Vector2 HeroCastle { get; private set; }
-        
+
+        public List<Vector2> Portal { get; private set; }
+
+
 
         public string MapName { get; private set; }
 
@@ -95,9 +98,19 @@ namespace HeroSiege.GameWorld.map
             }
         }
 
-
-
         //----- Initiator and Loadings -----//
+        public void InitMap(int width, int height)
+        {
+            this.BackGroundTexture = new List<Tile>();
+            this.MapWakeblePath = new Tile[width, height];
+            this.FogOfWar = new Tile[width, height];
+            this.Hitboxes = new List<Rectangle>();
+            this.HeroTowerPos = new List<Vector2>();
+            this.EnemieTowerPos = new List<Vector2>();
+            this.EnemieSpawnerPos = new List<Vector2>();
+            this.Portal = new List<Vector2>();
+        }
+
         public void LoadMapDataFromXMLFile(string mapName)
         {
             XDocument map = XDocument.Load(@"Content\Assets\Maps\Map_2.0.xml");
@@ -145,21 +158,11 @@ namespace HeroSiege.GameWorld.map
                     EnemieTowerPos.Add(new Vector2(xPos, yPos));
                 if (allObjects[i].name.Equals("EnemieSpawner"))
                     EnemieSpawnerPos.Add(new Vector2(xPos, yPos));
+                if (allObjects[i].name.Equals("Teleport"))
+                    Portal.Add(new Vector2(xPos, yPos));
 
             }
         }
-
-        public void InitMap(int width, int height)
-        {
-            this.BackGroundTexture = new List<Tile>();
-            this.MapWakeblePath = new Tile[width, height];
-            this.FogOfWar = new Tile[width, height];
-            this.Hitboxes = new List<Rectangle>();
-            this.HeroTowerPos = new List<Vector2>();
-            this.EnemieTowerPos = new List<Vector2>();
-            this.EnemieSpawnerPos = new List<Vector2>();
-        }
-
 
         //----- Create Map, fogofwar, wakeble tiles -----//
         private void CreateMapFromXmlFile(string layername, List<string> lines) //Not done
@@ -278,6 +281,9 @@ namespace HeroSiege.GameWorld.map
         public bool GetIfWakeble(int cellX, int cellY)
         {
             if (cellX < 0 || cellX > Width - 1 || cellY < 0 || cellY > Height - 1)
+                return false;
+
+            if (MapWakeblePath[cellX, cellY] == null)
                 return false;
 
             return MapWakeblePath[cellX, cellY].Wakeble;

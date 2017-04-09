@@ -1,4 +1,6 @@
-﻿using HeroSiege.FEntity.Buildings;
+﻿using HeroSiege.FEntity;
+using HeroSiege.FEntity.Buildings;
+using HeroSiege.FGameObject;
 using HeroSiege.GameWorld;
 using HeroSiege.Manager;
 using HeroSiege.Tools;
@@ -57,9 +59,10 @@ namespace HeroSiege.Render
             DrawAllBuildings(SB);
 
             //GameObjects
+            DrawAllGameObjects(SB);
 
             //Enemies
-
+            DrawEnemies(SB);
 
             //PLayers
             DrawPlayers(SB);
@@ -73,7 +76,7 @@ namespace HeroSiege.Render
             //UI
             SB.Begin();
 
-            SB.DrawString(ResourceManager.GetFont("Arial_Font"), "" + Camera.Position, new Vector2(50, 0), Color.Black);
+            
             DebugTextDraw(SB);
 
             SB.End();
@@ -86,6 +89,15 @@ namespace HeroSiege.Render
             if (World.PlayerTwo != null)
                 World.PlayerTwo.Draw(SB);
         }
+        private void DrawEnemies(SpriteBatch SB)
+        {
+            foreach (Entity e in World.Enimies)
+            {
+                if (e != null)
+                    e.Draw(SB);
+            }
+        }
+
         private void DrawAllBuildings(SpriteBatch SB)
         {
             foreach (Building b in World.HeroBuildings)
@@ -98,6 +110,14 @@ namespace HeroSiege.Render
                 b.Draw(SB);
             }
         }
+        private void DrawAllGameObjects(SpriteBatch SB)
+        {
+            foreach(GameObject obj in World.GameObjects)
+            {
+                if(obj != null)
+                    obj.Draw(SB);
+            }
+        }
 
         //----- Debug draw -----//
         private void DebugTextDraw(SpriteBatch SB)
@@ -105,11 +125,19 @@ namespace HeroSiege.Render
            
             if (DevTools.DevDebugMode)
             {
+                SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Rectangle(0, 0, 1920, 60), Color.Gray);
+
                 //----- PLayer ONE Direcion -----//
-                if (DevTools.DevDebugMode)
-                {
-                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "" + World.PlayerOne.MovingDirection, new Vector2(50, 0), Color.Black);
-                }
+                if (World.PlayerOne != null)
+                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "P_1: " + World.PlayerOne.MovingDirection, new Vector2(0, 0), Color.Black);
+
+                //----- PLayer TWO Direcion -----//
+                if (World.PlayerTwo != null)
+                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "P_2: " + World.PlayerTwo.MovingDirection, new Vector2(0, 30), Color.Black);
+
+
+                //----- Camera pos -----//
+                SB.DrawString(ResourceManager.GetFont("Arial_Font"), "Camera: " + Camera.Position, new Vector2(1600/2, 0), Color.Black);
 
 
             }

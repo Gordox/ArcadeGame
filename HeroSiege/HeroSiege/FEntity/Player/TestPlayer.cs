@@ -30,7 +30,7 @@ namespace HeroSiege.FEntity.Player
             offSetBound = new Vector2(0, 5);
         }
 
-        private void AddSpriteAnimations()
+        protected override void AddSpriteAnimations()
         {
             //--- Movment animation ---//
             sprite.AddAnimation("MoveNorth",         new FrameAnimation(ResourceManager.GetTexture("MageSheet"),   0, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));

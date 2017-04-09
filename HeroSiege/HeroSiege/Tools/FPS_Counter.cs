@@ -35,7 +35,7 @@ namespace HeroSiege.Tools
             FPS++;
 
 
-            SB.DrawString(ResourceManager.GetFont("Arial_Font"), "FPS: " + this.displayFPS.ToString(), new Vector2(10f, 10f), Color.WhiteSmoke, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 1);
+            SB.DrawString(ResourceManager.GetFont("Arial_Font"), "FPS: " + this.displayFPS.ToString(), new Vector2(1750, 0), Color.WhiteSmoke, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
         }
     }
 }
