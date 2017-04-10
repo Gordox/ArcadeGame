@@ -141,8 +141,8 @@ namespace HeroSiege.GameWorld
         //----- TEST -----//
         public void InitEnemy()
         {
-            Enimies.Add(new TestEnemy(Map.EnemieSpawnerPos[0].X, Map.EnemieSpawnerPos[0].Y, 64, 64, AttackType.Melee));
-            Enimies[0].SetControl(new AIController(this, (TestEnemy)Enimies[0]));
+            Enimies.Add(new Troll_Axe_Thrower(Map.EnemieSpawnerPos[0].X, Map.EnemieSpawnerPos[0].Y, 64, 64, AttackType.Melee));
+            Enimies[0].SetControl(new AIController(this, (Troll_Axe_Thrower)Enimies[0]));
         }
 
         public void InitGameObjects()

@@ -50,6 +50,7 @@
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
     <Compile Include="FEntity\Enemies\Enemy.cs" />
     <Compile Include="FEntity\Enemies\TestEnemy.cs" />
+    <Compile Include="FEntity\Enemies\Troll_Axe_Thrower.cs" />
     <Compile Include="FEntity\Entity.cs" />
     <Compile Include="FEntity\Player\Mage.cs" />
     <Compile Include="FEntity\Player\TestPlayer.cs" />

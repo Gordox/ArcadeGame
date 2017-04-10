@@ -18,8 +18,6 @@ namespace HeroSiege.FEntity.Player
         const float FRAME_DURATION_DEATH = 0.15f;
         
         
-        
-
         public TestPlayer(float x, float y, float width, float height)
             : base(null, x, y, width, height)
         {
@@ -28,6 +26,7 @@ namespace HeroSiege.FEntity.Player
             sprite.SetAnimation("MoveNorth");
             boundingBox = new Rectangle((int)x, (int)y, 32, 32);
             offSetBound = new Vector2(0, 5);
+            AttackFrame = 2;
         }
 
         protected override void AddSpriteAnimations()
@@ -58,7 +57,6 @@ namespace HeroSiege.FEntity.Player
             Stats.Speed = 200;
             Stats.Health = 1;
             Stats.Mana = 1;
-            AttackFrame = 2;
         }
 
 

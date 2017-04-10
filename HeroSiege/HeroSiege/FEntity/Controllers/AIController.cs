@@ -56,8 +56,6 @@ namespace HeroSiege.FEntity.Controllers
                 UpdatePathToTarget(delta);
             else
                 SetDestinationToCastle();
-
-
         }
 
         private void UpdatePathToTarget(float delta)

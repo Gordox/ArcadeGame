@@ -32,10 +32,11 @@ namespace HeroSiege.FEntity.Enemies
         protected Pathfinder pathFinder;
 
         //----- Constructors and Initiators -----//
-        public Enemy(TextureRegion region, float x, float y, float width, float height)
+        public Enemy(TextureRegion region, float x, float y, float width, float height, AttackType attackType)
             : base(region, x, y, width, height)
         {
             InitAStar();
+            this.AttackType = attackType;
         }
 
         protected void InitAStar()
@@ -84,7 +85,7 @@ namespace HeroSiege.FEntity.Enemies
             spriteBatch.Draw(ResourceManager.GetTexture("WhitePixel"), r, null, color, angle, Vector2.Zero, SpriteEffects.None, 0);
         }
 
-        //----- MEthos and functions ----//
+        //----- Methos and functions ----//
 
         //----- A Star -----//
         public void Astar(TileMap map, Point destination)

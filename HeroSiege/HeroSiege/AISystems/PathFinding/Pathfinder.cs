@@ -167,10 +167,10 @@ namespace HeroSiege.AISystems.PathFinding
                         new Point (x - 1, y), // The node left of the current node.
                         new Point (x + 1, y), // The node right of the current node
                         
-                        //new Point (x -1 , y - 1), // The node above left the current node
-                        //new Point (x + 1, y - 1), // The node above right of the current node
-                        //new Point (x + 1, y + 1), // The node below right the current node.
-                        //new Point (x - 1, y + 1), // The node below left of the current node.
+                        new Point (x -1 , y - 1), // The node above left the current node
+                        new Point (x + 1, y - 1), // The node above right of the current node
+                        new Point (x + 1, y + 1), // The node below right the current node.
+                        new Point (x - 1, y + 1), // The node below left of the current node.
                     };
 
                     // We loop through each of the possible neighbors
@@ -209,7 +209,7 @@ namespace HeroSiege.AISystems.PathFinding
             }
             if (map.GetTileType(x, y) == WalkTypes.Grass)
             {
-                node.priority = 1.5f;
+                node.priority = 2f;
             }
         }
 
@@ -385,7 +385,8 @@ namespace HeroSiege.AISystems.PathFinding
                     //////////////////////////////////////////////////
                     // ii) Calculate a new G value for the neighbouring node.
                     //////////////////////////////////////////////////
-                    float distanceTraveled = currentNode.DistanceTraveled + currentNode.priority;
+                    var dst = new Vector2(neighbor.Position.X - currentNode.Position.X, neighbor.Position.Y - currentNode.Position.Y).Length();
+                    float distanceTraveled = currentNode.DistanceTraveled + (currentNode.priority * dst);
 
                     // An estimate of the distance from this node to the end node.
                     float heuristic = Heuristic(neighbor.Position, endPoint);

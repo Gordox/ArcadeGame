@@ -22,7 +22,7 @@ Grunt
 Orge
 Peon
 SKeleton
-AxeThrower
+AxeThrower - working on it
 __________________________________
 Settings and game info:
 Volume?
@@ -45,16 +45,17 @@ End boss
 UI
 __________________________________
 Systems:
-A*(Astar) - Working on
+A*(Astar) - Done
 SpawnController - Working on
+Particle
 __________________________________
 Buildnings:
 Hero castle
-Tower (Deffends the hero tower)
+Balista (Deffends the hero tower)
 Blockade for tower (will be the first to eat upp damage before the tower)
 Shop
-Enemy tower -
-Enemy castle -
+Enemy tower - Working on
+Enemy castle - Working on
 __________________________________
 HUD / UI / GUI:
 
@@ -80,7 +81,7 @@ Grunt
 Orge
 Peon
 SKeleton
-AxeThrower
+TrollAxeThrower - Done
 
 //---Bosses---//
 Dragon (Final boss)

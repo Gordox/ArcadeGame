@@ -14,12 +14,14 @@ namespace HeroSiege.Manager.Resource
         private Texture2D tileTextureSummer;
         //Heros
         private Texture2D mageHeroSpriteSheet;
+        //Enemies
+        private Texture2D trollTrowerSpriteSheet;
         //Buildings
         private Texture2D heroBuildings, enemieBuildnings, etcBuildings;
         //Other
         private Texture2D blackPixel, whitePixel;
         //Debug
-        private Texture2D debugWalkTile;
+        private Texture2D debugWalkTile, debugRange;
 
         //Layer Name for the Tile Texure
         const string BASE_LAYER_NAME = "BaseLayer";
@@ -37,18 +39,23 @@ namespace HeroSiege.Manager.Resource
         {
             //Load in all sprite sheets and Textures
             tileTextureSummer = content.Load<Texture2D>(@"Assets\Texture\Tiles\Wc2-Tiles");
+
             mageHeroSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\MageHero");
+
+            trollTrowerSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Troll_Thrower");
+
             heroBuildings = content.Load<Texture2D>(@"Assets\Texture\Buildings\HeroBuildings");
             enemieBuildnings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EnemieBuildings");
-            debugWalkTile = content.Load<Texture2D>(@"Assets\Debug\debugsheet");
             etcBuildings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EtcBuildnings");
+
+            debugWalkTile = content.Load<Texture2D>(@"Assets\DebugTexture\Debug_CanWalk");
+            debugRange = content.Load<Texture2D>(@"Assets\DebugTexture\Debug_Range");
 
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
             //Add all textures and sprite to Dict
             AddTextureRegionToDict();
         }
-
        
         private void AddTextureRegionToDict()
         {
@@ -61,11 +68,16 @@ namespace HeroSiege.Manager.Resource
 
             //Debug
             AddSpriteSheetRegionsToDict(WALKEBLE_TILE_LAYER, debugWalkTile);
+            textureRegion["DebugRange"] = new TextureRegion(debugRange, 0, 0, 64, 64);
 
             //UI
 
             //Tiles
             AddSpriteSheetRegionsToDict(BASE_LAYER_NAME, tileTextureSummer);
+
+            //Enemies
+            textureRegion["Troll_Thrower"] = new TextureRegion(trollTrowerSpriteSheet, 0, 0, trollTrowerSpriteSheet.Width, trollTrowerSpriteSheet.Height);
+            
 
             //Player Heros
             textureRegion["MageSheet"] = new TextureRegion(mageHeroSpriteSheet, 0, 0, mageHeroSpriteSheet.Width, mageHeroSpriteSheet.Height);

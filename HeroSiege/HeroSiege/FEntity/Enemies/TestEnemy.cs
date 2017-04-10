@@ -12,12 +12,12 @@ namespace HeroSiege.FEntity.Enemies
     class TestEnemy : Enemy
     {
         public TestEnemy(float x, float y, float width, float height, AttackType attackType)
-            : base(null, x, y, width, height)
+            : base(null, x, y, width, height, attackType)
         {
             InitStats();
             sprite.AddAnimation("Death", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 0, 512, 64, 64, 7, 1, new Point(5, 2)));
             sprite.SetAnimation("Death");
-            this.AttackType = attackType;
+            
         }
 
         protected override void AddSpriteAnimations()
