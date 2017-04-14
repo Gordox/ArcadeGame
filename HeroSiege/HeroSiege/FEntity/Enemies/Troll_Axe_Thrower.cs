@@ -24,6 +24,7 @@ namespace HeroSiege.FEntity.Enemies
             sprite.SetAnimation("MoveWestEast");
             boundingBox = new Rectangle((int)x, (int)y, 32, 32);
             offSetBound = new Vector2(0, 5);
+            sprite.PauseAnimation = true;
         }
 
         protected override void AddSpriteAnimations()

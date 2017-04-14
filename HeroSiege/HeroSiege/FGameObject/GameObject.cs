@@ -18,8 +18,7 @@ namespace HeroSiege.FGameObject
         public Vector2 Position { get { return position; } }
 
         protected Rectangle boundingBox, hitBox;
-        protected Vector2 position, direction, offSetBound;
-
+        protected Vector2 position, offSetBound;
 
         public GameObject(TextureRegion region, float x, float y, float width, float height)
         {
@@ -35,33 +34,23 @@ namespace HeroSiege.FGameObject
             UpdateBounds();
             sprite.Update(delta);
         }
-
-        public virtual void Draw(SpriteBatch SB)
-        {
-            sprite.Draw(SB);
-        }
-
-
-        public virtual void DrawBoundingBox(SpriteBatch SB)
-        {
-            SB.Draw(ResourceManager.GetTexture("WhitePixel"), boundingBox, Color.Red);
-        }
-
-        public virtual void DrawHitBox(SpriteBatch SB)
-        {
-            SB.Draw(ResourceManager.GetTexture("WhitePixel"), hitBox, Color.Red);
-        }
-
         public void UpdateBounds()
         {
             boundingBox.X = (int)(position.X - (boundingBox.Width / 2) + offSetBound.X);
             boundingBox.Y = (int)(position.Y - (boundingBox.Height / 2) + offSetBound.Y);
         }
 
-        public void SetPosition(Vector2 pos)
+        public virtual void Draw(SpriteBatch SB)
         {
-            position.X = pos.X;
-            position.Y = pos.Y;
+            sprite.Draw(SB);
+        }
+        public virtual void DrawBoundingBox(SpriteBatch SB)
+        {
+            SB.Draw(ResourceManager.GetTexture("WhitePixel"), boundingBox, Color.Red);
+        }
+        public virtual void DrawHitBox(SpriteBatch SB)
+        {
+            SB.Draw(ResourceManager.GetTexture("WhitePixel"), hitBox, Color.Red);
         }
 
         public Rectangle GetBounds()
@@ -72,10 +61,14 @@ namespace HeroSiege.FGameObject
         {
             return hitBox;
         }
-
         public Rectangle SetHitbox
         {
             set { hitBox = value; }
+        }
+        public void SetPosition(Vector2 pos)
+        {
+            position.X = pos.X;
+            position.Y = pos.Y;
         }
 
         public bool CheckCollision(Rectangle _this, List<GameObject> objects)
@@ -92,7 +85,6 @@ namespace HeroSiege.FGameObject
             }
             return false;
         }
-
         public bool CheckCollision(Rectangle rec, List<Rectangle> objects)
         {
             foreach (var ob in objects)
@@ -104,6 +96,5 @@ namespace HeroSiege.FGameObject
             }
             return false;
         }
-
     }
 }

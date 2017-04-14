@@ -1,4 +1,5 @@
-﻿using HeroSiege.GameWorld;
+﻿using HeroSiege.FGameObject;
+using HeroSiege.GameWorld;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;

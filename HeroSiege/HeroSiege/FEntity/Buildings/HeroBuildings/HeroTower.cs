@@ -18,7 +18,7 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
 
         public override void Init()
         {
-            throw new NotImplementedException();
+           
         }
 
         public override bool LevelUp(float delta)

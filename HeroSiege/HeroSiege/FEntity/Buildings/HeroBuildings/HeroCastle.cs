@@ -23,6 +23,7 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
 
         public override void Init()
         {
+            Stats = new StatsData();
             Stats.MaxHealth = 1;
             Stats.Armor = 1;
         }

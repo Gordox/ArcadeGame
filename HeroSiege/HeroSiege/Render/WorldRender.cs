@@ -123,7 +123,7 @@ namespace HeroSiege.Render
         private void DebugTextDraw(SpriteBatch SB)
         {
            
-            if (DevTools.DevDebugMode)
+            if (DevTools.DevDebugMode || DevTools.DevTopBarInfo)
             {
                 SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Rectangle(0, 0, 1920, 60), Color.Gray);
 

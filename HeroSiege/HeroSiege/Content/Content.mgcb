@@ -25,17 +25,11 @@
 /processorParam:TextureFormat=Color
 /build:Assets/Texture/Tiles/Wc2-Tiles.png
 
-#begin Assets/Maps/Map1.xml
-/copy:Assets/Maps/Map1.xml
-
 #begin Assets/Fonts/Arial_Font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
 /build:Assets/Fonts/Arial_Font.spritefont
-
-#begin Assets/Maps/Map1.1.xml
-/copy:Assets/Maps/Map1.1.xml
 
 #begin Assets/Texture/Units/Heros/MageHero.png
 /importer:TextureImporter
@@ -207,4 +201,40 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Assets/Texture/Units/Enemies/Troll_Thrower.png
+
+#begin Assets/Texture/MagicAndProjectiles/AttacksSprites.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Texture/MagicAndProjectiles/AttacksSprites.png
+
+#begin Assets/Texture/MagicAndProjectiles/Explosion.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Texture/MagicAndProjectiles/Explosion.png
+
+#begin Assets/Texture/MagicAndProjectiles/Particles_&_Effects.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/Texture/MagicAndProjectiles/Particles_&_Effects.png
 

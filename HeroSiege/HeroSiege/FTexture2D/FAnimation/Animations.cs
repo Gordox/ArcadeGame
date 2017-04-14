@@ -22,7 +22,8 @@ namespace HeroSiege.FTexture2D.FAnimation
             //{
             //    animation.Value.Update(delta);
             //}
-            CurrentAnimation.Update(delta);
+            if(CurrentAnimation != null)
+                CurrentAnimation.Update(delta);
         }
 
         public TextureRegion GetRegion()

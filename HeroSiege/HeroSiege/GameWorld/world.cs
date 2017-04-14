@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HeroSiege.GameWorld.map;
-using Microsoft.Xna.Framework.Graphics;
 using HeroSiege.FEntity;
 using HeroSiege.FGameObject;
 using Microsoft.Xna.Framework;
@@ -37,6 +36,8 @@ namespace HeroSiege.GameWorld
         //----- Buildings -----//
         public List<Building> HeroBuildings { get; private set; }
         public List<Building> EnemyBuildings { get; private set; }
+        public List<Building> DeadBuildings { get; private set; }
+
 
         //----- Game objects -----//
         public List<GameObject> GameObjects { get; private set; }
@@ -141,8 +142,25 @@ namespace HeroSiege.GameWorld
         //----- TEST -----//
         public void InitEnemy()
         {
-            Enimies.Add(new Troll_Axe_Thrower(Map.EnemieSpawnerPos[0].X, Map.EnemieSpawnerPos[0].Y, 64, 64, AttackType.Melee));
-            Enimies[0].SetControl(new AIController(this, (Troll_Axe_Thrower)Enimies[0]));
+            
+            //Enimies.Add(new Troll_Axe_Thrower(Map.EnemieSpawnerPos[0].X, Map.EnemieSpawnerPos[0].Y, 64, 64, AttackType.Melee));
+            //Enimies[0].SetControl(new AIController(this, (Troll_Axe_Thrower)Enimies[0]));
+
+            Enimies.Add(new Troll_Axe_Thrower(28 * 32, 100 * 32, 64, 64, AttackType.Melee));
+            Enimies.Add(new Troll_Axe_Thrower(30 * 32, 100 * 32, 64, 64, AttackType.Melee));
+            Enimies.Add(new Troll_Axe_Thrower(32 * 32, 100 * 32, 64, 64, AttackType.Melee));
+
+            Enimies.Add(new Troll_Axe_Thrower(32 * 32, 102 * 32, 64, 64, AttackType.Melee));
+
+            Enimies.Add(new Troll_Axe_Thrower(32 * 32, 104 * 32, 64, 64, AttackType.Melee));
+
+            Enimies.Add(new Troll_Axe_Thrower(28 * 32, 102 * 32, 64, 64, AttackType.Melee));
+            Enimies.Add(new Troll_Axe_Thrower(28 * 32, 104 * 32, 64, 64, AttackType.Melee));
+
+            Enimies.Add(new Troll_Axe_Thrower(28 * 32, 106 * 32, 64, 64, AttackType.Melee));
+            Enimies.Add(new Troll_Axe_Thrower(30 * 32, 106 * 32, 64, 64, AttackType.Melee));
+            Enimies.Add(new Troll_Axe_Thrower(32 * 32, 108 * 32, 64, 64, AttackType.Melee));
+
         }
 
         public void InitGameObjects()
@@ -155,6 +173,7 @@ namespace HeroSiege.GameWorld
         {
             HeroBuildings = new List<Building>();
             EnemyBuildings = new List<Building>();
+            DeadBuildings = new List<Building>();
 
             if (Map != null)
             {
@@ -173,6 +192,14 @@ namespace HeroSiege.GameWorld
             foreach (Building b in HeroBuildings)
             {
                 Hitboxes.Add(b.GetHitbox());
+            }
+
+            for (int i = 0; i < Map.HeroBalista.Count; i++)
+            {
+                HeroBallista temp = new HeroBallista(Map.HeroBalista[i].X, Map.HeroBalista[i].Y);
+                temp.SetControl(new BallistaController(this, temp));
+                HeroBuildings.Add(temp);
+
             }
         }
         private void InitEnemyBuildings()
@@ -193,10 +220,14 @@ namespace HeroSiege.GameWorld
         public void Update(float delta)
         {
             UpdatePlayers(delta);
+            UpdateHeroBuildings(delta);
 
             UpdateGameObjects(delta);
             //Enemies
             UpdateEnemies(delta);
+
+
+            DeleteDeadThings();
         }
 
         private void UpdatePlayers(float delta)
@@ -216,6 +247,17 @@ namespace HeroSiege.GameWorld
             }
         }
 
+        private void UpdateHeroBuildings(float delta)
+        {
+            foreach (var build in HeroBuildings)
+            {
+                build.Update(delta);
+
+                if (!build.IsAlive)
+                    DeadBuildings.Add(build);
+            }
+        }
+
         private void UpdateEnemies(float delta)
         {
             foreach (var enemy in Enimies)
@@ -225,24 +267,37 @@ namespace HeroSiege.GameWorld
                 if(!enemy.IsAlive)
                     deadEnimies.Add(enemy);
             }
-
-            foreach (var deadEntity in deadEnimies)
-            {
-                Enimies.Remove(deadEntity);
-            }
-            deadEnimies.Clear();
         }
 
         private void UpdateGameObjects(float delta)
         {
             foreach (var obj in GameObjects)
             {
+                if(obj != null)
+                    obj.Update(delta);
+
                 if(obj is Portal)
                     IntreactionPortal((Portal)obj, delta);
 
                 if (!obj.IsAlive)
                     DeadObjects.Add(obj);
             }
+        }
+
+        private void DeleteDeadThings()
+        {
+            foreach (GameObject ob in DeadObjects)
+            {
+                GameObjects.Remove(ob);
+                EnemyObjects.Remove(ob);
+            }
+            DeadObjects.Clear();
+
+            foreach (Entity e in deadEnimies)
+            {
+                Enimies.Remove(e);
+            }
+            deadEnimies.Clear();
         }
 
         private void IntreactionPortal(Portal p, float delta)

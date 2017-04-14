@@ -8,6 +8,7 @@ using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.Manager;
 using Microsoft.Xna.Framework;
 using HeroSiege.GameWorld;
+using HeroSiege.FGameObject;
 
 namespace HeroSiege.FEntity.Player
 {
@@ -57,6 +58,7 @@ namespace HeroSiege.FEntity.Player
             Stats.Speed = 200;
             Stats.Health = 1;
             Stats.Mana = 1;
+            Stats.Radius = 200;
         }
 
 
@@ -70,43 +72,41 @@ namespace HeroSiege.FEntity.Player
         public override void Draw(SpriteBatch SB)
         {
             base.Draw(SB);
-
-            //DrawBoundingBox(SB);
         }
 
         protected override void SetMovmentAnimations()
         {
             switch (MovingDirection)
             {
-                case FEntity.Direction.North:
+                case Direction.North:
                     sprite.SetAnimation("MoveNorth");
                     sprite.Effect = SpriteEffects.None;
                     break;
-                case FEntity.Direction.North_East:
+                case Direction.North_East:
                     sprite.SetAnimation("MoveNorthWestEast");
                     sprite.Effect = SpriteEffects.None;
                     break;
-                case FEntity.Direction.East:
+                case Direction.East:
                     sprite.SetAnimation("MoveWestEast");
                     sprite.Effect = SpriteEffects.None;
                     break;
-                case FEntity.Direction.South_East:
+                case Direction.South_East:
                     sprite.SetAnimation("MoveSouthWestEast");
                     sprite.Effect = SpriteEffects.None;
                     break;
-                case FEntity.Direction.South:
+                case Direction.South:
                     sprite.SetAnimation("MoveSouth");
                     sprite.Effect = SpriteEffects.None;
                     break;
-                case FEntity.Direction.South_West:
+                case Direction.South_West:
                     sprite.SetAnimation("MoveSouthWestEast");
                     sprite.Effect = SpriteEffects.FlipHorizontally;
                     break;
-                case FEntity.Direction.West:
+                case Direction.West:
                     sprite.SetAnimation("MoveWestEast");
                     sprite.Effect = SpriteEffects.FlipHorizontally;
                     break;
-                case FEntity.Direction.North_West:
+                case Direction.North_West:
                     sprite.SetAnimation("MoveNorthWestEast");
                     sprite.Effect = SpriteEffects.FlipHorizontally;
                     break;
@@ -119,35 +119,35 @@ namespace HeroSiege.FEntity.Player
         {
             switch (MovingDirection)
             {
-                case FEntity.Direction.North:
+                case Direction.North:
                     sprite.SetAnimation("AttckNorth");
                     sprite.Effect = SpriteEffects.None;
                     break;
-                case FEntity.Direction.North_East:
+                case Direction.North_East:
                     sprite.SetAnimation("AttckNorthWestEast");
                     sprite.Effect = SpriteEffects.None;
                     break;
-                case FEntity.Direction.East:
+                case Direction.East:
                     sprite.SetAnimation("AttckWestEast");
                     sprite.Effect = SpriteEffects.None;
                     break;
-                case FEntity.Direction.South_East:
+                case Direction.South_East:
                     sprite.SetAnimation("AttckSouthWestEast");
                     sprite.Effect = SpriteEffects.None;
                     break;
-                case FEntity.Direction.South:
+                case Direction.South:
                     sprite.SetAnimation("AttckSouth");
                     sprite.Effect = SpriteEffects.None;
                     break;
-                case FEntity.Direction.South_West:
+                case Direction.South_West:
                     sprite.SetAnimation("AttckSouthWestEast");
                     sprite.Effect = SpriteEffects.FlipHorizontally;
                     break;
-                case FEntity.Direction.West:
+                case Direction.West:
                     sprite.SetAnimation("AttckWestEast");
                     sprite.Effect = SpriteEffects.FlipHorizontally;
                     break;
-                case FEntity.Direction.North_West:
+                case Direction.North_West:
                     sprite.SetAnimation("AttckNorthWestEast");
                     sprite.Effect = SpriteEffects.FlipHorizontally;
                     break;
@@ -159,8 +159,6 @@ namespace HeroSiege.FEntity.Player
         public override void GreenButton(World parent)
         {
             base.GreenButton(parent);
-            //isAttaking = true;
-            //UpdateAttckAnimation();
             Death();
         }
 
@@ -172,6 +170,9 @@ namespace HeroSiege.FEntity.Player
                 SetAttckAnimations();
                 sprite.Animations.CurrentAnimation.ResetAnimation();
                 isAttaking = true;
+
+                GetTargets(parent.Enimies);
+                CreateProjectilesTowardsTarget(parent, ProjectileType.Fire_Bal);
             }
         }
 

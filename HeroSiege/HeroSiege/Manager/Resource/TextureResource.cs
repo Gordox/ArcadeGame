@@ -17,7 +17,9 @@ namespace HeroSiege.Manager.Resource
         //Enemies
         private Texture2D trollTrowerSpriteSheet;
         //Buildings
-        private Texture2D heroBuildings, enemieBuildnings, etcBuildings;
+        private Texture2D heroBuildings, enemieBuildnings, etcBuildings, heroBalista;
+        //Magic and Missiels
+        private Texture2D explosionSprite, projectileSprite, effecSprite;
         //Other
         private Texture2D blackPixel, whitePixel;
         //Debug
@@ -44,6 +46,8 @@ namespace HeroSiege.Manager.Resource
 
             trollTrowerSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Troll_Thrower");
 
+            heroBalista = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\Ballista");
+
             heroBuildings = content.Load<Texture2D>(@"Assets\Texture\Buildings\HeroBuildings");
             enemieBuildnings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EnemieBuildings");
             etcBuildings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EtcBuildnings");
@@ -51,12 +55,17 @@ namespace HeroSiege.Manager.Resource
             debugWalkTile = content.Load<Texture2D>(@"Assets\DebugTexture\Debug_CanWalk");
             debugRange = content.Load<Texture2D>(@"Assets\DebugTexture\Debug_Range");
 
+            explosionSprite = content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Explosion");
+            projectileSprite = content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\AttacksSprites");
+            effecSprite = content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Particles_&_Effects");
+
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
             //Add all textures and sprite to Dict
             AddTextureRegionToDict();
         }
-       
+
+        //----- Add texture -----//
         private void AddTextureRegionToDict()
         {
             //Exapmle:
@@ -77,12 +86,46 @@ namespace HeroSiege.Manager.Resource
 
             //Enemies
             textureRegion["Troll_Thrower"] = new TextureRegion(trollTrowerSpriteSheet, 0, 0, trollTrowerSpriteSheet.Width, trollTrowerSpriteSheet.Height);
-            
+
+            //Explosion
+            textureRegion["Big_Explosion"] =         new TextureRegion(explosionSprite,   0,   0, 512, 128);
+            textureRegion["Medium_Explosion"] =      new TextureRegion(explosionSprite,   0, 128, 192, 128);
+            textureRegion["Light_Magic_Explosion"] = new TextureRegion(explosionSprite, 192, 128, 192, 128);
+            textureRegion["Dark_Magic_Explosion"] =  new TextureRegion(explosionSprite,   0, 256, 384,  64);
+            textureRegion["Frost_Hit"] =             new TextureRegion(explosionSprite, 256, 192, 128,  64);
+            textureRegion["Brown_Hit"] =             new TextureRegion(explosionSprite, 448, 128,  64,  64);
+            textureRegion["Fire_Hit"] =              new TextureRegion(explosionSprite, 512, 128,  64,  64);
+
+            //Projectiles
+            textureRegion["Harpon"] =           new TextureRegion(projectileSprite,   0,   0, 280,  56);
+            textureRegion["Soul_Tornado"] =     new TextureRegion(projectileSprite,   0,  56, 256,  64);
+            textureRegion["Fire_Bal"] =         new TextureRegion(projectileSprite,   0, 120, 160,  32);
+            textureRegion["Lighing_bal"] =      new TextureRegion(projectileSprite,   0, 152, 160,  32);
+            textureRegion["Big_Canon_bal"] =    new TextureRegion(projectileSprite,   0, 184, 160,  32);
+            textureRegion["Medium_Canon_Bal"] = new TextureRegion(projectileSprite, 160, 208, 120,  24);
+            textureRegion["small_Canon_Bal"] =  new TextureRegion(projectileSprite, 160, 184, 120,  24);
+            textureRegion["Evil_Hand"] =        new TextureRegion(projectileSprite,   0, 216, 160,  32);
+            textureRegion["Arrow"] =            new TextureRegion(projectileSprite,   0, 248, 160,  32);
+            textureRegion["Dark_Eye"] =         new TextureRegion(projectileSprite,   0, 280, 160,  32);
+            textureRegion["Lightning_Axe"] =    new TextureRegion(projectileSprite, 160, 120,  96,  32);
+            textureRegion["Normal_Axe"] =       new TextureRegion(projectileSprite, 160, 152,  96,  32);
+            textureRegion["Blizzard"] =         new TextureRegion(projectileSprite, 160, 232, 128,  32);
+            textureRegion["Fire_Canon_Bal"] =   new TextureRegion(projectileSprite, 160, 264,  64,  16);
+            textureRegion["Canon_Ball"] =       new TextureRegion(projectileSprite, 160, 280,  48,  16);
+
+            //Effects
+            textureRegion["Fire_Storm"] =     new TextureRegion(effecSprite,   0,   0, 320, 128);
+            textureRegion["Burning"] =        new TextureRegion(effecSprite,   0, 128, 192,  32);
+            textureRegion["Magic_Particle"] = new TextureRegion(effecSprite,   0, 160, 192,  32);
+            textureRegion["Soul_Spin"] =      new TextureRegion(effecSprite,   0, 192, 160,  32);
+            textureRegion["Fire_Emit"] =      new TextureRegion(effecSprite,   0, 224,  96,  32);
 
             //Player Heros
             textureRegion["MageSheet"] = new TextureRegion(mageHeroSpriteSheet, 0, 0, mageHeroSpriteSheet.Width, mageHeroSpriteSheet.Height);
 
             //Hero Buildings
+            textureRegion["Balista"] = new TextureRegion(heroBalista, 0, 0, heroBalista.Width, heroBalista.Height);
+
             textureRegion["Castle_lvl_1"] =        new TextureRegion(heroBuildings,   0,   0, 128, 128);
             textureRegion["Castle_lvl_1_Broken"] = new TextureRegion(heroBuildings,   0, 128, 128, 128);
             textureRegion["Castle_lvl_2"] =        new TextureRegion(heroBuildings, 128,   0, 128, 128);
@@ -106,7 +149,6 @@ namespace HeroSiege.Manager.Resource
             textureRegion["Portal"] = new TextureRegion(etcBuildings, 0, 0, 64, 64);
 
         }
-
         private void AddSpriteSheetRegionsToDict(string LayerName, Texture2D spriteSheet)
         {
             int id = 0;
@@ -121,6 +163,8 @@ namespace HeroSiege.Manager.Resource
 
         }
 
+
+        //----- Get Texture -----//
         public TextureRegion GetTextureRegion(string name)
         {
             try { return textureRegion[name]; }

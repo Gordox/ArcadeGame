@@ -50,12 +50,12 @@ SpawnController - Working on
 Particle
 __________________________________
 Buildnings:
-Hero castle
-Balista (Deffends the hero tower)
+Hero castle - Working on
+Ballista (Deffends the hero tower) - working on it (70% Done)
 Blockade for tower (will be the first to eat upp damage before the tower)
 Shop
 Enemy tower - Working on
-Enemy castle - Working on
+Enemy Spawner - Working on
 __________________________________
 HUD / UI / GUI:
 
@@ -100,6 +100,11 @@ Tower -Done
 //--- Enemies buildings ---//
 Tower - Done
 Spwaner (Dark portal sprite or Devil sumoner sprite) - Done
+
+//--- Misc ---//
+Explosion - Done
+Projectiles - Done
+Effects - Done
 __________________________________
 Fun stuff if I have time
 - Have code combination in start screen that will do funny thing if pressed correcly (ex: green, green, blue, red and a sound will be heard)

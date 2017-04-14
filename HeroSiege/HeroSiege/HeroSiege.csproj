@@ -42,9 +42,11 @@
     <Compile Include="FEntity\Buildings\Building.cs" />
     <Compile Include="FEntity\Buildings\EnemyBuildings\EnemySpawnerTower.cs" />
     <Compile Include="FEntity\Buildings\EnemyBuildings\EnemyTower.cs" />
+    <Compile Include="FEntity\Buildings\HeroBuildings\HeroBallista.cs" />
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroCastle.cs" />
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroTower.cs" />
     <Compile Include="FEntity\Buildings\Shop.cs" />
+    <Compile Include="FEntity\Controllers\BallistaController.cs" />
     <Compile Include="FEntity\Controllers\Control.cs" />
     <Compile Include="FEntity\Controllers\AIController.cs" />
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
@@ -55,7 +57,11 @@
     <Compile Include="FEntity\Player\Mage.cs" />
     <Compile Include="FEntity\Player\TestPlayer.cs" />
     <Compile Include="FEntity\StatsData.cs" />
+    <Compile Include="FGameObject\GameObjectEnums.cs" />
     <Compile Include="FGameObject\Portal.cs" />
+    <Compile Include="FGameObject\Projectiles\FireBal.cs" />
+    <Compile Include="FGameObject\Projectiles\Harpon.cs" />
+    <Compile Include="FGameObject\Projectiles\Projectile.cs" />
     <Compile Include="FTexture2D\FAnimation\Animation.cs" />
     <Compile Include="FTexture2D\FAnimation\Animations.cs" />
     <Compile Include="FTexture2D\FAnimation\FrameAnimation.cs" />
@@ -111,7 +117,6 @@
     <Folder Include="Buildnings\" />
     <Folder Include="FGameObject\Items\Armor\" />
     <Folder Include="FGameObject\Items\Weapon\" />
-    <Folder Include="FGameObject\Projectiles\" />
     <Folder Include="Globals\" />
     <Folder Include="InterFace\UI\" />
     <Folder Include="NewFolder1\" />

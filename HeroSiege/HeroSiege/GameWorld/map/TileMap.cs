@@ -42,6 +42,8 @@ namespace HeroSiege.GameWorld.map
         public List<Vector2> HeroTowerPos { get; private set; }
         public Vector2 HeroCastle { get; private set; }
 
+        public List<Vector2> HeroBalista { get; private set; }
+
         public List<Vector2> Portal { get; private set; }
 
 
@@ -109,6 +111,7 @@ namespace HeroSiege.GameWorld.map
             this.EnemieTowerPos = new List<Vector2>();
             this.EnemieSpawnerPos = new List<Vector2>();
             this.Portal = new List<Vector2>();
+            this.HeroBalista = new List<Vector2>();
         }
 
         public void LoadMapDataFromXMLFile(string mapName)
@@ -150,6 +153,7 @@ namespace HeroSiege.GameWorld.map
                                                      Int32.Parse(allObjects[i].Width),
                                                      Int32.Parse(allObjects[i].Height)));
 
+
                 if (allObjects[i].name.Equals("HeroTower"))
                     HeroTowerPos.Add(new Vector2(xPos, yPos));
                 if (allObjects[i].name.Equals("HeroCastle"))
@@ -160,7 +164,8 @@ namespace HeroSiege.GameWorld.map
                     EnemieSpawnerPos.Add(new Vector2(xPos, yPos));
                 if (allObjects[i].name.Equals("Teleport"))
                     Portal.Add(new Vector2(xPos, yPos));
-
+                if (allObjects[i].name.Equals("HeroBalista"))
+                    HeroBalista.Add(new Vector2(xPos, yPos));
             }
         }
 
