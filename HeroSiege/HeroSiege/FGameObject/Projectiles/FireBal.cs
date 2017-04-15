@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HeroSiege.FTexture2D.FAnimation;
+using HeroSiege.Manager;
+using HeroSiege.FTexture2D.SpriteEffect;
 
 namespace HeroSiege.FGameObject.Projectiles
 {
@@ -20,7 +23,11 @@ namespace HeroSiege.FGameObject.Projectiles
             : base(region, x, y, width, height, direction)
         {
         }
-
+        protected override void Init()
+        {
+            base.Init();
+            boundingBox = new Microsoft.Xna.Framework.Rectangle((int)Position.X, (int)Position.Y, 16, 16);
+        }
         protected override void InitStats()
         {
             stats = new StatsData();
@@ -36,6 +43,11 @@ namespace HeroSiege.FGameObject.Projectiles
                 UpdateMovingDirTowardsTarget();
 
             base.Update(delta);
+        }
+
+        public override SpriteFX.EffectType GetCollisionFX()
+        {
+            return SpriteFX.EffectType.Fire_Hit;
         }
     }
 }

@@ -25,10 +25,11 @@ namespace HeroSiege.FEntity.Controllers
             if(timer > ((HeroBallista)building).AttackSpeed)
             {
                 HeroBallista temp = (HeroBallista)building;
-                temp.GetTargets(world.Enimies);
+                temp.GetTargets(world.Enemies);
                 if (temp.GetTargetCount > 0)
                 {
                     temp.isAttaking = true;
+                    temp.SetPauseAnimation = false;
                     temp.setAttackAnimation();
                 }
                 timer = 0;
@@ -41,7 +42,8 @@ namespace HeroSiege.FEntity.Controllers
                 {
                     temp.CreateProjectilesTowardsTarget(world, FGameObject.ProjectileType.Harpon);
                     temp.ClearTargets();
-                    temp.setIdleTexture();
+                    temp.SetPauseAnimation = true;
+                    temp.setAttackAnimation();
                     temp.isAttaking = false;
 
                 }

@@ -171,7 +171,7 @@ namespace HeroSiege.FEntity.Player
                 sprite.Animations.CurrentAnimation.ResetAnimation();
                 isAttaking = true;
 
-                GetTargets(parent.Enimies);
+                GetTargets(parent.Enemies);
                 CreateProjectilesTowardsTarget(parent, ProjectileType.Fire_Bal);
             }
         }

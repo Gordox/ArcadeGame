@@ -61,7 +61,12 @@ namespace HeroSiege.FEntity.Enemies
 
             if (DevTools.DevDebugMode || DevTools.DevDrawAIPath)
                 DrawPath(SB, Position, waypoints.ToList(), Color.Red, 5);
+            if(Stats.Health < Stats.MaxHealth)
+                DrawHealtBar(SB);
         }
+
+        
+        
 
         //----- Draw Line -----//
         public void DrawPath(SpriteBatch SB, Vector2 position, List<Vector2> points, Color color, int thickness)

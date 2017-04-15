@@ -66,6 +66,9 @@
     <Compile Include="FTexture2D\FAnimation\Animations.cs" />
     <Compile Include="FTexture2D\FAnimation\FrameAnimation.cs" />
     <Compile Include="FTexture2D\Sprite.cs" />
+    <Compile Include="FTexture2D\SpriteEffect\IPoolable.cs" />
+    <Compile Include="FTexture2D\SpriteEffect\SpriteFX.cs" />
+    <Compile Include="FTexture2D\SpriteEffect\SpriteFXPool.cs" />
     <Compile Include="FTexture2D\TextureRegione.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="FGameObject\GameObject.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="Scenes\SceneSystem\SceneManager.cs" />
     <Compile Include="Scenes\ScoreScene.cs" />
     <Compile Include="Scenes\StartScene.cs" />
+    <Compile Include="Systems\SpatialHashGrid.cs" />
     <Compile Include="Tools\Camera2D.cs" />
     <Compile Include="Tools\DevTools.cs" />
     <Compile Include="Tools\FPS_Counter.cs" />
@@ -119,7 +123,6 @@
     <Folder Include="FGameObject\Items\Weapon\" />
     <Folder Include="Globals\" />
     <Folder Include="InterFace\UI\" />
-    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

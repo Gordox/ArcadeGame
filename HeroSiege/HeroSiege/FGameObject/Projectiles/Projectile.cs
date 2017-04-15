@@ -6,6 +6,9 @@ using HeroSiege.FTexture2D;
 using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.FEntity;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using HeroSiege.Tools;
+using static HeroSiege.FTexture2D.SpriteEffect.SpriteFX;
 
 namespace HeroSiege.FGameObject.Projectiles
 {
@@ -13,12 +16,13 @@ namespace HeroSiege.FGameObject.Projectiles
     abstract class Projectile : GameObject
     {
         //----- Feilds -----//
+        public bool Collision { get; set; }
         protected float timer = 0, lifeTimer;
         protected StatsData stats;
         public Direction Dir { get; protected set; }
         protected Direction oldDir;
         protected Vector2 movingDirection;
-        protected Entity target;
+        public Entity target { get; protected set; }
         TextureRegion region;
 
         //----- Constructors -----//
@@ -158,6 +162,27 @@ namespace HeroSiege.FGameObject.Projectiles
                 IsAlive = false;
         }
 
+        public bool AttackCollision()
+        {
+            if(target != null)
+            {
+                if(Vector2.Distance(Position, target.Position) < 5 && !Collision)
+                {
+                    return true;
+                }
+            }
+            return false;
+        } 
+
+
+        public override void Draw(SpriteBatch SB)
+        {
+            base.Draw(SB);
+
+            if (DevTools.DevDebugMode || DevTools.DevDrawBoundingbox)
+                DrawBoundingBox(SB);
+        }
+
         //----- Seters -----//
         public Entity SetTarget
         {
@@ -257,6 +282,8 @@ namespace HeroSiege.FGameObject.Projectiles
 
             return new Vector2(tempX, tempY);
         }
+
+        public abstract EffectType GetCollisionFX();
 
         public float GetDamage
         {

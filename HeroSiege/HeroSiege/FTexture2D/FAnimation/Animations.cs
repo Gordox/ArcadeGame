@@ -18,10 +18,6 @@ namespace HeroSiege.FTexture2D.FAnimation
 
         public void Update(float delta)
         {
-            //foreach (var animation in animations)
-            //{
-            //    animation.Value.Update(delta);
-            //}
             if(CurrentAnimation != null)
                 CurrentAnimation.Update(delta);
         }

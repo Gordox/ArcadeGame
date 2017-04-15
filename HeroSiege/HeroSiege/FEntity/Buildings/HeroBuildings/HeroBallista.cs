@@ -23,7 +23,9 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
         {
             AddSpriteAnimations();
             setDirection(x, y);
-            setIdleTexture();
+            //setIdleTexture();
+            setAttackAnimation();
+            sprite.PauseAnimation = true;
         }
 
         public override void Init()
@@ -42,11 +44,7 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
         public override void Update(float delta)
         {
             base.Update(delta);
-
-           
-
         }
-
 
         /// <summary>
         /// Hardcoded 
@@ -60,9 +58,9 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
             else if (x == 1280 + 16 && y == 3392 + 16)
                 Dir = Direction.North;
             else if (x == 1376 + 16 && y == 3488 + 16)
-                Dir = Direction.West;
-            else if (x == 1280 + 16 && y == 3584 + 16)
                 Dir = Direction.South;
+            else if (x == 1280 + 16 && y == 3584 + 16)
+                Dir = Direction.West;
         }
         public void setIdleTexture()
         {
@@ -110,7 +108,6 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
                     break;
             }
         }
-
         public int GetCurrentFrame
         {
             get { return sprite.Animations.CurrentAnimation.currentFrame; }
@@ -135,5 +132,6 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
         {
             return true;
         }
+
     }
 }

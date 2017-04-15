@@ -54,7 +54,7 @@ namespace HeroSiege.FEntity.Enemies
             Stats = new StatsData();
             Stats.MaxSpeed = 400;
             Stats.Speed = 50;
-            Stats.Health = 1;
+            Stats.MaxHealth = 100;
             Stats.Mana = 1;
             AttackFrame = 2;
         }

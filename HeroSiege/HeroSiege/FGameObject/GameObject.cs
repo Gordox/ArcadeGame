@@ -53,6 +53,22 @@ namespace HeroSiege.FGameObject
             SB.Draw(ResourceManager.GetTexture("WhitePixel"), hitBox, Color.Red);
         }
 
+        public Rectangle GenerateBar(float Current, float Max, int width, int height)
+        {
+            float Percent = Current / Max;
+            return new Rectangle(0, 0, (int)(Percent * width), height);
+        }
+        public Color LerpHealthColor(float current, float max)
+        {
+            Color temp;
+            if (current < max / 2)
+                temp = Color.Lerp(Color.Red, Color.Yellow, current * 2 / max);
+            else
+                temp = Color.Lerp(Color.Yellow, Color.Green, (current - max / 2) * 2);
+
+            return temp;
+        }
+
         public Rectangle GetBounds()
         {
             return boundingBox;
@@ -95,6 +111,12 @@ namespace HeroSiege.FGameObject
                 }
             }
             return false;
+        }
+
+        public bool SetPauseAnimation
+        {
+            get { return sprite.PauseAnimation; }
+            set { sprite.PauseAnimation = value; }
         }
     }
 }

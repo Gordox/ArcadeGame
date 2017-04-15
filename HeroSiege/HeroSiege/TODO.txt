@@ -47,6 +47,7 @@ __________________________________
 Systems:
 A*(Astar) - Done
 SpawnController - Working on
+SpriteFX - Done
 Particle
 __________________________________
 Buildnings:
@@ -75,18 +76,18 @@ Gnomish_Flying_Machine
 Knight - Done
 
 //---Enemies---//
-Goblin sappers
-Goblin Zepilin
-Grunt
-Orge
-Peon
-SKeleton
+Goblin sappers - not prio
+Goblin Zepilin - Done
+Grunt - Done
+Orge - Done
+Peon - not prio
+Skeleton - not prio
 TrollAxeThrower - Done
 
 //---Bosses---//
-Dragon (Final boss)
-Demon (mini boss)
-DeathKnight (spawner boss)
+Dragon (Final boss) - Done
+Demon (mini boss) - Done
+DeathKnight (spawner boss) - Done
 
 //--- Other ---//
 Ballista - Done

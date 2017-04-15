@@ -58,14 +58,16 @@ namespace HeroSiege.Render
             //Buildings
             DrawAllBuildings(SB);
 
-            //GameObjects
-            DrawAllGameObjects(SB);
-
             //Enemies
             DrawEnemies(SB);
 
+            //GameObjects
+            DrawAllGameObjects(SB);
+
             //PLayers
             DrawPlayers(SB);
+
+            DrawEffects(SB);
 
             //Debug
             DebugHitboxesDraw(SB);
@@ -91,7 +93,7 @@ namespace HeroSiege.Render
         }
         private void DrawEnemies(SpriteBatch SB)
         {
-            foreach (Entity e in World.Enimies)
+            foreach (Entity e in World.Enemies)
             {
                 if (e != null)
                     e.Draw(SB);
@@ -117,6 +119,12 @@ namespace HeroSiege.Render
                 if(obj != null)
                     obj.Draw(SB);
             }
+        }
+
+        private void DrawEffects(SpriteBatch SB)
+        {
+            foreach (var obj in World.Effects)
+                obj.Draw(SB);
         }
 
         //----- Debug draw -----//

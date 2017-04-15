@@ -15,6 +15,10 @@ using HeroSiege.FEntity.Buildings.HeroBuildings;
 using HeroSiege.FEntity.Buildings.EnemyBuildings;
 using HeroSiege.AISystems;
 using HeroSiege.FEntity.Enemies;
+using HeroSiege.FGameObject.Projectiles;
+using HeroSiege.FTexture2D.FAnimation;
+using HeroSiege.FTexture2D.SpriteEffect;
+using HeroSiege.Systems;
 
 namespace HeroSiege.GameWorld
 {
@@ -24,10 +28,12 @@ namespace HeroSiege.GameWorld
 
         SpawnController spawnController;
 
+        public SpatialHashGrid HashGrid { get; private set; }
+
         public TileMap Map { get; private set; }
 
         //----- Entities -----//
-        public List<Entity> Enimies { get; private set; }
+        public List<Entity> Enemies { get; private set; }
         private List<Entity> deadEnimies;
 
         public Entity PlayerOne { get; private set; }
@@ -46,15 +52,20 @@ namespace HeroSiege.GameWorld
 
         public List<Rectangle> Hitboxes { get; private set; }
 
+        //----- Effects -----//
+        public List<SpriteFX> Effects { get; private set; }
+        public SpriteFXPool FXPool { get; private set; }
 
         //----- Constructor -----//
         public World(GameSettings gameSettings) 
         {
             this.gameSettings = gameSettings;
+            this.Effects = new List<SpriteFX>();
+            this.FXPool = new SpriteFXPool();
 
             Initmap(gameSettings.MapName);
-            InitBuildings();
 
+            InitBuildings();
             InitEntitys();
         }
 
@@ -67,7 +78,7 @@ namespace HeroSiege.GameWorld
 
         public void InitEntitys()
         {
-            Enimies = new List<Entity>();
+            Enemies = new List<Entity>();
             deadEnimies = new List<Entity>();
             GameObjects = new List<GameObject>();
             EnemyObjects = new List<GameObject>();
@@ -142,24 +153,24 @@ namespace HeroSiege.GameWorld
         //----- TEST -----//
         public void InitEnemy()
         {
-            
-            //Enimies.Add(new Troll_Axe_Thrower(Map.EnemieSpawnerPos[0].X, Map.EnemieSpawnerPos[0].Y, 64, 64, AttackType.Melee));
-            //Enimies[0].SetControl(new AIController(this, (Troll_Axe_Thrower)Enimies[0]));
 
-            Enimies.Add(new Troll_Axe_Thrower(28 * 32, 100 * 32, 64, 64, AttackType.Melee));
-            Enimies.Add(new Troll_Axe_Thrower(30 * 32, 100 * 32, 64, 64, AttackType.Melee));
-            Enimies.Add(new Troll_Axe_Thrower(32 * 32, 100 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(Map.EnemieSpawnerPos[0].X, Map.EnemieSpawnerPos[0].Y, 64, 64, AttackType.Melee));
+            //Enemies[0].SetControl(new AIController(this, (Troll_Axe_Thrower)Enemies[0]));
 
-            Enimies.Add(new Troll_Axe_Thrower(32 * 32, 102 * 32, 64, 64, AttackType.Melee));
+            Enemies.Add(new Troll_Axe_Thrower(28 * 32, 100 * 32, 64, 64, AttackType.Melee));
+            Enemies.Add(new Troll_Axe_Thrower(30 * 32, 100 * 32, 64, 64, AttackType.Melee));
+            Enemies.Add(new Troll_Axe_Thrower(32 * 32, 100 * 32, 64, 64, AttackType.Melee));
 
-            Enimies.Add(new Troll_Axe_Thrower(32 * 32, 104 * 32, 64, 64, AttackType.Melee));
+            Enemies.Add(new Troll_Axe_Thrower(32 * 32, 102 * 32, 64, 64, AttackType.Melee));
 
-            Enimies.Add(new Troll_Axe_Thrower(28 * 32, 102 * 32, 64, 64, AttackType.Melee));
-            Enimies.Add(new Troll_Axe_Thrower(28 * 32, 104 * 32, 64, 64, AttackType.Melee));
+            Enemies.Add(new Troll_Axe_Thrower(32 * 32, 104 * 32, 64, 64, AttackType.Melee));
 
-            Enimies.Add(new Troll_Axe_Thrower(28 * 32, 106 * 32, 64, 64, AttackType.Melee));
-            Enimies.Add(new Troll_Axe_Thrower(30 * 32, 106 * 32, 64, 64, AttackType.Melee));
-            Enimies.Add(new Troll_Axe_Thrower(32 * 32, 108 * 32, 64, 64, AttackType.Melee));
+            Enemies.Add(new Troll_Axe_Thrower(28 * 32, 102 * 32, 64, 64, AttackType.Melee));
+            Enemies.Add(new Troll_Axe_Thrower(28 * 32, 104 * 32, 64, 64, AttackType.Melee));
+
+            Enemies.Add(new Troll_Axe_Thrower(28 * 32, 106 * 32, 64, 64, AttackType.Melee));
+            Enemies.Add(new Troll_Axe_Thrower(30 * 32, 106 * 32, 64, 64, AttackType.Melee));
+            Enemies.Add(new Troll_Axe_Thrower(32 * 32, 108 * 32, 64, 64, AttackType.Melee));
 
         }
 
@@ -221,15 +232,21 @@ namespace HeroSiege.GameWorld
         {
             UpdatePlayers(delta);
             UpdateHeroBuildings(delta);
-
             UpdateGameObjects(delta);
+
             //Enemies
             UpdateEnemies(delta);
 
+            //Attack collision
+            UpdateAttackCollision();
+
+            //Effects
+            UpdateEffects(delta);
 
             DeleteDeadThings();
         }
 
+        //Players / hero buildings
         private void UpdatePlayers(float delta)
         {
 
@@ -246,7 +263,6 @@ namespace HeroSiege.GameWorld
                 PlayerTwo.UpdatePlayerMovement(delta, Map.Hitboxes);
             }
         }
-
         private void UpdateHeroBuildings(float delta)
         {
             foreach (var build in HeroBuildings)
@@ -257,10 +273,10 @@ namespace HeroSiege.GameWorld
                     DeadBuildings.Add(build);
             }
         }
-
+        // Enemy
         private void UpdateEnemies(float delta)
         {
-            foreach (var enemy in Enimies)
+            foreach (var enemy in Enemies)
             {
                 enemy.Update(delta);
 
@@ -269,6 +285,7 @@ namespace HeroSiege.GameWorld
             }
         }
 
+        //Game object
         private void UpdateGameObjects(float delta)
         {
             foreach (var obj in GameObjects)
@@ -284,6 +301,64 @@ namespace HeroSiege.GameWorld
             }
         }
 
+        //Attack collision
+        private void UpdateAttackCollision()
+        {
+            foreach (GameObject obj in GameObjects)
+            {
+                foreach (Entity e in Enemies)
+                {
+                    if (obj is Projectile)
+                        UpdateProjectileCollision((Projectile)obj, e);
+                }
+            }
+        }
+        private void UpdateProjectileCollision(Projectile pro, Entity enemy)
+        {
+            //Set collision and hit damage
+            if(pro.target == null)
+            {
+                if (pro.GetBounds().Intersects(enemy.GetBounds()) && !pro.Collision)
+                {
+                    enemy.Hit(pro.GetDamage);
+                    pro.Collision = true;
+                    pro.IsAlive = false;
+                }
+            }
+            else
+            {
+                if (pro.AttackCollision())
+                {
+                    pro.target.Hit(pro.GetDamage);
+                    pro.Collision = true;
+                    pro.IsAlive = false;
+                }
+            }
+
+            //Set collision effect
+            if (pro.Collision)
+            {
+                if(pro.target != null)
+                    SpawnEffect(pro.GetCollisionFX(), pro.target.Position);
+                else
+                    SpawnEffect(pro.GetCollisionFX(), pro.Position);
+            }
+        }
+        
+        //Effects
+        private void UpdateEffects(float delta)
+        {
+            foreach (var fx in Effects)
+            {
+                fx.Update(delta);
+
+                if (fx.Done)
+                    FXPool.ReleaseObject(fx);
+            }
+            Effects.RemoveAll(x => x.Done);
+        }
+
+        //Delete
         private void DeleteDeadThings()
         {
             foreach (GameObject ob in DeadObjects)
@@ -295,7 +370,7 @@ namespace HeroSiege.GameWorld
 
             foreach (Entity e in deadEnimies)
             {
-                Enimies.Remove(e);
+                Enemies.Remove(e);
             }
             deadEnimies.Clear();
         }
@@ -310,5 +385,41 @@ namespace HeroSiege.GameWorld
         }
 
         //----- Functions-----//
+        public void SpawnEffect(SpriteFX.EffectType type, Vector2 pos)
+        {
+            var fx = FXPool.GetObject();
+            fx.SetPosition(pos);
+            fx.ZIndex = 0.023f;
+            fx.Color = Color.White;
+
+            switch (type)
+            {
+                case SpriteFX.EffectType.Big_Explosion:
+                    break;
+                case SpriteFX.EffectType.Medium_Explosion:
+                    break;
+                case SpriteFX.EffectType.Light_Magic_Explosion:
+                    break;
+                case SpriteFX.EffectType.Dark_Magic_Explosion:
+                    break;
+                case SpriteFX.EffectType.Frost_Hit:
+                    break;
+                case SpriteFX.EffectType.Brown_Hit:
+                    break;
+                case SpriteFX.EffectType.Fire_Hit:
+                    fx.SetSize(32, 32);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Fire_Hit"), 448, 128, 32, 32, 4, 0.08f, new Point(2, 2), false, false)).SetAnimation("fx");
+                    break;
+                case SpriteFX.EffectType.NONE:
+                    FXPool.ReleaseObject(fx);
+                    return;
+                default:
+                    FXPool.ReleaseObject(fx);
+                    return;
+            }
+            var sx = fx.Size * 0.5f;
+            fx.DrawOffset = new Vector2(sx.X, sx.Y);
+            Effects.Add(fx);
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace HeroSiege.Manager.Resource
         //Heros
         private Texture2D mageHeroSpriteSheet;
         //Enemies
-        private Texture2D trollTrowerSpriteSheet;
+        private Texture2D trollTrowerSpriteSheet, daemonSprite, deathKnightSprite, dragonSprite, gruntSPrite, orgeSprite, zeppelinSprite;
         //Buildings
         private Texture2D heroBuildings, enemieBuildnings, etcBuildings, heroBalista;
         //Magic and Missiels
@@ -42,23 +42,34 @@ namespace HeroSiege.Manager.Resource
             //Load in all sprite sheets and Textures
             tileTextureSummer = content.Load<Texture2D>(@"Assets\Texture\Tiles\Wc2-Tiles");
 
+            //Hero
             mageHeroSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\MageHero");
 
+            //Enemies
             trollTrowerSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Troll_Thrower");
+            deathKnightSprite =      content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Death_Knight");
+            zeppelinSprite =         content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Zeppelin");
+            daemonSprite =           content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Daemon");
+            dragonSprite =           content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Dragon");
+            gruntSPrite =            content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Grunt");
+            orgeSprite =             content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Orge");
 
-            heroBalista = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\Ballista");
-
-            heroBuildings = content.Load<Texture2D>(@"Assets\Texture\Buildings\HeroBuildings");
+            //Buildings
             enemieBuildnings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EnemieBuildings");
-            etcBuildings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EtcBuildnings");
+            heroBuildings =    content.Load<Texture2D>(@"Assets\Texture\Buildings\HeroBuildings");
+            etcBuildings =     content.Load<Texture2D>(@"Assets\Texture\Buildings\EtcBuildnings");
+            heroBalista =      content.Load<Texture2D>(@"Assets\Texture\Units\Heros\Ballista");
 
+            //Debug
             debugWalkTile = content.Load<Texture2D>(@"Assets\DebugTexture\Debug_CanWalk");
-            debugRange = content.Load<Texture2D>(@"Assets\DebugTexture\Debug_Range");
+            debugRange =    content.Load<Texture2D>(@"Assets\DebugTexture\Debug_Range");
 
-            explosionSprite = content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Explosion");
+            //Effect, projectiles and explostion
+            effecSprite =      content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Particles_&_Effects");
             projectileSprite = content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\AttacksSprites");
-            effecSprite = content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Particles_&_Effects");
+            explosionSprite =  content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Explosion");
 
+            //Other
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
             //Add all textures and sprite to Dict
@@ -86,6 +97,12 @@ namespace HeroSiege.Manager.Resource
 
             //Enemies
             textureRegion["Troll_Thrower"] = new TextureRegion(trollTrowerSpriteSheet, 0, 0, trollTrowerSpriteSheet.Width, trollTrowerSpriteSheet.Height);
+            textureRegion["Death_Knight"] =  new TextureRegion(deathKnightSprite,      0, 0, deathKnightSprite.Width,      deathKnightSprite.Height);
+            textureRegion["Zeppelin"] =      new TextureRegion(zeppelinSprite,         0, 0, zeppelinSprite.Width,         zeppelinSprite.Height);
+            textureRegion["Dragon"] =        new TextureRegion(dragonSprite,           0, 0, dragonSprite.Width,           dragonSprite.Height);
+            textureRegion["Daemon"] =        new TextureRegion(daemonSprite,           0, 0, daemonSprite.Width,           daemonSprite.Height);
+            textureRegion["Grunt"] =         new TextureRegion(gruntSPrite,            0, 0, gruntSPrite.Width,            gruntSPrite.Height);
+            textureRegion["Orge"] =          new TextureRegion(orgeSprite,             0, 0, orgeSprite.Width,             orgeSprite.Height);
 
             //Explosion
             textureRegion["Big_Explosion"] =         new TextureRegion(explosionSprite,   0,   0, 512, 128);
@@ -93,8 +110,8 @@ namespace HeroSiege.Manager.Resource
             textureRegion["Light_Magic_Explosion"] = new TextureRegion(explosionSprite, 192, 128, 192, 128);
             textureRegion["Dark_Magic_Explosion"] =  new TextureRegion(explosionSprite,   0, 256, 384,  64);
             textureRegion["Frost_Hit"] =             new TextureRegion(explosionSprite, 256, 192, 128,  64);
-            textureRegion["Brown_Hit"] =             new TextureRegion(explosionSprite, 448, 128,  64,  64);
-            textureRegion["Fire_Hit"] =              new TextureRegion(explosionSprite, 512, 128,  64,  64);
+            textureRegion["Brown_Hit"] =             new TextureRegion(explosionSprite, 384, 128,  64,  64);
+            textureRegion["Fire_Hit"] =              new TextureRegion(explosionSprite, 448, 128,  64,  64);
 
             //Projectiles
             textureRegion["Harpon"] =           new TextureRegion(projectileSprite,   0,   0, 280,  56);

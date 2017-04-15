@@ -95,7 +95,7 @@ namespace HeroSiege.AISystems
                     Timer = 0;
                     TotalSpawned++;
                 }
-                if (TotalSpawned >= Wave[CurrentWave] && gameWorld.Enimies.Count == 0)
+                if (TotalSpawned >= Wave[CurrentWave] && gameWorld.Enemies.Count == 0)
                 {
                     NextWave = true;
                     Timer = 0;

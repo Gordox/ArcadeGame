@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HeroSiege.FTexture2D.SpriteEffect;
 
 namespace HeroSiege.FGameObject.Projectiles
 {
@@ -38,6 +39,11 @@ namespace HeroSiege.FGameObject.Projectiles
                 UpdateMovingDirTowardsTarget();
 
             base.Update(delta);
+        }
+
+        public override SpriteFX.EffectType GetCollisionFX()
+        {
+            return SpriteFX.EffectType.NONE;
         }
     }
 }

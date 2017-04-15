@@ -123,6 +123,16 @@ namespace HeroSiege.FEntity
 
         }
 
+        //Health bar
+        protected void DrawHealtBar(SpriteBatch SB)
+        {
+            //Background
+            SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 25, Position.Y - 30), new Rectangle(0, 0, 50, 8), Color.Black);
+            SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 24, Position.Y - 29),
+                                                              GenerateBar(Stats.Health, Stats.MaxHealth, 48, 6),
+                                                              LerpHealthColor(Stats.Health, Stats.MaxHealth));
+        }
+
         //----- NAME HERE -----//
         private void CheckIsAlive()
         {
@@ -159,12 +169,6 @@ namespace HeroSiege.FEntity
         public void SetControl(Control control)
         {
             this.Control = control;
-        }
-
-        public bool SetPauseAnimation
-        {
-            get { return sprite.PauseAnimation; }
-            set { sprite.PauseAnimation = value; }
         }
 
         public void ChangeTotalTargets(int value)
