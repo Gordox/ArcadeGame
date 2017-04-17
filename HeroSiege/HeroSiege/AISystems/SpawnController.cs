@@ -1,4 +1,6 @@
-﻿using HeroSiege.FEntity.Enemies;
+﻿using HeroSiege.FEntity.Buildings.EnemyBuildings;
+using HeroSiege.FEntity.Controllers;
+using HeroSiege.FEntity.Enemies;
 using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.GameWorld;
 using HeroSiege.Manager;
@@ -14,64 +16,52 @@ namespace HeroSiege.AISystems
 {
     class SpawnController
     {
+        //----- Feilds -----//
         Random rnd;
         World gameWorld;
         GameSettings settings;
-        List<Vector2> spawns;
-        FrameAnimation nextwaveani;
 
-        private const float START_SPAWN_DELAY = 1.5f;
-        private const float START_WAVE_DELAY = 7.0f;
-        private const float END_SPAWN_DELAY = 0.25f;
-        private const float END_WAVE_DELAY = 4.0f;
+        List<EnemySpawner> spawners;
+        EnemySpawner currentSpawner;
 
-        private int[] Wave = { 5, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
-        private float[] SpawnDelay;
-        private float[] WaveDelay;
-        private float Timer;
+        private const float START_WAVE_DELAY  = 7.0f;
+        private const float SPAWN_DELAY       = 0.8f;
+
+        private float timer;
         private int WaveCount;
         private int CurrentWave;
         private int TotalSpawned;
         private bool NextWave;
+        int type = 0;
 
+        bool allSpawnersDead;
+
+        int enemiesRemainingToSpawn;
+        int enemiesRemainingAlive;
+
+        //-----  -----//
         public SpawnController(World world, GameSettings gameSettings)
         {
             this.gameWorld = world;
             this.settings = gameSettings;
-            spawns = new List<Vector2>();
-            rnd = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
+            this.rnd = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
 
-            foreach (Vector2 pos in world.Map.EnemieSpawnerPos)
-            {
-                spawns.Add(pos);
-            }
-
+            this.spawners = new List<EnemySpawner>();
+            this.currentSpawner = null;
             InitWaveSystem();
-
-            //nextwaveani = new FrameAnimation(TextureManager.NextWave, 0, 0, 910, 512, 112, 1 / 60.0f, new Point(14, 8), false);
         }
 
         private void InitWaveSystem()
         {
-            WaveCount = Wave.Length;
-            SpawnDelay = new float[WaveCount];
-            WaveDelay = new float[WaveCount];
             CurrentWave = 0;
             TotalSpawned = 0;
-            Timer = 0;
-            NextWave = false;
-
-            // Räkna ut mellanskillnaden för varje wave
-            float spawn_diff = START_SPAWN_DELAY - END_SPAWN_DELAY;
-            float wave_diff = START_WAVE_DELAY - END_WAVE_DELAY;
-            for (int i = 0; i < WaveCount; i++)
-            {
-                float percent = (float)i / (float)(WaveCount - 1.0f);
-                SpawnDelay[i] = START_SPAWN_DELAY - spawn_diff * percent;
-                WaveDelay[i] = START_WAVE_DELAY - wave_diff * percent;
-            }
+            timer = 0;
+            NextWave = true;
+            allSpawnersDead = false;
+            // EnemyType();
         }
 
+        //----- Updates -----//
         public void Update(float delta)
         {
             if (!NextWave)
@@ -82,23 +72,25 @@ namespace HeroSiege.AISystems
             {
                 WaveInactive(delta);
             }
+            if (spawners.Count == 0)
+                allSpawnersDead = true;
         }
 
         private void WaveActive(float delta)
         {
-            Timer += delta;
-            if (Timer >= SpawnDelay[CurrentWave])
+            timer += delta;
+            if (timer >= SPAWN_DELAY && !allSpawnersDead)
             {
-                if (TotalSpawned < Wave[CurrentWave])
+                if (TotalSpawned < enemiesRemainingToSpawn)
                 {
                     SpawnEnemy();
-                    Timer = 0;
+                    timer = 0;
                     TotalSpawned++;
                 }
-                if (TotalSpawned >= Wave[CurrentWave] && gameWorld.Enemies.Count == 0)
+                if (TotalSpawned >= WaveCount && gameWorld.Enemies.Count == 0)
                 {
                     NextWave = true;
-                    Timer = 0;
+                    timer = 0;
                     Console.WriteLine("Next wave");
                 }
             }
@@ -106,82 +98,77 @@ namespace HeroSiege.AISystems
 
         private void WaveInactive(float delta)
         {
-            if (Timer >= 1.0f)
+            timer += delta;
+            if (timer >= START_WAVE_DELAY && !allSpawnersDead)
             {
-                nextwaveani.Update(delta);
-                ResetPlayer();
-            }
-
-            Timer += delta;
-            if (Timer >= WaveDelay[CurrentWave])
-            {
-                Timer = 0;
+                timer = 0;
                 TotalSpawned = 0;
                 NextWave = false;
-                //nextwaveani = new FrameAnimation(TextureManager.NextWave, 0, 0, 910, 512, 112, 1 / 60.0f, new Point(14, 8), false);
                 CurrentWave++;
-                if (CurrentWave >= WaveCount)
-                {
-                    // Win
-                    Console.WriteLine("Won first stage");
-                }
+                WaveCount = enemiesRemainingToSpawn = EnemysToSpawn();
+                if(spawners.Count > 0)
+                    currentSpawner = spawners[rnd.Next(spawners.Count - 1)];
+                // EnemyType();
             }
         }
-
-        private void ResetPlayer()
-        {
-            // Return if 1 player mode
-            //if (gameWorld.settings.playerTwo == CharacterType.None || gameWorld.settings.playerOne == CharacterType.None)
-            //    return;
-
-            //if (gameWorld.PlayerOne == null)
-            //    gameWorld.InitPlayerOne(0.5f);
-            //else if (gameWorld.PlayerTwo == null)
-            //    gameWorld.InitPlayerTwo(0.5f);
-        }
-
+        //-----  -----//
         public void Draw(SpriteBatch SB)
         {
-            if (NextWave)
-            {
-                if (Timer >= 1.0f && nextwaveani.HasNext())
-                    SB.Draw(ResourceManager.GetTexture(""), new Vector2(0, 0), Color.White);
-            }
+
         }
 
+        //----- Function / Methods -----//
         private void SpawnEnemy()
         {
-            // Get spawn point
-            List<Vector2> avaiable = new List<Vector2>();
-            for (int i = 0; i < spawns.Count; i++)
-            {
-                //if (!spawn[i].Intersects(gameWorld.camera.ViewRect))
-                //    avaiable.Add(spawn[i]);
-            }
-
-            int selected = rnd.Next(avaiable.Count);
-            Vector2 spawnPos = new Vector2(avaiable[selected].X, avaiable[selected].Y);
-
-            // hp multiplier for 2 player mode
-            float hp_multiplier = 1.0f;
-            if (settings.playerOne != CharacterType.None && settings.playerTwo != CharacterType.None)
-                hp_multiplier = 2.5f;
+            if (currentSpawner == null)
+                return;
 
             // Randomize enemy
             Enemy enemy = null;
-            int type = rnd.Next(2);
+           
             switch (type)
             {
                 case 0:
-                    //enemy = new RockGolom(spawnPos, hp_multiplier);
-                    //enemy.SetControl(new AIControlMelee(enemy, gameWorld));
+                    enemy = new Troll_Axe_Thrower(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range);
                     break;
                 case 1:
                     //enemy = new WaterGolom(spawnPos, hp_multiplier);
-                    //enemy.SetControl(new AIControlRange(enemy, gameWorld));
+                    break;
+                case 2:
+                    //enemy = new WaterGolom(spawnPos, hp_multiplier);
+                    break;
+                case 3:
+                    //enemy = new WaterGolom(spawnPos, hp_multiplier);
                     break;
             }
-            //gameWorld.AddEnemy(enemy);
+            enemy.SetControl(new AIController(gameWorld, enemy));
+            gameWorld.Enemies.Add(enemy);
+        }
+
+        private void EnemyType()
+        {
+            type = rnd.Next(4);
+        }
+
+        private int EnemysToSpawn()
+        {
+            return (int)(CurrentWave * 2 + ((CurrentWave * CurrentWave) / (2 * CurrentWave))); ;
+        }
+
+        public void AddSpawner(EnemySpawner spawner)
+        {
+            spawners.Add(spawner);
+        }
+        public void RemoveSpawner(EnemySpawner spawner)
+        {
+            spawners.Remove(spawner);
+            if(currentSpawner == spawner)
+            {
+                currentSpawner = null;
+                NextWave = true;
+                timer = 0;
+                Console.WriteLine("Next wave");
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using HeroSiege.Manager;
 using HeroSiege.GameWorld.map;
 using HeroSiege.Tools;
+using HeroSiege.FGameObject;
 
 namespace HeroSiege.FEntity.Enemies
 {
@@ -26,6 +27,8 @@ namespace HeroSiege.FEntity.Enemies
 
         public Vector2 HeroCastle { get; set; }
 
+        protected Vector2 oldPos;
+
         //--- A* ---//
         protected Queue<Vector2> waypoints;
         public bool havePath;
@@ -37,6 +40,7 @@ namespace HeroSiege.FEntity.Enemies
         {
             InitAStar();
             this.AttackType = attackType;
+            oldPos = position;
         }
 
         protected void InitAStar()
@@ -48,12 +52,54 @@ namespace HeroSiege.FEntity.Enemies
         //----- Updates -----//
         public override void Update(float delta)
         {
-            base.Update(delta);
-
-            UpdateAnimation();
+            base.Update(delta);     
+                 
             movment(delta);
-        }
+            UpdateMovmentDirection();
+            UpdateAnimation();
 
+            oldPos = position;
+        }
+        protected override void UpdateMovmentDirection()
+        {
+            base.UpdateMovmentDirection();
+
+            if (position.X > oldPos.X && position.Y < oldPos.Y)
+            {
+                MovingDirection = Direction.North_East;
+            }
+            else if (position.X < oldPos.X && position.Y < oldPos.Y)
+            {
+                MovingDirection = Direction.North_West;
+            }
+            else if (position.X < oldPos.X && position.Y > oldPos.Y)
+            {
+                MovingDirection = Direction.South_West;
+            }
+            else if (position.X > oldPos.X && position.Y > oldPos.Y)
+            {
+                MovingDirection = Direction.South_East;
+            }
+
+            else if (position.Y < oldPos.Y)
+            {
+                MovingDirection = Direction.North;
+            }
+            else if (position.X > oldPos.X)
+            {
+                MovingDirection = Direction.East;
+            }
+            else if (position.Y > oldPos.Y)
+            {
+                MovingDirection = Direction.South;
+            }
+            else if (position.X < oldPos.X)
+            {
+                MovingDirection = Direction.West;
+            }
+
+
+        }
         //----- Draws -----//
         public override void Draw(SpriteBatch SB)
         {
@@ -64,9 +110,6 @@ namespace HeroSiege.FEntity.Enemies
             if(Stats.Health < Stats.MaxHealth)
                 DrawHealtBar(SB);
         }
-
-        
-        
 
         //----- Draw Line -----//
         public void DrawPath(SpriteBatch SB, Vector2 position, List<Vector2> points, Color color, int thickness)

@@ -56,7 +56,7 @@ namespace HeroSiege.FEntity.Player
             Stats = new StatsData();
             Stats.MaxSpeed = 400;
             Stats.Speed = 200;
-            Stats.Health = 1;
+            Stats.MaxHealth = 10000000;
             Stats.Mana = 1;
             Stats.Radius = 200;
         }
@@ -65,7 +65,6 @@ namespace HeroSiege.FEntity.Player
         public override void Update(float delta)
         {
             UpdateAnimation();
-
             base.Update(delta);
         }
 

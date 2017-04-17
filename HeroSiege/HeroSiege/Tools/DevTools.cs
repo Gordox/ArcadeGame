@@ -9,14 +9,14 @@ namespace HeroSiege.Tools
     {
         public static bool DevDebugMode = false;
         
-        public static bool DevTopBarInfo = true;
+        public static bool DevTopBarInfo = false;
 
         public static bool DevDrawWalkbleTiles = false;
         public static bool DevDrawHitbox = false;
         public static bool DevDrawBoundingbox = false;
-        public static bool DevDrawRange = true;
+        public static bool DevDrawRange = false;
 
-        public static bool DevDrawAIPath = true;
+        public static bool DevDrawAIPath = false;
         //more here later
     }
 }

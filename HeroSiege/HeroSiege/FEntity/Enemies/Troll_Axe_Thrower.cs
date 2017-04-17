@@ -6,6 +6,8 @@ using HeroSiege.FTexture2D;
 using HeroSiege.FTexture2D.FAnimation;
 using Microsoft.Xna.Framework;
 using HeroSiege.Manager;
+using HeroSiege.FGameObject;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace HeroSiege.FEntity.Enemies
 {
@@ -24,7 +26,7 @@ namespace HeroSiege.FEntity.Enemies
             sprite.SetAnimation("MoveWestEast");
             boundingBox = new Rectangle((int)x, (int)y, 32, 32);
             offSetBound = new Vector2(0, 5);
-            sprite.PauseAnimation = true;
+            sprite.PauseAnimation = false;
         }
 
         protected override void AddSpriteAnimations()
@@ -59,6 +61,85 @@ namespace HeroSiege.FEntity.Enemies
             AttackFrame = 2;
         }
 
-
+        protected override void SetMovmentAnimations()
+        {
+            switch (MovingDirection)
+            {
+                case Direction.North:
+                    sprite.SetAnimation("MoveNorth");
+                    sprite.Effect = SpriteEffects.None;
+                    break;
+                case Direction.North_East:
+                    sprite.SetAnimation("MoveNorthWestEast");
+                    sprite.Effect = SpriteEffects.None;
+                    break;
+                case Direction.East:
+                    sprite.SetAnimation("MoveWestEast");
+                    sprite.Effect = SpriteEffects.None;
+                    break;
+                case Direction.South_East:
+                    sprite.SetAnimation("MoveSouthWestEast");
+                    sprite.Effect = SpriteEffects.None;
+                    break;
+                case Direction.South:
+                    sprite.SetAnimation("MoveSouth");
+                    sprite.Effect = SpriteEffects.None;
+                    break;
+                case Direction.South_West:
+                    sprite.SetAnimation("MoveSouthWestEast");
+                    sprite.Effect = SpriteEffects.FlipHorizontally;
+                    break;
+                case Direction.West:
+                    sprite.SetAnimation("MoveWestEast");
+                    sprite.Effect = SpriteEffects.FlipHorizontally;
+                    break;
+                case Direction.North_West:
+                    sprite.SetAnimation("MoveNorthWestEast");
+                    sprite.Effect = SpriteEffects.FlipHorizontally;
+                    break;
+                default:
+                    break;
+            }
+        }
+        protected override void SetAttckAnimations()
+        {
+            switch (MovingDirection)
+            {
+                case Direction.North:
+                    sprite.SetAnimation("AttckNorth");
+                    sprite.Effect = SpriteEffects.None;
+                    break;
+                case Direction.North_East:
+                    sprite.SetAnimation("AttckNorthWestEast");
+                    sprite.Effect = SpriteEffects.None;
+                    break;
+                case Direction.East:
+                    sprite.SetAnimation("AttckWestEast");
+                    sprite.Effect = SpriteEffects.None;
+                    break;
+                case Direction.South_East:
+                    sprite.SetAnimation("AttckSouthWestEast");
+                    sprite.Effect = SpriteEffects.None;
+                    break;
+                case Direction.South:
+                    sprite.SetAnimation("AttckSouth");
+                    sprite.Effect = SpriteEffects.None;
+                    break;
+                case Direction.South_West:
+                    sprite.SetAnimation("AttckSouthWestEast");
+                    sprite.Effect = SpriteEffects.FlipHorizontally;
+                    break;
+                case Direction.West:
+                    sprite.SetAnimation("AttckWestEast");
+                    sprite.Effect = SpriteEffects.FlipHorizontally;
+                    break;
+                case Direction.North_West:
+                    sprite.SetAnimation("AttckNorthWestEast");
+                    sprite.Effect = SpriteEffects.FlipHorizontally;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

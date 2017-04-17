@@ -52,7 +52,7 @@ namespace HeroSiege.FGameObject.Projectiles
         {
             Dir = direction;
             this.IsAlive = true;
-            sprite.AddAnimation(animationName,animation);
+            sprite.AddAnimation(animationName,animation).SetAnimation(animationName);
             Init();
         }
         public Projectile(string animationName, FrameAnimation animation, float width, float height, Direction direction)
@@ -60,7 +60,7 @@ namespace HeroSiege.FGameObject.Projectiles
         {
             Dir = direction;
             this.IsAlive = true;
-            sprite.AddAnimation(animationName, animation);
+            sprite.AddAnimation(animationName, animation).SetAnimation(animationName);
             Init();
         }
 

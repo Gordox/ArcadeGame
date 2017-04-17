@@ -40,13 +40,13 @@
     <Compile Include="AISystems\PathFinding\Pathfinder.cs" />
     <Compile Include="AISystems\SpawnController.cs" />
     <Compile Include="FEntity\Buildings\Building.cs" />
-    <Compile Include="FEntity\Buildings\EnemyBuildings\EnemySpawnerTower.cs" />
+    <Compile Include="FEntity\Buildings\EnemyBuildings\EnemySpawner.cs" />
     <Compile Include="FEntity\Buildings\EnemyBuildings\EnemyTower.cs" />
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroBallista.cs" />
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroCastle.cs" />
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroTower.cs" />
     <Compile Include="FEntity\Buildings\Shop.cs" />
-    <Compile Include="FEntity\Controllers\BallistaController.cs" />
+    <Compile Include="FEntity\Controllers\TowerController.cs" />
     <Compile Include="FEntity\Controllers\Control.cs" />
     <Compile Include="FEntity\Controllers\AIController.cs" />
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
@@ -59,6 +59,7 @@
     <Compile Include="FEntity\StatsData.cs" />
     <Compile Include="FGameObject\GameObjectEnums.cs" />
     <Compile Include="FGameObject\Portal.cs" />
+    <Compile Include="FGameObject\Projectiles\BigCanonBal.cs" />
     <Compile Include="FGameObject\Projectiles\FireBal.cs" />
     <Compile Include="FGameObject\Projectiles\Harpon.cs" />
     <Compile Include="FGameObject\Projectiles\Projectile.cs" />

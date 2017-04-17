@@ -16,30 +16,33 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
 
         public float AttackSpeed { get { return ATTACK_SPEED; } }
 
-        const float ATTACK_SPEED = 0.5f;
+        const float ATTACK_SPEED = 0.8f;
 
         public HeroBallista(float x, float y)
             : base(x, y, 64, 64)
         {
             AddSpriteAnimations();
             setDirection(x, y);
-            //setIdleTexture();
             setAttackAnimation();
             sprite.PauseAnimation = true;
         }
 
         public override void Init()
         {
+            base.Init();
             totalTargets = 1;
             targets = new List<Entity>();
             AttackFrame = 3;
 
+            
+        }
+        protected override void InitStats()
+        {
             Stats = new StatsData();
             Stats.Radius = 250;
-            Stats.Health = 1;
+            Stats.MaxHealth = 1;
             Stats.Armor = 1;
         }
-
 
         public override void Update(float delta)
         {
@@ -133,5 +136,6 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
             return true;
         }
 
+        
     }
 }

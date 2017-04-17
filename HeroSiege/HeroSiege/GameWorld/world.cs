@@ -64,7 +64,7 @@ namespace HeroSiege.GameWorld
             this.FXPool = new SpriteFXPool();
 
             Initmap(gameSettings.MapName);
-
+            this.spawnController = new SpawnController(this, gameSettings);
             InitBuildings();
             InitEntitys();
         }
@@ -157,20 +157,20 @@ namespace HeroSiege.GameWorld
             //Enemies.Add(new Troll_Axe_Thrower(Map.EnemieSpawnerPos[0].X, Map.EnemieSpawnerPos[0].Y, 64, 64, AttackType.Melee));
             //Enemies[0].SetControl(new AIController(this, (Troll_Axe_Thrower)Enemies[0]));
 
-            Enemies.Add(new Troll_Axe_Thrower(28 * 32, 100 * 32, 64, 64, AttackType.Melee));
-            Enemies.Add(new Troll_Axe_Thrower(30 * 32, 100 * 32, 64, 64, AttackType.Melee));
-            Enemies.Add(new Troll_Axe_Thrower(32 * 32, 100 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 100 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(30 * 32, 100 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(32 * 32, 100 * 32, 64, 64, AttackType.Melee));
 
-            Enemies.Add(new Troll_Axe_Thrower(32 * 32, 102 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(32 * 32, 102 * 32, 64, 64, AttackType.Melee));
 
-            Enemies.Add(new Troll_Axe_Thrower(32 * 32, 104 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(32 * 32, 104 * 32, 64, 64, AttackType.Melee));
 
-            Enemies.Add(new Troll_Axe_Thrower(28 * 32, 102 * 32, 64, 64, AttackType.Melee));
-            Enemies.Add(new Troll_Axe_Thrower(28 * 32, 104 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 102 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 104 * 32, 64, 64, AttackType.Melee));
 
-            Enemies.Add(new Troll_Axe_Thrower(28 * 32, 106 * 32, 64, 64, AttackType.Melee));
-            Enemies.Add(new Troll_Axe_Thrower(30 * 32, 106 * 32, 64, 64, AttackType.Melee));
-            Enemies.Add(new Troll_Axe_Thrower(32 * 32, 108 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 106 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(30 * 32, 106 * 32, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(32 * 32, 108 * 32, 64, 64, AttackType.Melee));
 
         }
 
@@ -208,7 +208,7 @@ namespace HeroSiege.GameWorld
             for (int i = 0; i < Map.HeroBalista.Count; i++)
             {
                 HeroBallista temp = new HeroBallista(Map.HeroBalista[i].X, Map.HeroBalista[i].Y);
-                temp.SetControl(new BallistaController(this, temp));
+                temp.SetControl(new TowerController(this, temp));
                 HeroBuildings.Add(temp);
 
             }
@@ -216,10 +216,18 @@ namespace HeroSiege.GameWorld
         private void InitEnemyBuildings()
         {
             for (int i = 0; i < Map.EnemieTowerPos.Count; i++)
-                EnemyBuildings.Add(new EnemyTower(Map.EnemieTowerPos[i].X, Map.EnemieTowerPos[i].Y));
+            {
+                EnemyTower temp = new EnemyTower(Map.EnemieTowerPos[i].X, Map.EnemieTowerPos[i].Y);
+                temp.SetControl(new TowerController(this, temp));
+                EnemyBuildings.Add(temp);
+            }
 
             for (int i = 0; i < Map.EnemieSpawnerPos.Count; i++)
-                EnemyBuildings.Add(new EnemySpawnerTower(Map.EnemieSpawnerPos[i].X, Map.EnemieSpawnerPos[i].Y));
+            {
+                EnemySpawner temp = new EnemySpawner(Map.EnemieSpawnerPos[i].X, Map.EnemieSpawnerPos[i].Y);
+                spawnController.AddSpawner(temp);
+                EnemyBuildings.Add(temp);
+            }
 
             foreach (Building b in EnemyBuildings)
             {
@@ -230,12 +238,19 @@ namespace HeroSiege.GameWorld
         //----- Updates-----//
         public void Update(float delta)
         {
-            UpdatePlayers(delta);
-            UpdateHeroBuildings(delta);
-            UpdateGameObjects(delta);
+            //Spawn controller
+            spawnController.Update(delta);
 
-            //Enemies
+            //Entitys
+            UpdatePlayers(delta);
             UpdateEnemies(delta);
+
+            //Buildings
+            UpdateEnemyBuildings(delta);
+            UpdateHeroBuildings(delta);
+
+            //Game objects
+            UpdateGameObjects(delta);
 
             //Attack collision
             UpdateAttackCollision();
@@ -273,7 +288,7 @@ namespace HeroSiege.GameWorld
                     DeadBuildings.Add(build);
             }
         }
-        // Enemy
+        // Enemy / enemys buildings
         private void UpdateEnemies(float delta)
         {
             foreach (var enemy in Enemies)
@@ -282,6 +297,16 @@ namespace HeroSiege.GameWorld
 
                 if(!enemy.IsAlive)
                     deadEnimies.Add(enemy);
+            }
+        }
+        private void UpdateEnemyBuildings(float delta)
+        {
+            foreach (var build in EnemyBuildings)
+            {
+                build.Update(delta);
+
+                if (!build.IsAlive)
+                    DeadBuildings.Add(build);
             }
         }
 
@@ -311,16 +336,23 @@ namespace HeroSiege.GameWorld
                     if (obj is Projectile)
                         UpdateProjectileCollision((Projectile)obj, e);
                 }
+
+                foreach (Building b in EnemyBuildings)
+                {
+                    if(obj is Projectile)
+                        UpdateProjectileCollision((Projectile)obj, b);
+                }
             }
         }
-        private void UpdateProjectileCollision(Projectile pro, Entity enemy)
+        //Collision Enemy Entitys
+        private void UpdateProjectileCollision(Projectile pro, Entity target)
         {
             //Set collision and hit damage
             if(pro.target == null)
             {
-                if (pro.GetBounds().Intersects(enemy.GetBounds()) && !pro.Collision)
+                if (pro.GetBounds().Intersects(target.GetBounds()) && !pro.Collision)
                 {
-                    enemy.Hit(pro.GetDamage);
+                    target.Hit(pro.GetDamage);
                     pro.Collision = true;
                     pro.IsAlive = false;
                 }
@@ -344,7 +376,39 @@ namespace HeroSiege.GameWorld
                     SpawnEffect(pro.GetCollisionFX(), pro.Position);
             }
         }
-        
+        //Collision Eenemy buildings
+        private void UpdateProjectileCollision(Projectile pro, Building eBuilding)
+        {
+            //Set collision and hit damage
+            if (pro.target == null)
+            {
+                if (pro.GetBounds().Intersects(eBuilding.GetBounds()) && !pro.Collision)
+                {
+                    eBuilding.Hit(pro.GetDamage);
+                    pro.Collision = true;
+                    pro.IsAlive = false;
+                }
+            }
+            else
+            {
+                if (pro.AttackCollision())
+                {
+                    pro.target.Hit(pro.GetDamage);
+                    pro.Collision = true;
+                    pro.IsAlive = false;
+                }
+            }
+
+            //Set collision effect
+            if (pro.Collision)
+            {
+                if (pro.target != null)
+                    SpawnEffect(pro.GetCollisionFX(), pro.target.Position);
+                else
+                    SpawnEffect(pro.GetCollisionFX(), pro.Position);
+            }
+        }
+
         //Effects
         private void UpdateEffects(float delta)
         {
@@ -373,6 +437,18 @@ namespace HeroSiege.GameWorld
                 Enemies.Remove(e);
             }
             deadEnimies.Clear();
+
+            foreach (Building b in DeadBuildings)
+            {
+                Hitboxes.Remove(b.GetHitbox());
+
+                HeroBuildings.Remove(b);
+                EnemyBuildings.Remove(b);
+
+                if (b is EnemySpawner)
+                    spawnController.RemoveSpawner((EnemySpawner)b);
+            }
+            DeadBuildings.Clear();
         }
 
         private void IntreactionPortal(Portal p, float delta)

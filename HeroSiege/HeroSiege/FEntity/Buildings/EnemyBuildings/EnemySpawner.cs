@@ -7,9 +7,9 @@ using System.Text;
 
 namespace HeroSiege.FEntity.Buildings.EnemyBuildings
 {
-    class EnemySpawnerTower : Building
+    class EnemySpawner : Building
     {
-        public EnemySpawnerTower(float x, float y)
+        public EnemySpawner(float x, float y)
             : base(ResourceManager.GetTexture("Spawn_Altar"), x, y)
         {
             SetHitbox = new Rectangle((int)x - 10, (int)y - 20, 58, 58);
@@ -18,9 +18,12 @@ namespace HeroSiege.FEntity.Buildings.EnemyBuildings
                 sprite.Effect = Microsoft.Xna.Framework.Graphics.SpriteEffects.FlipHorizontally;
         }
 
-        public override void Init()
+        protected override void InitStats()
         {
-
+            Stats = new StatsData();
+            Stats.Radius = 250;
+            Stats.MaxHealth = 100;
+            Stats.Armor = 1;
         }
 
         public override bool LevelUp(float delta)

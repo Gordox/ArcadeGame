@@ -54,7 +54,8 @@ namespace HeroSiege.FEntity.Buildings
            
         }
 
-        public abstract void Init();
+        public virtual void Init() { InitStats(); }
+        protected abstract void InitStats();
 
         public override void Update(float delta)
         {
@@ -74,6 +75,9 @@ namespace HeroSiege.FEntity.Buildings
 
             if (DevTools.DevDebugMode || DevTools.DevDrawRange && Stats != null && Stats.Radius > 0)
                 DrawRange(SB);
+
+            if (Stats.Health < Stats.MaxHealth)
+                DrawHealtBar(SB);
         }
         public void DrawRange(SpriteBatch SB)
         {
@@ -91,6 +95,16 @@ namespace HeroSiege.FEntity.Buildings
             }
 
 
+        }
+
+        //Health bar
+        protected void DrawHealtBar(SpriteBatch SB)
+        {
+            //Background
+            SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 25, Position.Y - 30), new Rectangle(0, 0, 50, 8), Color.Black);
+            SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 24, Position.Y - 29),
+                                                              GenerateBar(Stats.Health, Stats.MaxHealth, 48, 6),
+                                                              LerpHealthColor(Stats.Health, Stats.MaxHealth));
         }
 
         //----- NAME HERE -----//
@@ -118,6 +132,9 @@ namespace HeroSiege.FEntity.Buildings
         {
             for (int i = 0; i < enemies.Count; i++)
             {
+                if (enemies[i] == null || !enemies[i].IsAlive)
+                    continue;
+
                 if (Vector2.Distance(Position, enemies[i].Position) <= Stats.Radius)
                 {
                     if (targets.Count < totalTargets)
@@ -141,6 +158,7 @@ namespace HeroSiege.FEntity.Buildings
                             temp = new Harpon(ResourceManager.GetTexture("Harpon"), Position.X, Position.Y, 56, 56, targets[i]);
                             break;
                         case ProjectileType.Big_Canon_bal:
+                            temp = new BigCanonBal(ResourceManager.GetTexture("Big_Canon_bal"), Position.X, Position.Y, 32, 32, targets[i]);
                             break;
                         case ProjectileType.Medium_Canon_Bal:
                             break;

@@ -46,16 +46,16 @@ UI
 __________________________________
 Systems:
 A*(Astar) - Done
-SpawnController - Working on
+SpawnController - Working on (80% Done)
 SpriteFX - Done
 Particle
 __________________________________
 Buildnings:
 Hero castle - Working on
-Ballista (Deffends the hero tower) - working on it (70% Done)
+Ballista (Deffends the hero tower) - Done
 Blockade for tower (will be the first to eat upp damage before the tower)
 Shop
-Enemy tower - Working on
+Enemy tower - Done
 Enemy Spawner - Working on
 __________________________________
 HUD / UI / GUI:

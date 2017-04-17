@@ -23,6 +23,10 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
 
         public override void Init()
         {
+            base.Init();
+        }
+        protected override void InitStats()
+        {
             Stats = new StatsData();
             Stats.MaxHealth = 1;
             Stats.Armor = 1;
@@ -39,5 +43,6 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
             return true;
         }
 
+        
     }
 }

@@ -92,7 +92,7 @@ namespace HeroSiege.FEntity
                 SetMovmentAnimations();
             }
         }
-
+        protected virtual void UpdateMovmentDirection() { }
         //----- Draw -----//
         public override void Draw(SpriteBatch SB)
         {
@@ -136,8 +136,11 @@ namespace HeroSiege.FEntity
         //----- NAME HERE -----//
         private void CheckIsAlive()
         {
-            if (Stats.Health <= 0)
+            if (Stats.Health <= 0 && IsAlive)
+            {
                 IsAlive = false;
+                Death();
+            }
         }
 
         //----- Movment (Player only)  -----//
@@ -147,6 +150,7 @@ namespace HeroSiege.FEntity
         public virtual void MoveRight(float delta) { velocity.X = Stats.Speed; }
 
         //----- Movment & Attack Animation -----//
+
         protected virtual void SetMovmentAnimations() { }
         protected virtual void SetAttckAnimations() { }
         protected virtual void AddSpriteAnimations() { }
