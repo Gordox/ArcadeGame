@@ -10,9 +10,9 @@ using Microsoft.Xna.Framework;
 using HeroSiege.GameWorld;
 using HeroSiege.FGameObject;
 
-namespace HeroSiege.FEntity.Player
+namespace HeroSiege.FEntity.Players
 {
-    class TestPlayer : Entity
+    class TestPlayer : Hero
     {
         const float FRAME_DURATION_MOVEMNT = 0.05f;
         const float FRAME_DURATION_ATTACK = 0.08f;
@@ -22,29 +22,28 @@ namespace HeroSiege.FEntity.Player
         public TestPlayer(float x, float y, float width, float height)
             : base(null, x, y, width, height)
         {
-            InitStats();
             AddSpriteAnimations();
             sprite.SetAnimation("MoveNorth");
             boundingBox = new Rectangle((int)x, (int)y, 32, 32);
             offSetBound = new Vector2(0, 5);
-            AttackFrame = 2;
+            AttackFrame = 3;
         }
 
         protected override void AddSpriteAnimations()
         {
             //--- Movment animation ---//
-            sprite.AddAnimation("MoveNorth",         new FrameAnimation(ResourceManager.GetTexture("MageSheet"),   0, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
-            sprite.AddAnimation("MoveNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"),  64, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
-            sprite.AddAnimation("MoveWestEast",      new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 128, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
-            sprite.AddAnimation("MoveSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 192, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
-            sprite.AddAnimation("MoveSouth",         new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 256, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveNorth",         new FrameAnimation(ResourceManager.GetTexture("MageSheet"),   0, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
+            sprite.AddAnimation("MoveNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"),  64, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
+            sprite.AddAnimation("MoveWestEast",      new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 128, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
+            sprite.AddAnimation("MoveSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 192, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
+            sprite.AddAnimation("MoveSouth",         new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 256, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
 
             //--- Attck animation ---//
-            sprite.AddAnimation("AttckNorth",          new FrameAnimation(ResourceManager.GetTexture("MageSheet"),   0, 320, 64, 64, 3, FRAME_DURATION_ATTACK, new Point(1, 3)));
-            sprite.AddAnimation("AttckNorthWestEast",  new FrameAnimation(ResourceManager.GetTexture("MageSheet"),  64, 320, 64, 64, 3, FRAME_DURATION_ATTACK, new Point(1, 3)));
-            sprite.AddAnimation("AttckWestEast",       new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 128, 320, 64, 64, 3, FRAME_DURATION_ATTACK, new Point(1, 3)));
-            sprite.AddAnimation("AttckSouthWestEast",  new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 192, 320, 64, 64, 3, FRAME_DURATION_ATTACK, new Point(1, 3)));
-            sprite.AddAnimation("AttckSouth",          new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 256, 320, 64, 64, 3, FRAME_DURATION_ATTACK, new Point(1, 3)));
+            sprite.AddAnimation("AttckNorth",          new FrameAnimation(ResourceManager.GetTexture("MageSheet"),   0, 256, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckNorthWestEast",  new FrameAnimation(ResourceManager.GetTexture("MageSheet"),  64, 256, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckWestEast",       new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 128, 256, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckSouthWestEast",  new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 192, 256, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckSouth",          new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 256, 256, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
 
             //--- Death animation ---//
             sprite.AddAnimation("Death", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 0, 512, 64, 64, 7, FRAME_DURATION_DEATH, new Point(5, 2), false));
@@ -56,7 +55,7 @@ namespace HeroSiege.FEntity.Player
             Stats = new StatsData();
             Stats.MaxSpeed = 400;
             Stats.Speed = 200;
-            Stats.MaxHealth = 10000000;
+            Stats.MaxHealth = 10000;
             Stats.Mana = 1;
             Stats.Radius = 200;
         }

@@ -62,7 +62,7 @@ HUD / UI / GUI:
 
 __________________________________
 Need to fix and do:
-Make a base class for the player hero and the enemies, called "Hero" & "Enemy" that inherent from entity (Maybe do this)
+Make a base class for the player hero and the enemies, called "Hero" & "Enemy" that inherent from entity - DONE
 
 __________________________________
 Sprite sheets:

@@ -1,4 +1,5 @@
-﻿using HeroSiege.FGameObject;
+﻿using HeroSiege.FEntity.Players;
+using HeroSiege.FGameObject;
 using HeroSiege.GameWorld;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -14,11 +15,11 @@ namespace HeroSiege.FEntity.Controllers
         public PlayerIndex playerIndex { get; private set; }
         private bool[] keysactive = new bool[4];
 
-        public HumanControler(PlayerIndex playerIndex, Entity entity, World world) : base(world, entity) { this.playerIndex = playerIndex; }
+        public HumanControler(PlayerIndex playerIndex, Hero player, World world) : base(world, player) { this.playerIndex = playerIndex; }
 
         public override void Update(float delta)
         {
-            if (entity == null)
+            if (player == null)
                 return;
 
             UpdateButtons();
@@ -27,22 +28,22 @@ namespace HeroSiege.FEntity.Controllers
         private void UpdateButtons()
         {
             if (PressedButton(PlayerInput.Green)) //Key G or numpad 4
-                entity.GreenButton(world);
+                player.GreenButton(world);
 
             if (PressedButton(PlayerInput.Blue))  //Key H or numpad 5
-                entity.BlueButton(world);
+                player.BlueButton(world);
 
             if (PressedButton(PlayerInput.Yellow))  //Key B or numpad 1
-                entity.YellowButton(world);
+                player.YellowButton(world);
 
             if (PressedButton(PlayerInput.Red))  //Key N or numpad 2
-                entity.RedButton(world);
+                player.RedButton(world);
 
             if (PressedButton(PlayerInput.A)) //Key M or numpad 3
-                entity.AButton(world);
+                player.AButton(world);
 
             if (PressedButton(PlayerInput.B))  //Key J or numpad 6
-                entity.BButton(world);
+                player.BButton(world);
         }
 
         public void UpdateJoystick(float delta)
@@ -50,7 +51,7 @@ namespace HeroSiege.FEntity.Controllers
             if (ButtonDown(PlayerInput.Up))
             {
                 keysactive[0] = true;
-                entity.MoveUp(delta);
+                player.MoveUp(delta);
             }
             else
                 keysactive[0] = false;
@@ -58,7 +59,7 @@ namespace HeroSiege.FEntity.Controllers
             if (ButtonDown(PlayerInput.Down))
             {
                 keysactive[1] = true;
-                entity.MoveDown(delta);
+                player.MoveDown(delta);
             }
             else
                 keysactive[1] = false;
@@ -66,7 +67,7 @@ namespace HeroSiege.FEntity.Controllers
             if (ButtonDown(PlayerInput.Left))
             {
                 keysactive[2] = true;
-                entity.MoveLeft(delta);
+                player.MoveLeft(delta);
             }
             else
                 keysactive[2] = false;
@@ -74,39 +75,39 @@ namespace HeroSiege.FEntity.Controllers
             if (ButtonDown(PlayerInput.Right))
             {
                 keysactive[3] = true;
-                entity.MoveRight(delta);
+                player.MoveRight(delta);
             }
             else
                 keysactive[3] = false;
 
             UpdateMovingDirecion();
 
-            if (!keysactive[0] && !keysactive[1] && !keysactive[2] && !keysactive[3] && !entity.isAttaking)
-                entity.SetPauseAnimation = true;
+            if (!keysactive[0] && !keysactive[1] && !keysactive[2] && !keysactive[3] && !player.isAttaking)
+                player.SetPauseAnimation = true;
             else
-                entity.SetPauseAnimation = false;
+                player.SetPauseAnimation = false;
 
         }
 
         public void UpdateMovingDirecion()
         {
             if (keysactive[0] && keysactive[3])
-                entity.MovingDirection = Direction.North_East;
+                player.MovingDirection = Direction.North_East;
             else if (keysactive[0] && keysactive[2])
-                entity.MovingDirection = Direction.North_West;
+                player.MovingDirection = Direction.North_West;
             else if (keysactive[1] && keysactive[3])
-                entity.MovingDirection = Direction.South_East;
+                player.MovingDirection = Direction.South_East;
             else if (keysactive[1] && keysactive[2])
-                entity.MovingDirection = Direction.South_West;
+                player.MovingDirection = Direction.South_West;
 
             else if (keysactive[0])
-                entity.MovingDirection = Direction.North;
+                player.MovingDirection = Direction.North;
             else if (keysactive[3])
-                entity.MovingDirection = Direction.East;
+                player.MovingDirection = Direction.East;
             else if (keysactive[1])
-                entity.MovingDirection = Direction.South;
+                player.MovingDirection = Direction.South;
             else if (keysactive[2])
-                entity.MovingDirection = Direction.West;
+                player.MovingDirection = Direction.West;
 
 
             

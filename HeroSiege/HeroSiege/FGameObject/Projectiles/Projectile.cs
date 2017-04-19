@@ -8,7 +8,7 @@ using HeroSiege.FEntity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using HeroSiege.Tools;
-using static HeroSiege.FTexture2D.SpriteEffect.SpriteFX;
+using HeroSiege.FTexture2D.SpriteEffect;
 
 namespace HeroSiege.FGameObject.Projectiles
 {
@@ -47,12 +47,21 @@ namespace HeroSiege.FGameObject.Projectiles
             this.IsAlive = true;
             Init();
         }
+
         public Projectile(string animationName, FrameAnimation animation, float x, float y, float width, float height, Direction direction)
             : base(null, x, y, width, height)
         {
             Dir = direction;
             this.IsAlive = true;
             sprite.AddAnimation(animationName,animation).SetAnimation(animationName);
+            Init();
+        }
+        public Projectile(string animationName, FrameAnimation animation, float x, float y, float width, float height, Entity target)
+            : base(null, x, y, width, height)
+        {
+            this.target = target;
+            this.IsAlive = true;
+            sprite.AddAnimation(animationName, animation).SetAnimation(animationName);
             Init();
         }
         public Projectile(string animationName, FrameAnimation animation, float width, float height, Direction direction)

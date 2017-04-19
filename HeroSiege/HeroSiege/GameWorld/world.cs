@@ -6,7 +6,7 @@ using HeroSiege.GameWorld.map;
 using HeroSiege.FEntity;
 using HeroSiege.FGameObject;
 using Microsoft.Xna.Framework;
-using HeroSiege.FEntity.Player;
+using HeroSiege.FEntity.Players;
 using HeroSiege.Manager;
 using HeroSiege.FEntity.Controllers;
 using HeroSiege.Tools;
@@ -36,8 +36,8 @@ namespace HeroSiege.GameWorld
         public List<Entity> Enemies { get; private set; }
         private List<Entity> deadEnimies;
 
-        public Entity PlayerOne { get; private set; }
-        public Entity PlayerTwo { get; private set; }
+        public Hero PlayerOne { get; private set; }
+        public Hero PlayerTwo { get; private set; }
 
         //----- Buildings -----//
         public List<Building> HeroBuildings { get; private set; }
@@ -154,7 +154,7 @@ namespace HeroSiege.GameWorld
         public void InitEnemy()
         {
 
-            //Enemies.Add(new Troll_Axe_Thrower(Map.EnemieSpawnerPos[0].X, Map.EnemieSpawnerPos[0].Y, 64, 64, AttackType.Melee));
+            //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 100 * 32, 64, 64, AttackType.Range));
             //Enemies[0].SetControl(new AIController(this, (Troll_Axe_Thrower)Enemies[0]));
 
             //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 100 * 32, 64, 64, AttackType.Melee));
@@ -173,6 +173,7 @@ namespace HeroSiege.GameWorld
             //Enemies.Add(new Troll_Axe_Thrower(32 * 32, 108 * 32, 64, 64, AttackType.Melee));
 
         }
+        //
 
         public void InitGameObjects()
         {
@@ -324,6 +325,15 @@ namespace HeroSiege.GameWorld
                 if (!obj.IsAlive)
                     DeadObjects.Add(obj);
             }
+
+            foreach (var obj in EnemyObjects)
+            {
+                if (obj != null)
+                    obj.Update(delta);
+
+                if (!obj.IsAlive)
+                    DeadObjects.Add(obj);
+            }
         }
 
         //Attack collision
@@ -343,9 +353,16 @@ namespace HeroSiege.GameWorld
                         UpdateProjectileCollision((Projectile)obj, b);
                 }
             }
+
+            foreach (GameObject obj in EnemyObjects)
+            {
+
+                if (obj is Projectile)
+                    UpdateProjectileCollision((Projectile)obj);
+            }
         }
         //Collision Enemy Entitys
-        private void UpdateProjectileCollision(Projectile pro, Entity target)
+        private void UpdateProjectileCollision(Projectile pro, Entity target = null)
         {
             //Set collision and hit damage
             if(pro.target == null)
@@ -461,7 +478,7 @@ namespace HeroSiege.GameWorld
         }
 
         //----- Functions-----//
-        public void SpawnEffect(SpriteFX.EffectType type, Vector2 pos)
+        public void SpawnEffect(EffectType type, Vector2 pos)
         {
             var fx = FXPool.GetObject();
             fx.SetPosition(pos);
@@ -470,23 +487,23 @@ namespace HeroSiege.GameWorld
 
             switch (type)
             {
-                case SpriteFX.EffectType.Big_Explosion:
+                case EffectType.Big_Explosion:
                     break;
-                case SpriteFX.EffectType.Medium_Explosion:
+                case EffectType.Medium_Explosion:
                     break;
-                case SpriteFX.EffectType.Light_Magic_Explosion:
+                case EffectType.Light_Magic_Explosion:
                     break;
-                case SpriteFX.EffectType.Dark_Magic_Explosion:
+                case EffectType.Dark_Magic_Explosion:
                     break;
-                case SpriteFX.EffectType.Frost_Hit:
+                case EffectType.Frost_Hit:
                     break;
-                case SpriteFX.EffectType.Brown_Hit:
+                case EffectType.Brown_Hit:
                     break;
-                case SpriteFX.EffectType.Fire_Hit:
+                case EffectType.Fire_Hit:
                     fx.SetSize(32, 32);
                     fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Fire_Hit"), 448, 128, 32, 32, 4, 0.08f, new Point(2, 2), false, false)).SetAnimation("fx");
                     break;
-                case SpriteFX.EffectType.NONE:
+                case EffectType.NONE:
                     FXPool.ReleaseObject(fx);
                     return;
                 default:

@@ -119,6 +119,12 @@ namespace HeroSiege.Render
                 if(obj != null)
                     obj.Draw(SB);
             }
+
+            foreach (GameObject obj in World.EnemyObjects)
+            {
+                if (obj != null)
+                    obj.Draw(SB);
+            }
         }
 
         private void DrawEffects(SpriteBatch SB)
@@ -135,14 +141,22 @@ namespace HeroSiege.Render
             {
                 SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Rectangle(0, 0, 1920, 60), Color.Gray);
 
-                //----- PLayer ONE Direcion -----//
+                //----- PLayer ONE INFO -----//
                 if (World.PlayerOne != null)
-                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "P_1: " + World.PlayerOne.MovingDirection, new Vector2(0, 0), Color.Black);
-
-                //----- PLayer TWO Direcion -----//
+                {
+                    Entity tempPlayer = World.PlayerOne;
+                    string textDir = "P_1: " + tempPlayer.MovingDirection;
+                    string textStats = "Health: " + tempPlayer.Stats.Health +" Mana: "+ tempPlayer.Stats.Mana;
+                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), textDir + "\n"+ textStats, new Vector2(0, 2), Color.Black);
+                }
+                //----- PLayer TWO INFO -----//
                 if (World.PlayerTwo != null)
-                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "P_2: " + World.PlayerTwo.MovingDirection, new Vector2(0, 30), Color.Black);
-
+                {
+                    Entity tempPlayer = World.PlayerTwo;
+                    string textDir = "P_2: " + tempPlayer.MovingDirection;
+                    string textStats = "Health: " + tempPlayer.Stats.Health + " Mana: " + tempPlayer.Stats.Mana;
+                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), textDir + "\n" + textStats, new Vector2(250, 2), Color.Black);
+                }
 
                 //----- Camera pos -----//
                 SB.DrawString(ResourceManager.GetFont("Arial_Font"), "Camera: " + Camera.Position, new Vector2(1600/2, 0), Color.Black);

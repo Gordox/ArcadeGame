@@ -21,18 +21,14 @@ namespace HeroSiege.FEntity.Buildings
         Level_3
     }
 
-    abstract class Building : GameObject
+    abstract class Building : Entity
     {
 
         protected List<Entity> targets;
         protected int totalTargets;
-        public bool isAttaking { get; set; }
-        protected int AttackFrame; //Which frame the attack shall be used
 
         protected bool isUpgrading;
 
-        public Control Control { get; protected set; }
-        public StatsData Stats { get; protected set; }
 
         protected BuildingLevel buildingLevel;
         public Direction Dir { get; set; }
@@ -53,9 +49,6 @@ namespace HeroSiege.FEntity.Buildings
             IsAlive = true;
            
         }
-
-        public virtual void Init() { InitStats(); }
-        protected abstract void InitStats();
 
         public override void Update(float delta)
         {
@@ -79,23 +72,6 @@ namespace HeroSiege.FEntity.Buildings
             if (Stats.Health < Stats.MaxHealth)
                 DrawHealtBar(SB);
         }
-        public void DrawRange(SpriteBatch SB)
-        {
-            // Work out the minimum step necessary using trigonometry + sine approximation.
-            double angleStep = 1f / Stats.Radius;
-
-            for (double angle = 0; angle < Math.PI * 2; angle += angleStep)
-            {
-                int x = (int)Math.Round(Stats.Radius + Stats.Radius * Math.Cos(angle));
-                int y = (int)Math.Round(Stats.Radius + Stats.Radius * Math.Sin(angle));
-
-                SB.Draw(ResourceManager.GetTexture("BlackPixel"), new Vector2(position.X + x, position.Y + y), null, Color.Black, 0,
-                    new Vector2(Stats.Radius, Stats.Radius),
-                    1, SpriteEffects.None, 0);
-            }
-
-
-        }
 
         //Health bar
         protected void DrawHealtBar(SpriteBatch SB)
@@ -115,10 +91,6 @@ namespace HeroSiege.FEntity.Buildings
         }
 
         public abstract bool LevelUp(float delta);
-        public void SetControl(Control control)
-        {
-            this.Control = control;
-        }
         //----- Other -----//
         public int GetTargetCount
         {
@@ -177,9 +149,6 @@ namespace HeroSiege.FEntity.Buildings
                 targets.Clear();
             }
         }
-        public void Hit(float damage)
-        {
-            Stats.Health = Stats.Health - (damage - (damage * (Stats.Armor / 1000)));
-        }
+
     }
 }

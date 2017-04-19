@@ -10,6 +10,11 @@ using HeroSiege.Manager;
 using HeroSiege.GameWorld.map;
 using HeroSiege.Tools;
 using HeroSiege.FGameObject;
+using HeroSiege.GameWorld;
+using HeroSiege.FGameObject.Projectiles;
+using HeroSiege.FTexture2D.FAnimation;
+using HeroSiege.FEntity.Players;
+using HeroSiege.FEntity.Buildings;
 
 namespace HeroSiege.FEntity.Enemies
 {
@@ -23,10 +28,14 @@ namespace HeroSiege.FEntity.Enemies
 
     class Enemy : Entity
     {
+        public Hero PlayerTarget { get; set; }
+        public Building BuildingTarget { get; set; }
+
         public AttackType AttackType { get; protected set; }
+        public ProjectileType ProjectType { get; protected set; }
+        public float AttackSpeed { get; protected set; }
 
         public Vector2 HeroCastle { get; set; }
-
         protected Vector2 oldPos;
 
         //--- A* ---//
@@ -38,6 +47,8 @@ namespace HeroSiege.FEntity.Enemies
         public Enemy(TextureRegion region, float x, float y, float width, float height, AttackType attackType)
             : base(region, x, y, width, height)
         {
+            this.PlayerTarget = null;
+            this.BuildingTarget = null;
             InitAStar();
             this.AttackType = attackType;
             oldPos = position;
@@ -100,6 +111,7 @@ namespace HeroSiege.FEntity.Enemies
 
 
         }
+
         //----- Draws -----//
         public override void Draw(SpriteBatch SB)
         {
@@ -111,7 +123,17 @@ namespace HeroSiege.FEntity.Enemies
                 DrawHealtBar(SB);
         }
 
-        //----- Draw Line -----//
+        //Health bar
+        protected void DrawHealtBar(SpriteBatch SB)
+        {
+            //Background
+            SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 25, Position.Y - 30), new Rectangle(0, 0, 50, 8), Color.Black);
+            SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 24, Position.Y - 29),
+                                                              GenerateBar(Stats.Health, Stats.MaxHealth, 48, 6),
+                                                              LerpHealthColor(Stats.Health, Stats.MaxHealth));
+        }
+
+        //Draw Line
         public void DrawPath(SpriteBatch SB, Vector2 position, List<Vector2> points, Color color, int thickness)
         {
             if (points.Count < 2)
@@ -134,6 +156,16 @@ namespace HeroSiege.FEntity.Enemies
         }
 
         //----- Methos and functions ----//
+        public void SetAttackAnimation() { SetAttckAnimations(); }
+        public void SetMovmentAnimation() { SetMovmentAnimations(); }
+        public int GetCurrentFrame
+        {
+            get { return sprite.Animations.CurrentAnimation.currentFrame; }
+        }
+        public int GetAttackFrame
+        {
+            get { return AttackFrame; }
+        }
 
         //----- A Star -----//
         public void Astar(TileMap map, Point destination)
@@ -241,5 +273,49 @@ namespace HeroSiege.FEntity.Enemies
         {
             waypoints.Clear();
         }
+
+        //----- Attacking method and functions -----//
+        public void GetTargets(List<Entity> enemies)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (Vector2.Distance(Position, enemies[i].Position) <= Stats.Radius)
+                {
+                    //if (Targets.Count < totalTargets)
+                    //    Targets.Add(enemies[i]);
+                }
+            }
+        }
+
+        public void CreateProjectilesTowardsTarget(World parent, ProjectileType type)
+        {
+            Projectile temp = null;
+            switch (type)
+            {
+                case ProjectileType.Fire_Bal:
+                    temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, MovingDirection);
+                    break;
+                case ProjectileType.Lighing_bal:
+                    break;
+                case ProjectileType.Evil_Hand:
+                    break;
+                case ProjectileType.Dark_Eye:
+                    break;
+                case ProjectileType.Lightning_Axe:
+                    break;
+                case ProjectileType.Normal_Axe:
+                    int x = ResourceManager.GetTexture("Normal_Axe").region.X;
+                    int y = ResourceManager.GetTexture("Normal_Axe").region.Y;
+                    if(PlayerTarget != null)
+                        temp = new Axe("AxeAnimation", new FrameAnimation(ResourceManager.GetTexture("Normal_Axe"), x, y, 32, 32, 3, 0.08f, new Point(3, 1)), Position.X, Position.Y, 32, 32, PlayerTarget);
+                    else
+                        temp = new Axe("AxeAnimation", new FrameAnimation(ResourceManager.GetTexture("Normal_Axe"), x, y, 32, 32, 3, 0.08f, new Point(3, 1)), Position.X, Position.Y, 32, 32, BuildingTarget);
+                    break;
+                default:
+                    break;      
+            }
+            parent.EnemyObjects.Add(temp);
+        }
+
     }
 }

@@ -1,4 +1,6 @@
 ﻿using HeroSiege.FEntity.Buildings;
+using HeroSiege.FEntity.Enemies;
+using HeroSiege.FEntity.Players;
 using HeroSiege.GameWorld;
 using System;
 using System.Collections.Generic;
@@ -12,13 +14,25 @@ namespace HeroSiege.FEntity.Controllers
         public World world { get; private set; }
         public Entity entity;
         public Building building;
+        public Hero player;
+        public Enemy enemy;
 
+        //----- Constructos -----//
         public Control(World world, Entity entity)
         {
             this.entity = entity;
             this.world = world;
         }
-
+        public Control(World world, Hero player)
+        {
+            this.player = player;
+            this.world = world;
+        }
+        public Control(World world, Enemy enemy)
+        {
+            this.enemy = enemy;
+            this.world = world;
+        }
         public Control(World world, Building building)
         {
             this.building = building;

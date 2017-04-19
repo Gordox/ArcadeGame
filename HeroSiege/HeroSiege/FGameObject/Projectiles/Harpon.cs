@@ -41,9 +41,9 @@ namespace HeroSiege.FGameObject.Projectiles
             base.Update(delta);
         }
 
-        public override SpriteFX.EffectType GetCollisionFX()
+        public override EffectType GetCollisionFX()
         {
-            return SpriteFX.EffectType.NONE;
+            return EffectType.NONE;
         }
     }
 }

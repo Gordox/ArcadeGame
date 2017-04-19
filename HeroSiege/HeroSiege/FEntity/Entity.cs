@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework.Graphics;
 using HeroSiege.Tools;
 using HeroSiege.FGameObject.Projectiles;
 using HeroSiege.Manager;
+using HeroSiege.FTexture2D.FAnimation;
+using HeroSiege.FEntity.Enemies;
 
 namespace HeroSiege.FEntity
 {
@@ -26,11 +28,8 @@ namespace HeroSiege.FEntity
         public Direction MovingDirection { get; set; }
         private Direction olddir;
 
-        public bool isAttaking { get; protected set; }
-
-        List<Entity> targets;
-        protected int totalTargets;
-
+        public bool isAttaking { get; set; }
+ 
         protected int AttackFrame; //Which frame the attack shall be used
 
         //----- Constructor -----//
@@ -45,7 +44,8 @@ namespace HeroSiege.FEntity
         }
 
 
-        public virtual void Init() { totalTargets = 10; targets = new List<Entity>(); }
+        public virtual void Init() { InitStats(); }
+
         protected virtual void InitStats() { }
 
         //----- Updates-----//
@@ -57,27 +57,6 @@ namespace HeroSiege.FEntity
             if (Control != null && IsAlive)
                 Control.Update(delta);
         }
-        public void UpdatePlayerMovement(float delta, List<Rectangle> objects)
-        {
-            velocity = Vector2.Zero;
-
-            if (Control != null && IsAlive)
-                ((HumanControler)Control).UpdateJoystick(delta);
-            
-            //Calculate future pos
-            Vector2 futurePos = (position + velocity * delta);
-
-            if (MovingDirection == Direction.North_East || MovingDirection == Direction.North_West ||
-                MovingDirection == Direction.South_East || MovingDirection == Direction.South_West)
-                velocity *= 0.75f; //hard coded value so the player moves at the same speed side ways somewhat 
-
-            //Update movement if no collision will happen
-            if (!CheckCollision(new Rectangle((int)futurePos.X, (int)position.Y, this.GetBounds().Width, this.GetBounds().Height), objects))
-                position.X += velocity.X * delta;
-                
-            if (!CheckCollision(new Rectangle((int)position.X, (int)futurePos.Y, this.GetBounds().Width, this.GetBounds().Height), objects))
-                position.Y += velocity.Y * delta;
-        }
         protected void UpdateAnimation()
         {
             if (olddir != MovingDirection && !isAttaking)
@@ -86,13 +65,14 @@ namespace HeroSiege.FEntity
                 olddir = MovingDirection;
             }
 
-            if (isAttaking && sprite.Animations.CurrentAnimation.currentFrame == AttackFrame)
+            if (isAttaking && sprite.Animations.CurrentAnimation.currentFrame >= AttackFrame)
             {
                 isAttaking = false;
                 SetMovmentAnimations();
             }
         }
         protected virtual void UpdateMovmentDirection() { }
+
         //----- Draw -----//
         public override void Draw(SpriteBatch SB)
         {
@@ -123,16 +103,6 @@ namespace HeroSiege.FEntity
 
         }
 
-        //Health bar
-        protected void DrawHealtBar(SpriteBatch SB)
-        {
-            //Background
-            SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 25, Position.Y - 30), new Rectangle(0, 0, 50, 8), Color.Black);
-            SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 24, Position.Y - 29),
-                                                              GenerateBar(Stats.Health, Stats.MaxHealth, 48, 6),
-                                                              LerpHealthColor(Stats.Health, Stats.MaxHealth));
-        }
-
         //----- NAME HERE -----//
         private void CheckIsAlive()
         {
@@ -143,25 +113,10 @@ namespace HeroSiege.FEntity
             }
         }
 
-        //----- Movment (Player only)  -----//
-        public virtual void MoveUp(float delta) { velocity.Y = -Stats.Speed; }
-        public virtual void MoveDown(float delta) { velocity.Y = Stats.Speed; }
-        public virtual void MoveLeft(float delta) { velocity.X = -Stats.Speed; }
-        public virtual void MoveRight(float delta) { velocity.X = Stats.Speed; }
-
         //----- Movment & Attack Animation -----//
-
         protected virtual void SetMovmentAnimations() { }
         protected virtual void SetAttckAnimations() { }
         protected virtual void AddSpriteAnimations() { }
-
-        //----- Button Input (Player only) -----//
-        public virtual void GreenButton(World parent) { } //Key G or numpad 4
-        public virtual void BlueButton(World parent) { } //Key H or numpad 5
-        public virtual void YellowButton(World parent) { }  //Key B or numpad 1
-        public virtual void RedButton(World parent) { } //Key N or numpad 2
-        public virtual void AButton(World parent) { } //Key M or numpad 3
-        public virtual void BButton(World parent) { }  //Key J or numpad 6
 
         //----- Death -----//
         protected virtual void Death()
@@ -175,86 +130,6 @@ namespace HeroSiege.FEntity
             this.Control = control;
         }
 
-        public void ChangeTotalTargets(int value)
-        {
-            totalTargets += value;
-            if (totalTargets <= 0)
-                totalTargets = 1;
-        }
-
-        //----- Other -----//
-        protected void GetTargets(List<Entity> enemies)
-        {
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if(Vector2.Distance(Position, enemies[i].Position) <= Stats.Radius)
-                {
-                    if (targets.Count < totalTargets)
-                        targets.Add(enemies[i]);
-                }
-            }
-        }
-        
-        protected void CreateProjectilesTowardsTarget(World parent, ProjectileType type)
-        {
-            Projectile temp = null;
-
-            if (targets.Count > 0)
-            {
-                
-                for (int i = 0; i < targets.Count; i++)
-                {
-                    switch (type)
-                    {
-                        case ProjectileType.Fire_Bal:
-                            temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, targets[i]);
-                            break;
-                        case ProjectileType.Lighing_bal:
-                            break;
-                        case ProjectileType.Evil_Hand:
-                            break;
-                        case ProjectileType.Arrow:
-                            break;
-                        case ProjectileType.Dark_Eye:
-                            break;
-                        case ProjectileType.Lightning_Axe:
-                            break;
-                        case ProjectileType.Normal_Axe:
-                            break;
-                        default:
-                            break;
-                    }
-
-                    parent.GameObjects.Add(temp);
-                }
-                targets.Clear();
-            }
-            else
-            {
-                switch (type)
-                {
-                    case ProjectileType.Fire_Bal:
-                        temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, MovingDirection);
-                        break;
-                    case ProjectileType.Lighing_bal:
-                        break;
-                    case ProjectileType.Evil_Hand:
-                        break;
-                    case ProjectileType.Arrow:
-                        break;
-                    case ProjectileType.Dark_Eye:
-                        break;
-                    case ProjectileType.Lightning_Axe:
-                        break;
-                    case ProjectileType.Normal_Axe:
-                        break;
-                    default:
-                        break;
-                }
-
-                parent.GameObjects.Add(temp);
-            }
-        }
 
         public void Hit(float damage)
         {

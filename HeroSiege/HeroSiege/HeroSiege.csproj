@@ -54,11 +54,13 @@
     <Compile Include="FEntity\Enemies\TestEnemy.cs" />
     <Compile Include="FEntity\Enemies\Troll_Axe_Thrower.cs" />
     <Compile Include="FEntity\Entity.cs" />
-    <Compile Include="FEntity\Player\Mage.cs" />
-    <Compile Include="FEntity\Player\TestPlayer.cs" />
+    <Compile Include="FEntity\Players\Mage.cs" />
+    <Compile Include="FEntity\Players\Hero.cs" />
+    <Compile Include="FEntity\Players\TestPlayer.cs" />
     <Compile Include="FEntity\StatsData.cs" />
     <Compile Include="FGameObject\GameObjectEnums.cs" />
     <Compile Include="FGameObject\Portal.cs" />
+    <Compile Include="FGameObject\Projectiles\Axe.cs" />
     <Compile Include="FGameObject\Projectiles\BigCanonBal.cs" />
     <Compile Include="FGameObject\Projectiles\FireBal.cs" />
     <Compile Include="FGameObject\Projectiles\Harpon.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="FTexture2D\FAnimation\FrameAnimation.cs" />
     <Compile Include="FTexture2D\Sprite.cs" />
     <Compile Include="FTexture2D\SpriteEffect\IPoolable.cs" />
+    <Compile Include="FTexture2D\SpriteEffect\SpriteEffectEnums.cs" />
     <Compile Include="FTexture2D\SpriteEffect\SpriteFX.cs" />
     <Compile Include="FTexture2D\SpriteEffect\SpriteFXPool.cs" />
     <Compile Include="FTexture2D\TextureRegione.cs" />

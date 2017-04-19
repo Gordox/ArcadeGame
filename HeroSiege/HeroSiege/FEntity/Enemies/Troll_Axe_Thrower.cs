@@ -21,12 +21,30 @@ namespace HeroSiege.FEntity.Enemies
         public Troll_Axe_Thrower(float x, float y, float width, float height, AttackType attackType)
             : base(null, x, y, width, height, attackType)
         {
-            InitStats();
             AddSpriteAnimations();
-            sprite.SetAnimation("MoveWestEast");
+            SetMovmentAnimations();
+
             boundingBox = new Rectangle((int)x, (int)y, 32, 32);
             offSetBound = new Vector2(0, 5);
             sprite.PauseAnimation = false;
+        }
+
+        public override void Init()
+        {
+            base.Init();
+            ProjectType = ProjectileType.Normal_Axe;
+            AttackFrame = 3;
+            AttackSpeed = 0.8f;
+        }
+        protected override void InitStats()
+        {
+            Stats = new StatsData();
+            Stats.MaxSpeed = 400;
+            Stats.Speed = 50;
+            Stats.MaxHealth = 100;
+            Stats.MaxMana = 1;
+            Stats.visibilityRadius = 250;
+            Stats.Radius = 190;
         }
 
         protected override void AddSpriteAnimations()
@@ -49,16 +67,6 @@ namespace HeroSiege.FEntity.Enemies
             sprite.AddAnimation("Death_1", new FrameAnimation(ResourceManager.GetTexture("Troll_Thrower"), 0, 576, 64, 64, 3, FRAME_DURATION_DEATH, new Point(1, 3), false));
             sprite.AddAnimation("Death_2", new FrameAnimation(ResourceManager.GetTexture("Troll_Thrower"), 0, 640, 64, 64, 3, FRAME_DURATION_DEATH, new Point(1, 3), false));
 
-        }
-
-        protected override void InitStats()
-        {
-            Stats = new StatsData();
-            Stats.MaxSpeed = 400;
-            Stats.Speed = 50;
-            Stats.MaxHealth = 100;
-            Stats.Mana = 1;
-            AttackFrame = 2;
         }
 
         protected override void SetMovmentAnimations()
@@ -140,6 +148,8 @@ namespace HeroSiege.FEntity.Enemies
                 default:
                     break;
             }
+
+            sprite.Animations.CurrentAnimation.ResetAnimation();
         }
     }
 }

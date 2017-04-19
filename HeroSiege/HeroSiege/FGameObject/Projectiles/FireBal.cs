@@ -1,11 +1,5 @@
 ﻿using HeroSiege.FEntity;
 using HeroSiege.FTexture2D;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HeroSiege.FTexture2D.FAnimation;
-using HeroSiege.Manager;
 using HeroSiege.FTexture2D.SpriteEffect;
 
 namespace HeroSiege.FGameObject.Projectiles
@@ -45,9 +39,9 @@ namespace HeroSiege.FGameObject.Projectiles
             base.Update(delta);
         }
 
-        public override SpriteFX.EffectType GetCollisionFX()
+        public override EffectType GetCollisionFX()
         {
-            return SpriteFX.EffectType.Fire_Hit;
+            return EffectType.Fire_Hit;
         }
     }
 }
