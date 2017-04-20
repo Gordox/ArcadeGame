@@ -17,12 +17,12 @@ Enimy units:
 DeathKnight
 Dragon
 Goblin sappers
-Goblin Zepilin
+Goblin Zepilin - working on it (death animation left)
 Grunt
-Orge
+Orge - working on it (death animation left)
 Peon
-SKeleton
-AxeThrower - working on it
+Skeleton
+AxeThrower - working on it (death animation left)
 __________________________________
 Settings and game info:
 Volume?
@@ -53,10 +53,10 @@ __________________________________
 Buildnings:
 Hero castle - Working on
 Ballista (Deffends the hero tower) - Done
-Blockade for tower (will be the first to eat upp damage before the tower)
+Blockade for tower (will be the first to eat upp damage before the tower) - Done
 Shop
 Enemy tower - Done
-Enemy Spawner - Working on
+Enemy Spawner - Working on soon done
 __________________________________
 HUD / UI / GUI:
 

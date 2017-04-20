@@ -51,8 +51,10 @@
     <Compile Include="FEntity\Controllers\AIController.cs" />
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
     <Compile Include="FEntity\Enemies\Enemy.cs" />
+    <Compile Include="FEntity\Enemies\Orge.cs" />
     <Compile Include="FEntity\Enemies\TestEnemy.cs" />
     <Compile Include="FEntity\Enemies\Troll_Axe_Thrower.cs" />
+    <Compile Include="FEntity\Enemies\Zeppelin.cs" />
     <Compile Include="FEntity\Entity.cs" />
     <Compile Include="FEntity\Players\Mage.cs" />
     <Compile Include="FEntity\Players\Hero.cs" />
@@ -63,7 +65,9 @@
     <Compile Include="FGameObject\Projectiles\Axe.cs" />
     <Compile Include="FGameObject\Projectiles\BigCanonBal.cs" />
     <Compile Include="FGameObject\Projectiles\FireBal.cs" />
+    <Compile Include="FGameObject\Projectiles\FireCanonBall.cs" />
     <Compile Include="FGameObject\Projectiles\Harpon.cs" />
+    <Compile Include="FGameObject\Projectiles\Lightning_ball.cs" />
     <Compile Include="FGameObject\Projectiles\Projectile.cs" />
     <Compile Include="FTexture2D\FAnimation\Animation.cs" />
     <Compile Include="FTexture2D\FAnimation\Animations.cs" />

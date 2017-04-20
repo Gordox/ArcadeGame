@@ -44,7 +44,7 @@ namespace HeroSiege.FEntity.Enemies
             Stats.MaxHealth = 100;
             Stats.MaxMana = 1;
             Stats.visibilityRadius = 250;
-            Stats.Radius = 190;
+            Stats.Radius = 180;
         }
 
         protected override void AddSpriteAnimations()

@@ -108,7 +108,7 @@ namespace HeroSiege.AISystems
                 WaveCount = enemiesRemainingToSpawn = EnemysToSpawn();
                 if(spawners.Count > 0)
                     currentSpawner = spawners[rnd.Next(spawners.Count - 1)];
-                // EnemyType();
+                 EnemyType();
             }
         }
         //-----  -----//
@@ -132,10 +132,10 @@ namespace HeroSiege.AISystems
                     enemy = new Troll_Axe_Thrower(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range);
                     break;
                 case 1:
-                    //enemy = new WaterGolom(spawnPos, hp_multiplier);
+                    enemy = new Orge(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range);
                     break;
                 case 2:
-                    //enemy = new WaterGolom(spawnPos, hp_multiplier);
+                    enemy = new Zeppelin(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range);
                     break;
                 case 3:
                     //enemy = new WaterGolom(spawnPos, hp_multiplier);
@@ -147,7 +147,7 @@ namespace HeroSiege.AISystems
 
         private void EnemyType()
         {
-            type = rnd.Next(4);
+            type = rnd.Next(0,3); //Change later to 4
         }
 
         private int EnemysToSpawn()

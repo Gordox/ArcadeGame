@@ -24,6 +24,7 @@ namespace HeroSiege.FEntity
         public StatsData Stats { get; protected set; }
 
         public Vector2 velocity, projectileOffset;
+        List<Vector2> rangeDots;
 
         public Direction MovingDirection { get; set; }
         private Direction olddir;
@@ -41,6 +42,7 @@ namespace HeroSiege.FEntity
             this.velocity = Vector2.Zero;
             this.olddir = MovingDirection;
             Init();
+            this.rangeDots = calculateRangeCircle();
         }
 
 
@@ -87,7 +89,31 @@ namespace HeroSiege.FEntity
         }
         public void DrawRange(SpriteBatch SB)
         {
-            // Work out the minimum step necessary using trigonometry + sine approximation.
+            //// Work out the minimum step necessary using trigonometry + sine approximation.
+            //double angleStep = 1f / Stats.Radius;
+
+            //for (double angle = 0; angle < Math.PI * 2; angle += angleStep)
+            //{
+            //    int x = (int)Math.Round(Stats.Radius + Stats.Radius * Math.Cos(angle));
+            //    int y = (int)Math.Round(Stats.Radius + Stats.Radius * Math.Sin(angle));
+
+            //    SB.Draw(ResourceManager.GetTexture("BlackPixel"), new Vector2(position.X + x, position.Y + y), null, Color.Black, 0,
+            //        new Vector2(Stats.Radius, Stats.Radius),
+            //        1, SpriteEffects.None,0);
+            //}
+
+            for (int i = 0; i < rangeDots.Count; i++)
+            {
+                SB.Draw(ResourceManager.GetTexture("BlackPixel"), new Vector2(position.X + rangeDots[i].X, position.Y + rangeDots[i].Y), null, Color.Black, 0,
+                    new Vector2(Stats.Radius, Stats.Radius),
+                    1, SpriteEffects.None, 0);
+            }
+
+
+        }
+        private List<Vector2> calculateRangeCircle()
+        {
+            List<Vector2> temp = new List<Vector2>();
             double angleStep = 1f / Stats.Radius;
 
             for (double angle = 0; angle < Math.PI * 2; angle += angleStep)
@@ -95,12 +121,9 @@ namespace HeroSiege.FEntity
                 int x = (int)Math.Round(Stats.Radius + Stats.Radius * Math.Cos(angle));
                 int y = (int)Math.Round(Stats.Radius + Stats.Radius * Math.Sin(angle));
 
-                SB.Draw(ResourceManager.GetTexture("BlackPixel"), new Vector2(position.X + x, position.Y + y), null, Color.Black, 0,
-                    new Vector2(Stats.Radius, Stats.Radius),
-                    1, SpriteEffects.None,0);
+                temp.Add(new Vector2(x, y));
             }
-
-
+            return temp;
         }
 
         //----- NAME HERE -----//

@@ -2,6 +2,7 @@
 using HeroSiege.FGameObject;
 using HeroSiege.FGameObject.Projectiles;
 using HeroSiege.FTexture2D;
+using HeroSiege.FTexture2D.SpriteEffect;
 using HeroSiege.GameWorld;
 using HeroSiege.Manager;
 using HeroSiege.Tools;
@@ -149,6 +150,8 @@ namespace HeroSiege.FEntity.Buildings
                 targets.Clear();
             }
         }
+
+        public abstract EffectType GetDeathFX();
 
     }
 }

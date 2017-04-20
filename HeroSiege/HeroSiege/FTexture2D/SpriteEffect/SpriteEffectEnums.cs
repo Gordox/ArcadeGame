@@ -14,6 +14,11 @@ namespace HeroSiege.FTexture2D.SpriteEffect
         Frost_Hit,
         Brown_Hit,
         Fire_Hit,
+        Fire_Storm,
+        Burning,
+        Magic_Particle,
+        Soul_Spin,
+        Fire_Emit,
         NONE
     }
 }

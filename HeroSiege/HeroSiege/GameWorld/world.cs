@@ -457,6 +457,8 @@ namespace HeroSiege.GameWorld
 
             foreach (Building b in DeadBuildings)
             {
+                SpawnEffect(b.GetDeathFX(), b.Position);
+
                 Hitboxes.Remove(b.GetHitbox());
 
                 HeroBuildings.Remove(b);
@@ -488,16 +490,28 @@ namespace HeroSiege.GameWorld
             switch (type)
             {
                 case EffectType.Big_Explosion:
+                    fx.SetSize(64, 64);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Big_Explosion"), 0, 0, 64, 64, 16, 0.08f, new Point(8, 2), false, false)).SetAnimation("fx");
                     break;
                 case EffectType.Medium_Explosion:
+                    fx.SetSize(64, 64);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Medium_Explosion"), 0, 128, 62, 62, 6, 0.08f, new Point(3, 2), false, false)).SetAnimation("fx");
                     break;
                 case EffectType.Light_Magic_Explosion:
+                    fx.SetSize(64, 64);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Light_Magic_Explosion"), 196, 128, 62, 62, 6, 0.08f, new Point(3, 2), false, false)).SetAnimation("fx");
                     break;
                 case EffectType.Dark_Magic_Explosion:
+                    fx.SetSize(64, 64);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Dark_Magic_Explosion"), 0, 256, 62, 62, 6, 0.08f, new Point(6, 1), false, false)).SetAnimation("fx");
                     break;
                 case EffectType.Frost_Hit:
+                    fx.SetSize(32, 32);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Frost_Hit"), 384, 196, 32, 32, 5, 0.08f, new Point(2, 2), false, false)).SetAnimation("fx");
                     break;
                 case EffectType.Brown_Hit:
+                    fx.SetSize(32, 32);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Brown_Hit"), 384, 128, 32, 32, 4, 0.08f, new Point(2, 2), false, false)).SetAnimation("fx");
                     break;
                 case EffectType.Fire_Hit:
                     fx.SetSize(32, 32);

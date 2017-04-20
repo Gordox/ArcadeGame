@@ -290,12 +290,17 @@ namespace HeroSiege.FEntity.Enemies
         public void CreateProjectilesTowardsTarget(World parent, ProjectileType type)
         {
             Projectile temp = null;
+            int x = 0, y = 0;
             switch (type)
             {
                 case ProjectileType.Fire_Bal:
                     temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, MovingDirection);
                     break;
                 case ProjectileType.Lighing_bal:
+                    if (PlayerTarget != null)
+                        temp = new Lightning_ball(ResourceManager.GetTexture("Lighing_bal"), Position.X, Position.Y, 32, 32, PlayerTarget);
+                    else
+                        temp = new Lightning_ball(ResourceManager.GetTexture("Lighing_bal"), Position.X, Position.Y, 32, 32, BuildingTarget);
                     break;
                 case ProjectileType.Evil_Hand:
                     break;
@@ -303,9 +308,17 @@ namespace HeroSiege.FEntity.Enemies
                     break;
                 case ProjectileType.Lightning_Axe:
                     break;
+                case ProjectileType.Fire_Canon_Bal:
+                    x = ResourceManager.GetTexture("Fire_Canon_Bal").region.X;
+                    y = ResourceManager.GetTexture("Fire_Canon_Bal").region.Y;
+                    if (PlayerTarget != null)
+                        temp = new FireCanonBall("FireCanonBalAnimation", new FrameAnimation(ResourceManager.GetTexture("Fire_Canon_Bal"), x, y, 16, 16, 4, 0.05f, new Point(4, 1)), Position.X, Position.Y, 24, 24, PlayerTarget);
+                    else
+                        temp = new FireCanonBall("FireCanonBalAnimation", new FrameAnimation(ResourceManager.GetTexture("Fire_Canon_Bal"), x, y, 16, 16, 4, 0.05f, new Point(4, 1)), Position.X, Position.Y, 24, 24, BuildingTarget);
+                    break;
                 case ProjectileType.Normal_Axe:
-                    int x = ResourceManager.GetTexture("Normal_Axe").region.X;
-                    int y = ResourceManager.GetTexture("Normal_Axe").region.Y;
+                     x = ResourceManager.GetTexture("Normal_Axe").region.X;
+                     y = ResourceManager.GetTexture("Normal_Axe").region.Y;
                     if(PlayerTarget != null)
                         temp = new Axe("AxeAnimation", new FrameAnimation(ResourceManager.GetTexture("Normal_Axe"), x, y, 32, 32, 3, 0.08f, new Point(3, 1)), Position.X, Position.Y, 32, 32, PlayerTarget);
                     else

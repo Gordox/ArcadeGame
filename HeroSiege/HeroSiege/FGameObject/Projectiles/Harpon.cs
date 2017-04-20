@@ -38,6 +38,9 @@ namespace HeroSiege.FGameObject.Projectiles
             if (target != null)
                 UpdateMovingDirTowardsTarget();
 
+            if (target != null && !target.IsAlive)
+                target = null;
+
             base.Update(delta);
         }
 

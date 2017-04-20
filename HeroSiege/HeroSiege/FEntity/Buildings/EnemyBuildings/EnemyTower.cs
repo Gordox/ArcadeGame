@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HeroSiege.FTexture2D.SpriteEffect;
 
 namespace HeroSiege.FEntity.Buildings.EnemyBuildings
 {
@@ -35,6 +36,11 @@ namespace HeroSiege.FEntity.Buildings.EnemyBuildings
         public override bool LevelUp(float delta)
         {
             throw new NotImplementedException();
+        }
+
+        public override EffectType GetDeathFX()
+        {
+            return EffectType.Big_Explosion;
         }
     }
 }

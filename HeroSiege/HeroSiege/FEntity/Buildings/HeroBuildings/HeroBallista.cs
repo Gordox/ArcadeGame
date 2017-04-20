@@ -7,6 +7,7 @@ using HeroSiege.Manager;
 using HeroSiege.FTexture2D.FAnimation;
 using Microsoft.Xna.Framework;
 using HeroSiege.FGameObject;
+using HeroSiege.FTexture2D.SpriteEffect;
 
 namespace HeroSiege.FEntity.Buildings.HeroBuildings
 {
@@ -136,6 +137,9 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
             return true;
         }
 
-        
+        public override EffectType GetDeathFX()
+        {
+            return EffectType.Medium_Explosion;
+        }
     }
 }

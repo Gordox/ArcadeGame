@@ -1,4 +1,5 @@
 ﻿using HeroSiege.FTexture2D;
+using HeroSiege.FTexture2D.SpriteEffect;
 using HeroSiege.Manager;
 using Microsoft.Xna.Framework;
 using System;
@@ -43,6 +44,9 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
             return true;
         }
 
-        
+        public override EffectType GetDeathFX()
+        {
+            return EffectType.Big_Explosion;
+        }
     }
 }
