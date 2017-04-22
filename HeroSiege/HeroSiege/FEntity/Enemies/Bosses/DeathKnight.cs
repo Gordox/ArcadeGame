@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HeroSiege.FTexture2D;
-using HeroSiege.FGameObject;
-using Microsoft.Xna.Framework.Graphics;
 using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.Manager;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using HeroSiege.FGameObject;
 
-namespace HeroSiege.FEntity.Enemies
+namespace HeroSiege.FEntity.Enemies.Bosses
 {
-    class Orge : Enemy
+    class DeathKnight : Enemy
     {
         const float FRAME_DURATION_MOVEMNT = 0.08f;
         const float FRAME_DURATION_ATTACK = 0.1f;
         const float FRAME_DURATION_DEATH = 0.15f;
 
-        public Orge(float x, float y, float width, float height, AttackType attackType)
+        public DeathKnight(float x, float y, float width, float height, AttackType attackType)
             : base(null, x, y, width, height, attackType)
         {
             AddSpriteAnimations();
@@ -31,7 +31,7 @@ namespace HeroSiege.FEntity.Enemies
         public override void Init()
         {
             base.Init();
-            ProjectType = ProjectileType.Lighing_bal;
+            ProjectType = ProjectileType.Evil_Hand;
             AttackFrame = 3;
             AttackSpeed = 0.8f;
         }
@@ -49,22 +49,21 @@ namespace HeroSiege.FEntity.Enemies
         protected override void AddSpriteAnimations()
         {
             //--- Movment animation ---//
-            sprite.AddAnimation("MoveNorth",         new FrameAnimation(ResourceManager.GetTexture("Orge"),   0, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
-            sprite.AddAnimation("MoveNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("Orge"),  64, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
-            sprite.AddAnimation("MoveWestEast",      new FrameAnimation(ResourceManager.GetTexture("Orge"), 128, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
-            sprite.AddAnimation("MoveSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("Orge"), 192, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
-            sprite.AddAnimation("MoveSouth",         new FrameAnimation(ResourceManager.GetTexture("Orge"), 256, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveNorth",         new FrameAnimation(ResourceManager.GetTexture("Death_Knight"),   0, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("Death_Knight"),  64, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveWestEast",      new FrameAnimation(ResourceManager.GetTexture("Death_Knight"), 128, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("Death_Knight"), 192, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveSouth",         new FrameAnimation(ResourceManager.GetTexture("Death_Knight"), 256, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
 
             //--- Attck animation ---//
-            sprite.AddAnimation("AttckNorth",         new FrameAnimation(ResourceManager.GetTexture("Orge"),   0, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
-            sprite.AddAnimation("AttckNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("Orge"),  64, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
-            sprite.AddAnimation("AttckWestEast",      new FrameAnimation(ResourceManager.GetTexture("Orge"), 128, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
-            sprite.AddAnimation("AttckSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("Orge"), 192, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
-            sprite.AddAnimation("AttckSouth",         new FrameAnimation(ResourceManager.GetTexture("Orge"), 256, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckNorth",         new FrameAnimation(ResourceManager.GetTexture("Death_Knight"),   0, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("Death_Knight"),  64, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckWestEast",      new FrameAnimation(ResourceManager.GetTexture("Death_Knight"), 128, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("Death_Knight"), 192, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckSouth",         new FrameAnimation(ResourceManager.GetTexture("Death_Knight"), 256, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
 
             //--- Death animation ---//
-            sprite.AddAnimation("Death_1", new FrameAnimation(ResourceManager.GetTexture("Orge"), 0, 576, 64, 64, 3, FRAME_DURATION_DEATH, new Point(3, 1), false));
-            sprite.AddAnimation("Death_2", new FrameAnimation(ResourceManager.GetTexture("Orge"), 0, 640, 64, 64, 3, FRAME_DURATION_DEATH, new Point(3, 1), false));
+            sprite.AddAnimation("Death_1", new FrameAnimation(ResourceManager.GetTexture("Death_Knight"), 0, 576, 64, 64, 3, FRAME_DURATION_DEATH, new Point(3, 1), false));
 
         }
 
@@ -155,25 +154,10 @@ namespace HeroSiege.FEntity.Enemies
         protected override void Death()
         {
             base.Death();
-
             FrameAnimation temp;
-            SpriteEffects ef = SpriteEffects.None;
-            if (MovingDirection == Direction.North || MovingDirection == Direction.North_East || MovingDirection == Direction.North_West || MovingDirection == Direction.East)
-                temp = new FrameAnimation(ResourceManager.GetTexture("Orge"), 0, 576, 64, 64, 3, FRAME_DURATION_DEATH, new Point(3, 1), false);
-            else
-                temp = new FrameAnimation(ResourceManager.GetTexture("Orge"), 0, 640, 64, 64, 3, FRAME_DURATION_DEATH, new Point(3, 1), false);
+            temp = new FrameAnimation(ResourceManager.GetTexture("Death_Knight"), 0, 576, 64, 64, 3, FRAME_DURATION_DEATH, new Point(3, 1), false);
 
-            if (MovingDirection == Direction.North || MovingDirection == Direction.North_East || MovingDirection == Direction.East)
-                ef = SpriteEffects.None;
-            else if (MovingDirection == Direction.North_West || MovingDirection == Direction.West)
-                ef = SpriteEffects.FlipHorizontally;
-
-            else if (MovingDirection == Direction.South || MovingDirection == Direction.South_East || MovingDirection == Direction.East)
-                ef = SpriteEffects.None;
-            else if (MovingDirection == Direction.South_West || MovingDirection == Direction.West)
-                ef = SpriteEffects.FlipHorizontally;
-
-            Control.world.SpawnEffect("Death", temp, ef, Position, new Point(64, 64));
+            Control.world.SpawnEffect("Death", temp, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, Position, new Point(64, 64));
         }
     }
 }

@@ -23,6 +23,8 @@ namespace HeroSiege.FEntity.Players
         {
         }
 
+        int level;
+
         public override void Init()
         {
             base.Init();
@@ -35,6 +37,7 @@ namespace HeroSiege.FEntity.Players
         public override void Update(float delta)
         {
             base.Update(delta);
+            UpdateAnimation();
 
         }
         public void UpdatePlayerMovement(float delta, List<Rectangle> objects)

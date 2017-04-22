@@ -54,20 +54,23 @@ namespace HeroSiege.FEntity
         public override void Update(float delta)
         {
             base.Update(delta);
+
             CheckIsAlive();
 
             if (Control != null && IsAlive)
                 Control.Update(delta);
+
+            
         }
         protected void UpdateAnimation()
         {
-            if (olddir != MovingDirection && !isAttaking)
+            if (olddir != MovingDirection && !isAttaking && IsAlive)
             {
                 SetMovmentAnimations();
                 olddir = MovingDirection;
             }
 
-            if (isAttaking && sprite.Animations.CurrentAnimation.currentFrame >= AttackFrame)
+            if (isAttaking && sprite.Animations.CurrentAnimation.currentFrame >= AttackFrame && IsAlive)
             {
                 isAttaking = false;
                 SetMovmentAnimations();
@@ -126,7 +129,7 @@ namespace HeroSiege.FEntity
             return temp;
         }
 
-        //----- NAME HERE -----//
+        //----- Other -----//
         private void CheckIsAlive()
         {
             if (Stats.Health <= 0 && IsAlive)
@@ -134,6 +137,71 @@ namespace HeroSiege.FEntity
                 IsAlive = false;
                 Death();
             }
+        }
+        public void CalculateDirection(Entity target)
+        {
+
+           var movingDirection = new Vector2(target.Position.X - position.X, target.Position.Y - position.Y);
+            movingDirection.Normalize();
+            movingDirection = RoundValue(movingDirection);
+
+            if ((int)movingDirection.X == 0 && (int)movingDirection.Y == -1)
+                MovingDirection = Direction.North;
+            else if ((int)movingDirection.X == 0 && (int)movingDirection.Y == 1)
+                MovingDirection = Direction.South;
+            else if ((int)movingDirection.X == -1 && (int)movingDirection.Y == 0)
+                MovingDirection = Direction.West;
+            else if ((int)movingDirection.X == 1 && (int)movingDirection.Y == 0)
+                MovingDirection = Direction.East;
+            else if ((int)movingDirection.X == -1 && (int)movingDirection.Y == -1)
+                MovingDirection = Direction.North_West;
+            else if ((int)movingDirection.X == 1 && (int)movingDirection.Y == -1)
+                MovingDirection = Direction.North_East;
+            else if ((int)movingDirection.X == 1 && (int)movingDirection.Y == 1)
+                MovingDirection = Direction.South_East;
+            else if ((int)movingDirection.X == -1 && (int)movingDirection.Y == 1)
+                MovingDirection = Direction.South_West;
+        }
+        protected Vector2 RoundValue(Vector2 vector)
+        {
+            int tempX = 0;
+            int tempY = 0;
+
+            if (vector.X > 0)
+            {
+                if (vector.X - (int)vector.X >= 0.5)
+                    tempX = (int)Math.Ceiling(vector.X);
+                else
+                    tempX = (int)Math.Floor(vector.X);
+            }
+            else
+            {
+                if (vector.X - (int)vector.X >= 0.5)
+                    tempX = (int)Math.Ceiling(vector.X);
+                else
+                    tempX = (int)Math.Floor(vector.X);
+            }
+
+            if (vector.Y > 0)
+            {
+                if ((int)vector.Y - vector.Y >= 0.5)
+                    tempY = (int)Math.Floor(vector.Y);
+                else
+                    tempY = (int)Math.Ceiling(vector.Y);
+            }
+            else
+            {
+                if ((int)vector.Y - vector.Y >= 0.5)
+                    tempY = (int)Math.Floor(vector.Y);
+                else
+                    tempY = (int)Math.Ceiling(vector.Y);
+            }
+
+            return new Vector2(tempX, tempY);
+        }
+        public void ResetAnimation()
+        {
+            sprite.Animations.CurrentAnimation.ResetAnimation();
         }
 
         //----- Movment & Attack Animation -----//

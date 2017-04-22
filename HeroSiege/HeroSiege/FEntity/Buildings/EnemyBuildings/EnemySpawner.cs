@@ -36,5 +36,8 @@ namespace HeroSiege.FEntity.Buildings.EnemyBuildings
         {
             return EffectType.Big_Explosion;
         }
+
+
+
     }
 }

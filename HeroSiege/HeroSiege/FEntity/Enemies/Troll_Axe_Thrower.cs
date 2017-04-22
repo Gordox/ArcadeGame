@@ -151,5 +151,30 @@ namespace HeroSiege.FEntity.Enemies
 
             sprite.Animations.CurrentAnimation.ResetAnimation();
         }
+
+
+        protected override void Death()
+        {
+            base.Death();
+
+            FrameAnimation temp;
+            SpriteEffects ef = SpriteEffects.None;
+            if (MovingDirection == Direction.North || MovingDirection == Direction.North_East || MovingDirection == Direction.North_West || MovingDirection == Direction.East)
+                temp = new FrameAnimation(ResourceManager.GetTexture("Troll_Thrower"), 0, 576, 64, 64, 3, FRAME_DURATION_DEATH, new Point(3, 1), false);
+            else
+                temp = new FrameAnimation(ResourceManager.GetTexture("Troll_Thrower"), 0, 640, 64, 64, 3, FRAME_DURATION_DEATH, new Point(3, 1), false);
+
+            if (MovingDirection == Direction.North || MovingDirection == Direction.North_East || MovingDirection == Direction.East)
+                ef = SpriteEffects.None;
+            else if (MovingDirection == Direction.North_West || MovingDirection == Direction.West)
+                ef = SpriteEffects.FlipHorizontally;
+
+            else if (MovingDirection == Direction.South || MovingDirection == Direction.South_East || MovingDirection == Direction.East)
+                ef = SpriteEffects.None;
+            else if (MovingDirection == Direction.South_West || MovingDirection == Direction.West)
+                ef = SpriteEffects.FlipHorizontally;
+
+            Control.world.SpawnEffect("Death", temp, ef, Position, new Point(64, 64));
+        }
     }
 }

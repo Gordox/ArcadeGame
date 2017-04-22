@@ -14,15 +14,15 @@ Gnomish_Flying_Machine
 Knight
 __________________________________
 Enimy units:
-DeathKnight
+DeathKnight - Done
 Dragon
 Goblin sappers
-Goblin Zepilin - working on it (death animation left)
+Goblin Zepilin - Done
 Grunt
-Orge - working on it (death animation left)
+Orge - Done
 Peon
 Skeleton
-AxeThrower - working on it (death animation left)
+AxeThrower - Done
 __________________________________
 Settings and game info:
 Volume?
@@ -42,24 +42,24 @@ Shop
 Teleport to mini bosses - DONE
 mini bosses
 End boss
-UI
+UI - working on it
 __________________________________
 Systems:
 A*(Astar) - Done
 SpawnController - Working on (80% Done)
 SpriteFX - Done
-Particle
+Particle - working on it
 __________________________________
 Buildnings:
 Hero castle - Working on
 Ballista (Deffends the hero tower) - Done
-Blockade for tower (will be the first to eat upp damage before the tower) - Done
+Blockade for ballista - Done
 Shop
 Enemy tower - Done
-Enemy Spawner - Working on soon done
+Enemy Spawner - Done (might shoot projectiles towards the player, have not yet decide)
 __________________________________
 HUD / UI / GUI:
-
+HUD - Working on
 __________________________________
 Need to fix and do:
 Make a base class for the player hero and the enemies, called "Hero" & "Enemy" that inherent from entity - DONE

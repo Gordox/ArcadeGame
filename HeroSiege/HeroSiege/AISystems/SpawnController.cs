@@ -1,6 +1,7 @@
 ﻿using HeroSiege.FEntity.Buildings.EnemyBuildings;
 using HeroSiege.FEntity.Controllers;
 using HeroSiege.FEntity.Enemies;
+using HeroSiege.FEntity.Enemies.Bosses;
 using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.GameWorld;
 using HeroSiege.Manager;
@@ -32,7 +33,7 @@ namespace HeroSiege.AISystems
         private int CurrentWave;
         private int TotalSpawned;
         private bool NextWave;
-        int type = 0;
+        int type = 2;
 
         bool allSpawnersDead;
 
@@ -53,7 +54,7 @@ namespace HeroSiege.AISystems
 
         private void InitWaveSystem()
         {
-            CurrentWave = 0;
+            CurrentWave = 2;
             TotalSpawned = 0;
             timer = 0;
             NextWave = true;
@@ -108,7 +109,7 @@ namespace HeroSiege.AISystems
                 WaveCount = enemiesRemainingToSpawn = EnemysToSpawn();
                 if(spawners.Count > 0)
                     currentSpawner = spawners[rnd.Next(spawners.Count - 1)];
-                 EnemyType();
+                 //EnemyType();
             }
         }
         //-----  -----//
@@ -169,6 +170,10 @@ namespace HeroSiege.AISystems
                 timer = 0;
                 Console.WriteLine("Next wave");
             }
+
+            DeathKnight deathKnight = new DeathKnight(spawner.Position.X, spawner.Position.Y, 64, 64, AttackType.Range);
+            deathKnight.SetControl(new AIController(gameWorld, deathKnight));
+            gameWorld.Enemies.Add(deathKnight);
         }
     }
 }

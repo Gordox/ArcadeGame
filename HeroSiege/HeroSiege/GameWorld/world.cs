@@ -19,12 +19,13 @@ using HeroSiege.FGameObject.Projectiles;
 using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.FTexture2D.SpriteEffect;
 using HeroSiege.Systems;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace HeroSiege.GameWorld
 {
     class World
     {
-        GameSettings gameSettings;
+        public GameSettings gameSettings { get; private set; }
 
         SpawnController spawnController;
 
@@ -34,6 +35,7 @@ namespace HeroSiege.GameWorld
 
         //----- Entities -----//
         public List<Entity> Enemies { get; private set; }
+        public List<Entity> EnemieBosses { get; private set; }
         private List<Entity> deadEnimies;
 
         public Hero PlayerOne { get; private set; }
@@ -79,6 +81,7 @@ namespace HeroSiege.GameWorld
         public void InitEntitys()
         {
             Enemies = new List<Entity>();
+            EnemieBosses = new List<Entity>();
             deadEnimies = new List<Entity>();
             GameObjects = new List<GameObject>();
             EnemyObjects = new List<GameObject>();
@@ -299,6 +302,14 @@ namespace HeroSiege.GameWorld
                 if(!enemy.IsAlive)
                     deadEnimies.Add(enemy);
             }
+
+            foreach (var boss in EnemieBosses)
+            {
+                boss.Update(delta);
+
+                if (!boss.IsAlive)
+                    deadEnimies.Add(boss);
+            }
         }
         private void UpdateEnemyBuildings(float delta)
         {
@@ -342,6 +353,12 @@ namespace HeroSiege.GameWorld
             foreach (GameObject obj in GameObjects)
             {
                 foreach (Entity e in Enemies)
+                {
+                    if (obj is Projectile)
+                        UpdateProjectileCollision((Projectile)obj, e);
+                }
+
+                foreach (Entity e in EnemieBosses)
                 {
                     if (obj is Projectile)
                         UpdateProjectileCollision((Projectile)obj, e);
@@ -452,6 +469,7 @@ namespace HeroSiege.GameWorld
             foreach (Entity e in deadEnimies)
             {
                 Enemies.Remove(e);
+                EnemieBosses.Remove(e);
             }
             deadEnimies.Clear();
 
@@ -517,6 +535,26 @@ namespace HeroSiege.GameWorld
                     fx.SetSize(32, 32);
                     fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Fire_Hit"), 448, 128, 32, 32, 4, 0.08f, new Point(2, 2), false, false)).SetAnimation("fx");
                     break;
+                case EffectType.Fire_Storm:
+                    fx.SetSize(64, 64);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Fire_Storm"), 0, 0, 64, 64, 10, 0.08f, new Point(5, 2), false, false)).SetAnimation("fx");
+                    break;
+                case EffectType.Burning:
+                    fx.SetSize(32, 32);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Burning"), 0, 128, 32, 32, 6, 0.08f, new Point(6, 1), false, false)).SetAnimation("fx");
+                    break;
+                case EffectType.Magic_Particle:
+                    fx.SetSize(32, 32);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Magic_Particle"), 0, 160, 32, 32, 6, 0.08f, new Point(6, 1), false, false)).SetAnimation("fx");
+                    break;
+                case EffectType.Soul_Spin:
+                    fx.SetSize(32, 32);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Soul_Spin"), 0, 192, 32, 32, 5, 0.08f, new Point(5, 1), false, false)).SetAnimation("fx");
+                    break;
+                case EffectType.Fire_Emit:
+                    fx.SetSize(32, 32);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Fire_Emit"), 0, 224, 32, 32, 3, 0.08f, new Point(3, 1), false, false)).SetAnimation("fx");
+                    break;
                 case EffectType.NONE:
                     FXPool.ReleaseObject(fx);
                     return;
@@ -524,6 +562,23 @@ namespace HeroSiege.GameWorld
                     FXPool.ReleaseObject(fx);
                     return;
             }
+
+            var sx = fx.Size * 0.5f;
+            fx.DrawOffset = new Vector2(sx.X, sx.Y);
+            Effects.Add(fx);
+        }
+
+        public void SpawnEffect(string name, FrameAnimation animation, SpriteEffects effect, Vector2 pos, Point size)
+        {
+            var fx = FXPool.GetObject();
+            fx.SetPosition(pos);
+            fx.ZIndex = 0.023f;
+            fx.Color = Color.White;
+
+            fx.Effect = effect;
+            fx.SetSize(size.X, size.Y);
+            fx.AddAnimation(name, animation).SetAnimation(name);
+
             var sx = fx.Size * 0.5f;
             fx.DrawOffset = new Vector2(sx.X, sx.Y);
             Effects.Add(fx);

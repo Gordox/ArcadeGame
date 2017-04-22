@@ -115,7 +115,8 @@ namespace HeroSiege.FEntity.Enemies
         //----- Draws -----//
         public override void Draw(SpriteBatch SB)
         {
-            base.Draw(SB);
+            if(IsAlive)
+                base.Draw(SB);
 
             if (DevTools.DevDebugMode || DevTools.DevDrawAIPath)
                 DrawPath(SB, Position, waypoints.ToList(), Color.Red, 5);
@@ -158,6 +159,10 @@ namespace HeroSiege.FEntity.Enemies
         //----- Methos and functions ----//
         public void SetAttackAnimation() { SetAttckAnimations(); }
         public void SetMovmentAnimation() { SetMovmentAnimations(); }
+        public FrameAnimation GetCurrentAnimation
+        {
+            get { return (FrameAnimation)sprite.Animations.CurrentAnimation; }
+        }
         public int GetCurrentFrame
         {
             get { return sprite.Animations.CurrentAnimation.currentFrame; }
@@ -303,6 +308,10 @@ namespace HeroSiege.FEntity.Enemies
                         temp = new Lightning_ball(ResourceManager.GetTexture("Lighing_bal"), Position.X, Position.Y, 32, 32, BuildingTarget);
                     break;
                 case ProjectileType.Evil_Hand:
+                    if (PlayerTarget != null)
+                        temp = new EvilHand(ResourceManager.GetTexture("Evil_Hand"), Position.X, Position.Y, 32, 32, PlayerTarget);
+                    else
+                        temp = new EvilHand(ResourceManager.GetTexture("Evil_Hand"), Position.X, Position.Y, 32, 32, BuildingTarget);
                     break;
                 case ProjectileType.Dark_Eye:
                     break;

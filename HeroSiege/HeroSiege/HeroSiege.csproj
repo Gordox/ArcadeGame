@@ -50,6 +50,7 @@
     <Compile Include="FEntity\Controllers\Control.cs" />
     <Compile Include="FEntity\Controllers\AIController.cs" />
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
+    <Compile Include="FEntity\Enemies\Bosses\DeathKnight.cs" />
     <Compile Include="FEntity\Enemies\Enemy.cs" />
     <Compile Include="FEntity\Enemies\Orge.cs" />
     <Compile Include="FEntity\Enemies\TestEnemy.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="FGameObject\Portal.cs" />
     <Compile Include="FGameObject\Projectiles\Axe.cs" />
     <Compile Include="FGameObject\Projectiles\BigCanonBal.cs" />
+    <Compile Include="FGameObject\Projectiles\EvilHand.cs" />
     <Compile Include="FGameObject\Projectiles\FireBal.cs" />
     <Compile Include="FGameObject\Projectiles\FireCanonBall.cs" />
     <Compile Include="FGameObject\Projectiles\Harpon.cs" />
@@ -72,6 +74,8 @@
     <Compile Include="FTexture2D\FAnimation\Animation.cs" />
     <Compile Include="FTexture2D\FAnimation\Animations.cs" />
     <Compile Include="FTexture2D\FAnimation\FrameAnimation.cs" />
+    <Compile Include="FTexture2D\ParticleEffect\Particle.cs" />
+    <Compile Include="FTexture2D\ParticleEffect\ParticleEngine.cs" />
     <Compile Include="FTexture2D\Sprite.cs" />
     <Compile Include="FTexture2D\SpriteEffect\IPoolable.cs" />
     <Compile Include="FTexture2D\SpriteEffect\SpriteEffectEnums.cs" />
@@ -82,7 +86,10 @@
     <Compile Include="FGameObject\GameObject.cs" />
     <Compile Include="GameWorld\map\TileTypes.cs" />
     <Compile Include="GameWorld\World.cs" />
+    <Compile Include="InterFace\GUI\Button.cs" />
+    <Compile Include="InterFace\GUI\HUD.cs" />
     <Compile Include="InterFace\GUI\Inventory.cs" />
+    <Compile Include="InterFace\IUI.cs" />
     <Compile Include="Manager\ResourceManager.cs" />
     <Compile Include="Manager\Resource\FontResource.cs" />
     <Compile Include="Manager\Resource\SoundResource.cs" />
@@ -130,7 +137,7 @@
     <Folder Include="FGameObject\Items\Armor\" />
     <Folder Include="FGameObject\Items\Weapon\" />
     <Folder Include="Globals\" />
-    <Folder Include="InterFace\UI\" />
+    <Folder Include="InterFace\UI\Menu\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

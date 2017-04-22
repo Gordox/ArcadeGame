@@ -2,6 +2,7 @@
 using HeroSiege.FEntity.Buildings;
 using HeroSiege.FGameObject;
 using HeroSiege.GameWorld;
+using HeroSiege.InterFace.GUI;
 using HeroSiege.Manager;
 using HeroSiege.Tools;
 using Microsoft.Xna.Framework;
@@ -18,12 +19,15 @@ namespace HeroSiege.Render
         public Camera2D Camera { get; private set; }
         public World World { get; private set; }
         private GraphicsDeviceArcade graphicsDev;
+        private HUD playerOneHUD;
 
         public WorldRender(World world, GraphicsDeviceArcade graphicsDev)
         {
             this.Camera = new Camera2D(graphicsDev.Viewport);
             this.World = world;
             this.graphicsDev = graphicsDev;
+
+            playerOneHUD = new HUD(world.gameSettings, graphicsDev.Viewport, world.PlayerOne, PlayerIndex.One);
         }
 
         //----- Updates -----//
@@ -77,8 +81,9 @@ namespace HeroSiege.Render
 
             //UI
             SB.Begin();
+            playerOneHUD.Draw(SB);
 
-            
+
             DebugTextDraw(SB);
 
             SB.End();
@@ -94,6 +99,12 @@ namespace HeroSiege.Render
         private void DrawEnemies(SpriteBatch SB)
         {
             foreach (Entity e in World.Enemies)
+            {
+                if (e != null)
+                    e.Draw(SB);
+            }
+
+            foreach (Entity e in World.EnemieBosses)
             {
                 if (e != null)
                     e.Draw(SB);
@@ -126,7 +137,7 @@ namespace HeroSiege.Render
                     obj.Draw(SB);
             }
         }
-
+   
         private void DrawEffects(SpriteBatch SB)
         {
             foreach (var obj in World.Effects)

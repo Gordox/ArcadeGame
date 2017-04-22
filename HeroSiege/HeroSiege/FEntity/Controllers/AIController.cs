@@ -44,6 +44,8 @@ namespace HeroSiege.FEntity.Controllers
             }
 
             UpdateBehavior(delta);
+
+            
         }
 
         private void UpdateBehavior(float delta)
@@ -66,6 +68,7 @@ namespace HeroSiege.FEntity.Controllers
             if(!isPlayerInRange(new List<Hero>() { world.PlayerOne, world.PlayerTwo }))
             {
                 enemy.PlayerTarget = null;
+                hasTarget = false;
             }
         }
 
@@ -80,12 +83,12 @@ namespace HeroSiege.FEntity.Controllers
                 enemy.Astar(world.Map, new Point((int)enemy.PlayerTarget.Position.X, (int)enemy.PlayerTarget.Position.Y));
                 pathTimer = 0;
             }
+            enemy.SetPauseAnimation = false;
         }
         private void SetDestinationToCastle()
         {
-
-
-            if(enemy.havePath == false)
+            enemy.SetPauseAnimation = false;
+            if (enemy.havePath == false)
             {
                 enemy.Astar(world.Map, new Point((int)world.Map.HeroCastle.X,
                                                            (int)world.Map.HeroCastle.Y));
@@ -171,13 +174,21 @@ namespace HeroSiege.FEntity.Controllers
             if (targetTimer > enemy.AttackSpeed && !enemy.isAttaking)
             {
                 enemy.isAttaking = true;
+                if(enemy.PlayerTarget != null)
+                    enemy.CalculateDirection(enemy.PlayerTarget);
+                else
+                    enemy.CalculateDirection(enemy.BuildingTarget);
                 enemy.SetAttackAnimation();
+                enemy.ResetAnimation();
             }
+            if (enemy.isAttaking)
+                enemy.SetPauseAnimation = false;
+
             if (enemy.isAttaking && enemy.GetCurrentFrame == enemy.GetAttackFrame)
             {
                 enemy.CreateProjectilesTowardsTarget(world, enemy.ProjectType);
                 enemy.isAttaking = false;
-                enemy.SetMovmentAnimation();
+                enemy.SetPauseAnimation = true;               
                 hasTarget = false;
                 enemy.PlayerTarget = null;
                 targetTimer = 0;

@@ -55,15 +55,15 @@ namespace HeroSiege.FEntity.Players
             Stats = new StatsData();
             Stats.MaxSpeed = 400;
             Stats.Speed = 200;
-            Stats.MaxHealth = 10000;
-            Stats.Mana = 1;
+            Stats.MaxHealth = 100;
+            Stats.MaxMana = 1;
             Stats.Radius = 200;
         }
 
 
         public override void Update(float delta)
         {
-            UpdateAnimation();
+            
             base.Update(delta);
         }
 
@@ -163,10 +163,10 @@ namespace HeroSiege.FEntity.Players
         public override void BlueButton(World parent)
         {
             base.BlueButton(parent);
-            if (!isAttaking)
+            if (!isAttaking && IsAlive)
             {
                 SetAttckAnimations();
-                sprite.Animations.CurrentAnimation.ResetAnimation();
+                ResetAnimation();
                 isAttaking = true;
 
                 GetTargets(parent.Enemies);

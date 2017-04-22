@@ -1,5 +1,6 @@
 ﻿using HeroSiege.FGameObject;
 using HeroSiege.FTexture2D.FAnimation;
+using HeroSiege.FTexture2D.SpriteEffect;
 using HeroSiege.Manager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -61,6 +62,8 @@ namespace HeroSiege.FEntity.Enemies
             sprite.AddAnimation("AttckSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("Zeppelin"), 216, 0, 72, 72, 2, FRAME_DURATION_MOVEMNT, new Point(1, 2)));
             sprite.AddAnimation("AttckSouth",         new FrameAnimation(ResourceManager.GetTexture("Zeppelin"), 288, 0, 72, 72, 2, FRAME_DURATION_MOVEMNT, new Point(1, 2)));
 
+
+            //var ass = sprite.Animations.CurrentAnimation;
             //--- Death animation ---//
             //NONE
 
@@ -147,6 +150,13 @@ namespace HeroSiege.FEntity.Enemies
             }
 
             sprite.Animations.CurrentAnimation.ResetAnimation();
+        }
+
+        protected override void Death()
+        {
+            base.Death();
+
+            Control.world.SpawnEffect(EffectType.Medium_Explosion, Position);
         }
     }
 }

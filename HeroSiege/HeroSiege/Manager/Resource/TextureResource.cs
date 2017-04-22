@@ -20,6 +20,8 @@ namespace HeroSiege.Manager.Resource
         private Texture2D heroBuildings, enemieBuildnings, etcBuildings, heroBalista;
         //Magic and Missiels
         private Texture2D explosionSprite, projectileSprite, effecSprite;
+        //UI
+        private Texture2D hudTexture;
         //Other
         private Texture2D blackPixel, whitePixel;
         //Debug
@@ -69,6 +71,9 @@ namespace HeroSiege.Manager.Resource
             projectileSprite = content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\AttacksSprites");
             explosionSprite =  content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Explosion");
 
+            //UI
+            hudTexture = content.Load<Texture2D>(@"Assets\Texture\UI\Console\UI-HUD");
+
             //Other
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
@@ -91,7 +96,7 @@ namespace HeroSiege.Manager.Resource
             textureRegion["DebugRange"] = new TextureRegion(debugRange, 0, 0, 64, 64);
 
             //UI
-
+            textureRegion["HUDTexture"] = new TextureRegion(hudTexture, 0, 0, hudTexture.Width, hudTexture.Height);
             //Tiles
             AddSpriteSheetRegionsToDict(BASE_LAYER_NAME, tileTextureSummer);
 
