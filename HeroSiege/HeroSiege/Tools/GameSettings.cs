@@ -27,11 +27,18 @@ namespace HeroSiege.Tools
         Hell
     }
 
+    public enum GameMode
+    {
+        singlePlayer,
+        Multiplayer
+    }
+
     public class GameSettings
     {
         public CharacterType playerOne { get; set; }
         public CharacterType playerTwo { get; set; }
         public Difficult GameDifficulty { get; set; }
+        public GameMode GameMode { get; set; }
 
         public string MapName { get; set; }
 
@@ -39,6 +46,7 @@ namespace HeroSiege.Tools
 
         public GameSettings()
         {
+            GameMode = GameMode.singlePlayer;
             playerOne = CharacterType.None;
             playerTwo = CharacterType.None;
             MasterVolym = 0.55f;

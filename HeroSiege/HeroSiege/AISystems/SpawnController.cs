@@ -33,7 +33,7 @@ namespace HeroSiege.AISystems
         private int CurrentWave;
         private int TotalSpawned;
         private bool NextWave;
-        int type = 2;
+        int type = 0;
 
         bool allSpawnersDead;
 
@@ -109,7 +109,7 @@ namespace HeroSiege.AISystems
                 WaveCount = enemiesRemainingToSpawn = EnemysToSpawn();
                 if(spawners.Count > 0)
                     currentSpawner = spawners[rnd.Next(spawners.Count - 1)];
-                 //EnemyType();
+                 EnemyType();
             }
         }
         //-----  -----//

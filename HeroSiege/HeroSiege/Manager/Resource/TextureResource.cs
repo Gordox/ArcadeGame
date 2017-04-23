@@ -8,7 +8,7 @@ namespace HeroSiege.Manager.Resource
 {
     public class TextureResource
     {
-        private Dictionary<string, TextureRegion> textureRegion; // Used for all the rest f the textures
+        private Dictionary<string, TextureRegion> textureRegion; // Used for all the rest of the textures
         private Dictionary<Tuple<string, int>, TextureRegion> tileTextureRegion; // Used only to store tile texture region
         //Tiles
         private Texture2D tileTextureSummer;
@@ -21,7 +21,7 @@ namespace HeroSiege.Manager.Resource
         //Magic and Missiels
         private Texture2D explosionSprite, projectileSprite, effecSprite;
         //UI
-        private Texture2D hudTexture;
+        private Texture2D hudTexture, xpbarLayer_1, xpbarLayer_2, basicIcons;
         //Other
         private Texture2D blackPixel, whitePixel;
         //Debug
@@ -71,10 +71,15 @@ namespace HeroSiege.Manager.Resource
             projectileSprite = content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\AttacksSprites");
             explosionSprite =  content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Explosion");
 
-            //UI
+            //--- UI ---//
+            //HUD
             hudTexture = content.Load<Texture2D>(@"Assets\Texture\UI\Console\UI-HUD");
+            //Bars
+            xpbarLayer_1 = content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_1");
+            xpbarLayer_2 = content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_2");
+            //Icons
+            basicIcons = content.Load<Texture2D>(@"Assets\Texture\UI\Icons\BasicIcons");
 
-            //Other
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
             //Add all textures and sprite to Dict
@@ -96,7 +101,11 @@ namespace HeroSiege.Manager.Resource
             textureRegion["DebugRange"] = new TextureRegion(debugRange, 0, 0, 64, 64);
 
             //UI
-            textureRegion["HUDTexture"] = new TextureRegion(hudTexture, 0, 0, hudTexture.Width, hudTexture.Height);
+            textureRegion["HUDTexture"] =   new TextureRegion(hudTexture,   0, 0, hudTexture.Width,   hudTexture.Height);
+            textureRegion["XpBarLayer_1"] = new TextureRegion(xpbarLayer_1, 0, 0, xpbarLayer_1.Width, xpbarLayer_1.Height);
+            textureRegion["XpBarLayer_2"] = new TextureRegion(xpbarLayer_2, 0, 0, xpbarLayer_2.Width, xpbarLayer_2.Height);
+            textureRegion["BasicIcons"] =   new TextureRegion(basicIcons,   0, 0, basicIcons.Width,   basicIcons.Height);
+
             //Tiles
             AddSpriteSheetRegionsToDict(BASE_LAYER_NAME, tileTextureSummer);
 

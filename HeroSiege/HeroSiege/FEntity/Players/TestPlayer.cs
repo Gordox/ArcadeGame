@@ -52,12 +52,14 @@ namespace HeroSiege.FEntity.Players
 
         protected override void InitStats()
         {
-            Stats = new StatsData();
+            base.InitStats();
             Stats.MaxSpeed = 400;
             Stats.Speed = 200;
             Stats.MaxHealth = 100;
             Stats.MaxMana = 1;
             Stats.Radius = 200;
+
+  
         }
 
 

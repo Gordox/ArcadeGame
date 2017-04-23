@@ -137,6 +137,8 @@ namespace HeroSiege.FEntity
                 IsAlive = false;
                 Death();
             }
+            if (Stats.Health <= 0)
+                Stats.Health = 0;
         }
         public void CalculateDirection(Entity target)
         {

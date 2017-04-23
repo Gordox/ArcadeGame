@@ -16,18 +16,76 @@ namespace HeroSiege.Render
 {
     class WorldRender
     {
-        public Camera2D Camera { get; private set; }
+        GameSettings settings;
+
         public World World { get; private set; }
         private GraphicsDeviceArcade graphicsDev;
-        private HUD playerOneHUD;
+        private HUD playerOneHUD, playerTwoHUD;
 
-        public WorldRender(World world, GraphicsDeviceArcade graphicsDev)
+        public Camera2D Camera { get; private set; }
+        public Camera2D PlayerOneCamera { get; private set; }
+        public Camera2D PlayerTwoCamera { get; private set; }
+
+        private Viewport singlePlayerView, playerOneView, playerTwoView;
+
+        public WorldRender(GameSettings gameSettings, World world, GraphicsDeviceArcade graphicsDev)
         {
-            this.Camera = new Camera2D(graphicsDev.Viewport);
+            this.settings = gameSettings;
             this.World = world;
             this.graphicsDev = graphicsDev;
 
-            playerOneHUD = new HUD(world.gameSettings, graphicsDev.Viewport, world.PlayerOne, PlayerIndex.One);
+            InitCameraAndViewPorts(graphicsDev);
+            InitHUD();
+        }
+
+        //----- Initiator -----//
+        private void InitCameraAndViewPorts(GraphicsDeviceArcade graphicsDev)
+        {
+            switch (settings.GameMode)
+            {
+                case GameMode.singlePlayer:
+                    //Init view
+                    singlePlayerView = graphicsDev.Viewport;
+                    this.Camera = new Camera2D(singlePlayerView);
+                    //Init camera
+                    break;
+                case GameMode.Multiplayer:
+                    //Init view
+                    singlePlayerView = graphicsDev.Viewport;
+                    playerOneView = singlePlayerView;
+                    playerTwoView = singlePlayerView;
+
+                    playerOneView.Width = playerOneView.Width / 2;
+                    playerTwoView.Width = playerTwoView.Width / 2;
+                    playerTwoView.X = playerOneView.Width;
+
+                    //Init camera
+                    this.PlayerOneCamera = new Camera2D(playerOneView);
+                    this.PlayerTwoCamera = new Camera2D(playerTwoView);
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void InitHUD()
+        {
+            switch (settings.GameMode)
+            {
+                case GameMode.singlePlayer:
+                    if(World.PlayerOne != null)
+                        playerOneHUD = new HUD(World.gameSettings, singlePlayerView, World.PlayerOne, PlayerIndex.One);
+                    //if (World.PlayerOne != null)
+                    //    playerOneHUD = new HUD(World.gameSettings, singlePlayerView, World.PlayerTwo, PlayerIndex.Two);
+                    break;
+                case GameMode.Multiplayer:
+                    if (World.PlayerOne != null)
+                        playerOneHUD = new HUD(World.gameSettings, playerOneView, World.PlayerOne, PlayerIndex.One);
+                    if (World.PlayerTwo != null)
+                        playerTwoHUD = new HUD(World.gameSettings, playerTwoView, World.PlayerTwo, PlayerIndex.Two);
+                    break;
+                default:
+                    break;
+            }
         }
 
         //----- Updates -----//
@@ -38,19 +96,80 @@ namespace HeroSiege.Render
 
         private void CameraUpdate()
         {
-            Camera.Position = World.PlayerOne.Position;
-            Camera.Update();
+            switch (settings.GameMode)
+            {
+                case GameMode.singlePlayer:
+                    if(World.PlayerOne != null)
+                        Camera.Position = World.PlayerOne.Position;
+                    //if (World.PlayerTwo != null)
+                    //    Camera.Position = World.PlayerTwo.Position;
+                    Camera.Update();
+                    break;
+                case GameMode.Multiplayer:
+                    PlayerOneCamera.Position = World.PlayerOne.Position;
+                    PlayerTwoCamera.Position = World.PlayerTwo.Position;
+
+                    PlayerOneCamera.Update();
+                    PlayerTwoCamera.Update();
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         //----- Draws -----//
         public void Draw(SpriteBatch SB)
+        {
+
+            switch (settings.GameMode)
+            {
+                case GameMode.singlePlayer:                 
+                    DrawScenne(SB, Camera);
+                    break;
+                case GameMode.Multiplayer:
+                    graphicsDev.Viewport = playerOneView;
+                    DrawScenne(SB, PlayerOneCamera);
+
+                    graphicsDev.Viewport = playerTwoView;
+                    DrawScenne(SB, PlayerTwoCamera);
+
+                    graphicsDev.Viewport = singlePlayerView;
+                    break;
+                default:
+                    break;
+            }
+
+            //UI
+            SB.Begin();
+
+            switch (settings.GameMode)
+            {
+                case GameMode.singlePlayer:
+                    playerOneHUD.Draw(SB);
+                    break;
+                case GameMode.Multiplayer:
+                    playerOneHUD.Draw(SB);
+                    playerTwoHUD.Draw(SB);
+                    break;
+                default:
+                    break;
+            }
+
+            DebugTextDraw(SB);
+
+            SB.End();
+        }
+
+
+        private void DrawScenne(SpriteBatch SB, Camera2D camera)
         {
             //World
             SB.Begin(SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
                 SamplerState.PointClamp,
                 null, null, null,
-                Camera.Transform);
+                camera.Transform);
 
             //--- World map ---//
             World.Map.DrawMapTexture(SB);
@@ -78,16 +197,8 @@ namespace HeroSiege.Render
 
             SB.End();
 
-
-            //UI
-            SB.Begin();
-            playerOneHUD.Draw(SB);
-
-
-            DebugTextDraw(SB);
-
-            SB.End();
         }
+
 
         private void DrawPlayers(SpriteBatch SB)
         {
@@ -170,7 +281,8 @@ namespace HeroSiege.Render
                 }
 
                 //----- Camera pos -----//
-                SB.DrawString(ResourceManager.GetFont("Arial_Font"), "Camera: " + Camera.Position, new Vector2(1600/2, 0), Color.Black);
+                if(Camera != null)
+                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "Camera: " + Camera.Position, new Vector2(1600/2, 0), Color.Black);
 
 
             }

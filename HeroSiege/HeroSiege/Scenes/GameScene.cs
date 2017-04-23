@@ -22,7 +22,7 @@ namespace HeroSiege.Scenes
         public override void Init()
         {
             this.World = new World(GameSettings);
-            this.Renderer = new WorldRender(World, Graphics);
+            this.Renderer = new WorldRender(GameSettings, World, Graphics);
         }
 
         public override void Update(float delta, bool otherSceneHasFocus, bool coveredByOtherScene)

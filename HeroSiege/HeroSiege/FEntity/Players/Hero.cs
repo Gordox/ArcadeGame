@@ -14,6 +14,10 @@ namespace HeroSiege.FEntity.Players
 {
     class Hero : Entity
     {
+        const float START_XP = 100;
+        const int START_GOLD = 300;
+
+        private int gold;
 
         public List<Entity> Targets { get; protected set; }
         protected int totalTargets;
@@ -23,8 +27,6 @@ namespace HeroSiege.FEntity.Players
         {
         }
 
-        int level;
-
         public override void Init()
         {
             base.Init();
@@ -32,13 +34,21 @@ namespace HeroSiege.FEntity.Players
             totalTargets = 1;
             Targets = new List<Entity>();
         }
+        protected override void InitStats()
+        {
+            base.InitStats();
+            Stats = new StatsData();
+            Stats.Level = 1;
+            Stats.MaxXP = START_XP;
+            Stats.XP = 0;
+        }
 
         //----- Updates-----//
         public override void Update(float delta)
         {
             base.Update(delta);
             UpdateAnimation();
-
+            CheckXP();
         }
         public void UpdatePlayerMovement(float delta, List<Rectangle> objects)
         {
@@ -61,6 +71,26 @@ namespace HeroSiege.FEntity.Players
             if (!CheckCollision(new Rectangle((int)position.X, (int)futurePos.Y, this.GetBounds().Width, this.GetBounds().Height), objects))
                 position.Y += velocity.Y * delta;
         }
+
+        //----- XP handeling -----//
+        protected void LevelUP()
+        {
+            Stats.Level++;
+            Stats.MaxXP = Stats.MaxXP + Stats.MaxXP / 2;
+            Stats.XP = 0;
+        }
+        protected void CheckXP()
+        {
+            if (Stats.XP >= Stats.MaxXP)
+                LevelUP();
+        }
+        public void IncreaseXP(float xpValue) { Stats.XP += xpValue; }
+
+        //----- Shoping -----//
+
+
+        //----- Inventory -----//
+
 
         //----- Movment -----//
         public virtual void MoveUp(float delta) { velocity.Y = -Stats.Speed; }

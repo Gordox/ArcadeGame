@@ -27,6 +27,13 @@ namespace HeroSiege.FEntity
         private float speed;
         public float Speed { get { return speed; } set { speed = MathHelper.Clamp(value, 0, MaxSpeed); } }
 
+        public float XP { get; set; }
+
+        private  float maxXP;
+        public float MaxXP { get { return maxXP; } set { maxXP = value; XP = value; } }
+
+        public int Level { get; set; }
+
         //ETC
         public float Damage { get; set; }
 
