@@ -7,14 +7,14 @@ namespace HeroSiege.FGameObject.Projectiles
     class FireBal : Projectile
     {
         const float LIFE_TIME = 1.5f; //5 sec
-        const float DAMAGE = 20;
+        const int DAMAGE = 20;
 
-        public FireBal(TextureRegion region, float x, float y, float width, float height, Entity target)
-            : base(region, x, y, width, height, target)
+        public FireBal(TextureRegion region, float x, float y, float width, float height, Entity target, int dmg = 0)
+            : base(region, x, y, width, height, target, dmg)
         {
         }
-        public FireBal(TextureRegion region, float x, float y, float width, float height, Direction direction)
-            : base(region, x, y, width, height, direction)
+        public FireBal(TextureRegion region, float x, float y, float width, float height, Direction direction, int dmg = 0)
+            : base(region, x, y, width, height, direction, dmg)
         {
         }
         protected override void Init()
@@ -24,10 +24,13 @@ namespace HeroSiege.FGameObject.Projectiles
         }
         protected override void InitStats()
         {
+            if (damage == 0)
+                damage = DAMAGE;
+
             stats = new StatsData();
             stats.MaxSpeed = 400;
             stats.Speed = 200;
-            stats.Damage = DAMAGE;
+            stats.Damage = damage;
             lifeTimer = LIFE_TIME;
         }
 

@@ -13,7 +13,7 @@ namespace HeroSiege.Manager.Resource
         //Tiles
         private Texture2D tileTextureSummer;
         //Heros
-        private Texture2D mageHeroSpriteSheet;
+        private Texture2D heroMage, heroArcher, heroFootMan, heroKnight, heroGryponRider;
         //Enemies
         private Texture2D trollTrowerSpriteSheet, daemonSprite, deathKnightSprite, dragonSprite, gruntSPrite, orgeSprite, zeppelinSprite;
         //Buildings
@@ -21,7 +21,7 @@ namespace HeroSiege.Manager.Resource
         //Magic and Missiels
         private Texture2D explosionSprite, projectileSprite, effecSprite;
         //UI
-        private Texture2D hudTexture, xpbarLayer_1, xpbarLayer_2, basicIcons;
+        private Texture2D hudTexture, xpbarLayer_1, xpbarLayer_2, basicIcons, heroPortraits;
         //Other
         private Texture2D blackPixel, whitePixel;
         //Debug
@@ -44,8 +44,12 @@ namespace HeroSiege.Manager.Resource
             //Load in all sprite sheets and Textures
             tileTextureSummer = content.Load<Texture2D>(@"Assets\Texture\Tiles\Wc2-Tiles");
 
-            //Hero
-            mageHeroSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\MageHero");
+            //Heros
+            heroMage = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\MageHero");
+            heroArcher = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\ArcherHero");
+            heroFootMan = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\FootManHero");
+            heroKnight = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\KnightHero");
+            heroGryponRider = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\GryphonRiderHero");
 
             //Enemies
             trollTrowerSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Troll_Thrower");
@@ -72,13 +76,11 @@ namespace HeroSiege.Manager.Resource
             explosionSprite =  content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Explosion");
 
             //--- UI ---//
-            //HUD
-            hudTexture = content.Load<Texture2D>(@"Assets\Texture\UI\Console\UI-HUD");
-            //Bars
+            hudTexture =   content.Load<Texture2D>(@"Assets\Texture\UI\Console\UI-HUD");
             xpbarLayer_1 = content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_1");
             xpbarLayer_2 = content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_2");
-            //Icons
-            basicIcons = content.Load<Texture2D>(@"Assets\Texture\UI\Icons\BasicIcons");
+            basicIcons =   content.Load<Texture2D>(@"Assets\Texture\UI\Icons\BasicIcons");
+            heroPortraits = content.Load<Texture2D>(@"Assets\Texture\UI\Portraits\Portraits");
 
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
@@ -104,7 +106,11 @@ namespace HeroSiege.Manager.Resource
             textureRegion["HUDTexture"] =   new TextureRegion(hudTexture,   0, 0, hudTexture.Width,   hudTexture.Height);
             textureRegion["XpBarLayer_1"] = new TextureRegion(xpbarLayer_1, 0, 0, xpbarLayer_1.Width, xpbarLayer_1.Height);
             textureRegion["XpBarLayer_2"] = new TextureRegion(xpbarLayer_2, 0, 0, xpbarLayer_2.Width, xpbarLayer_2.Height);
-            textureRegion["BasicIcons"] =   new TextureRegion(basicIcons,   0, 0, basicIcons.Width,   basicIcons.Height);
+            textureRegion["StatsIcons"] =   new TextureRegion(basicIcons,   0, 0, basicIcons.Width,   basicIcons.Height);
+            textureRegion["SoldierPortraits"] = new TextureRegion(heroPortraits,  0,  0, 96, 96);
+            textureRegion["KnightPortraits"] =  new TextureRegion(heroPortraits, 96,  0, 96, 96);
+            textureRegion["MagePortraits"] =    new TextureRegion(heroPortraits,  0, 96, 96, 96);
+            textureRegion["ArcherPortraits"] =  new TextureRegion(heroPortraits, 96, 96, 96, 96);
 
             //Tiles
             AddSpriteSheetRegionsToDict(BASE_LAYER_NAME, tileTextureSummer);
@@ -152,7 +158,11 @@ namespace HeroSiege.Manager.Resource
             textureRegion["Fire_Emit"] =      new TextureRegion(effecSprite,   0, 224,  96,  32);
 
             //Player Heros
-            textureRegion["MageSheet"] = new TextureRegion(mageHeroSpriteSheet, 0, 0, mageHeroSpriteSheet.Width, mageHeroSpriteSheet.Height);
+            textureRegion["MageSheet"] =        new TextureRegion(heroMage,        0, 0, heroMage.Width, heroMage.Height);
+            textureRegion["ArcherSheet"] =      new TextureRegion(heroArcher,      0, 0, heroArcher.Width, heroArcher.Height);
+            textureRegion["FootManSheet"] =     new TextureRegion(heroFootMan,     0, 0, heroFootMan.Width, heroFootMan.Height);
+            textureRegion["KnightSheet"] =      new TextureRegion(heroKnight,      0, 0, heroKnight.Width, heroKnight.Height);
+            textureRegion["GryponRiderSheet"] = new TextureRegion(heroGryponRider, 0, 0, heroGryponRider.Width, heroGryponRider.Height);
 
             //Hero Buildings
             textureRegion["Balista"] = new TextureRegion(heroBalista, 0, 0, heroBalista.Width, heroBalista.Height);

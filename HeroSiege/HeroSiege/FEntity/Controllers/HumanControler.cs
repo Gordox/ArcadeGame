@@ -82,7 +82,7 @@ namespace HeroSiege.FEntity.Controllers
 
             UpdateMovingDirecion();
 
-            if (!keysactive[0] && !keysactive[1] && !keysactive[2] && !keysactive[3] && !player.isAttaking)
+            if (!keysactive[0] && !keysactive[1] && !keysactive[2] && !keysactive[3] && !player.isAttaking && !(player is GryphonRider))
                 player.SetPauseAnimation = true;
             else
                 player.SetPauseAnimation = false;

@@ -1,33 +1,36 @@
 ﻿using HeroSiege.FEntity;
 using HeroSiege.FTexture2D;
+using HeroSiege.FTexture2D.SpriteEffect;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HeroSiege.FTexture2D.SpriteEffect;
 
 namespace HeroSiege.FGameObject.Projectiles
 {
-    class Harpon : Projectile
+    class Arrow : Projectile
     {
         const float LIFE_TIME = 1.5f; //5 sec
         const int DAMAGE = 20;
 
-        public Harpon(TextureRegion region, float x, float y, float width, float height, Entity target, int dmg = 0)
+        public Arrow(TextureRegion region, float x, float y, float width, float height, Entity target, int dmg = 0)
             : base(region, x, y, width, height, target, dmg)
         {
         }
-
-        public Harpon(TextureRegion region, float x, float y, float width, float height, Direction direction, int dmg = 0)
+        public Arrow(TextureRegion region, float x, float y, float width, float height, Direction direction, int dmg = 0)
             : base(region, x, y, width, height, direction, dmg)
         {
-            InitTexture(region, direction);
         }
-
+        protected override void Init()
+        {
+            base.Init();
+            boundingBox = new Microsoft.Xna.Framework.Rectangle((int)Position.X, (int)Position.Y, 16, 16);
+        }
         protected override void InitStats()
         {
             if (damage == 0)
                 damage = DAMAGE;
+
             stats = new StatsData();
             stats.MaxSpeed = 400;
             stats.Speed = 200;
@@ -39,9 +42,6 @@ namespace HeroSiege.FGameObject.Projectiles
         {
             if (target != null)
                 UpdateMovingDirTowardsTarget();
-
-            if (target != null && !target.IsAlive)
-                target = null;
 
             base.Update(delta);
         }

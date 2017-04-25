@@ -6,12 +6,12 @@ easy, normal, Hard, extream
 __________________________________
 Player hero:
 Mage - working on it
-ElvenArcher
-Gryphon_Rider
-FootMan
+ElvenArcher - working on it
+Gryphon_Rider - working on it
+FootMan - working on it
 Dwarven
 Gnomish_Flying_Machine
-Knight
+Knight - working on it
 __________________________________
 Enimy units:
 DeathKnight - Done
@@ -46,7 +46,7 @@ UI - working on it
 __________________________________
 Systems:
 A*(Astar) - Done
-SpawnController - Working on (80% Done)
+SpawnController - Working on it(85% Done)
 SpriteFX - Done
 Particle - working on it
 __________________________________
@@ -59,7 +59,7 @@ Enemy tower - Done
 Enemy Spawner - Done (might shoot projectiles towards the player, have not yet decide)
 __________________________________
 HUD / UI / GUI:
-HUD - Working on
+HUD - Working on it (80% only inventoiy left)
 __________________________________
 Need to fix and do:
 Make a base class for the player hero and the enemies, called "Hero" & "Enemy" that inherent from entity - DONE

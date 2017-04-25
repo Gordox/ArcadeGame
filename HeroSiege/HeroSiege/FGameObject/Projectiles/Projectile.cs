@@ -18,6 +18,7 @@ namespace HeroSiege.FGameObject.Projectiles
         //----- Feilds -----//
         public bool Collision { get; set; }
         protected float timer = 0, lifeTimer;
+        protected int damage;
         protected StatsData stats;
         public Direction Dir { get; protected set; }
         protected Direction oldDir;
@@ -26,18 +27,19 @@ namespace HeroSiege.FGameObject.Projectiles
         TextureRegion region;
 
         //----- Constructors -----//
-        public Projectile(TextureRegion region, float x, float y, float width, float height, Entity target)
+        public Projectile(TextureRegion region, float x, float y, float width, float height, Entity target, int dmg = 0)
             : base(null, x, y, width, height)
         {
             this.target = target;
             this.region = region;
             this.IsAlive = true;
+            this.damage = dmg;
             Init();
             CalculateDirection();
             InitTexture(region, Dir);
             oldDir = Dir;
         }
-        public Projectile(TextureRegion region, float x, float y, float width, float height, Direction direction)
+        public Projectile(TextureRegion region, float x, float y, float width, float height, Direction direction, int dmg = 0)
             : base(null, x, y, width, height)
         {
             Dir = direction;
@@ -45,30 +47,35 @@ namespace HeroSiege.FGameObject.Projectiles
             InitTexture(region, Dir);
             this.region = region;
             this.IsAlive = true;
+            this.damage = dmg;
             Init();
         }
 
-        public Projectile(string animationName, FrameAnimation animation, float x, float y, float width, float height, Direction direction)
+        public Projectile(string animationName, FrameAnimation animation, float x, float y, float width, float height, Direction direction, int dmg = 0)
             : base(null, x, y, width, height)
         {
             Dir = direction;
+            SetMovingDirection(Dir);
             this.IsAlive = true;
+            this.damage = dmg;
             sprite.AddAnimation(animationName,animation).SetAnimation(animationName);
             Init();
         }
-        public Projectile(string animationName, FrameAnimation animation, float x, float y, float width, float height, Entity target)
+        public Projectile(string animationName, FrameAnimation animation, float x, float y, float width, float height, Entity target, int dmg = 0)
             : base(null, x, y, width, height)
         {
             this.target = target;
             this.IsAlive = true;
+            this.damage = dmg;
             sprite.AddAnimation(animationName, animation).SetAnimation(animationName);
             Init();
         }
-        public Projectile(string animationName, FrameAnimation animation, float width, float height, Direction direction)
+        public Projectile(string animationName, FrameAnimation animation, float width, float height, Direction direction, int dmg = 0)
             : base(null, 0, 0, width, height)
         {
             Dir = direction;
             this.IsAlive = true;
+            this.damage = dmg;
             sprite.AddAnimation(animationName, animation).SetAnimation(animationName);
             Init();
         }

@@ -9,14 +9,15 @@ using HeroSiege.FGameObject;
 using HeroSiege.FEntity.Controllers;
 using HeroSiege.FGameObject.Projectiles;
 using HeroSiege.Manager;
+using HeroSiege.FTexture2D.FAnimation;
 
 namespace HeroSiege.FEntity.Players
 {
-    class Hero : Entity
+    abstract class Hero : Entity
     {
         const float START_XP = 100;
         const int START_GOLD = 300;
-
+        public string HeroName { get; protected set; }
         private int gold;
 
         public List<Entity> Targets { get; protected set; }
@@ -93,16 +94,16 @@ namespace HeroSiege.FEntity.Players
 
 
         //----- Movment -----//
-        public virtual void MoveUp(float delta) { velocity.Y = -Stats.Speed; }
-        public virtual void MoveDown(float delta) { velocity.Y = Stats.Speed; }
-        public virtual void MoveLeft(float delta) { velocity.X = -Stats.Speed; }
+        public virtual void MoveUp(float delta)    { velocity.Y = -Stats.Speed; }
+        public virtual void MoveDown(float delta)  { velocity.Y = Stats.Speed; }
+        public virtual void MoveLeft(float delta)  { velocity.X = -Stats.Speed; }
         public virtual void MoveRight(float delta) { velocity.X = Stats.Speed; }
 
         //----- Button Input -----//
-        public virtual void GreenButton(World parent) { } //Key G or numpad 4
-        public virtual void BlueButton(World parent) { } //Key H or numpad 5
-        public virtual void YellowButton(World parent) { }  //Key B or numpad 1
-        public virtual void RedButton(World parent) { } //Key N or numpad 2
+        public virtual void GreenButton(World parent)  { } //Key G or numpad 4
+        public virtual void BlueButton(World parent)   { } //Key H or numpad 5
+        public virtual void YellowButton(World parent) { } //Key B or numpad 1
+        public virtual void RedButton(World parent)    { } //Key N or numpad 2
         public virtual void AButton(World parent) { } //Key M or numpad 3
         public virtual void BButton(World parent) { }  //Key J or numpad 6
 
@@ -136,17 +137,19 @@ namespace HeroSiege.FEntity.Players
                     switch (type)
                     {
                         case ProjectileType.Fire_Bal:
-                            temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, Targets[i]);
+                            temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, Targets[i], GetDamage());
                             break;
                         case ProjectileType.Lighing_bal:
                             break;
-                        case ProjectileType.Evil_Hand:
-                            break;
                         case ProjectileType.Arrow:
+                            temp = new Arrow(ResourceManager.GetTexture("Arrow"), Position.X, Position.Y, 32, 32, Targets[i], GetDamage());
                             break;
                         case ProjectileType.Dark_Eye:
                             break;
                         case ProjectileType.Lightning_Axe:
+                            int x = ResourceManager.GetTexture("Lightning_Axe").region.X;
+                            int y = ResourceManager.GetTexture("Lightning_Axe").region.Y;
+                            temp = new LightningAxe("LightningAxeAnimation", new FrameAnimation(ResourceManager.GetTexture("Lightning_Axe"), x, y, 32, 32, 3, 0.08f, new Point(3, 1)), Position.X, Position.Y, 32, 32, Targets[i], GetDamage());
                             break;
                         case ProjectileType.Normal_Axe:
                             //int x = ResourceManager.GetTexture("Troll_Thrower").region.X;
@@ -165,17 +168,19 @@ namespace HeroSiege.FEntity.Players
                 switch (type)
                 {
                     case ProjectileType.Fire_Bal:
-                        temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, MovingDirection);
+                        temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, MovingDirection, GetDamage());
                         break;
                     case ProjectileType.Lighing_bal:
                         break;
-                    case ProjectileType.Evil_Hand:
-                        break;
                     case ProjectileType.Arrow:
+                        temp = new Arrow(ResourceManager.GetTexture("Arrow"), Position.X, Position.Y, 32, 32, MovingDirection, GetDamage());
                         break;
                     case ProjectileType.Dark_Eye:
                         break;
                     case ProjectileType.Lightning_Axe:
+                        int x = ResourceManager.GetTexture("Lightning_Axe").region.X;
+                        int y = ResourceManager.GetTexture("Lightning_Axe").region.Y;
+                        temp = new LightningAxe("LightningAxeAnimation", new FrameAnimation(ResourceManager.GetTexture("Lightning_Axe"), x, y, 32, 32, 3, 0.08f, new Point(3, 1)), Position.X, Position.Y, 32, 32, MovingDirection, GetDamage());
                         break;
                     case ProjectileType.Normal_Axe:
                         temp = new FireBal(ResourceManager.GetTexture("Normal_Axe"), Position.X, Position.Y, 32, 32, MovingDirection);
@@ -187,5 +192,8 @@ namespace HeroSiege.FEntity.Players
                 parent.GameObjects.Add(temp);
             }
         }
+
+        public abstract int GetDamage();
+        public abstract int GetDmgOnStats();
     }
 }

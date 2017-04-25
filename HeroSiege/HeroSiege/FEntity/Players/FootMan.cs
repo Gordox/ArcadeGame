@@ -1,18 +1,17 @@
-﻿using HeroSiege.FTexture2D;
+﻿using HeroSiege.FGameObject;
+using HeroSiege.FTexture2D.FAnimation;
+using HeroSiege.GameWorld;
+using HeroSiege.Manager;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework.Graphics;
-using HeroSiege.FTexture2D.FAnimation;
-using HeroSiege.Manager;
-using Microsoft.Xna.Framework;
-using HeroSiege.GameWorld;
-using HeroSiege.FGameObject;
 
 namespace HeroSiege.FEntity.Players
 {
-    class TestPlayer : Hero
+    class FootMan : Hero
     {
         const float FRAME_DURATION_MOVEMNT = 0.05f;
         const float FRAME_DURATION_ATTACK = 0.08f;
@@ -26,7 +25,13 @@ namespace HeroSiege.FEntity.Players
         const int START_ARM = 20;
         const int START_DMG = 20;
 
-        public TestPlayer(float x, float y, float width, float height)
+        const int START_HEALTH = 400;
+        const int START_MANA = 200;
+        const int START_MSPEED = 400;
+        const int START_SPEED = 200;
+        const int ATTACK_RADIUS = 200;
+
+        public FootMan(float x, float y, float width, float height)
             : base(null, x, y, width, height)
         {
             AddSpriteAnimations();
@@ -44,11 +49,11 @@ namespace HeroSiege.FEntity.Players
         protected override void InitStats()
         {
             base.InitStats();
-            Stats.MaxSpeed = 400;
-            Stats.Speed = 200;
-            Stats.MaxHealth = 100;
-            Stats.MaxMana = 1;
-            Stats.Radius = 200;
+            Stats.MaxSpeed = START_MSPEED;
+            Stats.Speed = START_SPEED;
+            Stats.MaxHealth = START_HEALTH;
+            Stats.MaxMana = START_MANA;
+            Stats.Radius = ATTACK_RADIUS;
 
             Stats.Intelligens = START_INT;
             Stats.Agility = START_AGI;
@@ -60,26 +65,27 @@ namespace HeroSiege.FEntity.Players
         protected override void AddSpriteAnimations()
         {
             //--- Movment animation ---//
-            sprite.AddAnimation("MoveNorth",         new FrameAnimation(ResourceManager.GetTexture("MageSheet"),   0, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
-            sprite.AddAnimation("MoveNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"),  64, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
-            sprite.AddAnimation("MoveWestEast",      new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 128, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
-            sprite.AddAnimation("MoveSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 192, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
-            sprite.AddAnimation("MoveSouth",         new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 256, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
+            sprite.AddAnimation("MoveNorth",         new FrameAnimation(ResourceManager.GetTexture("FootManSheet"),   0, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("FootManSheet"),  64, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveWestEast",      new FrameAnimation(ResourceManager.GetTexture("FootManSheet"), 128, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("FootManSheet"), 192, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            sprite.AddAnimation("MoveSouth",         new FrameAnimation(ResourceManager.GetTexture("FootManSheet"), 256, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
 
             //--- Attck animation ---//
-            sprite.AddAnimation("AttckNorth",          new FrameAnimation(ResourceManager.GetTexture("MageSheet"),   0, 256, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
-            sprite.AddAnimation("AttckNorthWestEast",  new FrameAnimation(ResourceManager.GetTexture("MageSheet"),  64, 256, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
-            sprite.AddAnimation("AttckWestEast",       new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 128, 256, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
-            sprite.AddAnimation("AttckSouthWestEast",  new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 192, 256, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
-            sprite.AddAnimation("AttckSouth",          new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 256, 256, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckNorth",         new FrameAnimation(ResourceManager.GetTexture("FootManSheet"),   0, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckNorthWestEast", new FrameAnimation(ResourceManager.GetTexture("FootManSheet"),  64, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckWestEast",      new FrameAnimation(ResourceManager.GetTexture("FootManSheet"), 128, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckSouthWestEast", new FrameAnimation(ResourceManager.GetTexture("FootManSheet"), 192, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
+            sprite.AddAnimation("AttckSouth",         new FrameAnimation(ResourceManager.GetTexture("FootManSheet"), 256, 320, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
 
             //--- Death animation ---//
-            sprite.AddAnimation("Death", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 0, 512, 64, 64, 7, FRAME_DURATION_DEATH, new Point(5, 2), false));
+            sprite.AddAnimation("Death_1", new FrameAnimation(ResourceManager.GetTexture("FootManSheet"), 0, 576, 64, 64, 3, FRAME_DURATION_DEATH, new Point(3, 1), false));
+            sprite.AddAnimation("Death_2", new FrameAnimation(ResourceManager.GetTexture("FootManSheet"), 0, 640, 64, 64, 3, FRAME_DURATION_DEATH, new Point(3, 1), false));
         }
 
         public override void Update(float delta)
         {
-            
+
             base.Update(delta);
         }
 
@@ -170,42 +176,61 @@ namespace HeroSiege.FEntity.Players
             }
         }
 
+        //
         public override void GreenButton(World parent)
         {
             base.GreenButton(parent);
-            Death();
-        }
 
+        }
+        //Fire ball attack
         public override void BlueButton(World parent)
         {
             base.BlueButton(parent);
-            if (!isAttaking && IsAlive)
-            {
-                SetAttckAnimations();
-                ResetAnimation();
-                isAttaking = true;
+            if (isAttaking && IsAlive) return;
 
-                GetTargets(parent.Enemies);
-                CreateProjectilesTowardsTarget(parent, ProjectileType.Fire_Bal);
-            }
+            SetAttckAnimations();
+            ResetAnimation();
+            isAttaking = true;            
+        }
+        //
+        public override void RedButton(World parent)
+        {
+            base.RedButton(parent);
+        }
+        //
+        public override void YellowButton(World parent)
+        {
+            base.YellowButton(parent);
+        }
+
+        public override void AButton(World parent)
+        {
+            base.AButton(parent);
+        }
+        public override void BButton(World parent)
+        {
+            base.BButton(parent);
         }
 
         protected override void Death()
         {
             base.Death();
             IsAlive = false;
-            sprite.SetAnimation("Death");
+            if (MovingDirection == Direction.North || MovingDirection == Direction.North_East || MovingDirection == Direction.North_West || MovingDirection == Direction.East)
+                sprite.SetAnimation("Death_1");
+            else
+                sprite.SetAnimation("Death_2");
             sprite.Animations.CurrentAnimation.ResetAnimation();
         }
 
         public override int GetDamage()
         {
-            throw new NotImplementedException();
+            return Stats.Damage + GetDmgOnStats();
         }
 
         public override int GetDmgOnStats()
         {
-            throw new NotImplementedException();
+            return (int)(Stats.Damage * (Stats.Strength / 100f)); //+inventory items
         }
     }
 }

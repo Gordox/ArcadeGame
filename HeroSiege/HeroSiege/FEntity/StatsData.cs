@@ -35,9 +35,14 @@ namespace HeroSiege.FEntity
         public int Level { get; set; }
 
         //ETC
-        public float Damage { get; set; }
+        public int Damage { get; set; }
 
-        public float Armor { get; set; }
+        public int Armor { get; set; }
+
+        public int Intelligens { get; set; }
+        public int Strength { get; set; }
+        public int Agility { get; set; }
+
 
         public float CritChance { get; set; }
 

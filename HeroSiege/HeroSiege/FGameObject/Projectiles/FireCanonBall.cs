@@ -11,10 +11,10 @@ namespace HeroSiege.FGameObject.Projectiles
     class FireCanonBall : Projectile
     {
         const float LIFE_TIME = 1.5f; //1.5 sec
-        const float DAMAGE = 20;
+        const int DAMAGE = 20;
 
-        public FireCanonBall(string animationName, FrameAnimation animation, float x, float y, float width, float height, Entity target)
-            : base(animationName, animation, x, y, width, height, target)
+        public FireCanonBall(string animationName, FrameAnimation animation, float x, float y, float width, float height, Entity target, int dmg = 0)
+            : base(animationName, animation, x, y, width, height, target, dmg)
         {
 
         }
@@ -22,10 +22,12 @@ namespace HeroSiege.FGameObject.Projectiles
 
         protected override void InitStats()
         {
+            if (damage == 0)
+                damage = DAMAGE;
             stats = new StatsData();
             stats.MaxSpeed = 400;
             stats.Speed = 350;
-            stats.Damage = DAMAGE;
+            stats.Damage = damage;
             lifeTimer = LIFE_TIME;
         }
 

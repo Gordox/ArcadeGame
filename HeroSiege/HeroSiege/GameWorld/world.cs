@@ -121,7 +121,7 @@ namespace HeroSiege.GameWorld
                 default:
                     break;
             }
-            PlayerOne = new TestPlayer(32 * 40, 32 * 90, 64, 64);
+            PlayerOne = new Knight(32 * 40, 32 * 90, 72, 72);
             PlayerOne.SetControl(new HumanControler(PlayerIndex.One, PlayerOne, this));
             
         }
@@ -149,7 +149,7 @@ namespace HeroSiege.GameWorld
                     break;
             }
 
-            PlayerTwo = new TestPlayer(32 * 40, 32 * 100, 64, 64);
+            PlayerTwo = new Mage(32 * 40, 32 * 100, 64, 64);
             PlayerTwo.SetControl(new HumanControler(PlayerIndex.Two, PlayerTwo, this));
         }
 
