@@ -46,7 +46,7 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
 
         public override EffectType GetDeathFX()
         {
-            return EffectType.Big_Explosion;
+            return EffectType.Mega_Explosion;
         }
     }
 }

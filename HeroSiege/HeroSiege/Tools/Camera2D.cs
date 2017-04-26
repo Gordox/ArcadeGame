@@ -37,7 +37,7 @@ namespace HeroSiege.Tools
             ClampPosValues(480, 2080, 0, 4565);
 
             //Create view matrix
-            transform = Matrix.CreateTranslation(new Vector3(-pos.X, -pos.Y, 0)) *
+            transform = Matrix.CreateTranslation(new Vector3((float)Math.Round(-pos.X,1), (float)Math.Round(-pos.Y,1), 0)) *
                         Matrix.CreateRotationZ(0) *
                         Matrix.CreateScale(new Vector3(zoom, zoom, 1)) *
                         Matrix.CreateTranslation(new Vector3(ViewPort.Width / 2, ViewPort.Height / 2, 0));

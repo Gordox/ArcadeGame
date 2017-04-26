@@ -17,8 +17,8 @@ namespace HeroSiege.FEntity.Enemies.Bosses
         const float FRAME_DURATION_ATTACK = 0.1f;
         const float FRAME_DURATION_DEATH = 0.15f;
 
-        public DeathKnight(float x, float y, float width, float height, AttackType attackType)
-            : base(null, x, y, width, height, attackType)
+        public DeathKnight(float x, float y, float width, float height, AttackType attackType, int level = 0)
+            : base(null, x, y, width, height, attackType, level)
         {
             AddSpriteAnimations();
             SetMovmentAnimations();

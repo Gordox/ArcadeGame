@@ -47,8 +47,8 @@ namespace HeroSiege.Tools
         public GameSettings()
         {
             GameMode = GameMode.singlePlayer;
-            playerOne = CharacterType.ElvenArcher;
-            playerTwo = CharacterType.Mage;
+            playerOne = CharacterType.FootMan;
+            playerTwo = CharacterType.None;
             MasterVolym = 0.55f;
         }
 

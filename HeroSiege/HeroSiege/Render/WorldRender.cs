@@ -74,8 +74,8 @@ namespace HeroSiege.Render
                 case GameMode.singlePlayer:
                     if(World.PlayerOne != null)
                         playerOneHUD = new HUD(World.gameSettings, singlePlayerView, World.PlayerOne, PlayerIndex.One);
-                    //if (World.PlayerOne != null)
-                    //    playerOneHUD = new HUD(World.gameSettings, singlePlayerView, World.PlayerTwo, PlayerIndex.Two);
+                    if (World.PlayerTwo != null)
+                        playerOneHUD = new HUD(World.gameSettings, singlePlayerView, World.PlayerTwo, PlayerIndex.Two);
                     break;
                 case GameMode.Multiplayer:
                     if (World.PlayerOne != null)
@@ -101,8 +101,8 @@ namespace HeroSiege.Render
                 case GameMode.singlePlayer:
                     if(World.PlayerOne != null)
                         Camera.Position = World.PlayerOne.Position;
-                    //if (World.PlayerTwo != null)
-                    //    Camera.Position = World.PlayerTwo.Position;
+                    if (World.PlayerTwo != null)
+                        Camera.Position = World.PlayerTwo.Position;
                     Camera.Update();
                     break;
                 case GameMode.Multiplayer:

@@ -25,11 +25,11 @@ namespace HeroSiege.FEntity.Players
         const int START_ARM = 20;
         const int START_DMG = 20;
 
-        const int START_HEALTH = 400;
+        const int START_HEALTH = 40000;
         const int START_MANA = 200;
         const int START_MSPEED = 400;
         const int START_SPEED = 200;
-        const int ATTACK_RADIUS = 200;
+        const int ATTACK_RADIUS = 55;
 
         public FootMan(float x, float y, float width, float height)
             : base(null, x, y, width, height)
@@ -190,7 +190,9 @@ namespace HeroSiege.FEntity.Players
 
             SetAttckAnimations();
             ResetAnimation();
-            isAttaking = true;            
+            isAttaking = true;
+            GetAllTargets(parent.Enemies, parent.EnemyBuildings);
+            MeleeAttack();
         }
         //
         public override void RedButton(World parent)

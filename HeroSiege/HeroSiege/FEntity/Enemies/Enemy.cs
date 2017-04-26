@@ -38,20 +38,24 @@ namespace HeroSiege.FEntity.Enemies
         public Vector2 HeroCastle { get; set; }
         protected Vector2 oldPos;
 
+        protected int level;
+
         //--- A* ---//
         protected Queue<Vector2> waypoints;
         public bool havePath;
         protected Pathfinder pathFinder;
 
         //----- Constructors and Initiators -----//
-        public Enemy(TextureRegion region, float x, float y, float width, float height, AttackType attackType)
+        public Enemy(TextureRegion region, float x, float y, float width, float height, AttackType attackType, int level = 0)
             : base(region, x, y, width, height)
         {
             this.PlayerTarget = null;
             this.BuildingTarget = null;
             InitAStar();
             this.AttackType = attackType;
+            this.level = level;
             oldPos = position;
+
         }
 
         protected void InitAStar()
@@ -338,6 +342,16 @@ namespace HeroSiege.FEntity.Enemies
             }
             parent.EnemyObjects.Add(temp);
         }
+
+        public int GetXPWorth
+        {
+            get { return 5 + 5 * level; }
+        }
+        public int GetGold
+        {
+            get { return 50 + 50 * level; }
+        }
+
 
     }
 }

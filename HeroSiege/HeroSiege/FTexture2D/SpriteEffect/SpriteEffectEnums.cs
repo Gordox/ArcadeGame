@@ -7,6 +7,7 @@ namespace HeroSiege.FTexture2D.SpriteEffect
 {
     public enum EffectType
     {
+        Mega_Explosion,
         Big_Explosion,
         Medium_Explosion,
         Light_Magic_Explosion,

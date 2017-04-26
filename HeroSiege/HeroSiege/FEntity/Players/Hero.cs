@@ -10,6 +10,7 @@ using HeroSiege.FEntity.Controllers;
 using HeroSiege.FGameObject.Projectiles;
 using HeroSiege.Manager;
 using HeroSiege.FTexture2D.FAnimation;
+using HeroSiege.FEntity.Buildings;
 
 namespace HeroSiege.FEntity.Players
 {
@@ -85,7 +86,8 @@ namespace HeroSiege.FEntity.Players
             if (Stats.XP >= Stats.MaxXP)
                 LevelUP();
         }
-        public void IncreaseXP(float xpValue) { Stats.XP += xpValue; }
+        public void IncreaseXP(int xpValue) { Stats.XP += xpValue; }
+        public void IncreaseGold(int gold) { this.gold += gold; }
 
         //----- Shoping -----//
 
@@ -122,6 +124,25 @@ namespace HeroSiege.FEntity.Players
                 {
                     if (Targets.Count < totalTargets)
                         Targets.Add(enemies[i]);
+                }
+            }
+        }
+        public void GetAllTargets(List<Entity> enemies, List<Building> enemyB)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (Vector2.Distance(Position, enemies[i].Position) <= Stats.Radius)
+                {
+                    if (Targets.Count < totalTargets)
+                        Targets.Add(enemies[i]);
+                }
+            }
+            for (int i = 0; i < enemyB.Count; i++)
+            {
+                if (Vector2.Distance(Position, enemyB[i].Position) <= Stats.Radius)
+                {
+                    if (Targets.Count < totalTargets)
+                        Targets.Add(enemyB[i]);
                 }
             }
         }
@@ -191,6 +212,14 @@ namespace HeroSiege.FEntity.Players
 
                 parent.GameObjects.Add(temp);
             }
+        }
+        public void MeleeAttack()
+        {
+            for (int i = 0; i < Targets.Count; i++)
+            {
+                Targets[i].Hit(GetDamage());
+            }
+            Targets.Clear();
         }
 
         public abstract int GetDamage();

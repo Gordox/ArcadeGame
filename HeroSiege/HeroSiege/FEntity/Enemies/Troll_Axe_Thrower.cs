@@ -18,8 +18,8 @@ namespace HeroSiege.FEntity.Enemies
         const float FRAME_DURATION_DEATH = 0.15f;
 
 
-        public Troll_Axe_Thrower(float x, float y, float width, float height, AttackType attackType)
-            : base(null, x, y, width, height, attackType)
+        public Troll_Axe_Thrower(float x, float y, float width, float height, AttackType attackType, int level = 0)
+            : base(null, x, y, width, height, attackType, level)
         {
             AddSpriteAnimations();
             SetMovmentAnimations();

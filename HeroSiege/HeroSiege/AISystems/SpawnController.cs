@@ -54,7 +54,7 @@ namespace HeroSiege.AISystems
 
         private void InitWaveSystem()
         {
-            CurrentWave = 2;
+            CurrentWave = 0;
             TotalSpawned = 0;
             timer = 0;
             NextWave = true;
@@ -123,20 +123,20 @@ namespace HeroSiege.AISystems
         {
             if (currentSpawner == null)
                 return;
-
+            int lvl = 1 + CurrentWave / 4;
             // Randomize enemy
             Enemy enemy = null;
            
             switch (type)
             {
                 case 0:
-                    enemy = new Troll_Axe_Thrower(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range);
+                    enemy = new Troll_Axe_Thrower(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range, lvl);
                     break;
                 case 1:
-                    enemy = new Orge(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range);
+                    enemy = new Orge(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range, lvl);
                     break;
                 case 2:
-                    enemy = new Zeppelin(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range);
+                    enemy = new Zeppelin(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range, lvl);
                     break;
                 case 3:
                     //enemy = new WaterGolom(spawnPos, hp_multiplier);

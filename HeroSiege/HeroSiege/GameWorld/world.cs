@@ -103,26 +103,32 @@ namespace HeroSiege.GameWorld
             switch (gameSettings.playerOne)
             {
                 case CharacterType.ElvenArcher:
+                    PlayerOne = new ElvenArcher(32 * 40, 32 * 90, 64, 64);
                     break;
                 case CharacterType.Mage:
+                    PlayerOne = new Mage(32 * 40, 32 * 90, 64, 64);
                     break;
                 case CharacterType.Gryphon_Rider:
+                    PlayerOne = new GryphonRider(32 * 40, 32 * 90, 96, 96);
                     break;
                 case CharacterType.FootMan:
+                    PlayerOne = new FootMan(32 * 40, 32 * 90, 64, 64);
                     break;
                 case CharacterType.Dwarven:
                     break;
                 case CharacterType.Gnomish_Flying_Machine:
                     break;
                 case CharacterType.Knight:
+                    PlayerOne = new Knight(32 * 40, 32 * 90, 72, 72);
                     break;
                 case CharacterType.None:
+                    PlayerOne = null;
                     break;
                 default:
                     break;
             }
-            PlayerOne = new Knight(32 * 40, 32 * 90, 72, 72);
-            PlayerOne.SetControl(new HumanControler(PlayerIndex.One, PlayerOne, this));
+            if(PlayerOne != null)
+                PlayerOne.SetControl(new HumanControler(PlayerIndex.One, PlayerOne, this));
             
         }
         public void InitPlayerTwo()
@@ -130,27 +136,32 @@ namespace HeroSiege.GameWorld
             switch (gameSettings.playerTwo)
             {
                 case CharacterType.ElvenArcher:
+                    PlayerTwo = new ElvenArcher(32 * 40, 32 * 90, 64, 64);
                     break;
                 case CharacterType.Mage:
+                    PlayerTwo = new Mage(32 * 40, 32 * 90, 64, 64);
                     break;
                 case CharacterType.Gryphon_Rider:
+                    PlayerTwo = new GryphonRider(32 * 40, 32 * 90, 96, 96);
                     break;
                 case CharacterType.FootMan:
+                    PlayerTwo = new FootMan(32 * 40, 32 * 90, 64, 64);
                     break;
                 case CharacterType.Dwarven:
                     break;
                 case CharacterType.Gnomish_Flying_Machine:
                     break;
                 case CharacterType.Knight:
+                    PlayerTwo = new Knight(32 * 40, 32 * 90, 72, 72);
                     break;
                 case CharacterType.None:
+                    PlayerTwo = null;
                     break;
                 default:
                     break;
             }
-
-            PlayerTwo = new Mage(32 * 40, 32 * 100, 64, 64);
-            PlayerTwo.SetControl(new HumanControler(PlayerIndex.Two, PlayerTwo, this));
+            if (PlayerTwo != null)
+                PlayerTwo.SetControl(new HumanControler(PlayerIndex.Two, PlayerTwo, this));
         }
 
         //----- TEST -----//
@@ -299,8 +310,11 @@ namespace HeroSiege.GameWorld
             {
                 enemy.Update(delta);
 
-                if(!enemy.IsAlive)
+                if (!enemy.IsAlive)
+                {
                     deadEnimies.Add(enemy);
+                    EnemyReward(enemy);
+                }
             }
 
             foreach (var boss in EnemieBosses)
@@ -308,7 +322,10 @@ namespace HeroSiege.GameWorld
                 boss.Update(delta);
 
                 if (!boss.IsAlive)
+                {
                     deadEnimies.Add(boss);
+                    EnemyReward(boss);
+                }
             }
         }
         private void UpdateEnemyBuildings(float delta)
@@ -488,6 +505,34 @@ namespace HeroSiege.GameWorld
             DeadBuildings.Clear();
         }
 
+        private void EnemyReward(Entity e)
+        {
+            if (PlayerOne != null)
+            {
+                if (e is Enemy)
+                {
+                    PlayerOne.IncreaseXP(((Enemy)e).GetXPWorth);
+                    PlayerOne.IncreaseGold(((Enemy)e).GetGold);
+                }
+                else
+                {
+                    //Building
+                }
+            }
+            if (PlayerTwo != null)
+            {
+                if (e is Enemy)
+                {
+                    PlayerTwo.IncreaseXP(((Enemy)e).GetXPWorth);
+                    PlayerTwo.IncreaseGold(((Enemy)e).GetGold);
+                }
+                else
+                {
+                    //Building
+                }
+            }
+        }
+
         private void IntreactionPortal(Portal p, float delta)
         {
             if (PlayerOne != null)
@@ -507,6 +552,10 @@ namespace HeroSiege.GameWorld
 
             switch (type)
             {
+                case EffectType.Mega_Explosion:
+                    fx.SetSize(128, 128);
+                    fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Big_Explosion"), 0, 0, 64, 64, 16, 0.08f, new Point(8, 2), false, false)).SetAnimation("fx");
+                    break;
                 case EffectType.Big_Explosion:
                     fx.SetSize(64, 64);
                     fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Big_Explosion"), 0, 0, 64, 64, 16, 0.08f, new Point(8, 2), false, false)).SetAnimation("fx");
