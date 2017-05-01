@@ -27,6 +27,15 @@ namespace HeroSiege.FEntity.Controllers
 
         private void UpdateButtons()
         {
+            if (PressedButton(PlayerInput.A)) //Key M or numpad 3
+                player.AButton(world);
+
+            if (PressedButton(PlayerInput.B))  //Key J or numpad 6
+                player.BButton(world);
+
+            if (player.isBuying)
+                return;
+
             if (PressedButton(PlayerInput.Green)) //Key G or numpad 4
                 player.GreenButton(world);
 
@@ -39,11 +48,7 @@ namespace HeroSiege.FEntity.Controllers
             if (PressedButton(PlayerInput.Red))  //Key N or numpad 2
                 player.RedButton(world);
 
-            if (PressedButton(PlayerInput.A)) //Key M or numpad 3
-                player.AButton(world);
-
-            if (PressedButton(PlayerInput.B))  //Key J or numpad 6
-                player.BButton(world);
+            
         }
 
         public void UpdateJoystick(float delta)

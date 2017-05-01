@@ -16,6 +16,12 @@ using HeroSiege.FEntity.Enemies;
 
 namespace HeroSiege.FEntity
 {
+    public enum AttackType
+    {
+        Range,
+        Melee,
+        NONE
+    }
     class Entity : GameObject
     {
         //----- Feilds -----//

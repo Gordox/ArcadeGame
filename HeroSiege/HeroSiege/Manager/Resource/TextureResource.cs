@@ -21,7 +21,7 @@ namespace HeroSiege.Manager.Resource
         //Magic and Missiels
         private Texture2D explosionSprite, projectileSprite, effecSprite;
         //UI
-        private Texture2D hudTexture, xpbarLayer_1, xpbarLayer_2, basicIcons, heroPortraits;
+        private Texture2D hudTexture, xpbarLayer_1, xpbarLayer_2, basicIcons, heroPortraits, shopWindow, ItemIcons;
         //Other
         private Texture2D blackPixel, whitePixel;
         //Debug
@@ -71,15 +71,17 @@ namespace HeroSiege.Manager.Resource
             debugRange =    content.Load<Texture2D>(@"Assets\DebugTexture\Debug_Range");
 
             //Effect, projectiles and explostion
-            effecSprite =      content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Particles_&_Effects");
+            effecSprite =      content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Particles_&_Effects_V2");
             projectileSprite = content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\AttacksSprites");
             explosionSprite =  content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Explosion");
 
             //--- UI ---//
-            hudTexture =   content.Load<Texture2D>(@"Assets\Texture\UI\Console\UI-HUD");
-            xpbarLayer_1 = content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_1");
-            xpbarLayer_2 = content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_2");
-            basicIcons =   content.Load<Texture2D>(@"Assets\Texture\UI\Icons\BasicIcons");
+            hudTexture =    content.Load<Texture2D>(@"Assets\Texture\UI\Console\UI-HUD");
+            shopWindow =    content.Load<Texture2D>(@"Assets\Texture\UI\Console\ShopWindow");
+            xpbarLayer_1 =  content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_1");
+            xpbarLayer_2 =  content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_2");
+            basicIcons =    content.Load<Texture2D>(@"Assets\Texture\UI\Icons\BasicIcons");
+            ItemIcons =     content.Load<Texture2D>(@"Assets\Texture\UI\Icons\ItemIcons");
             heroPortraits = content.Load<Texture2D>(@"Assets\Texture\UI\Portraits\Portraits");
 
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
@@ -104,9 +106,11 @@ namespace HeroSiege.Manager.Resource
 
             //UI
             textureRegion["HUDTexture"] =   new TextureRegion(hudTexture,   0, 0, hudTexture.Width,   hudTexture.Height);
+            textureRegion["ShopWindow"] =   new TextureRegion(shopWindow,   0, 0, shopWindow.Width, shopWindow.Height);
             textureRegion["XpBarLayer_1"] = new TextureRegion(xpbarLayer_1, 0, 0, xpbarLayer_1.Width, xpbarLayer_1.Height);
             textureRegion["XpBarLayer_2"] = new TextureRegion(xpbarLayer_2, 0, 0, xpbarLayer_2.Width, xpbarLayer_2.Height);
             textureRegion["StatsIcons"] =   new TextureRegion(basicIcons,   0, 0, basicIcons.Width,   basicIcons.Height);
+            textureRegion["ItemIcons"] =    new TextureRegion(ItemIcons,    0, 0, ItemIcons.Width, ItemIcons.Height);
             textureRegion["SoldierPortraits"] = new TextureRegion(heroPortraits,  0,  0, 96, 96);
             textureRegion["KnightPortraits"] =  new TextureRegion(heroPortraits, 96,  0, 96, 96);
             textureRegion["MagePortraits"] =    new TextureRegion(heroPortraits,  0, 96, 96, 96);
@@ -171,6 +175,11 @@ namespace HeroSiege.Manager.Resource
             textureRegion["Castle_lvl_1_Broken"] = new TextureRegion(heroBuildings,   0, 128, 128, 128);
             textureRegion["Castle_lvl_2"] =        new TextureRegion(heroBuildings, 128,   0, 128, 128);
             textureRegion["Castle_lvl_2_Broken"] = new TextureRegion(heroBuildings, 128, 128, 128, 128);
+
+            textureRegion["Shop_1"] = new TextureRegion(heroBuildings,   0, 256, 96, 96);
+            textureRegion["Shop_2"] = new TextureRegion(heroBuildings,  96, 256, 96, 96);
+            textureRegion["Shop_3"] = new TextureRegion(heroBuildings, 192, 256, 96, 96);
+            textureRegion["Church"] = new TextureRegion(heroBuildings, 288, 256, 96, 96);
 
             textureRegion["HTower_1"] = new TextureRegion(heroBuildings, 256,  0, 64, 64);
             textureRegion["HTower_2"] = new TextureRegion(heroBuildings, 320,  0, 64, 64);

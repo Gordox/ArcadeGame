@@ -21,7 +21,7 @@ namespace HeroSiege.Render
         public World World { get; private set; }
         private GraphicsDeviceArcade graphicsDev;
         private HUD playerOneHUD, playerTwoHUD;
-
+        private ShopWindow plOneShopWindow, plTwoShopWindow;
         public Camera2D Camera { get; private set; }
         public Camera2D PlayerOneCamera { get; private set; }
         public Camera2D PlayerTwoCamera { get; private set; }
@@ -35,7 +35,7 @@ namespace HeroSiege.Render
             this.graphicsDev = graphicsDev;
 
             InitCameraAndViewPorts(graphicsDev);
-            InitHUD();
+            InitHUDwindows();
         }
 
         //----- Initiator -----//
@@ -67,21 +67,33 @@ namespace HeroSiege.Render
                     break;
             }
         }
-        private void InitHUD()
+        private void InitHUDwindows()
         {
             switch (settings.GameMode)
             {
                 case GameMode.singlePlayer:
-                    if(World.PlayerOne != null)
+                    if (World.PlayerOne != null)
+                    {
                         playerOneHUD = new HUD(World.gameSettings, singlePlayerView, World.PlayerOne, PlayerIndex.One);
+                        plOneShopWindow = new ShopWindow(World.gameSettings, singlePlayerView, World.PlayerOne, PlayerIndex.One);
+                    }
                     if (World.PlayerTwo != null)
+                    {
                         playerOneHUD = new HUD(World.gameSettings, singlePlayerView, World.PlayerTwo, PlayerIndex.Two);
+                        plOneShopWindow = new ShopWindow(World.gameSettings, singlePlayerView, World.PlayerTwo, PlayerIndex.Two);
+                    }
                     break;
                 case GameMode.Multiplayer:
                     if (World.PlayerOne != null)
+                    {
                         playerOneHUD = new HUD(World.gameSettings, playerOneView, World.PlayerOne, PlayerIndex.One);
+                        plOneShopWindow = new ShopWindow(World.gameSettings, playerOneView, World.PlayerOne, PlayerIndex.One);
+                    }
                     if (World.PlayerTwo != null)
+                    {
                         playerTwoHUD = new HUD(World.gameSettings, playerTwoView, World.PlayerTwo, PlayerIndex.Two);
+                        plTwoShopWindow = new ShopWindow(World.gameSettings, playerTwoView, World.PlayerTwo, PlayerIndex.Two);
+                    }
                     break;
                 default:
                     break;
@@ -92,6 +104,11 @@ namespace HeroSiege.Render
         public void Update(float delta)
         {
             CameraUpdate();
+
+            if (plOneShopWindow != null)
+                plOneShopWindow.Update(delta);
+            if (plTwoShopWindow != null)
+                plTwoShopWindow.Update(delta);
         }
 
         private void CameraUpdate()
@@ -147,10 +164,19 @@ namespace HeroSiege.Render
             {
                 case GameMode.singlePlayer:
                     playerOneHUD.Draw(SB);
+                    if ((World.PlayerOne != null && World.PlayerOne.isBuying) ||
+                        (World.PlayerTwo != null && World.PlayerTwo.isBuying))
+                        plOneShopWindow.Draw(SB);
                     break;
                 case GameMode.Multiplayer:
                     playerOneHUD.Draw(SB);
                     playerTwoHUD.Draw(SB);
+
+                    if (World.PlayerOne.isBuying)
+                        plOneShopWindow.Draw(SB);
+                    if (World.PlayerTwo.isBuying)
+                        plTwoShopWindow.Draw(SB);
+
                     break;
                 default:
                     break;
@@ -160,7 +186,6 @@ namespace HeroSiege.Render
 
             SB.End();
         }
-
 
         private void DrawScenne(SpriteBatch SB, Camera2D camera)
         {
@@ -225,14 +250,13 @@ namespace HeroSiege.Render
         private void DrawAllBuildings(SpriteBatch SB)
         {
             foreach (Building b in World.HeroBuildings)
-            {
                 b.Draw(SB);
-            }
 
             foreach (Building b in World.EnemyBuildings)
-            {
                 b.Draw(SB);
-            }
+
+            foreach (Building b in World.GeneralBuildings)
+                b.Draw(SB);
         }
         private void DrawAllGameObjects(SpriteBatch SB)
         {
@@ -269,7 +293,8 @@ namespace HeroSiege.Render
                     Entity tempPlayer = World.PlayerOne;
                     string textDir = "P_1: " + tempPlayer.MovingDirection;
                     string textStats = "Health: " + tempPlayer.Stats.Health +" Mana: "+ tempPlayer.Stats.Mana;
-                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), textDir + "\n"+ textStats, new Vector2(0, 2), Color.Black);
+                    string textGold = "Gold: " + World.PlayerOne.GetGold;
+                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), textDir + "\n"+ textStats + "  " + textGold, new Vector2(0, 2), Color.Black);
                 }
                 //----- PLayer TWO INFO -----//
                 if (World.PlayerTwo != null)
@@ -277,7 +302,8 @@ namespace HeroSiege.Render
                     Entity tempPlayer = World.PlayerTwo;
                     string textDir = "P_2: " + tempPlayer.MovingDirection;
                     string textStats = "Health: " + tempPlayer.Stats.Health + " Mana: " + tempPlayer.Stats.Mana;
-                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), textDir + "\n" + textStats, new Vector2(250, 2), Color.Black);
+                    string textGold = "Gold: " + World.PlayerTwo.GetGold;
+                    SB.DrawString(ResourceManager.GetFont("Arial_Font"), textDir + "\n" + textStats + "  "+ textGold, new Vector2(350, 2), Color.Black);
                 }
 
                 //----- Camera pos -----//

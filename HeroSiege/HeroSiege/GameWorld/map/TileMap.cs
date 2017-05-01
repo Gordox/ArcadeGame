@@ -46,7 +46,7 @@ namespace HeroSiege.GameWorld.map
 
         public List<Vector2> Portal { get; private set; }
 
-
+        public List<Vector2> Shop { get; private set; }
 
         public string MapName { get; private set; }
 
@@ -112,6 +112,7 @@ namespace HeroSiege.GameWorld.map
             this.EnemieSpawnerPos = new List<Vector2>();
             this.Portal = new List<Vector2>();
             this.HeroBalista = new List<Vector2>();
+            this.Shop = new List<Vector2>();
         }
 
         public void LoadMapDataFromXMLFile(string mapName)
@@ -166,6 +167,8 @@ namespace HeroSiege.GameWorld.map
                     Portal.Add(new Vector2(xPos, yPos));
                 if (allObjects[i].name.Equals("HeroBalista"))
                     HeroBalista.Add(new Vector2(xPos, yPos));
+                if (allObjects[i].name.Equals("Shop"))
+                    Shop.Add(new Vector2(xPos, yPos));
             }
         }
 

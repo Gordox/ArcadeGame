@@ -1,4 +1,5 @@
 ﻿using HeroSiege.FEntity.Players;
+using HeroSiege.FGameObject.Items;
 using HeroSiege.FTexture2D;
 using HeroSiege.Manager;
 using HeroSiege.Tools;
@@ -108,10 +109,11 @@ namespace HeroSiege.InterFace.GUI
                 //Attack
             DrawStatsInfo(SB, attackIcon, ResourceManager.GetFont("Arial_Font"), position + new Vector2(-offsetX - 20, 140), "Damage:", player.Stats.Damage, player.GetDmgOnStats());
                 //Armor
-            DrawStatsInfo(SB, armorIcon, ResourceManager.GetFont("Arial_Font"), position + new Vector2(-offsetX - 20, 150 + armorIcon.region.Height/2), "Armor:", player.Stats.Armor);
+            DrawStatsInfo(SB, armorIcon, ResourceManager.GetFont("Arial_Font"), position + new Vector2(-offsetX - 20, 150 + armorIcon.region.Height/2), "Armor:", player.GetArmor());
                 //Stats
-            DrawStatsInfo(SB, mainStatsIcon, ResourceManager.GetFont("Arial_Font"), position + new Vector2(-offsetX + 140, 130 + armorIcon.region.Height / 3), "Strength:", player.Stats.Strength.ToString(), "Agility:", player.Stats.Agility.ToString(), "Intelligence:", player.Stats.Intelligens.ToString());
+            DrawStatsInfo(SB, mainStatsIcon, ResourceManager.GetFont("Arial_Font"), position + new Vector2(-offsetX + 140, 130 + armorIcon.region.Height / 3), "Strength:", player.GetStrenght().ToString(), "Agility:", player.GetAgility().ToString(), "Intelligence:", player.GetInteligence().ToString());
             //Inventory
+            DrawInventory(SB, position);
         }
 
 
@@ -137,6 +139,7 @@ namespace HeroSiege.InterFace.GUI
             string text = "Level: " + player.Stats.Level;
             DrawCenterString(SB, ResourceManager.GetFont("Arial_Font"), text, pos + offset, Color.White);
         }
+
         private void DrawStatsInfo(SpriteBatch SB, TextureRegion texturRegion, SpriteFont font, Vector2 pos, string statsName, int statsNr, int extra = 0)
         {
             SB.Draw(texturRegion, new Vector2(pos.X, pos.Y), texturRegion, Color.White, 0, new Vector2(0, 0), .5f, SpriteEffects.None, 0);
@@ -166,6 +169,40 @@ namespace HeroSiege.InterFace.GUI
             DrawString(SB, ResourceManager.GetFont("Arial_Font"), statsName_3, pos + new Vector2(width + 10, 60), Color.Gold, .8f);
             DrawCenterString(SB, ResourceManager.GetFont("Arial_Font"), statsNr_3,   pos + new Vector2(100, 90), Color.White, .8f);
         }
+
+        private void DrawInventory(SpriteBatch SB, Vector2 basePos)
+        {
+
+            Item[] temp = player.Inventory.GetInventory;
+
+            if (temp[0].GetItemType != ItemType.NONE)
+            {
+                SB.Draw(temp[0].GetTexture, basePos + new Vector2(220, 70), temp[0].GetTexture.region, Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+                DrawString(SB, ResourceManager.GetFont("Arial_Font"), temp[0].Quantity.ToString(), basePos + new Vector2(225, 72), Color.White, .8f);
+            }
+
+            if (temp[1].GetItemType != ItemType.NONE)
+            { 
+                SB.Draw(temp[1].GetTexture, basePos + new Vector2(290, 70), temp[1].GetTexture.region, Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+                DrawString(SB, ResourceManager.GetFont("Arial_Font"), temp[1].Quantity.ToString(), basePos + new Vector2(295, 72), Color.White, .8f);
+            }
+
+            if (temp[2].GetItemType != ItemType.NONE)
+                SB.Draw(temp[2].GetTexture, basePos + new Vector2(220, 70 * 2), temp[2].GetTexture.region, Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+
+            if (temp[3].GetItemType != ItemType.NONE)
+                SB.Draw(temp[3].GetTexture, basePos + new Vector2(290, 70 * 2), temp[3].GetTexture.region, Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+
+            if (temp[4].GetItemType != ItemType.NONE)
+                SB.Draw(temp[4].GetTexture, basePos + new Vector2(220, 70 * 3), temp[4].GetTexture.region, Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+
+            if (temp[5].GetItemType != ItemType.NONE)
+                SB.Draw(temp[5].GetTexture, basePos + new Vector2(290, 70 * 3), temp[5].GetTexture.region, Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+
+        }
+
+        //----- General draw functions -----//
+        //Draw bars
         public Rectangle GenerateBar(float Current, float Max, int width, int height)
         {
             float Percent = Current / Max;
@@ -176,6 +213,8 @@ namespace HeroSiege.InterFace.GUI
             float Percent = Current / Max;
             return new Rectangle(0, 0, (int)(Percent * region.Width), region.Height);
         }
+
+        //Draw strings
         private void DrawCenterString(SpriteBatch SB, SpriteFont font, string text, Vector2 pos, Color color)
         {
             Vector2 orgin = font.MeasureString(text);
@@ -191,6 +230,6 @@ namespace HeroSiege.InterFace.GUI
             SB.DrawString(ResourceManager.GetFont("Arial_Font"), text, pos, color, 0, new Vector2(0,0), size, SpriteEffects.None, 1);
         }
 
-        private void DrawInventory(SpriteBatch SB, TextureRegion item_1, TextureRegion item_2, TextureRegion item_3, TextureRegion item_4, TextureRegion item_5, TextureRegion item_6) { }
+        
     }
 }

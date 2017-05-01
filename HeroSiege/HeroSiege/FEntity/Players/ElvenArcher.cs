@@ -45,6 +45,7 @@ namespace HeroSiege.FEntity.Players
         {
             base.Init();
             HeroName = HERO_NAME;
+            attackType = AttackType.Range;
         }
         protected override void InitStats()
         {
@@ -241,7 +242,7 @@ namespace HeroSiege.FEntity.Players
 
         public override int GetDmgOnStats()
         {
-            return (int)(Stats.Damage * (Stats.Agility / 100f)); //+inventory items
+            return (int)(Stats.Damage * (GetAgility() / 100f));
         }
     }
 }

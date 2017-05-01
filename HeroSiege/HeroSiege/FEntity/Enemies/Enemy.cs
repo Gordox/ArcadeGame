@@ -19,13 +19,6 @@ using HeroSiege.FEntity.Buildings;
 namespace HeroSiege.FEntity.Enemies
 {
 
-    public enum AttackType
-    {
-        Range,
-        Melee,
-        NONE
-    }
-
     class Enemy : Entity
     {
         public Hero PlayerTarget { get; set; }

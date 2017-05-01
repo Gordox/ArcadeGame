@@ -38,7 +38,6 @@ __________________________________
 Sounds & Music:
 __________________________________
 In Game: (Change name later maybe)
-Shop
 Teleport to mini bosses - DONE
 mini bosses
 End boss
@@ -51,10 +50,10 @@ SpriteFX - Done
 Particle - working on it
 __________________________________
 Buildnings:
+Shop - working on it (60% done)
 Hero castle - Working on
 Ballista (Deffends the hero tower) - Done
 Blockade for ballista - Done
-Shop
 Enemy tower - Done
 Enemy Spawner - Done (might shoot projectiles towards the player, have not yet decide)
 __________________________________

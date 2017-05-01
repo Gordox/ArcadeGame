@@ -45,6 +45,7 @@ namespace HeroSiege.GameWorld
         public List<Building> HeroBuildings { get; private set; }
         public List<Building> EnemyBuildings { get; private set; }
         public List<Building> DeadBuildings { get; private set; }
+        public List<Building> GeneralBuildings { get; private set; }
 
 
         //----- Game objects -----//
@@ -199,12 +200,14 @@ namespace HeroSiege.GameWorld
         {
             HeroBuildings = new List<Building>();
             EnemyBuildings = new List<Building>();
+            GeneralBuildings = new List<Building>();
             DeadBuildings = new List<Building>();
 
             if (Map != null)
             {
                 InitHeroBuildings();
                 InitEnemyBuildings();
+                ShopBuildings();
             }
 
         }
@@ -249,13 +252,20 @@ namespace HeroSiege.GameWorld
                 Hitboxes.Add(b.GetHitbox());
             }
         }
+        private void ShopBuildings()
+        {
+            for (int i = 0; i < Map.Shop.Count; i++)
+                GeneralBuildings.Add(new Shop(Map.Shop[i].X, Map.Shop[i].Y, this));
 
+            foreach (Building b in GeneralBuildings)
+                Hitboxes.Add(b.GetHitbox());
+        }
         //----- Updates-----//
         public void Update(float delta)
         {
             //Spawn controller
             spawnController.Update(delta);
-
+           
             //Entitys
             UpdatePlayers(delta);
             UpdateEnemies(delta);
@@ -263,6 +273,7 @@ namespace HeroSiege.GameWorld
             //Buildings
             UpdateEnemyBuildings(delta);
             UpdateHeroBuildings(delta);
+            UpdateGeneralBuildings(delta);
 
             //Game objects
             UpdateGameObjects(delta);
@@ -336,6 +347,17 @@ namespace HeroSiege.GameWorld
 
                 if (!build.IsAlive)
                     DeadBuildings.Add(build);
+            }
+        }
+        //GeneralBuildings
+        private void UpdateGeneralBuildings(float delta)
+        {
+            foreach (var build in GeneralBuildings)
+            {
+                build.Update(delta);
+
+                if (build is Shop)
+                    ((Shop)build).IsPlayersInRange(delta, new List<Hero>() { PlayerOne, PlayerTwo });
             }
         }
 
@@ -543,12 +565,14 @@ namespace HeroSiege.GameWorld
         }
 
         //----- Functions-----//
-        public void SpawnEffect(EffectType type, Vector2 pos)
+        public void SpawnEffect(EffectType type, Vector2 pos, float r = -1, float g = -1, float b = -1)
         {
             var fx = FXPool.GetObject();
             fx.SetPosition(pos);
             fx.ZIndex = 0.023f;
             fx.Color = Color.White;
+            if (r >= 0 && g >= 0 && b >= 0)
+                fx.Color = new Color(r, g, b);
 
             switch (type)
             {
@@ -593,7 +617,7 @@ namespace HeroSiege.GameWorld
                     fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Burning"), 0, 128, 32, 32, 6, 0.08f, new Point(6, 1), false, false)).SetAnimation("fx");
                     break;
                 case EffectType.Magic_Particle:
-                    fx.SetSize(32, 32);
+                    fx.SetSize(64, 64);
                     fx.AddAnimation("fx", new FrameAnimation(ResourceManager.GetTexture("Magic_Particle"), 0, 160, 32, 32, 6, 0.08f, new Point(6, 1), false, false)).SetAnimation("fx");
                     break;
                 case EffectType.Soul_Spin:

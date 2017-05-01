@@ -11,22 +11,33 @@ using HeroSiege.FGameObject.Projectiles;
 using HeroSiege.Manager;
 using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.FEntity.Buildings;
+using HeroSiege.InterFace.GUI;
+using HeroSiege.FGameObject.Items.Weapons;
 
 namespace HeroSiege.FEntity.Players
 {
     abstract class Hero : Entity
     {
-        const float START_XP = 100;
-        const int START_GOLD = 300;
+        const float START_XP = 100; //How much xp is needed for level 2
+        const int START_GOLD = 30000;
+
         public string HeroName { get; protected set; }
         private int gold;
 
+        protected AttackType attackType;
+
+        public Inventory Inventory { get; protected set; }
+        public bool isBuying { get; set; }
+        public bool CanBuy { get; set; }
+
         public List<Entity> Targets { get; protected set; }
         protected int totalTargets;
-        public bool isBuying { get; set; }
+
+
         public Hero(TextureRegion region, float x, float y, float width, float height)
             : base(region, x, y, width, height)
         {
+            Inventory = new Inventory();
         }
 
         public override void Init()
@@ -35,6 +46,7 @@ namespace HeroSiege.FEntity.Players
             isBuying = false;
             totalTargets = 1;
             Targets = new List<Entity>();
+            gold = START_GOLD;
         }
         protected override void InitStats()
         {
@@ -48,12 +60,19 @@ namespace HeroSiege.FEntity.Players
         //----- Updates-----//
         public override void Update(float delta)
         {
-            base.Update(delta);
-            UpdateAnimation();
             CheckXP();
+            base.Update(delta);
+
+            if (isBuying)
+                return;
+            CloseToShop();
+            UpdateAnimation();
         }
         public void UpdatePlayerMovement(float delta, List<Rectangle> objects)
         {
+            if (isBuying)
+                return;
+
             velocity = Vector2.Zero;
 
             if (Control != null && IsAlive)
@@ -80,6 +99,7 @@ namespace HeroSiege.FEntity.Players
             Stats.Level++;
             Stats.MaxXP = Stats.MaxXP + Stats.MaxXP / 2;
             Stats.XP = 0;
+            IncreaceTargets();
         }
         protected void CheckXP()
         {
@@ -87,10 +107,63 @@ namespace HeroSiege.FEntity.Players
                 LevelUP();
         }
         public void IncreaseXP(int xpValue) { Stats.XP += xpValue; }
+        private void IncreaceTargets()
+        {
+            Weapon w = null;
+            if (Inventory.GetInventory[2].ItemType == FGameObject.Items.ItemType.Weapon)
+                w = (Weapon)Inventory.GetInventory[2];
+            if (w == null)
+                return;
+
+            if (attackType == AttackType.Melee && w.WeaponType == FGameObject.Items.WeaponType.Cleave)
+            {
+                totalTargets += totalTargets * Stats.Level;
+            }
+            else if (attackType == AttackType.Range && w.WeaponType == FGameObject.Items.WeaponType.MultiShot)
+            {
+                totalTargets += totalTargets * Stats.Level;
+            }
+
+        }
+
+        //----- Gold handeling -----//
         public void IncreaseGold(int gold) { this.gold += gold; }
+        public void DecreaseGold(int g)
+        {
+            if(HaveEnoughGold(g))
+                this.gold -= g;
+        }
+        public bool HaveEnoughGold(int g)
+        {
+            if (gold - g >= 0)
+                return true;
+            else
+                return false;
+        }
+        public int GetGold
+        {
+            get { return this.gold; }
+        }
 
         //----- Shoping -----//
-
+        public void setIsBuying()
+        {
+            isBuying = !isBuying;
+        }
+        public void CloseToShop()
+        {
+            foreach (var s in Control.world.GeneralBuildings)
+            {
+                if (s is Shop)
+                    if (((Shop)s).playerInRange && Vector2.Distance(s.Position, Position) < s.Stats.Radius)
+                    {
+                        CanBuy = true;
+                        return;
+                    }
+                    else
+                        CanBuy = false;
+            }
+        }
 
         //----- Inventory -----//
 
@@ -102,12 +175,12 @@ namespace HeroSiege.FEntity.Players
         public virtual void MoveRight(float delta) { velocity.X = Stats.Speed; }
 
         //----- Button Input -----//
-        public virtual void GreenButton(World parent)  { } //Key G or numpad 4
+        public virtual void GreenButton(World parent)  { } //Key G or numpad 4 
         public virtual void BlueButton(World parent)   { } //Key H or numpad 5
-        public virtual void YellowButton(World parent) { } //Key B or numpad 1
-        public virtual void RedButton(World parent)    { } //Key N or numpad 2
-        public virtual void AButton(World parent) { } //Key M or numpad 3
-        public virtual void BButton(World parent) { }  //Key J or numpad 6
+        public virtual void YellowButton(World parent) { if (UseHealthPotion()) parent.SpawnEffect(FTexture2D.SpriteEffect.EffectType.Magic_Particle, Position, 255, 0, 0); } //Key B or numpad 1
+        public virtual void RedButton(World parent)    { if (UseManahPotion()) parent.SpawnEffect(FTexture2D.SpriteEffect.EffectType.Magic_Particle, Position, 0, 0, 255); } //Key N or numpad 2
+        public virtual void AButton(World parent) { if (CanBuy && !isBuying) setIsBuying(); } //Key M or numpad 3
+        public virtual void BButton(World parent) { if(isBuying) setIsBuying(); }  //Key J or numpad 6
 
         //----- Attacking method and functions -----//
         public void ChangeTotalTargets(int value)
@@ -222,7 +295,54 @@ namespace HeroSiege.FEntity.Players
             Targets.Clear();
         }
 
+        //----- Getters -----//
         public abstract int GetDamage();
         public abstract int GetDmgOnStats();
+
+        public int GetArmor()
+        {
+            return Stats.Armor + Inventory.GetArmor();
+        }
+
+        public int GetStrenght()
+        {
+            return Stats.Strength + Inventory.GetStrenght();
+        }
+        public int GetAgility()
+        {
+            return Stats.Agility + Inventory.GetAgility();
+        }
+        public int GetInteligence()
+        {
+            return Stats.Agility + Inventory.GetInteligence();
+        }
+
+        //---- Help methods -----//
+        protected bool UseHealthPotion()
+        {
+            bool temp = false;
+            int h = Inventory.UseHealingPotion();
+
+            if (h > 0)
+                temp = true;
+            Stats.Health += h;
+            if (Stats.Health > Stats.MaxHealth)
+                Stats.Health = Stats.MaxHealth;
+
+            return temp;
+        }
+        protected bool UseManahPotion()
+        {
+            bool temp = false;
+            int m = Inventory.UseManaPotion();
+
+            if (m > 0)
+                temp = true;
+            Stats.Mana += m;
+            if (Stats.Mana > Stats.MaxMana)
+                Stats.Mana = Stats.MaxMana;
+
+            return temp;
+        }
     }
 }

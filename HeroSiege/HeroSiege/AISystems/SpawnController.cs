@@ -1,4 +1,5 @@
-﻿using HeroSiege.FEntity.Buildings.EnemyBuildings;
+﻿using HeroSiege.FEntity;
+using HeroSiege.FEntity.Buildings.EnemyBuildings;
 using HeroSiege.FEntity.Controllers;
 using HeroSiege.FEntity.Enemies;
 using HeroSiege.FEntity.Enemies.Bosses;
@@ -54,12 +55,12 @@ namespace HeroSiege.AISystems
 
         private void InitWaveSystem()
         {
-            CurrentWave = 0;
+            CurrentWave = 6;
             TotalSpawned = 0;
             timer = 0;
             NextWave = true;
             allSpawnersDead = false;
-            // EnemyType();
+            EnemyType();
         }
 
         //----- Updates -----//

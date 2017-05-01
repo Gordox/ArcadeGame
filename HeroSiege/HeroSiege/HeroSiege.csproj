@@ -66,6 +66,16 @@
     <Compile Include="FEntity\Players\TestPlayer.cs" />
     <Compile Include="FEntity\StatsData.cs" />
     <Compile Include="FGameObject\GameObjectEnums.cs" />
+    <Compile Include="FGameObject\Items\Armors\Armor.cs" />
+    <Compile Include="FGameObject\Items\EItems.cs" />
+    <Compile Include="FGameObject\Items\Item.cs" />
+    <Compile Include="FGameObject\Items\Potions\HealingPotion.cs" />
+    <Compile Include="FGameObject\Items\Potions\ManaPotion.cs" />
+    <Compile Include="FGameObject\Items\Potions\Potion.cs" />
+    <Compile Include="FGameObject\Items\Potions\Reincarnation.cs" />
+    <Compile Include="FGameObject\Items\Weapons\Cleave.cs" />
+    <Compile Include="FGameObject\Items\Weapons\MultiShot.cs" />
+    <Compile Include="FGameObject\Items\Weapons\Weapon.cs" />
     <Compile Include="FGameObject\Portal.cs" />
     <Compile Include="FGameObject\Projectiles\Arrow.cs" />
     <Compile Include="FGameObject\Projectiles\Axe.cs" />
@@ -95,6 +105,7 @@
     <Compile Include="InterFace\GUI\Button.cs" />
     <Compile Include="InterFace\GUI\HUD.cs" />
     <Compile Include="InterFace\GUI\Inventory.cs" />
+    <Compile Include="InterFace\GUI\ShopWindow.cs" />
     <Compile Include="InterFace\IUI.cs" />
     <Compile Include="Manager\ResourceManager.cs" />
     <Compile Include="Manager\Resource\FontResource.cs" />
@@ -140,8 +151,6 @@
   <ItemGroup>
     <Folder Include="AISystems\FUSM\" />
     <Folder Include="Buildnings\" />
-    <Folder Include="FGameObject\Items\Armor\" />
-    <Folder Include="FGameObject\Items\Weapon\" />
     <Folder Include="Globals\" />
     <Folder Include="InterFace\UI\Menu\" />
   </ItemGroup>
