@@ -19,7 +19,7 @@ namespace HeroSiege.FEntity.Players
     abstract class Hero : Entity
     {
         const float START_XP = 100; //How much xp is needed for level 2
-        const int START_GOLD = 30000;
+        const int START_GOLD = 3000;
 
         public string HeroName { get; protected set; }
         private int gold;
@@ -343,6 +343,49 @@ namespace HeroSiege.FEntity.Players
                 Stats.Mana = Stats.MaxMana;
 
             return temp;
+        }
+        protected bool UseHealthPotion(int h)
+        {
+            bool temp = false;
+
+            if (h > 0)
+                temp = true;
+            Stats.Health += h;
+            if (Stats.Health > Stats.MaxHealth)
+                Stats.Health = Stats.MaxHealth;
+
+            return temp;
+        }
+        protected bool UseManahPotion(int m)
+        {
+            bool temp = false;
+
+            if (m > 0)
+                temp = true;
+            Stats.Mana += m;
+            if (Stats.Mana > Stats.MaxMana)
+                Stats.Mana = Stats.MaxMana;
+
+            return temp;
+        }
+        private bool UseRejuvenation()
+        {
+            FGameObject.Items.Potions.Reincarnation r = Inventory.UseRejuventation;
+            UseHealthPotion(r.Healing);
+            UseManahPotion(r.ManaRestoring);
+            return true;
+        }
+
+        //----- Other -----//
+        protected override void Death()
+        {
+            base.Death();
+            if(Inventory.HaveRejuvenation())
+            {
+                IsAlive = true;
+                UseRejuvenation();
+                SetMovmentAnimations();
+            }
         }
     }
 }

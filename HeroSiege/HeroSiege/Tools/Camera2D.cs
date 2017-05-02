@@ -19,22 +19,41 @@ namespace HeroSiege.Tools
         public float Zoom_Max = 3.0f;
         public float Zoom_Min = 0.1f;
 
+        int xMin, xMax, yMin, yMax;
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="viewport"></param>
-        public Camera2D(Viewport viewport)
+        public Camera2D(Viewport viewport, GameSettings settings)
         {
             zoom = 2.0f;
             pos = Vector2.Zero;
             ViewPort = viewport;
+
+            switch (settings.GameMode)
+            {
+                case GameMode.singlePlayer:
+                    xMin = 480;
+                    xMax = 2080;
+                    yMin = 300;
+                    yMax = 4660;
+                    break;
+                case GameMode.Multiplayer:
+                    xMin = 240;
+                    xMax = 2320;
+                    yMin = 300;
+                    yMax = 4660;
+                    break;
+                default:
+                    break;
+            }
         }
 
 
         //Methods
         public void Update()
         {
-            ClampPosValues(480, 2080, 0, 4565);
+            ClampPosValues(xMin, xMax, yMin, yMax);
 
             //Create view matrix
             transform = Matrix.CreateTranslation(new Vector3((float)Math.Round(-pos.X,1), (float)Math.Round(-pos.Y,1), 0)) *

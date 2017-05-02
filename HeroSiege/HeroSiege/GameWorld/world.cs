@@ -113,7 +113,7 @@ namespace HeroSiege.GameWorld
                     PlayerOne = new GryphonRider(32 * 40, 32 * 90, 96, 96);
                     break;
                 case CharacterType.FootMan:
-                    PlayerOne = new FootMan(32 * 40, 32 * 90, 64, 64);
+                    PlayerOne = new FootMan(32 * 38, 32 * 102, 64, 64);
                     break;
                 case CharacterType.Dwarven:
                     break;
@@ -140,7 +140,7 @@ namespace HeroSiege.GameWorld
                     PlayerTwo = new ElvenArcher(32 * 40, 32 * 90, 64, 64);
                     break;
                 case CharacterType.Mage:
-                    PlayerTwo = new Mage(32 * 40, 32 * 90, 64, 64);
+                    PlayerTwo = new Mage(32 * 43, 32 * 102, 64, 64);
                     break;
                 case CharacterType.Gryphon_Rider:
                     PlayerTwo = new GryphonRider(32 * 40, 32 * 90, 96, 96);

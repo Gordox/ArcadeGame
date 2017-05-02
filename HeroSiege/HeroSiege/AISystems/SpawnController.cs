@@ -55,7 +55,7 @@ namespace HeroSiege.AISystems
 
         private void InitWaveSystem()
         {
-            CurrentWave = 6;
+            CurrentWave = 0;
             TotalSpawned = 0;
             timer = 0;
             NextWave = true;

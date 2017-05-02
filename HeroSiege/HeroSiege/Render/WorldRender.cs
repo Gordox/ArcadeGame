@@ -46,7 +46,7 @@ namespace HeroSiege.Render
                 case GameMode.singlePlayer:
                     //Init view
                     singlePlayerView = graphicsDev.Viewport;
-                    this.Camera = new Camera2D(singlePlayerView);
+                    this.Camera = new Camera2D(singlePlayerView, settings);
                     //Init camera
                     break;
                 case GameMode.Multiplayer:
@@ -60,8 +60,8 @@ namespace HeroSiege.Render
                     playerTwoView.X = playerOneView.Width;
 
                     //Init camera
-                    this.PlayerOneCamera = new Camera2D(playerOneView);
-                    this.PlayerTwoCamera = new Camera2D(playerTwoView);
+                    this.PlayerOneCamera = new Camera2D(playerOneView, settings);
+                    this.PlayerTwoCamera = new Camera2D(playerTwoView, settings);
                     break;
                 default:
                     break;
@@ -306,9 +306,19 @@ namespace HeroSiege.Render
                     SB.DrawString(ResourceManager.GetFont("Arial_Font"), textDir + "\n" + textStats + "  "+ textGold, new Vector2(350, 2), Color.Black);
                 }
 
+
+                //----- Version Build -----//
+                SB.DrawString(ResourceManager.GetFont("Arial_Font"), "Version: Alpha 2.0 ", new Vector2(1600 / 2, 0), Color.Black);
+
                 //----- Camera pos -----//
-                if(Camera != null)
+                if (Camera != null)
                     SB.DrawString(ResourceManager.GetFont("Arial_Font"), "Camera: " + Camera.Position, new Vector2(1600/2, 0), Color.Black);
+
+                //if (PlayerOneCamera != null)
+                //    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "Pl_1 Camera: " + PlayerOneCamera.Position, new Vector2(1600 / 6 * 2, 0), Color.Black);
+
+                //if (PlayerTwoCamera != null)
+                //    SB.DrawString(ResourceManager.GetFont("Arial_Font"), "Pl_2 Camera: " + PlayerTwoCamera.Position, new Vector2(1600 / 6 * 4, 0), Color.Black);
 
 
             }

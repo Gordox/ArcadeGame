@@ -225,7 +225,6 @@ namespace HeroSiege.FEntity.Players
 
         protected override void Death()
         {
-            base.Death();
             IsAlive = false;
             if (MovingDirection == Direction.North || MovingDirection == Direction.North_East || MovingDirection == Direction.North_West || MovingDirection == Direction.East)
                 sprite.SetAnimation("Death_2");
@@ -233,6 +232,7 @@ namespace HeroSiege.FEntity.Players
                 sprite.SetAnimation("Death_1");
 
             sprite.Animations.CurrentAnimation.ResetAnimation();
+            base.Death();
         }
 
         public override int GetDamage()

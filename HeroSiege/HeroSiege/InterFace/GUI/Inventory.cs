@@ -49,7 +49,7 @@ namespace HeroSiege.InterFace.GUI
 
         private void AddPotion(Potion p)
         {
-            if (p.GetPotionType == PotionType.HealingPotion || p.PotionType == PotionType.GreaterHealingPotion)
+            if (p.GetPotionType == PotionType.HealingPotion || p.PotionType == PotionType.GreaterHealingPotion || p.PotionType == PotionType.RejuvenationPotion)
             {
                 if (items[0].GetItemType == ItemType.NONE)
                     items[0] = p;
@@ -77,8 +77,9 @@ namespace HeroSiege.InterFace.GUI
         {
             if(w.WeaponType == WeaponType.Cleave || w.WeaponType == WeaponType.MultiShot)
             {
-                if (items[2].GetItemType == ItemType.NONE)
-                    items[2] = w;
+                if (items[2].GetItemType != ItemType.NONE)
+                    DecreaseBunosStats((Weapon)items[2]);
+                items[2] = w;
                 IncreaseBunosStats(w);
                 
             }
@@ -155,6 +156,27 @@ namespace HeroSiege.InterFace.GUI
             bAgli -= w.GetItemAgility;
             bStr -= w.GetItemStrength;
             bInt -= w.GetItemInteligence;
+        }
+
+        public bool HaveRejuvenation()
+        {
+            if (items[0].ItemType != ItemType.NONE && ((Potion)items[0]).PotionType == PotionType.RejuvenationPotion)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public Reincarnation UseRejuventation
+        {
+            get {
+
+                Reincarnation r = (Reincarnation)items[0];
+                items[0] = new Item();
+                return r;
+
+            }
         }
 
         public int GetArmor()

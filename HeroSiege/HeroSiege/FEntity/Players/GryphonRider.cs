@@ -218,10 +218,10 @@ namespace HeroSiege.FEntity.Players
 
         protected override void Death()
         {
-            base.Death();
             IsAlive = false;
             sprite.SetAnimation("Death");
             sprite.Animations.CurrentAnimation.ResetAnimation();
+            base.Death();
         }
 
         public override int GetDamage()

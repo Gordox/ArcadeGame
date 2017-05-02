@@ -144,14 +144,21 @@ namespace HeroSiege.InterFace.GUI
                     }
                     break;
                 case ShopIndex.w2:
+                    if (ButtonPress(PlayerInput.A))
+                    {
+                        selectedItem = new Reincarnation(revieText);
+                        if (!player.HaveEnoughGold(selectedItem.GetItemCost))
+                            return;
+
+                        player.Inventory.AddItem(selectedItem);
+                        player.DecreaseGold(selectedItem.GetItemCost);
+                    }
                     break;
                 case ShopIndex.w3:
                     if (ButtonPress(PlayerInput.A))
                     {
                         selectedItem = new Cleave(CleaveText);
                         if (!player.HaveEnoughGold(selectedItem.GetItemCost))
-                            return;
-                        if (player.Inventory.GetInventory[2].GetItemType != ItemType.NONE)
                             return;
 
                         player.Inventory.AddItem(selectedItem);
@@ -163,8 +170,6 @@ namespace HeroSiege.InterFace.GUI
                     {
                         selectedItem = new MultiShot(multiShotText);
                         if (!player.HaveEnoughGold(selectedItem.GetItemCost))
-                            return;
-                        if (player.Inventory.GetInventory[2].GetItemType != ItemType.NONE)
                             return;
 
                         player.Inventory.AddItem(selectedItem);

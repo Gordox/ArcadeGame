@@ -25,7 +25,7 @@ namespace HeroSiege.FEntity.Players
         const int START_ARM = 20;
         const int START_DMG = 20;
 
-        const int START_HEALTH  = 400;
+        const int START_HEALTH  = 4000;
         const int START_MANA    = 200;
         const int START_MSPEED  = 400;
         const int START_SPEED   = 200;
@@ -217,10 +217,10 @@ namespace HeroSiege.FEntity.Players
 
         protected override void Death()
         {
-            base.Death();
             IsAlive = false;
             sprite.SetAnimation("Death");
             sprite.Animations.CurrentAnimation.ResetAnimation();
+            base.Death();
         }
 
         public override int GetDamage()
