@@ -21,7 +21,7 @@ namespace HeroSiege.Manager.Resource
         //Magic and Missiels
         private Texture2D explosionSprite, projectileSprite, effecSprite;
         //UI
-        private Texture2D hudTexture, xpbarLayer_1, xpbarLayer_2, basicIcons, heroPortraits, shopWindow, ItemIcons;
+        private Texture2D hudTexture, xpbarLayer_1, xpbarLayer_2, basicIcons, heroPortraits, shopWindow, ItemIcons, ItemInfoWindow;
         //Other
         private Texture2D blackPixel, whitePixel;
         //Debug
@@ -45,10 +45,10 @@ namespace HeroSiege.Manager.Resource
             tileTextureSummer = content.Load<Texture2D>(@"Assets\Texture\Tiles\Wc2-Tiles");
 
             //Heros
-            heroMage = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\MageHero");
-            heroArcher = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\ArcherHero");
-            heroFootMan = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\FootManHero");
-            heroKnight = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\KnightHero");
+            heroMage =        content.Load<Texture2D>(@"Assets\Texture\Units\Heros\MageHero");
+            heroArcher =      content.Load<Texture2D>(@"Assets\Texture\Units\Heros\ArcherHero");
+            heroFootMan =     content.Load<Texture2D>(@"Assets\Texture\Units\Heros\FootManHero");
+            heroKnight =      content.Load<Texture2D>(@"Assets\Texture\Units\Heros\KnightHero");
             heroGryponRider = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\GryphonRiderHero");
 
             //Enemies
@@ -76,13 +76,14 @@ namespace HeroSiege.Manager.Resource
             explosionSprite =  content.Load<Texture2D>(@"Assets\Texture\MagicAndProjectiles\Explosion");
 
             //--- UI ---//
-            hudTexture =    content.Load<Texture2D>(@"Assets\Texture\UI\Console\UI-HUD");
-            shopWindow =    content.Load<Texture2D>(@"Assets\Texture\UI\Console\ShopWindow");
-            xpbarLayer_1 =  content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_1");
-            xpbarLayer_2 =  content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_2");
-            basicIcons =    content.Load<Texture2D>(@"Assets\Texture\UI\Icons\BasicIcons");
-            ItemIcons =     content.Load<Texture2D>(@"Assets\Texture\UI\Icons\ItemIcons");
-            heroPortraits = content.Load<Texture2D>(@"Assets\Texture\UI\Portraits\Portraits");
+            hudTexture =     content.Load<Texture2D>(@"Assets\Texture\UI\Console\UI-HUD");
+            ItemInfoWindow = content.Load<Texture2D>(@"Assets\Texture\UI\Console\Item_Info_UI");
+            shopWindow =     content.Load<Texture2D>(@"Assets\Texture\UI\Console\ShopWindow");
+            xpbarLayer_1 =   content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_1");
+            xpbarLayer_2 =   content.Load<Texture2D>(@"Assets\Texture\UI\Bars\xpbarBorderLayer_2");
+            basicIcons =     content.Load<Texture2D>(@"Assets\Texture\UI\Icons\BasicIcons");
+            ItemIcons =      content.Load<Texture2D>(@"Assets\Texture\UI\Icons\ItemIcons");
+            heroPortraits =  content.Load<Texture2D>(@"Assets\Texture\UI\Portraits\Portraits");
 
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
@@ -105,12 +106,13 @@ namespace HeroSiege.Manager.Resource
             textureRegion["DebugRange"] = new TextureRegion(debugRange, 0, 0, 64, 64);
 
             //UI
-            textureRegion["HUDTexture"] =   new TextureRegion(hudTexture,   0, 0, hudTexture.Width,   hudTexture.Height);
-            textureRegion["ShopWindow"] =   new TextureRegion(shopWindow,   0, 0, shopWindow.Width, shopWindow.Height);
-            textureRegion["XpBarLayer_1"] = new TextureRegion(xpbarLayer_1, 0, 0, xpbarLayer_1.Width, xpbarLayer_1.Height);
-            textureRegion["XpBarLayer_2"] = new TextureRegion(xpbarLayer_2, 0, 0, xpbarLayer_2.Width, xpbarLayer_2.Height);
-            textureRegion["StatsIcons"] =   new TextureRegion(basicIcons,   0, 0, basicIcons.Width,   basicIcons.Height);
-            textureRegion["ItemIcons"] =    new TextureRegion(ItemIcons,    0, 0, ItemIcons.Width, ItemIcons.Height);
+            textureRegion["HUDTexture"] =       new TextureRegion(hudTexture,     0,  0, hudTexture.Width,     hudTexture.Height);
+            textureRegion["ItemInfoWindow"] =   new TextureRegion(ItemInfoWindow, 0,  0, ItemInfoWindow.Width, ItemInfoWindow.Height);
+            textureRegion["ShopWindow"] =       new TextureRegion(shopWindow,     0,  0, shopWindow.Width,     shopWindow.Height);
+            textureRegion["XpBarLayer_1"] =     new TextureRegion(xpbarLayer_1,   0,  0, xpbarLayer_1.Width,   xpbarLayer_1.Height);
+            textureRegion["XpBarLayer_2"] =     new TextureRegion(xpbarLayer_2,   0,  0, xpbarLayer_2.Width,   xpbarLayer_2.Height);
+            textureRegion["StatsIcons"] =       new TextureRegion(basicIcons,     0,  0, basicIcons.Width,     basicIcons.Height);
+            textureRegion["ItemIcons"] =        new TextureRegion(ItemIcons,      0,  0, ItemIcons.Width,      ItemIcons.Height);
             textureRegion["SoldierPortraits"] = new TextureRegion(heroPortraits,  0,  0, 96, 96);
             textureRegion["KnightPortraits"] =  new TextureRegion(heroPortraits, 96,  0, 96, 96);
             textureRegion["MagePortraits"] =    new TextureRegion(heroPortraits,  0, 96, 96, 96);

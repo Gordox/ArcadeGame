@@ -1,6 +1,7 @@
 ﻿using HeroSiege.FEntity.Players;
 using HeroSiege.FGameObject.Items;
 using HeroSiege.FTexture2D;
+using HeroSiege.InterFace.UIs;
 using HeroSiege.Manager;
 using HeroSiege.Tools;
 using Microsoft.Xna.Framework;
@@ -12,7 +13,7 @@ using System.Text;
 
 namespace HeroSiege.InterFace.GUI
 {
-    class HUD : IUI
+    class HUD : UI
     {
         GameSettings setting;
         Viewport viewPort;
@@ -87,13 +88,13 @@ namespace HeroSiege.InterFace.GUI
             }
         }
 
-        public void Update(float delta)
+        public override void Update(float delta)
         {
             
         }
 
 
-        public void Draw(SpriteBatch SB)
+        public override void Draw(SpriteBatch SB)
         {
             //Potrait
             SB.Draw(heroPortrait, new Vector2(position.X - 355, position.Y + 50), heroPortrait, Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
@@ -201,34 +202,7 @@ namespace HeroSiege.InterFace.GUI
 
         }
 
-        //----- General draw functions -----//
-        //Draw bars
-        public Rectangle GenerateBar(float Current, float Max, int width, int height)
-        {
-            float Percent = Current / Max;
-            return new Rectangle(0, 0, (int)(Percent * width), height);
-        }
-        public Rectangle GenerateBar(float Current, float Max, Rectangle region)
-        {
-            float Percent = Current / Max;
-            return new Rectangle(0, 0, (int)(Percent * region.Width), region.Height);
-        }
-
-        //Draw strings
-        private void DrawCenterString(SpriteBatch SB, SpriteFont font, string text, Vector2 pos, Color color)
-        {
-            Vector2 orgin = font.MeasureString(text);
-            SB.DrawString(ResourceManager.GetFont("Arial_Font"), text, pos, color, 0, new Vector2(orgin.X / 2, orgin.Y / 2), 1, SpriteEffects.None, 1);
-        }
-        private void DrawCenterString(SpriteBatch SB, SpriteFont font, string text, Vector2 pos, Color color, float size)
-        {
-            Vector2 orgin = font.MeasureString(text);
-            SB.DrawString(ResourceManager.GetFont("Arial_Font"), text, pos, color, 0, new Vector2(orgin.X / 2, orgin.Y / 2), size, SpriteEffects.None, 1);
-        }
-        private void DrawString(SpriteBatch SB, SpriteFont font, string text, Vector2 pos, Color color, float size)
-        {
-            SB.DrawString(ResourceManager.GetFont("Arial_Font"), text, pos, color, 0, new Vector2(0,0), size, SpriteEffects.None, 1);
-        }
+       
 
         
     }

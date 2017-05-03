@@ -12,6 +12,8 @@ using HeroSiege.FGameObject.Items.Potions;
 using HeroSiege.FTexture2D;
 using HeroSiege.FGameObject.Items;
 using HeroSiege.FGameObject.Items.Weapons;
+using HeroSiege.InterFace.UIs;
+using HeroSiege.FGameObject.Items.Armors;
 
 namespace HeroSiege.InterFace.GUI
 {
@@ -31,9 +33,8 @@ namespace HeroSiege.InterFace.GUI
         w11
     }
 
-    class ShopWindow : IUI
+    class ShopWindow : UI
     {
-
         Viewport viewPort;
         Hero player;
         Vector2 basePos;
@@ -45,6 +46,7 @@ namespace HeroSiege.InterFace.GUI
 
         ShopIndex sIndex;
         int index;
+
         public ShopWindow(GameSettings setting, Viewport viewPort, Hero player, PlayerIndex index)
         {
             this.viewPort = viewPort;
@@ -104,7 +106,7 @@ namespace HeroSiege.InterFace.GUI
         }
 
         //----- Updates -----//
-        public void Update(float delta)
+        public override void Update(float delta)
         {
             if (player.isBuying)
                 UpdateShopWindow();
@@ -121,10 +123,12 @@ namespace HeroSiege.InterFace.GUI
             
             switch (sIndex)
             {
-                case ShopIndex.w0:              
+                case ShopIndex.w0:
+
+                    selectedItem = new HealingPotion(healtText);
+
                     if (ButtonPress(PlayerInput.A))
                     {
-                        selectedItem = new HealingPotion(healtText);
                         if (!player.HaveEnoughGold(selectedItem.GetItemCost))
                             return;
 
@@ -133,9 +137,9 @@ namespace HeroSiege.InterFace.GUI
                     }
                     break;
                 case ShopIndex.w1:
+                    selectedItem = new ManaPotion(manaText);
                     if (ButtonPress(PlayerInput.A))
                     {
-                        selectedItem = new ManaPotion(manaText);
                         if (!player.HaveEnoughGold(selectedItem.GetItemCost))
                             return;
 
@@ -144,9 +148,9 @@ namespace HeroSiege.InterFace.GUI
                     }
                     break;
                 case ShopIndex.w2:
+                    selectedItem = new Reincarnation(revieText);
                     if (ButtonPress(PlayerInput.A))
                     {
-                        selectedItem = new Reincarnation(revieText);
                         if (!player.HaveEnoughGold(selectedItem.GetItemCost))
                             return;
 
@@ -155,9 +159,9 @@ namespace HeroSiege.InterFace.GUI
                     }
                     break;
                 case ShopIndex.w3:
+                    selectedItem = new Cleave(CleaveText);
                     if (ButtonPress(PlayerInput.A))
                     {
-                        selectedItem = new Cleave(CleaveText);
                         if (!player.HaveEnoughGold(selectedItem.GetItemCost))
                             return;
 
@@ -166,9 +170,9 @@ namespace HeroSiege.InterFace.GUI
                     }
                     break;
                 case ShopIndex.w4:
+                    selectedItem = new MultiShot(multiShotText);
                     if (ButtonPress(PlayerInput.A))
-                    {
-                        selectedItem = new MultiShot(multiShotText);
+                    {                     
                         if (!player.HaveEnoughGold(selectedItem.GetItemCost))
                             return;
 
@@ -177,18 +181,25 @@ namespace HeroSiege.InterFace.GUI
                     }
                     break;
                 case ShopIndex.w5:
+                    selectedItem = new Item();
                     break;
                 case ShopIndex.w6:
+                    selectedItem = new Item();
                     break;
                 case ShopIndex.w7:
+                    selectedItem = new Item();
                     break;
                 case ShopIndex.w8:
+                    selectedItem = new Item();
                     break;
                 case ShopIndex.w9:
+                    selectedItem = new Item();
                     break;
                 case ShopIndex.w10:
+                    selectedItem = new Item();
                     break;
                 case ShopIndex.w11:
+                    selectedItem = new Item();
                     break;
                 default:
                     break;
@@ -218,11 +229,12 @@ namespace HeroSiege.InterFace.GUI
         }
 
         //----- Draws -----//
-        public void Draw(SpriteBatch SB)
+        public override void Draw(SpriteBatch SB)
         {
             SB.Draw(ResourceManager.GetTexture("ShopWindow"), basePos + new Vector2(0,-50), null, Color.White, 0, new Vector2(windowSize.X / 2, 0), 2, SpriteEffects.None, 0);
             DrawItemIcon(SB);
             DrawSelectedWindow(SB);
+            DrawItemInfo(SB);
         }
         private void DrawItemIcon(SpriteBatch SB)
         {
@@ -240,10 +252,70 @@ namespace HeroSiege.InterFace.GUI
 
             SB.Draw(selectTexture, basePos + offset + drawOffsets[index], selectTexture, Color.White);
         }
+        private void DrawItemInfo(SpriteBatch SB)
+        {
+            SB.Draw(ResourceManager.GetTexture("ItemInfoWindow"), basePos + new Vector2(0, -200), null, Color.White, 0, new Vector2(windowSize.X / 2, 0), new Vector2(1,1), SpriteEffects.None, 0);
 
+            if (selectedItem == null || (selectedItem != null && selectedItem.ItemType == ItemType.NONE))
+                return;
+            if(selectedItem.ItemType == ItemType.Potion)
+                DrawPotionInfo(SB, basePos + new Vector2(-100, -195), (Potion)selectedItem);
+            else if (selectedItem.ItemType == ItemType.Weapon)
+                DrawWeaponInfo(SB, basePos + new Vector2(-100, -195), (Weapon)selectedItem);
+            else if (selectedItem.ItemType == ItemType.Armor)
+                DrawArmorInfo(SB, basePos + new Vector2(-100, -195), (Armor)selectedItem);
+
+            //
+        }
         
+        private void DrawPotionInfo(SpriteBatch SB, Vector2 pos, Potion p)
+        {
+            DrawString(SB, ResourceManager.GetFont("Arial_Font"),
+                "Name: " +p.ItemName
+                +"\nCost: "+p.GetItemCost+ " gold", pos, Color.White, 1);
 
-       
+            if(p.PotionType == PotionType.HealingPotion || p.PotionType == PotionType.GreaterHealingPotion)
+                DrawString(SB, ResourceManager.GetFont("Arial_Font"), "\n\nHeals: " + p.Healing, pos, Color.White, 1);
+            else if (p.PotionType == PotionType.ManaPotion || p.PotionType == PotionType.GreaterManaPotion)
+                DrawString(SB, ResourceManager.GetFont("Arial_Font"), "\n\nMana restoring: " + p.ManaRestoring, pos, Color.White, 1);
+            else if (p.PotionType == PotionType.RejuvenationPotion)
+                DrawString(SB, ResourceManager.GetFont("Arial_Font"), "\n\nRevive on death" +
+                                                                      "\nHeals: " + p.Healing +
+                                                                      "\nMana restoring: " + p.ManaRestoring, pos, Color.White, 1);
+        }
+        private void DrawWeaponInfo(SpriteBatch SB, Vector2 pos, Weapon w)
+        {
+            DrawString(SB, ResourceManager.GetFont("Arial_Font"),
+                "Name: " + w.ItemName
+                + "\nCost: " + w.GetItemCost + " gold", pos, Color.White, 1);
+
+            string extraInfo ="\n";
+            if (w.WeaponType == WeaponType.Cleave)
+                extraInfo += "\nFor Melee type";
+            else if (w.WeaponType == WeaponType.MultiShot)
+                extraInfo += "\nFor Range type";
+
+            DrawString(SB, ResourceManager.GetFont("Arial_Font"), extraInfo +
+                                                                  "\nDamage: " + w.GetItemDamage +
+                                                                  "\nStrength: " + w.GetItemStrength +
+                                                                  "\nAgility: " + w.GetItemAgility +
+                                                                  "\nInteligence: " + w.GetItemInteligence,
+                                                                  
+                                                                  pos, Color.White, 1);
+        }
+        private void DrawArmorInfo(SpriteBatch SB, Vector2 pos, Armor a)
+        {
+            DrawString(SB, ResourceManager.GetFont("Arial_Font"),
+                "Name: " + a.ItemName
+                + "\nCost: " + a.GetItemCost + " gold", pos, Color.White, 1);
+
+            DrawString(SB, ResourceManager.GetFont("Arial_Font"),"\n\nArmor: " + a.GetItemArmor +
+                                                                  "\nStrength: " + a.GetItemStrength +
+                                                                  "\nAgility: " + a.GetItemAgility +
+                                                                  "\nInteligence: " + a.GetItemInteligence,
+                                                                  pos, Color.White, 1);
+        }
+
         private bool ButtonPress(PlayerInput b)
         {
             return InputHandler.GetButtonState(playerIndex, b) == InputState.Released;

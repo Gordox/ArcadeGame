@@ -107,6 +107,7 @@
     <Compile Include="InterFace\GUI\Inventory.cs" />
     <Compile Include="InterFace\GUI\ShopWindow.cs" />
     <Compile Include="InterFace\IUI.cs" />
+    <Compile Include="InterFace\UIs\UI.cs" />
     <Compile Include="Manager\ResourceManager.cs" />
     <Compile Include="Manager\Resource\FontResource.cs" />
     <Compile Include="Manager\Resource\SoundResource.cs" />
@@ -152,7 +153,7 @@
     <Folder Include="AISystems\FUSM\" />
     <Folder Include="Buildnings\" />
     <Folder Include="Globals\" />
-    <Folder Include="InterFace\UI\Menu\" />
+    <Folder Include="InterFace\UIs\Menu\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

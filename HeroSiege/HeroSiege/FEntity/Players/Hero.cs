@@ -33,7 +33,6 @@ namespace HeroSiege.FEntity.Players
         public List<Entity> Targets { get; protected set; }
         protected int totalTargets;
 
-
         public Hero(TextureRegion region, float x, float y, float width, float height)
             : base(region, x, y, width, height)
         {
@@ -57,7 +56,7 @@ namespace HeroSiege.FEntity.Players
             Stats.XP = 0;
         }
 
-        //----- Updates-----//
+        //----- Updates -----//
         public override void Update(float delta)
         {
             CheckXP();
@@ -166,7 +165,63 @@ namespace HeroSiege.FEntity.Players
         }
 
         //----- Inventory -----//
+        protected bool UseHealthPotion()
+        {
+            bool temp = false;
+            int h = Inventory.UseHealingPotion();
 
+            if (h > 0)
+                temp = true;
+            Stats.Health += h;
+            if (Stats.Health > Stats.MaxHealth)
+                Stats.Health = Stats.MaxHealth;
+
+            return temp;
+        }
+        protected bool UseManahPotion()
+        {
+            bool temp = false;
+            int m = Inventory.UseManaPotion();
+
+            if (m > 0)
+                temp = true;
+            Stats.Mana += m;
+            if (Stats.Mana > Stats.MaxMana)
+                Stats.Mana = Stats.MaxMana;
+
+            return temp;
+        }
+        protected bool UseHealthPotion(int h)
+        {
+            bool temp = false;
+
+            if (h > 0)
+                temp = true;
+            Stats.Health += h;
+            if (Stats.Health > Stats.MaxHealth)
+                Stats.Health = Stats.MaxHealth;
+
+            return temp;
+        }
+        protected bool UseManahPotion(int m)
+        {
+            bool temp = false;
+
+            if (m > 0)
+                temp = true;
+            Stats.Mana += m;
+            if (Stats.Mana > Stats.MaxMana)
+                Stats.Mana = Stats.MaxMana;
+
+            return temp;
+        }
+        private bool UseRejuvenation()
+        {
+            FGameObject.Items.Potions.Reincarnation r = Inventory.UseRejuventation;
+            UseHealthPotion(r.Healing);
+            UseManahPotion(r.ManaRestoring);
+            return true;
+        }
 
         //----- Movment -----//
         public virtual void MoveUp(float delta)    { velocity.Y = -Stats.Speed; }
@@ -303,7 +358,6 @@ namespace HeroSiege.FEntity.Players
         {
             return Stats.Armor + Inventory.GetArmor();
         }
-
         public int GetStrenght()
         {
             return Stats.Strength + Inventory.GetStrenght();
@@ -318,63 +372,7 @@ namespace HeroSiege.FEntity.Players
         }
 
         //---- Help methods -----//
-        protected bool UseHealthPotion()
-        {
-            bool temp = false;
-            int h = Inventory.UseHealingPotion();
 
-            if (h > 0)
-                temp = true;
-            Stats.Health += h;
-            if (Stats.Health > Stats.MaxHealth)
-                Stats.Health = Stats.MaxHealth;
-
-            return temp;
-        }
-        protected bool UseManahPotion()
-        {
-            bool temp = false;
-            int m = Inventory.UseManaPotion();
-
-            if (m > 0)
-                temp = true;
-            Stats.Mana += m;
-            if (Stats.Mana > Stats.MaxMana)
-                Stats.Mana = Stats.MaxMana;
-
-            return temp;
-        }
-        protected bool UseHealthPotion(int h)
-        {
-            bool temp = false;
-
-            if (h > 0)
-                temp = true;
-            Stats.Health += h;
-            if (Stats.Health > Stats.MaxHealth)
-                Stats.Health = Stats.MaxHealth;
-
-            return temp;
-        }
-        protected bool UseManahPotion(int m)
-        {
-            bool temp = false;
-
-            if (m > 0)
-                temp = true;
-            Stats.Mana += m;
-            if (Stats.Mana > Stats.MaxMana)
-                Stats.Mana = Stats.MaxMana;
-
-            return temp;
-        }
-        private bool UseRejuvenation()
-        {
-            FGameObject.Items.Potions.Reincarnation r = Inventory.UseRejuventation;
-            UseHealthPotion(r.Healing);
-            UseManahPotion(r.ManaRestoring);
-            return true;
-        }
 
         //----- Other -----//
         protected override void Death()
