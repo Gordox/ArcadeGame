@@ -41,7 +41,8 @@ namespace HeroSiege.InterFace.GUI
         PlayerIndex playerIndex;
         Point windowSize;
         Item selectedItem;
-        TextureRegion selectTexture, healtText, manaText, revieText, CleaveText, multiShotText;
+        TextureRegion selectTexture, healtText, manaText, revieText, CleaveText, multiShotText, DevastationText,
+            StaffOfHapText, AggramText, CloackWisText, DragonscText, FirewalkText, JusticeGazText, SaruansText;
         Vector2[] drawOffsets;
 
         ShopIndex sIndex;
@@ -67,20 +68,24 @@ namespace HeroSiege.InterFace.GUI
         private void InitTexture()
         {
             selectTexture = new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 0, 0, 78, 78);
-            healtText =     new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78, 0, 78, 78);
-            manaText =      new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78 * 2, 0, 78, 78);
-            revieText =     new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78 * 3, 0, 78, 78);
+            //Potions
+            healtText =     new TextureRegion(ResourceManager.GetTexture("ItemIcons"),  78, 0, 78, 78);
+            manaText =      new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 156, 0, 78, 78);
+            revieText =     new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 234, 0, 78, 78);
+            //Weapons
+            CleaveText =      new TextureRegion(ResourceManager.GetTexture("ItemIcons"),   0,  78, 78, 78);
+            multiShotText =   new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 234,  78, 78, 78);
+            DevastationText = new TextureRegion(ResourceManager.GetTexture("ItemIcons"),  78,  78, 78, 78);
+            StaffOfHapText =  new TextureRegion(ResourceManager.GetTexture("ItemIcons"),   0, 156, 78, 78);
+            //Armors
+            AggramText =     new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 234, 234, 78, 78);
+            CloackWisText =  new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 234, 156, 78, 78);
+            DragonscText =   new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 156, 156, 78, 78);
+            FirewalkText =   new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 156, 234, 78, 78);
+            JusticeGazText = new TextureRegion(ResourceManager.GetTexture("ItemIcons"),  78, 234, 78, 78);
+            SaruansText =    new TextureRegion(ResourceManager.GetTexture("ItemIcons"),   0, 234, 78, 78);
 
-            CleaveText =    new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 0, 78, 78, 78);
-            multiShotText = new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78 * 3, 78, 78, 78);
 
-            //healtText = new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78, 0, 78, 78);
-            //healtText = new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78, 0, 78, 78);
-            //healtText = new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78, 0, 78, 78);
-            //healtText = new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78, 0, 78, 78);
-            //healtText = new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78, 0, 78, 78);
-            //healtText = new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78, 0, 78, 78);
-            //healtText = new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78, 0, 78, 78);
 
         }
         private void InitDrawOffset()
@@ -119,90 +124,56 @@ namespace HeroSiege.InterFace.GUI
         private void UpdateShopWindow()
         {
             UpdateJoystick();
-
-            
+             
             switch (sIndex)
             {
                 case ShopIndex.w0:
-
                     selectedItem = new HealingPotion(healtText);
-
-                    if (ButtonPress(PlayerInput.A))
-                    {
-                        if (!player.HaveEnoughGold(selectedItem.GetItemCost))
-                            return;
-
-                        player.Inventory.AddItem(selectedItem);
-                        player.DecreaseGold(selectedItem.GetItemCost);
-                    }
                     break;
                 case ShopIndex.w1:
                     selectedItem = new ManaPotion(manaText);
-                    if (ButtonPress(PlayerInput.A))
-                    {
-                        if (!player.HaveEnoughGold(selectedItem.GetItemCost))
-                            return;
-
-                        player.Inventory.AddItem(selectedItem);
-                        player.DecreaseGold(selectedItem.GetItemCost);
-                    }
                     break;
                 case ShopIndex.w2:
                     selectedItem = new Reincarnation(revieText);
-                    if (ButtonPress(PlayerInput.A))
-                    {
-                        if (!player.HaveEnoughGold(selectedItem.GetItemCost))
-                            return;
-
-                        player.Inventory.AddItem(selectedItem);
-                        player.DecreaseGold(selectedItem.GetItemCost);
-                    }
                     break;
                 case ShopIndex.w3:
                     selectedItem = new Cleave(CleaveText);
-                    if (ButtonPress(PlayerInput.A))
-                    {
-                        if (!player.HaveEnoughGold(selectedItem.GetItemCost))
-                            return;
-
-                        player.Inventory.AddItem(selectedItem);
-                        player.DecreaseGold(selectedItem.GetItemCost);
-                    }
                     break;
                 case ShopIndex.w4:
                     selectedItem = new MultiShot(multiShotText);
-                    if (ButtonPress(PlayerInput.A))
-                    {                     
-                        if (!player.HaveEnoughGold(selectedItem.GetItemCost))
-                            return;
-
-                        player.Inventory.AddItem(selectedItem);
-                        player.DecreaseGold(selectedItem.GetItemCost);
-                    }
                     break;
                 case ShopIndex.w5:
-                    selectedItem = new Item();
+                    selectedItem = new Devastation(DevastationText);
                     break;
                 case ShopIndex.w6:
-                    selectedItem = new Item();
+                    selectedItem = new StaffOfHappiness(StaffOfHapText);
                     break;
                 case ShopIndex.w7:
-                    selectedItem = new Item();
+                    selectedItem = new DragonScaleChest(DragonscText);
                     break;
                 case ShopIndex.w8:
-                    selectedItem = new Item();
+                    selectedItem = new CloakOfWisdom(CloackWisText);
                     break;
                 case ShopIndex.w9:
-                    selectedItem = new Item();
+                    selectedItem = new SaruansResolve(SaruansText);
                     break;
                 case ShopIndex.w10:
-                    selectedItem = new Item();
+                    selectedItem = new JusticeGaze(JusticeGazText);
                     break;
                 case ShopIndex.w11:
-                    selectedItem = new Item();
+                    selectedItem = new FirestoneWalkers(FirewalkText);
                     break;
                 default:
                     break;
+            }
+
+            if (ButtonPress(PlayerInput.A))
+            {
+                if (!player.HaveEnoughGold(selectedItem.GetItemCost))
+                    return;
+
+                player.Inventory.AddItem(selectedItem);
+                player.DecreaseGold(selectedItem.GetItemCost);
             }
         }
         private void UpdateSelected(int i)
@@ -242,8 +213,17 @@ namespace HeroSiege.InterFace.GUI
             SB.Draw(healtText, basePos + offset + drawOffsets[0], healtText, Color.White);
             SB.Draw(manaText, basePos + offset + drawOffsets[1], manaText, Color.White);
             SB.Draw(revieText, basePos + offset + drawOffsets[2], revieText, Color.White);
+
             SB.Draw(CleaveText, basePos + offset + drawOffsets[3], CleaveText, Color.White);
             SB.Draw(multiShotText, basePos + offset + drawOffsets[4], multiShotText, Color.White);
+            SB.Draw(DevastationText, basePos + offset + drawOffsets[5], DevastationText, Color.White);
+            SB.Draw(StaffOfHapText, basePos + offset + drawOffsets[6], StaffOfHapText, Color.White);
+
+            SB.Draw(DragonscText, basePos + offset + drawOffsets[7], DragonscText, Color.White);
+            SB.Draw(CloackWisText, basePos + offset + drawOffsets[8], CloackWisText, Color.White);
+            SB.Draw(SaruansText, basePos + offset + drawOffsets[9], SaruansText, Color.White);
+            SB.Draw(JusticeGazText, basePos + offset + drawOffsets[10], JusticeGazText, Color.White);
+            SB.Draw(FirewalkText, basePos + offset + drawOffsets[11], FirewalkText, Color.White);
 
         }
         private void DrawSelectedWindow(SpriteBatch SB)
@@ -271,8 +251,8 @@ namespace HeroSiege.InterFace.GUI
         private void DrawPotionInfo(SpriteBatch SB, Vector2 pos, Potion p)
         {
             DrawString(SB, ResourceManager.GetFont("Arial_Font"),
-                "Name: " +p.ItemName
-                +"\nCost: "+p.GetItemCost+ " gold", pos, Color.White, 1);
+                "Name: " + p.ItemName
+                +"\nCost: " + p.GetItemCost + " gold", pos, Color.White, 1);
 
             if(p.PotionType == PotionType.HealingPotion || p.PotionType == PotionType.GreaterHealingPotion)
                 DrawString(SB, ResourceManager.GetFont("Arial_Font"), "\n\nHeals: " + p.Healing, pos, Color.White, 1);
@@ -280,6 +260,7 @@ namespace HeroSiege.InterFace.GUI
                 DrawString(SB, ResourceManager.GetFont("Arial_Font"), "\n\nMana restoring: " + p.ManaRestoring, pos, Color.White, 1);
             else if (p.PotionType == PotionType.RejuvenationPotion)
                 DrawString(SB, ResourceManager.GetFont("Arial_Font"), "\n\nRevive on death" +
+                                                                      "\nWill REMOVE ALL \nhealing potion"+
                                                                       "\nHeals: " + p.Healing +
                                                                       "\nMana restoring: " + p.ManaRestoring, pos, Color.White, 1);
         }

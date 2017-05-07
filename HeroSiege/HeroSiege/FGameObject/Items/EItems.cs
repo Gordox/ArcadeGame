@@ -28,15 +28,18 @@ namespace HeroSiege.FGameObject.Items
         NONE,
         Cleave,
         MultiShot,
-        HeavyAxe,
-        TitanStaff,
-        GoldenBow,
-
+        Devastation,
+        StaffOfHappiness
     }
 
     public enum ArmorType
     {
         NONE,
-
+        AggramarsStride,
+        CloakOfWisdom,
+        DragonScaleChest,
+        FirestoneWalkers,
+        JusticeGaze,
+        SaruansResolve
     }
 }

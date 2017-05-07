@@ -30,7 +30,7 @@ Player info about characters and enemies
 Player controls
 __________________________________
 Scenes:
-Start scene
+Start scene - working on it
 Option scene
 Game scene (almost done? basic stuff)
 Score scene
@@ -50,7 +50,7 @@ SpriteFX - Done
 Particle - working on it
 __________________________________
 Buildnings:
-Shop - working on it (70% done)
+Shop - Done
 Hero castle - Working on
 Ballista (Deffends the hero tower) - Done
 Blockade for ballista - Done
@@ -58,7 +58,9 @@ Enemy tower - Done
 Enemy Spawner - Done (might shoot projectiles towards the player, have not yet decide)
 __________________________________
 HUD / UI / GUI:
-HUD - Working on it (90% only inventoiy left)
+HUD - Done
+ShopWindow - Done
+InGame menu
 __________________________________
 Need to fix and do:
 Make a base class for the player hero and the enemies, called "Hero" & "Enemy" that inherent from entity - DONE

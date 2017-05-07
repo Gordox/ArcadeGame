@@ -93,13 +93,15 @@ namespace HeroSiege.InterFace.GUI
             
         }
 
-
         public override void Draw(SpriteBatch SB)
         {
             //Potrait
-            SB.Draw(heroPortrait, new Vector2(position.X - 355, position.Y + 50), heroPortrait, Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
+            if(heroPortrait != null)
+                SB.Draw(heroPortrait, new Vector2(position.X - 355, position.Y + 50), heroPortrait, Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
+
             //HUD
             SB.Draw(ResourceManager.GetTexture("HUDTexture"), position, null, Color.White, 0, new Vector2(hudSize.X / 2, 0), 1, SpriteEffects.None, 0);
+
             // Middle Mana / Health / EXP / Name / stats
             DrawCenterString(SB, ResourceManager.GetFont("Arial_Font"), player.HeroName, position + new Vector2(0, 80), Color.White, 1.5f);
             DrawHealtManaStatus(SB);
@@ -107,16 +109,24 @@ namespace HeroSiege.InterFace.GUI
             int offsetY = ResourceManager.GetTexture("XpBarLayer_1").region.Height / 2;
             Vector2 xpBarPos = new Vector2(position.X - offsetX - 20, viewPort.Height - 170);
             DrawEXPBar(SB, xpBarPos, new Vector2(offsetX, offsetY));
-                //Attack
+            //Attack
             DrawStatsInfo(SB, attackIcon, ResourceManager.GetFont("Arial_Font"), position + new Vector2(-offsetX - 20, 140), "Damage:", player.Stats.Damage, player.GetDmgOnStats());
-                //Armor
-            DrawStatsInfo(SB, armorIcon, ResourceManager.GetFont("Arial_Font"), position + new Vector2(-offsetX - 20, 150 + armorIcon.region.Height/2), "Armor:", player.GetArmor());
-                //Stats
+            //Armor
+            DrawStatsInfo(SB, armorIcon, ResourceManager.GetFont("Arial_Font"), position + new Vector2(-offsetX - 20, 150 + armorIcon.region.Height / 2), "Armor:", player.GetArmor());
+            //Stats
             DrawStatsInfo(SB, mainStatsIcon, ResourceManager.GetFont("Arial_Font"), position + new Vector2(-offsetX + 140, 130 + armorIcon.region.Height / 3), "Strength:", player.GetStrenght().ToString(), "Agility:", player.GetAgility().ToString(), "Intelligence:", player.GetInteligence().ToString());
             //Inventory
             DrawInventory(SB, position);
+
+            //Gold
+            DrawGoldStats(SB, position + new Vector2(-viewPort.Width / 2 + (index == PlayerIndex.One ? 0 : ResourceManager.GetTexture("ScreenSplitter").region.Width / 2), -position.Y));
         }
 
+        private void DrawGoldStats(SpriteBatch SB, Vector2 pos)
+        {
+            SB.Draw(ResourceManager.GetTexture("GoldUI"), pos, null, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+            DrawStringLeftSided(SB, ResourceManager.GetFont("Arial_Font"), player.GetGold.ToString(), pos + new Vector2(105, 4), Color.White, 1);
+        }
 
         private void DrawHealtManaStatus(SpriteBatch SB)
         {
@@ -202,8 +212,5 @@ namespace HeroSiege.InterFace.GUI
 
         }
 
-       
-
-        
     }
 }

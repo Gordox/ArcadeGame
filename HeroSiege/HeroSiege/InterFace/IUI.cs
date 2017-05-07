@@ -8,7 +8,6 @@ namespace HeroSiege.InterFace
 {
     interface IUI
     {
-
         void Update(float delta);
         void Draw(SpriteBatch SB);
     }

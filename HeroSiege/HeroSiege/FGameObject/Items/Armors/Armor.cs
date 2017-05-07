@@ -13,8 +13,17 @@ namespace HeroSiege.FGameObject.Items.Armors
         {
             this.ArmorType = armorType;
         }
+        public Armor(ItemType itemType, ArmorType armorType)
+           : base(itemType)
+        {
+            this.ArmorType = armorType;
+        }
 
-
+        protected override void InitAtributes()
+        {
+            base.InitAtributes();
+            maxQuantity = 1;
+        }
 
         public int GetItemInteligence
         {

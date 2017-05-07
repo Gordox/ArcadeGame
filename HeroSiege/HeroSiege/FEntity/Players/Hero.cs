@@ -19,7 +19,7 @@ namespace HeroSiege.FEntity.Players
     abstract class Hero : Entity
     {
         const float START_XP = 100; //How much xp is needed for level 2
-        const int START_GOLD = 3000;
+        const int START_GOLD = 10000;
 
         public string HeroName { get; protected set; }
         private int gold;

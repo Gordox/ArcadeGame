@@ -10,13 +10,9 @@ namespace HeroSiege.InterFace.UIs
 {
     abstract class UI : IUI
     {
-        public virtual void Draw(SpriteBatch SB)
-        {           
-        }
-       
-        public virtual void Update(float delta)
-        {
-        }
+        public abstract void Draw(SpriteBatch SB);
+
+        public abstract void Update(float delta);
 
         //----- General draw functions -----//
         //Draw bars
@@ -45,6 +41,11 @@ namespace HeroSiege.InterFace.UIs
         protected void DrawString(SpriteBatch SB, SpriteFont font, string text, Vector2 pos, Color color, float size)
         {
             SB.DrawString(font, text, pos, color, 0, new Vector2(0, 0), size, SpriteEffects.None, 1);
+        }
+        protected void DrawStringLeftSided(SpriteBatch SB, SpriteFont font, string text, Vector2 pos, Color color, float size)
+        {
+            float offset = font.MeasureString(text).Length();
+            SB.DrawString(font, text, pos, color, 0, new Vector2(offset, 0), size, SpriteEffects.None, 1);
         }
     }
 }

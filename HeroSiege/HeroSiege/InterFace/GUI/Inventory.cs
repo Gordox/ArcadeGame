@@ -37,7 +37,7 @@ namespace HeroSiege.InterFace.GUI
                     AddPotion((Potion)item);
                     break;
                 case ItemType.Armor:
-
+                    AddArmor((Armor)item);
                     break;
                 case ItemType.Weapon:
                     AddWeapon((Weapon)item);
@@ -85,12 +85,39 @@ namespace HeroSiege.InterFace.GUI
             }
             else
             {
+                if(items[3].ItemType != ItemType.NONE)
+                    DecreaseBunosStats((Weapon)items[3]);
                 items[3] = w;
                 IncreaseBunosStats(w);
             }
 
         }
+        private void AddArmor(Armor a)
+        {
+            if (items[4].ItemType == ItemType.NONE)
+            {
+                items[4] = a;
+                IncreaseBunosStats(a);
+            }
+            else if (items[5].ItemType == ItemType.NONE && a.ArmorType != ((Armor)items[4]).ArmorType)
+            {
+                items[5] = a;
+                IncreaseBunosStats(a);
+            }
+            else
+            {
+                if (((Armor)items[4]).ArmorType == a.ArmorType || ((Armor)items[5]).ArmorType == a.ArmorType)
+                    return;
 
+                int index = new Random().Next(4, 6);
+                Armor inv = (Armor)items[index];
+                DecreaseBunosStats(inv);
+                items[index] = a;
+                IncreaseBunosStats(a);
+
+            }
+
+        }
 
         public int UseHealingPotion()
         {
@@ -203,9 +230,3 @@ namespace HeroSiege.InterFace.GUI
 
     }
 }
-/*
- *   const int STRENGTH = 0;
-        const int INTELIGENCE = 0;
-        const int AGILITY = 0;
-        const int DAMAGE = 0;
-*/

@@ -159,6 +159,7 @@ namespace HeroSiege.Render
 
             //UI
             SB.Begin();
+            
 
             switch (settings.GameMode)
             {
@@ -181,10 +182,24 @@ namespace HeroSiege.Render
                 default:
                     break;
             }
-
+            if (settings.GameMode == GameMode.Multiplayer)
+                DrawScreenSplitter(SB);
             DebugTextDraw(SB);
 
             SB.End();
+        }
+
+        private void DrawScreenSplitter(SpriteBatch SB)
+        {
+            int width = ResourceManager.GetTexture("ScreenSplitter").region.Width / 2;
+            int height = ResourceManager.GetTexture("ScreenSplitter").region.Height;
+            int Count = playerTwoView.Height / height + 1;
+            for (int i = 0; i < Count; i++)
+            {
+                SB.Draw(ResourceManager.GetTexture("ScreenSplitter"),
+                    new Vector2(playerTwoView.Width - width, height * i), Color.White);
+            }
+            
         }
 
         private void DrawScenne(SpriteBatch SB, Camera2D camera)

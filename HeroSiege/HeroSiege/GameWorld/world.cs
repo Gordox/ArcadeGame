@@ -94,9 +94,6 @@ namespace HeroSiege.GameWorld
                 InitPlayerOne();
                 InitPlayerTwo();
                 InitGameObjects();
-
-                //----- TEST -----//
-                InitEnemy();
             }
         }
         public void InitPlayerOne()
@@ -165,30 +162,6 @@ namespace HeroSiege.GameWorld
                 PlayerTwo.SetControl(new HumanControler(PlayerIndex.Two, PlayerTwo, this));
         }
 
-        //----- TEST -----//
-        public void InitEnemy()
-        {
-
-            //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 100 * 32, 64, 64, AttackType.Range));
-            //Enemies[0].SetControl(new AIController(this, (Troll_Axe_Thrower)Enemies[0]));
-
-            //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 100 * 32, 64, 64, AttackType.Melee));
-            //Enemies.Add(new Troll_Axe_Thrower(30 * 32, 100 * 32, 64, 64, AttackType.Melee));
-            //Enemies.Add(new Troll_Axe_Thrower(32 * 32, 100 * 32, 64, 64, AttackType.Melee));
-
-            //Enemies.Add(new Troll_Axe_Thrower(32 * 32, 102 * 32, 64, 64, AttackType.Melee));
-
-            //Enemies.Add(new Troll_Axe_Thrower(32 * 32, 104 * 32, 64, 64, AttackType.Melee));
-
-            //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 102 * 32, 64, 64, AttackType.Melee));
-            //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 104 * 32, 64, 64, AttackType.Melee));
-
-            //Enemies.Add(new Troll_Axe_Thrower(28 * 32, 106 * 32, 64, 64, AttackType.Melee));
-            //Enemies.Add(new Troll_Axe_Thrower(30 * 32, 106 * 32, 64, 64, AttackType.Melee));
-            //Enemies.Add(new Troll_Axe_Thrower(32 * 32, 108 * 32, 64, 64, AttackType.Melee));
-
-        }
-        //
 
         public void InitGameObjects()
         {
@@ -529,7 +502,7 @@ namespace HeroSiege.GameWorld
 
         private void EnemyReward(Entity e)
         {
-            if (PlayerOne != null)
+            if (PlayerOne != null && PlayerOne.IsAlive)
             {
                 if (e is Enemy)
                 {
@@ -541,7 +514,7 @@ namespace HeroSiege.GameWorld
                     //Building
                 }
             }
-            if (PlayerTwo != null)
+            if (PlayerTwo != null && PlayerTwo.IsAlive)
             {
                 if (e is Enemy)
                 {

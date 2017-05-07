@@ -121,16 +121,12 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
             get { return AttackFrame; }
         }
 
-        protected void AddSpriteAnimations()
+        protected override void AddSpriteAnimations()
         {
             //--- Attck animation ---//
             sprite.AddAnimation("AttckNorth",    new FrameAnimation(ResourceManager.GetTexture("Balista"),   0, 0, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
             sprite.AddAnimation("AttckWestEast", new FrameAnimation(ResourceManager.GetTexture("Balista"), 128, 0, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
             sprite.AddAnimation("AttckSouth",    new FrameAnimation(ResourceManager.GetTexture("Balista"), 256, 0, 64, 64, 4, FRAME_DURATION_ATTACK, new Point(1, 4)));
-
-            //--- Death animation ---//
-            //sprite.AddAnimation("Death", new FrameAnimation(ResourceManager.GetTexture("MageSheet"), 0, 512, 64, 64, 7, FRAME_DURATION_DEATH, new Point(5, 2), false));
-
         }
         public override bool LevelUp(float delta)
         {

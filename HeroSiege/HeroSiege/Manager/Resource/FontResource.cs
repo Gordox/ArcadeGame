@@ -23,6 +23,12 @@ namespace HeroSiege.Manager.Resource
 
             fonts["Arial_Font"] = content.Load<SpriteFont>(@"Assets\Fonts\Arial_Font");
 
+            fonts["Folkard_16"] = content.Load<SpriteFont>(@"Assets\Fonts\Folkard_16");
+
+            fonts["WarFont_16"] = content.Load<SpriteFont>(@"Assets\Fonts\WarFont_16");
+            fonts["WarFont_22"] = content.Load<SpriteFont>(@"Assets\Fonts\WarFont_22");
+            fonts["WarFont_32"] = content.Load<SpriteFont>(@"Assets\Fonts\WarFont_32");
+
 
         }
 

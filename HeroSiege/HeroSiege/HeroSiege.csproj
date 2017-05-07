@@ -66,7 +66,13 @@
     <Compile Include="FEntity\Players\TestPlayer.cs" />
     <Compile Include="FEntity\StatsData.cs" />
     <Compile Include="FGameObject\GameObjectEnums.cs" />
+    <Compile Include="FGameObject\Items\Armors\AggramarsStride.cs" />
     <Compile Include="FGameObject\Items\Armors\Armor.cs" />
+    <Compile Include="FGameObject\Items\Armors\CloakOfWisdom.cs" />
+    <Compile Include="FGameObject\Items\Armors\DragonScaleChest.cs" />
+    <Compile Include="FGameObject\Items\Armors\FirestoneWalkers.cs" />
+    <Compile Include="FGameObject\Items\Armors\JusticeGaze.cs" />
+    <Compile Include="FGameObject\Items\Armors\SaruansResolve.cs" />
     <Compile Include="FGameObject\Items\EItems.cs" />
     <Compile Include="FGameObject\Items\Item.cs" />
     <Compile Include="FGameObject\Items\Potions\HealingPotion.cs" />
@@ -74,7 +80,9 @@
     <Compile Include="FGameObject\Items\Potions\Potion.cs" />
     <Compile Include="FGameObject\Items\Potions\Reincarnation.cs" />
     <Compile Include="FGameObject\Items\Weapons\Cleave.cs" />
+    <Compile Include="FGameObject\Items\Weapons\Devastation.cs" />
     <Compile Include="FGameObject\Items\Weapons\MultiShot.cs" />
+    <Compile Include="FGameObject\Items\Weapons\StaffOfHappiness.cs" />
     <Compile Include="FGameObject\Items\Weapons\Weapon.cs" />
     <Compile Include="FGameObject\Portal.cs" />
     <Compile Include="FGameObject\Projectiles\Arrow.cs" />
@@ -107,6 +115,10 @@
     <Compile Include="InterFace\GUI\Inventory.cs" />
     <Compile Include="InterFace\GUI\ShopWindow.cs" />
     <Compile Include="InterFace\IUI.cs" />
+    <Compile Include="InterFace\UIs\Buttons\BigButton.cs" />
+    <Compile Include="InterFace\UIs\Buttons\Button.cs" />
+    <Compile Include="InterFace\UIs\Menus\InGameMenu.cs" />
+    <Compile Include="InterFace\UIs\Menus\StartMenu.cs" />
     <Compile Include="InterFace\UIs\UI.cs" />
     <Compile Include="Manager\ResourceManager.cs" />
     <Compile Include="Manager\Resource\FontResource.cs" />
@@ -124,6 +136,7 @@
     <Compile Include="Scenes\StartScene.cs" />
     <Compile Include="Systems\SpatialHashGrid.cs" />
     <Compile Include="Tools\Camera2D.cs" />
+    <Compile Include="Tools\CharacterSelecter.cs" />
     <Compile Include="Tools\DevTools.cs" />
     <Compile Include="Tools\FPS_Counter.cs" />
     <Compile Include="Tools\GameSettings.cs" />
@@ -153,7 +166,6 @@
     <Folder Include="AISystems\FUSM\" />
     <Folder Include="Buildnings\" />
     <Folder Include="Globals\" />
-    <Folder Include="InterFace\UIs\Menu\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

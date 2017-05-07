@@ -17,8 +17,8 @@ namespace HeroSiege
         SpriteBatch spriteBatch;
 #else
         FPS_Counter fpsCounter;
-
-		public override string GameDisplayName { get { return "HeroSiege"; } }
+        GameSettings settings;
+        public override string GameDisplayName { get { return "HeroSiege"; } }
 #endif
 
         public Game1()
@@ -46,9 +46,11 @@ namespace HeroSiege
 
             fpsCounter = new FPS_Counter();
             ResourceManager.LoadResouces(Content);
+            settings = new GameSettings();
+
 
             SceneManager.Initialize(this);
-            SceneManager.AddScene(new GameScene(new GameSettings(), GraphicsDevice));
+            SceneManager.AddScene(new StartScene(settings, GraphicsDevice));
         }
 
       
