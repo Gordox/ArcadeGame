@@ -41,8 +41,8 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
         {
             Stats = new StatsData();
             Stats.Radius = 250;
-            Stats.MaxHealth = 1;
-            Stats.Armor = 1;
+            Stats.MaxHealth = 600;
+            Stats.Armor = 120;
         }
 
         public override void Update(float delta)

@@ -83,7 +83,7 @@ namespace HeroSiege
             
             // ----- Draw stats info ONLY! -----//
             spriteBatch.Begin();
-            if (DevTools.DevDebugMode || DevTools.DevTopBarInfo)
+            if (DevTools.DevDebugMode || DevTools.DevTopBarInfo || DevTools.DevShowFPS)
             {
                 fpsCounter.DrawFpsCount(gameTime, spriteBatch);
             }

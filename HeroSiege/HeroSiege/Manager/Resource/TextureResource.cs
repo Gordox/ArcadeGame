@@ -13,7 +13,7 @@ namespace HeroSiege.Manager.Resource
         //Tiles
         private Texture2D tileTextureSummer;
         //Heros
-        private Texture2D heroMage, heroArcher, heroFootMan, heroKnight, heroGryponRider;
+        private Texture2D heroMage, heroArcher, heroFootMan, heroKnight, heroGryponRider, heroDwarven, heroGnomish;
         //Enemies
         private Texture2D trollTrowerSpriteSheet, daemonSprite, deathKnightSprite, dragonSprite, gruntSPrite, orgeSprite, zeppelinSprite;
         //Buildings
@@ -56,7 +56,8 @@ namespace HeroSiege.Manager.Resource
             heroFootMan = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\FootManHero");
             heroKnight = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\KnightHero");
             heroGryponRider = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\GryphonRiderHero");
-
+            heroDwarven = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\Dwarven");
+            heroGnomish = content.Load<Texture2D>(@"Assets\Texture\Units\Heros\Gnomish_Flying_Machine");
             //Enemies
             trollTrowerSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Troll_Thrower");
             deathKnightSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Death_Knight");
@@ -201,6 +202,8 @@ namespace HeroSiege.Manager.Resource
             textureRegion["FootManSheet"] = new TextureRegion(heroFootMan, 0, 0, heroFootMan.Width, heroFootMan.Height);
             textureRegion["KnightSheet"] = new TextureRegion(heroKnight, 0, 0, heroKnight.Width, heroKnight.Height);
             textureRegion["GryponRiderSheet"] = new TextureRegion(heroGryponRider, 0, 0, heroGryponRider.Width, heroGryponRider.Height);
+            textureRegion["Dwarven"] =          new TextureRegion(heroDwarven, 0, 0, heroDwarven.Width, heroDwarven.Height);
+            textureRegion["Gnomish"] =          new TextureRegion(heroGnomish, 0, 0, heroGnomish.Width, heroGnomish.Height);
 
             //Hero Buildings
             textureRegion["Balista"] = new TextureRegion(heroBalista, 0, 0, heroBalista.Width, heroBalista.Height);
@@ -266,10 +269,13 @@ namespace HeroSiege.Manager.Resource
             textureRegion["StatsIcons"] =     new TextureRegion(basicIcons,     0, 0, basicIcons.Width, basicIcons.Height);
             textureRegion["ItemIcons"] =      new TextureRegion(ItemIcons,      0, 0, ItemIcons.Width, ItemIcons.Height);
             //Potraits
-            textureRegion["SoldierPortraits"] = new TextureRegion(heroPortraits,  0,  0, 96, 96);
-            textureRegion["KnightPortraits"] =  new TextureRegion(heroPortraits, 96,  0, 96, 96);
-            textureRegion["MagePortraits"] =    new TextureRegion(heroPortraits,  0, 96, 96, 96);
-            textureRegion["ArcherPortraits"] =  new TextureRegion(heroPortraits, 96, 96, 96, 96);
+            textureRegion["SoldierPortraits"] = new TextureRegion(heroPortraits,   0,  0, 96, 96);
+            textureRegion["KnightPortraits"] =  new TextureRegion(heroPortraits,  96,  0, 96, 96);
+            textureRegion["MagePortraits"] =    new TextureRegion(heroPortraits,   0, 96, 96, 96);
+            textureRegion["ArcherPortraits"] =  new TextureRegion(heroPortraits,  96, 96, 96, 96);
+            textureRegion["DwarfPortraits"] =   new TextureRegion(heroPortraits, 192,  0, 96, 96);
+            textureRegion["GryphonPortraits"] = new TextureRegion(heroPortraits, 288,  0, 96, 96);
+            textureRegion["GnomePortraits"] =   new TextureRegion(heroPortraits, 192,  96, 96, 96);
             //Img 
             textureRegion["ImgStartScreen"] =   new TextureRegion(imgStartScreen, 0, 0, imgStartScreen.Width, imgStartScreen.Height);
             //Other

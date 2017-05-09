@@ -272,7 +272,7 @@ namespace HeroSiege.Scenes
         public bool DoorClosed { get; private set; }
         public bool Done { get; private set; }
 
-        float speed = 400;
+        float speed = 450;
         float timerWait = 0.3f, timer;
 
         Viewport viewPort;

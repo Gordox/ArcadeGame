@@ -40,7 +40,7 @@ namespace HeroSiege.FEntity.Enemies
             Stats = new StatsData();
             Stats.MaxSpeed = 400;
             Stats.Speed = 50;
-            Stats.MaxHealth = 100;
+            Stats.MaxHealth = 100 + 100 * level;
             Stats.MaxMana = 1;
             Stats.visibilityRadius = 250;
             Stats.Radius = 180;

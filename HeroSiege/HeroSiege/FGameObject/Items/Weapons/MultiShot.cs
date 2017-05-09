@@ -10,12 +10,12 @@ namespace HeroSiege.FGameObject.Items.Weapons
     {
 
         const string ITEM_NAME = "Multi Shot";
-        const int ITEM_COST = 150;
+        const int ITEM_COST = 500;
 
-        const int STRENGTH = 0;
+        const int STRENGTH = 2;
         const int INTELIGENCE = 50;
-        const int AGILITY = 0;
-        const int DAMAGE = 0;
+        const int AGILITY = 50;
+        const int DAMAGE = 5;
 
         public MultiShot(TextureRegion region)
             : base(region, ItemType.Weapon, WeaponType.MultiShot)

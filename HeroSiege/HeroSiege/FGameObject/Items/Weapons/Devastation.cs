@@ -10,12 +10,12 @@ namespace HeroSiege.FGameObject.Items.Weapons
     {
 
         const string ITEM_NAME = "Devastation";
-        const int ITEM_COST = 150;
+        const int ITEM_COST = 1800;
 
-        const int STRENGTH = 0;
-        const int INTELIGENCE = 0;
-        const int AGILITY = 0;
-        const int DAMAGE = 0;
+        const int STRENGTH = 50;
+        const int INTELIGENCE = 5;
+        const int AGILITY = 10;
+        const int DAMAGE = 5;
 
         public Devastation(TextureRegion region)
             : base(region, ItemType.Weapon, WeaponType.Devastation)

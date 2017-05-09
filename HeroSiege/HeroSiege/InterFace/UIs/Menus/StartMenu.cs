@@ -51,8 +51,8 @@ namespace HeroSiege.InterFace.UIs.Menus
 
             bnStartGame.Size = bnOption.Size = bnCredit.Size = bnHighScore.Size = 2.7f;
             bnStartGame.Selected = true;
-            bnHighScore.ButtonActive = false;
-            bnHighScore.ButtonState = ButtonState.inActive;
+            bnHighScore.ButtonActive = bnOption.ButtonActive = bnCredit.ButtonActive = false;
+            bnHighScore.ButtonState = bnOption.ButtonState = bnCredit.ButtonState = ButtonState.inActive;
 
         }
 
@@ -89,8 +89,8 @@ namespace HeroSiege.InterFace.UIs.Menus
         }
         private void UpdateSelected()
         {
-            bnStartGame.ButtonState = bnOption.ButtonState = bnCredit.ButtonState = ButtonState.Active;
-            bnHighScore.ButtonState = ButtonState.inActive;
+            bnStartGame.ButtonState =  ButtonState.Active;
+            bnHighScore.ButtonState = bnOption.ButtonState = bnCredit.ButtonState = ButtonState.inActive;
             switch (buttonState)
             {
                 case Buttons.Start_Game:

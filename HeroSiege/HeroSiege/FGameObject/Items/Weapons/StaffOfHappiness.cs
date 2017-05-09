@@ -10,12 +10,12 @@ namespace HeroSiege.FGameObject.Items.Weapons
     {
 
         const string ITEM_NAME = "Staff of Happiness";
-        const int ITEM_COST = 150;
+        const int ITEM_COST = 1800;
 
-        const int STRENGTH = 0;
-        const int INTELIGENCE = 0;
-        const int AGILITY = 0;
-        const int DAMAGE = 0;
+        const int STRENGTH = 5;
+        const int INTELIGENCE = 30;
+        const int AGILITY = 30;
+        const int DAMAGE = 2;
 
         public StaffOfHappiness(TextureRegion region)
             : base(region, ItemType.Weapon, WeaponType.StaffOfHappiness)

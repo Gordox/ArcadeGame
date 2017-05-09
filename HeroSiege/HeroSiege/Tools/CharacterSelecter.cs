@@ -42,11 +42,13 @@ namespace HeroSiege.Tools
         {
             animations = new Sprite(null, drawPos.X, drawPos.Y, 0, 0);
             animations.PauseAnimation = false;
-            animations.AddAnimation("Mage",        new FrameAnimation(ResourceManager.GetTexture("MageSheet"),        256, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
-            animations.AddAnimation("Knight",      new FrameAnimation(ResourceManager.GetTexture("KnightSheet"),      288, 0, 72, 72, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
-            animations.AddAnimation("Gryphon",     new FrameAnimation(ResourceManager.GetTexture("GryponRiderSheet"), 384, 0, 96, 96, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
-            animations.AddAnimation("Foot",        new FrameAnimation(ResourceManager.GetTexture("FootManSheet"),     256, 0, 64, 64, 5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
-            animations.AddAnimation("Elven",       new FrameAnimation(ResourceManager.GetTexture("ArcherSheet"),      256, 0, 64, 64, 4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
+            animations.AddAnimation("Mage",        new FrameAnimation(ResourceManager.GetTexture("MageSheet"),        256, 0, 64, 64,  4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
+            animations.AddAnimation("Knight",      new FrameAnimation(ResourceManager.GetTexture("KnightSheet"),      288, 0, 72, 72,  5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            animations.AddAnimation("Gryphon",     new FrameAnimation(ResourceManager.GetTexture("GryponRiderSheet"), 384, 0, 96, 96,  4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
+            animations.AddAnimation("Foot",        new FrameAnimation(ResourceManager.GetTexture("FootManSheet"),     256, 0, 64, 64,  5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            animations.AddAnimation("Dwarven",     new FrameAnimation(ResourceManager.GetTexture("Dwarven"),          224, 0, 56, 56,  5, FRAME_DURATION_MOVEMNT, new Point(1, 5)));
+            animations.AddAnimation("Gnome",       new FrameAnimation(ResourceManager.GetTexture("Gnomish"),          320, 0, 80, 80,  2, FRAME_DURATION_MOVEMNT, new Point(1, 2)));
+            animations.AddAnimation("Elven",       new FrameAnimation(ResourceManager.GetTexture("ArcherSheet"),      256, 0, 64, 64,  4, FRAME_DURATION_MOVEMNT, new Point(1, 4)));
             animations.AddAnimation("Looking",     new FrameAnimation(ResourceManager.GetTexture("Eye"),                0, 0, 64, 64, 30, FRAME_DURATION_MOVEMNT, new Point(30, 1)));
 
         }
@@ -78,13 +80,15 @@ namespace HeroSiege.Tools
                     break;
                 case CharacterType.FootMan:
                     animations.SetSize(128, 128);
-                    animations.SetAnimation("Looking");
+                    animations.SetAnimation("Foot");
                     break;
                 case CharacterType.Dwarven:
-                    animations.SetAnimation("Looking");
+                    animations.SetSize(128, 128);
+                    animations.SetAnimation("Dwarven");
                     break;
                 case CharacterType.Gnomish_Flying_Machine:
-                    animations.SetAnimation("Looking");
+                    animations.SetSize(128, 128);
+                    animations.SetAnimation("Gnome");
                     break;
                 case CharacterType.Knight:
                     animations.SetSize(128, 128);

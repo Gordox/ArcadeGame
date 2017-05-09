@@ -10,12 +10,12 @@ namespace HeroSiege.FGameObject.Items.Armors
     {
 
         const string ITEM_NAME = "Firestone Walkers";
-        const int ITEM_COST = 150;
+        const int ITEM_COST = 500;
 
-        const int STRENGTH = 0;
-        const int INTELIGENCE = 0;
-        const int AGILITY = 0;
-        const int ARMOR = 0;
+        const int STRENGTH = 10;
+        const int INTELIGENCE = 10;
+        const int AGILITY = 10;
+        const int ARMOR = 20;
 
         public FirestoneWalkers(TextureRegion region)
             : base(region, ItemType.Armor, ArmorType.FirestoneWalkers)

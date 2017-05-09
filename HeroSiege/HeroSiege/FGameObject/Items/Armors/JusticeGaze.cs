@@ -10,12 +10,12 @@ namespace HeroSiege.FGameObject.Items.Armors
     {
 
         const string ITEM_NAME = "Justice Gaze";
-        const int ITEM_COST = 150;
+        const int ITEM_COST = 1500;
 
-        const int STRENGTH = 0;
-        const int INTELIGENCE = 0;
-        const int AGILITY = 0;
-        const int ARMOR = 0;
+        const int STRENGTH = 40;
+        const int INTELIGENCE = 10;
+        const int AGILITY = 5;
+        const int ARMOR = 30;
 
         public JusticeGaze(TextureRegion region)
             : base(region, ItemType.Armor, ArmorType.JusticeGaze)

@@ -10,12 +10,12 @@ namespace HeroSiege.FGameObject.Items.Weapons
     {
         
         const string ITEM_NAME = "Cleave";
-        const int ITEM_COST = 150;
+        const int ITEM_COST = 500;
 
         const int STRENGTH = 20;
-        const int INTELIGENCE = 0;
-        const int AGILITY = 0;
-        const int DAMAGE = 0;
+        const int INTELIGENCE = 2;
+        const int AGILITY = 10;
+        const int DAMAGE = 5;
 
         public Cleave(TextureRegion region)
             : base(region, ItemType.Weapon, WeaponType.Cleave)

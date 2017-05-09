@@ -10,12 +10,12 @@ namespace HeroSiege.FGameObject.Items.Armors
     {
 
         const string ITEM_NAME = "Dragonscale Chest";
-        const int ITEM_COST = 150;
+        const int ITEM_COST = 2000;
 
-        const int STRENGTH = 10;
-        const int INTELIGENCE = 0;
-        const int AGILITY = 0;
-        const int ARMOR = 0;
+        const int STRENGTH = 30;
+        const int INTELIGENCE = 1;
+        const int AGILITY = 1;
+        const int ARMOR = 200;
 
         public DragonScaleChest(TextureRegion region)
             : base(region, ItemType.Armor, ArmorType.DragonScaleChest)

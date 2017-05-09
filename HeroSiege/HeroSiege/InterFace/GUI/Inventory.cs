@@ -2,6 +2,8 @@
 using HeroSiege.FGameObject.Items.Armors;
 using HeroSiege.FGameObject.Items.Potions;
 using HeroSiege.FGameObject.Items.Weapons;
+using HeroSiege.FTexture2D;
+using HeroSiege.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,10 @@ namespace HeroSiege.InterFace.GUI
         {
             for (int i = 0; i < items.Length; i++)
                 items[i] = new Item();
+
+            items[0] = new HealingPotion(new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 78, 0, 78, 78)) { Quantity = 6 };
+            items[1] = new ManaPotion(new TextureRegion(ResourceManager.GetTexture("ItemIcons"), 156, 0, 78, 78)) { Quantity = 3 };
+
         }
 
 

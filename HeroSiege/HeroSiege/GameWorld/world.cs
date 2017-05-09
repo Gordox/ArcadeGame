@@ -96,28 +96,31 @@ namespace HeroSiege.GameWorld
                 InitGameObjects();
             }
         }
+
         public void InitPlayerOne()
         {
             switch (gameSettings.playerOne)
             {
                 case CharacterType.ElvenArcher:
-                    PlayerOne = new ElvenArcher(32 * 40, 32 * 90, 64, 64);
+                    PlayerOne = new ElvenArcher(32 * 38, 32 * 102, 64, 64);
                     break;
                 case CharacterType.Mage:
-                    PlayerOne = new Mage(32 * 40, 32 * 90, 64, 64);
+                    PlayerOne = new Mage(32 * 38, 32 * 102, 64, 64);
                     break;
                 case CharacterType.Gryphon_Rider:
-                    PlayerOne = new GryphonRider(32 * 40, 32 * 90, 96, 96);
+                    PlayerOne = new GryphonRider(32 * 38, 32 * 102, 96, 96);
                     break;
                 case CharacterType.FootMan:
                     PlayerOne = new FootMan(32 * 38, 32 * 102, 64, 64);
                     break;
                 case CharacterType.Dwarven:
+                    PlayerOne = new Dwarven(32 * 38, 32 * 102, 56, 56);
                     break;
                 case CharacterType.Gnomish_Flying_Machine:
+                    PlayerOne = new GnomishFlyingMachine(32 * 38, 32 * 102, 80, 80);
                     break;
                 case CharacterType.Knight:
-                    PlayerOne = new Knight(32 * 40, 32 * 90, 72, 72);
+                    PlayerOne = new Knight(32 * 38, 32 * 102, 72, 72);
                     break;
                 case CharacterType.None:
                     PlayerOne = null;
@@ -134,23 +137,25 @@ namespace HeroSiege.GameWorld
             switch (gameSettings.playerTwo)
             {
                 case CharacterType.ElvenArcher:
-                    PlayerTwo = new ElvenArcher(32 * 40, 32 * 90, 64, 64);
+                    PlayerTwo = new ElvenArcher(32 * 43, 32 * 102, 64, 64);
                     break;
                 case CharacterType.Mage:
                     PlayerTwo = new Mage(32 * 43, 32 * 102, 64, 64);
                     break;
                 case CharacterType.Gryphon_Rider:
-                    PlayerTwo = new GryphonRider(32 * 40, 32 * 90, 96, 96);
+                    PlayerTwo = new GryphonRider(32 * 43, 32 * 102, 96, 96);
                     break;
                 case CharacterType.FootMan:
-                    PlayerTwo = new FootMan(32 * 40, 32 * 90, 64, 64);
+                    PlayerTwo = new FootMan(32 * 43, 32 * 102, 64, 64);
                     break;
                 case CharacterType.Dwarven:
+                    PlayerTwo = new Dwarven(32 * 43, 32 * 102, 56, 56);
                     break;
                 case CharacterType.Gnomish_Flying_Machine:
+                    PlayerTwo = new GnomishFlyingMachine(32 * 43, 32 * 102, 80, 80);
                     break;
                 case CharacterType.Knight:
-                    PlayerTwo = new Knight(32 * 40, 32 * 90, 72, 72);
+                    PlayerTwo = new Knight(32 * 43, 32 * 102, 72, 72);
                     break;
                 case CharacterType.None:
                     PlayerTwo = null;

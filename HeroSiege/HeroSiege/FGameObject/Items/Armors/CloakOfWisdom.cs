@@ -10,12 +10,12 @@ namespace HeroSiege.FGameObject.Items.Armors
     {
 
         const string ITEM_NAME = "Cloak of Wisdom";
-        const int ITEM_COST = 150;
+        const int ITEM_COST = 2000;
 
-        const int STRENGTH = 0;
-        const int INTELIGENCE = 0;
-        const int AGILITY = 0;
-        const int ARMOR = 0;
+        const int STRENGTH = 1;
+        const int INTELIGENCE = 50;
+        const int AGILITY = 20;
+        const int ARMOR = 120;
 
         public CloakOfWisdom(TextureRegion region)
             : base(region, ItemType.Armor, ArmorType.CloakOfWisdom)

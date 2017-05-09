@@ -25,7 +25,7 @@ namespace HeroSiege.FEntity.Players
         const int START_ARM = 20;
         const int START_DMG = 20;
 
-        const int START_HEALTH = 400;
+        const int START_HEALTH = 1200;
         const int START_MANA = 200;
         const int START_MSPEED = 400;
         const int START_SPEED = 200;
@@ -182,17 +182,10 @@ namespace HeroSiege.FEntity.Players
 
 
 
-        //Attack 2
+        //Basic attack Arow shoot
         public override void GreenButton(World parent)
         {
             base.GreenButton(parent);
-            if (isAttaking && IsAlive) return;
-
-        }
-        //Basic attack Arow shoot
-        public override void BlueButton(World parent)
-        {
-            base.BlueButton(parent);
             if (isAttaking && IsAlive) return;
 
             SetAttckAnimations();
@@ -201,18 +194,24 @@ namespace HeroSiege.FEntity.Players
 
             GetTargets(parent.Enemies);
             CreateProjectilesTowardsTarget(parent, ProjectileType.Arrow);
-
-        }
-        //
-        public override void RedButton(World parent)
-        {
-            base.RedButton(parent);
         }
         //
         public override void YellowButton(World parent)
         {
             base.YellowButton(parent);
         }
+
+        //Use Mana potion
+        public override void BlueButton(World parent)
+        {
+            base.BlueButton(parent);
+        }
+        // Use Healing potion
+        public override void RedButton(World parent)
+        {
+            base.RedButton(parent);
+        }
+
 
         public override void AButton(World parent)
         {

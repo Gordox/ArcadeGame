@@ -24,8 +24,8 @@ namespace HeroSiege.FEntity.Buildings.HeroBuildings
         protected override void InitStats()
         {
             Stats = new StatsData();
-            Stats.MaxHealth = 100;
-            Stats.Armor = 1;
+            Stats.MaxHealth = 1000;
+            Stats.Armor = 320;
         }
 
         public override bool LevelUp(float delta)

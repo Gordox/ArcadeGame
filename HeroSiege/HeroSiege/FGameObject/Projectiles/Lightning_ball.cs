@@ -11,7 +11,7 @@ namespace HeroSiege.FGameObject.Projectiles
     class Lightning_ball : Projectile
     {
         const float LIFE_TIME = 1.5f; //1.5 sec
-        const int DAMAGE = 20;
+        const int DAMAGE = 40;
 
         public Lightning_ball(TextureRegion region, float x, float y, float width, float height, Entity target, int dmg = 0)
             : base(region, x, y, width, height, target, dmg)

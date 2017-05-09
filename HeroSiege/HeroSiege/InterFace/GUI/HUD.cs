@@ -66,7 +66,7 @@ namespace HeroSiege.InterFace.GUI
                     mainStatsIcon = new TextureRegion(ResourceManager.GetTexture("StatsIcons"), 0, 111, 112, 111); //int
                     break;
                 case CharacterType.Gryphon_Rider:
-
+                    heroPortrait = ResourceManager.GetTexture("GryphonPortraits");
                     mainStatsIcon = new TextureRegion(ResourceManager.GetTexture("StatsIcons"), 0, 111, 112, 111); //int
                     break;
                 case CharacterType.FootMan:
@@ -74,8 +74,12 @@ namespace HeroSiege.InterFace.GUI
                     mainStatsIcon = new TextureRegion(ResourceManager.GetTexture("StatsIcons"), 224, 111, 112, 111); //str
                     break;
                 case CharacterType.Dwarven:
+                    heroPortrait = ResourceManager.GetTexture("DwarfPortraits");
+                    mainStatsIcon = new TextureRegion(ResourceManager.GetTexture("StatsIcons"), 224, 111, 112, 111); //str
                     break;
                 case CharacterType.Gnomish_Flying_Machine:
+                    heroPortrait = ResourceManager.GetTexture("GnomePortraits");
+                    mainStatsIcon = new TextureRegion(ResourceManager.GetTexture("StatsIcons"), 112, 111, 112, 111); //Agi
                     break;
                 case CharacterType.Knight:
                     heroPortrait = ResourceManager.GetTexture("KnightPortraits");

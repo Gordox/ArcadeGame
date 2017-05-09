@@ -19,7 +19,7 @@ namespace HeroSiege.FEntity.Players
     abstract class Hero : Entity
     {
         const float START_XP = 100; //How much xp is needed for level 2
-        const int START_GOLD = 10000;
+        const int START_GOLD = 1200;
 
         public string HeroName { get; protected set; }
         private int gold;
@@ -230,10 +230,10 @@ namespace HeroSiege.FEntity.Players
         public virtual void MoveRight(float delta) { velocity.X = Stats.Speed; }
 
         //----- Button Input -----//
+        public virtual void RedButton(World parent)    { if (UseHealthPotion()) parent.SpawnEffect(FTexture2D.SpriteEffect.EffectType.Magic_Particle, Position, 255, 0, 0); } //Key N or numpad 2
+        public virtual void BlueButton(World parent) { if (UseManahPotion()) parent.SpawnEffect(FTexture2D.SpriteEffect.EffectType.Magic_Particle, Position, 0, 0, 255); } //Key H or numpad 5
         public virtual void GreenButton(World parent)  { } //Key G or numpad 4 
-        public virtual void BlueButton(World parent)   { } //Key H or numpad 5
-        public virtual void YellowButton(World parent) { if (UseHealthPotion()) parent.SpawnEffect(FTexture2D.SpriteEffect.EffectType.Magic_Particle, Position, 255, 0, 0); } //Key B or numpad 1
-        public virtual void RedButton(World parent)    { if (UseManahPotion()) parent.SpawnEffect(FTexture2D.SpriteEffect.EffectType.Magic_Particle, Position, 0, 0, 255); } //Key N or numpad 2
+        public virtual void YellowButton(World parent) {  } //Key B or numpad 1
         public virtual void AButton(World parent) { if (CanBuy && !isBuying) setIsBuying(); } //Key M or numpad 3
         public virtual void BButton(World parent) { if(isBuying) setIsBuying(); }  //Key J or numpad 6
 
@@ -293,7 +293,8 @@ namespace HeroSiege.FEntity.Players
                         case ProjectileType.Arrow:
                             temp = new Arrow(ResourceManager.GetTexture("Arrow"), Position.X, Position.Y, 32, 32, Targets[i], GetDamage());
                             break;
-                        case ProjectileType.Dark_Eye:
+                        case ProjectileType.small_Canon_Bal:
+                            temp = new FireBal(ResourceManager.GetTexture("small_Canon_Bal"), Position.X, Position.Y, 24, 24, Targets[i], GetDamage());
                             break;
                         case ProjectileType.Lightning_Axe:
                             int x = ResourceManager.GetTexture("Lightning_Axe").region.X;
@@ -324,7 +325,8 @@ namespace HeroSiege.FEntity.Players
                     case ProjectileType.Arrow:
                         temp = new Arrow(ResourceManager.GetTexture("Arrow"), Position.X, Position.Y, 32, 32, MovingDirection, GetDamage());
                         break;
-                    case ProjectileType.Dark_Eye:
+                    case ProjectileType.small_Canon_Bal:
+                        temp = new FireBal(ResourceManager.GetTexture("small_Canon_Bal"), Position.X, Position.Y, 24, 24, MovingDirection, GetDamage());
                         break;
                     case ProjectileType.Lightning_Axe:
                         int x = ResourceManager.GetTexture("Lightning_Axe").region.X;
