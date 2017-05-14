@@ -121,6 +121,7 @@
     <Compile Include="InterFace\IUI.cs" />
     <Compile Include="InterFace\UIs\Buttons\BigButton.cs" />
     <Compile Include="InterFace\UIs\Buttons\Button.cs" />
+    <Compile Include="InterFace\UIs\Menus\DefeatMenu.cs" />
     <Compile Include="InterFace\UIs\Menus\InGameMenu.cs" />
     <Compile Include="InterFace\UIs\Menus\StartMenu.cs" />
     <Compile Include="InterFace\UIs\UI.cs" />
@@ -154,8 +155,12 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\PreviewData\GameBanner.png" />
-    <Content Include="Content\PreviewData\GamePreviewInfoImage.png" />
+    <Content Include="Content\PreviewData\GameBanner.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\PreviewData\GamePreviewInfoImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="TODO.txt" />
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <Content Include="AssemblyInfo.txt">

@@ -28,7 +28,7 @@ namespace HeroSiege.InterFace.UIs.Menus
         Vector2 position;
 
         int offset;
-        int bgIndex;
+        int bgIndex; //Background index
         Buttons buttonState, oldButtonState;
         int bnindex;
 

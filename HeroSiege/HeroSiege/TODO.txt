@@ -5,13 +5,13 @@ Modes:
 easy, normal, Hard, extream
 __________________________________
 Player hero:
-Mage - working on it
-ElvenArcher - working on it
-Gryphon_Rider - working on it
-FootMan - working on it
-Dwarven
-Gnomish_Flying_Machine
-Knight - working on it
+Mage - Basic Done
+ElvenArcher - Basic Done
+Gryphon_Rider - Basic Done
+FootMan - Basic Done
+Dwarven - Basic Done
+Gnomish_Flying_Machine - Basic Done
+Knight - Basic Done
 __________________________________
 Enimy units:
 DeathKnight - Done

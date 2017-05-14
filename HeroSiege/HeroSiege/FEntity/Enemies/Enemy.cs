@@ -119,11 +119,14 @@ namespace HeroSiege.FEntity.Enemies
                 DrawPath(SB, Position, waypoints.ToList(), Color.Red, 5);
             if(Stats.Health < Stats.MaxHealth)
                 DrawHealtBar(SB);
+            else
+                SB.DrawString(ResourceManager.GetFont("Arial_Font"), "lvl: " + level, new Vector2(Position.X - 10, Position.Y - 30), Color.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
         }
 
         //Health bar
         protected void DrawHealtBar(SpriteBatch SB)
         {
+            SB.DrawString(ResourceManager.GetFont("Arial_Font"), "lvl: "+level, new Vector2(Position.X - 48, Position.Y - 32), Color.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
             //Background
             SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 25, Position.Y - 30), new Rectangle(0, 0, 50, 8), Color.Black);
             SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 24, Position.Y - 29),

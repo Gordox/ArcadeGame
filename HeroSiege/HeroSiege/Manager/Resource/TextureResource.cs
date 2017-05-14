@@ -22,9 +22,9 @@ namespace HeroSiege.Manager.Resource
         private Texture2D explosionSprite, projectileSprite, effecSprite;
         //----- UI -----//
         private Texture2D hudTexture, xpbarLayer_1, xpbarLayer_2, basicIcons, heroPortraits, shopWindow, ItemIcons, ItemInfoWindow;
-        private Texture2D unSelectButton, selectedButton, mark, goldUI, screenSplitter, bigButton, startMenu, eye;
+        private Texture2D goldUI, screenSplitter, bigButton, startMenu, inGameMenu, eye;
         //Img
-        private Texture2D imgStartScreen, img_1, img_2, img_3, img_4, img_5, img_6, img_7, img_8, img_9, img_10;
+        private Texture2D imgStartScreen, imgDefeat, bg_1, bg_2, bg_3, bg_4, bg_5, bg_6, bg_7, bg_8, bg_9, bg_10;
         //Other
         private Texture2D leftDoor, rightDoor;
 
@@ -96,16 +96,16 @@ namespace HeroSiege.Manager.Resource
 
         private void LoadInBackGroundIMG(ContentManager content)
         {
-            img_1 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_1");
-            img_2 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_2");
-            img_3 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_3");
-            img_4 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_4");
-            img_5 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_5");
-            img_6 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_6");
-            img_7 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_7");
-            img_8 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_8");
-            img_9 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_9");
-            img_10 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_10");
+            bg_1 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_1");
+            bg_2 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_2");
+            bg_3 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_3");
+            bg_4 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_4");
+            bg_5 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_5");
+            bg_6 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_6");
+            bg_7 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_7");
+            bg_8 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_8");
+            bg_9 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_9");
+            bg_10 = content.Load<Texture2D>(@"Assets\Texture\UI\BackgroundImg\Normal\Img_10");
         }
         private void LoadInUITextures(ContentManager content)
         {
@@ -116,6 +116,7 @@ namespace HeroSiege.Manager.Resource
             goldUI =         content.Load<Texture2D>(@"Assets\Texture\UI\Console\Money_UI");
             screenSplitter = content.Load<Texture2D>(@"Assets\Texture\UI\Console\ScreenSplitter");
             startMenu =      content.Load<Texture2D>(@"Assets\Texture\UI\Console\StartMenuBackground");
+            inGameMenu =     content.Load<Texture2D>(@"Assets\Texture\UI\Console\InGameMenu");
             //Buttons
             bigButton =      content.Load<Texture2D>(@"Assets\Texture\UI\Buttons\BigButton");
             //Bars
@@ -128,6 +129,7 @@ namespace HeroSiege.Manager.Resource
             heroPortraits =  content.Load<Texture2D>(@"Assets\Texture\UI\Portraits\Portraits");
             //Img
             imgStartScreen = content.Load<Texture2D>(@"Assets\Texture\UI\Img\StartScreen");
+            imgDefeat =      content.Load<Texture2D>(@"Assets\Texture\UI\Img\Defeat_Img");
             //Other
             eye =            content.Load<Texture2D>(@"Assets\Texture\UI\Other\Eye");
             leftDoor =       content.Load<Texture2D>(@"Assets\Texture\UI\Other\Door_left");
@@ -239,16 +241,16 @@ namespace HeroSiege.Manager.Resource
 
         private void BackGroundImgToDict()
         {
-            textureRegion["BG_1"] =  new TextureRegion(img_1,  0, 0, img_1.Width, img_1.Height);
-            textureRegion["BG_2"] =  new TextureRegion(img_2,  0, 0, img_2.Width, img_2.Height);
-            textureRegion["BG_3"] =  new TextureRegion(img_3,  0, 0, img_3.Width, img_3.Height);
-            textureRegion["BG_4"] =  new TextureRegion(img_4,  0, 0, img_4.Width, img_4.Height);
-            textureRegion["BG_5"] =  new TextureRegion(img_5,  0, 0, img_5.Width, img_5.Height);
-            textureRegion["BG_6"] =  new TextureRegion(img_6,  0, 0, img_6.Width, img_6.Height);
-            textureRegion["BG_7"] =  new TextureRegion(img_7,  0, 0, img_7.Width, img_7.Height);
-            textureRegion["BG_8"] =  new TextureRegion(img_8,  0, 0, img_8.Width, img_8.Height);
-            textureRegion["BG_9"] =  new TextureRegion(img_9,  0, 0, img_9.Width, img_9.Height);
-            textureRegion["BG_10"] = new TextureRegion(img_10, 0, 0, img_10.Width, img_10.Height);
+            textureRegion["BG_1"] =  new TextureRegion(bg_1,  0, 0, bg_1.Width, bg_1.Height);
+            textureRegion["BG_2"] =  new TextureRegion(bg_2,  0, 0, bg_2.Width, bg_2.Height);
+            textureRegion["BG_3"] =  new TextureRegion(bg_3,  0, 0, bg_3.Width, bg_3.Height);
+            textureRegion["BG_4"] =  new TextureRegion(bg_4,  0, 0, bg_4.Width, bg_4.Height);
+            textureRegion["BG_5"] =  new TextureRegion(bg_5,  0, 0, bg_5.Width, bg_5.Height);
+            textureRegion["BG_6"] =  new TextureRegion(bg_6,  0, 0, bg_6.Width, bg_6.Height);
+            textureRegion["BG_7"] =  new TextureRegion(bg_7,  0, 0, bg_7.Width, bg_7.Height);
+            textureRegion["BG_8"] =  new TextureRegion(bg_8,  0, 0, bg_8.Width, bg_8.Height);
+            textureRegion["BG_9"] =  new TextureRegion(bg_9,  0, 0, bg_9.Width, bg_9.Height);
+            textureRegion["BG_10"] = new TextureRegion(bg_10, 0, 0, bg_10.Width, bg_10.Height);
 
         }
         private void UIToDict()
@@ -260,6 +262,7 @@ namespace HeroSiege.Manager.Resource
             textureRegion["GoldUI"] =         new TextureRegion(goldUI,         0, 0, goldUI.Width, goldUI.Height);
             textureRegion["ScreenSplitter"] = new TextureRegion(screenSplitter, 0, 0, screenSplitter.Width, screenSplitter.Height);
             textureRegion["StartMenu"] =      new TextureRegion(startMenu,      0, 0, startMenu.Width, startMenu.Height);
+            textureRegion["InGameMenu"] =      new TextureRegion(inGameMenu,     0, 0, inGameMenu.Width, inGameMenu.Height);
             //Buttons
             textureRegion["BigButton"] =      new TextureRegion(bigButton,      0, 0, bigButton.Width, bigButton.Height);
             //Bars
@@ -276,8 +279,9 @@ namespace HeroSiege.Manager.Resource
             textureRegion["DwarfPortraits"] =   new TextureRegion(heroPortraits, 192,  0, 96, 96);
             textureRegion["GryphonPortraits"] = new TextureRegion(heroPortraits, 288,  0, 96, 96);
             textureRegion["GnomePortraits"] =   new TextureRegion(heroPortraits, 192,  96, 96, 96);
-            //Img 
+            //Img  
             textureRegion["ImgStartScreen"] =   new TextureRegion(imgStartScreen, 0, 0, imgStartScreen.Width, imgStartScreen.Height);
+            textureRegion["ImgDefeat"] =        new TextureRegion(imgDefeat,      0, 0, imgDefeat.Width, imgDefeat.Height);
             //Other
             textureRegion["LeftDoor"] =  new TextureRegion(leftDoor,  0, 0, leftDoor.Width, leftDoor.Height);
             textureRegion["RightDoor"] = new TextureRegion(rightDoor, 0, 0, rightDoor.Width, rightDoor.Height);

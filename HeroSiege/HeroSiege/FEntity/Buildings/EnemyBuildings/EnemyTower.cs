@@ -29,8 +29,8 @@ namespace HeroSiege.FEntity.Buildings.EnemyBuildings
         {
             Stats = new StatsData();
             Stats.Radius = 250;
-            Stats.MaxHealth = 6000;
-            Stats.Armor = 220;
+            Stats.MaxHealth = 3000;
+            Stats.Armor = 110;
         }
 
         public override bool LevelUp(float delta)

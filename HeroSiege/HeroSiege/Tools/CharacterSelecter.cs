@@ -21,6 +21,7 @@ namespace HeroSiege.Tools
         private int selectIndex, oldIndex;
         private Vector2 drawPos;
         Sprite animations;
+        private string titleText = string.Empty, bioText = string.Empty;
 
         public CharacterSelecter(PlayerIndex playerIndex, Vector2 pos)
         {
@@ -69,30 +70,37 @@ namespace HeroSiege.Tools
                 case CharacterType.ElvenArcher:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Elven");
+                    titleText = "Elven Archer";
                     break;
                 case CharacterType.Mage:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Mage");
+                    titleText = "Mage";
                     break;
                 case CharacterType.Gryphon_Rider:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Gryphon");
+                    titleText = "Gryphon Rider";
                     break;
                 case CharacterType.FootMan:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Foot");
+                    titleText = "Foot Man";
                     break;
                 case CharacterType.Dwarven:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Dwarven");
+                    titleText = "Dwarven";
                     break;
                 case CharacterType.Gnomish_Flying_Machine:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Gnome");
+                    titleText = "Gnomish Flying Machine";
                     break;
                 case CharacterType.Knight:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Knight");
+                    titleText = "Knight";
                     break;
                 case CharacterType.None:
                     animations.SetSize(128, 128);
@@ -132,7 +140,13 @@ namespace HeroSiege.Tools
             animations.Draw(SB);
 
             if(SelectedHero == CharacterType.None)
-                DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Looking for player", drawPos + new Vector2(80, -40), Color.Gold, 1);
+                DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Looking for player", drawPos + new Vector2(65, -40), Color.Gold, 1);
+            else
+            {
+                DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), titleText, drawPos + new Vector2(65, -40), Color.Gold, 1);
+
+                DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), bioText, drawPos + new Vector2(65, -40), Color.Gold, 1);
+            }
         }
 
         private bool ButtonPress(PlayerInput b)

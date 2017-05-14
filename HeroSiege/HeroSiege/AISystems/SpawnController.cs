@@ -38,6 +38,7 @@ namespace HeroSiege.AISystems
 
         bool allSpawnersDead;
 
+        int deathKnightLevel = 1;
         int enemiesRemainingToSpawn;
         int enemiesRemainingAlive;
 
@@ -172,9 +173,11 @@ namespace HeroSiege.AISystems
                 Console.WriteLine("Next wave");
             }
 
-            DeathKnight deathKnight = new DeathKnight(spawner.Position.X, spawner.Position.Y, 64, 64, AttackType.Range);
+            DeathKnight deathKnight = new DeathKnight(spawner.Position.X, spawner.Position.Y, 64, 64, AttackType.Range, deathKnightLevel);
             deathKnight.SetControl(new AIController(gameWorld, deathKnight));
             gameWorld.Enemies.Add(deathKnight);
+
+            deathKnightLevel++;
         }
     }
 }
