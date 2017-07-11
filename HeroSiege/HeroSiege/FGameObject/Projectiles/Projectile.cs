@@ -51,6 +51,17 @@ namespace HeroSiege.FGameObject.Projectiles
             Init();
         }
 
+        public Projectile(TextureRegion region, float x, float y, float width, float height, float degree, int dmg = 0)
+            : base(null, x, y, width, height)
+        {
+            SetMovingDirection(degree);
+            CalculateDirection(movingDirection);
+            InitTexture(region, Dir);
+            this.region = region;
+            this.IsAlive = true;
+            this.damage = dmg;
+            Init();
+        }
         public Projectile(string animationName, FrameAnimation animation, float x, float y, float width, float height, Direction direction, int dmg = 0)
             : base(null, x, y, width, height)
         {
@@ -84,6 +95,43 @@ namespace HeroSiege.FGameObject.Projectiles
         public void InitTexture(TextureRegion reg, Direction dir)
         {
             int regSize = reg.region.Width / 5;
+            switch (dir)
+            {
+                case Direction.North:
+                    sprite.SetRegion(new TextureRegion(reg.GetTexture(), reg.region.X, reg.region.Y, regSize, reg.region.Height));
+                    break;
+                case Direction.North_East:
+                    sprite.SetRegion(new TextureRegion(reg.GetTexture(), reg.region.X + regSize, reg.region.Y, regSize, reg.region.Height));
+                    break;
+                case Direction.East:
+                    sprite.SetRegion(new TextureRegion(reg.GetTexture(), reg.region.X + regSize * 2, reg.region.Y, regSize, reg.region.Height));
+                    break;
+                case Direction.South_East:
+                    sprite.SetRegion(new TextureRegion(reg.GetTexture(), reg.region.X + regSize * 3, reg.region.Y, regSize, reg.region.Height));
+                    break;
+                case Direction.South:
+                    sprite.SetRegion(new TextureRegion(reg.GetTexture(), reg.region.X + regSize * 4, reg.region.Y, regSize, reg.region.Height));
+                    break;
+                case Direction.South_West:
+                    sprite.SetRegion(new TextureRegion(reg.GetTexture(), reg.region.X + regSize * 3, reg.region.Y, regSize, reg.region.Height));
+                    sprite.Effect = Microsoft.Xna.Framework.Graphics.SpriteEffects.FlipHorizontally;
+                    break;
+                case Direction.West:
+                    sprite.SetRegion(new TextureRegion(reg.GetTexture(), reg.region.X + regSize * 2, reg.region.Y, regSize, reg.region.Height));
+                    sprite.Effect = Microsoft.Xna.Framework.Graphics.SpriteEffects.FlipHorizontally;
+                    break;
+                case Direction.North_West:
+                    sprite.SetRegion(new TextureRegion(reg.GetTexture(), reg.region.X + regSize, reg.region.Y, regSize, reg.region.Height));
+                    sprite.Effect = Microsoft.Xna.Framework.Graphics.SpriteEffects.FlipHorizontally;
+                    break;
+                default:
+                    break;
+            }
+        }
+        public void InitTexture(TextureRegion reg, float degree)
+        {
+            int regSize = reg.region.Width / 5;
+            Direction dir = Direction.East;
             switch (dir)
             {
                 case Direction.North:
@@ -236,6 +284,13 @@ namespace HeroSiege.FGameObject.Projectiles
                     break;
             }
         }
+        public void SetMovingDirection(float degree)
+        {
+            float rad = MathHelper.ToRadians(degree);
+            movingDirection = new Vector2(
+                (float)Math.Cos(rad),
+                -(float)Math.Sin(rad));
+        }
 
         //----- Other -----//
         protected void CalculateDirection()
@@ -259,6 +314,29 @@ namespace HeroSiege.FGameObject.Projectiles
             else if ((int)movingDirection.X == 1 && (int)movingDirection.Y == 1)
                 Dir = Direction.South_East;
             else if ((int)movingDirection.X == -1 && (int)movingDirection.Y == 1)
+                Dir = Direction.South_West;
+        }
+        protected void CalculateDirection(Vector2 dir)
+        {
+            Vector2 temp = dir;
+            temp.Normalize();
+            temp = RoundValue(temp);
+
+            if ((int)temp.X == 0 && (int)temp.Y == -1)
+                Dir = Direction.North;
+            else if ((int)temp.X == 0 && (int)temp.Y == 1)
+                Dir = Direction.South;
+            else if ((int)temp.X == -1 && (int)temp.Y == 0)
+                Dir = Direction.West;
+            else if ((int)temp.X == 1 && (int)temp.Y == 0)
+                Dir = Direction.East;
+            else if ((int)temp.X == -1 && (int)temp.Y == -1)
+                Dir = Direction.North_West;
+            else if ((int)temp.X == 1 && (int)temp.Y == -1)
+                Dir = Direction.North_East;
+            else if ((int)temp.X == 1 && (int)temp.Y == 1)
+                Dir = Direction.South_East;
+            else if ((int)temp.X == -1 && (int)temp.Y == 1)
                 Dir = Direction.South_West;
         }
         protected Vector2 RoundValue(Vector2 vector)

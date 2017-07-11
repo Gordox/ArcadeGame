@@ -37,6 +37,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AISystems\FSM\FSMMachine.cs" />
+    <Compile Include="AISystems\FSM\FSMStates\FSMState.cs" />
+    <Compile Include="AISystems\FSM\FSMStates\StateBigFIreBall.cs" />
+    <Compile Include="AISystems\FSM\FSMStates\StateBulletHell.cs" />
+    <Compile Include="AISystems\FSM\FSMStates\StateLava.cs" />
+    <Compile Include="AISystems\FSM\FSMStates\StateMultiShoot.cs" />
+    <Compile Include="AISystems\FSM\FSMStates\StateNormalAttack.cs" />
+    <Compile Include="AISystems\FSM\FSMStates\StateTeleport.cs" />
+    <Compile Include="AISystems\FSM\FSMStates\StateWall.cs" />
+    <Compile Include="AISystems\FSM\FSMTypes.cs" />
     <Compile Include="AISystems\PathFinding\Pathfinder.cs" />
     <Compile Include="AISystems\SpawnController.cs" />
     <Compile Include="FEntity\Buildings\Building.cs" />
@@ -46,11 +56,13 @@
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroCastle.cs" />
     <Compile Include="FEntity\Buildings\HeroBuildings\HeroTower.cs" />
     <Compile Include="FEntity\Buildings\Shop.cs" />
+    <Compile Include="FEntity\Controllers\BossController.cs" />
     <Compile Include="FEntity\Controllers\TowerController.cs" />
     <Compile Include="FEntity\Controllers\Control.cs" />
     <Compile Include="FEntity\Controllers\AIController.cs" />
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
     <Compile Include="FEntity\Enemies\Bosses\DeathKnight.cs" />
+    <Compile Include="FEntity\Enemies\Bosses\Demon.cs" />
     <Compile Include="FEntity\Enemies\Enemy.cs" />
     <Compile Include="FEntity\Enemies\Orge.cs" />
     <Compile Include="FEntity\Enemies\TestEnemy.cs" />
@@ -67,6 +79,8 @@
     <Compile Include="FEntity\Players\Hero.cs" />
     <Compile Include="FEntity\Players\TestPlayer.cs" />
     <Compile Include="FEntity\StatsData.cs" />
+    <Compile Include="FGameObject\Attacks\LavaFloor.cs" />
+    <Compile Include="FGameObject\FireWall.cs" />
     <Compile Include="FGameObject\GameObjectEnums.cs" />
     <Compile Include="FGameObject\Items\Armors\AggramarsStride.cs" />
     <Compile Include="FGameObject\Items\Armors\Armor.cs" />
@@ -171,7 +185,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AISystems\FUSM\" />
     <Folder Include="Buildnings\" />
     <Folder Include="Globals\" />
   </ItemGroup>

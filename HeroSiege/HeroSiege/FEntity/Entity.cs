@@ -149,7 +149,7 @@ namespace HeroSiege.FEntity
         public void CalculateDirection(Entity target)
         {
 
-           var movingDirection = new Vector2(target.Position.X - position.X, target.Position.Y - position.Y);
+            Vector2 movingDirection = new Vector2(target.Position.X - position.X, target.Position.Y - position.Y);
             movingDirection.Normalize();
             movingDirection = RoundValue(movingDirection);
 

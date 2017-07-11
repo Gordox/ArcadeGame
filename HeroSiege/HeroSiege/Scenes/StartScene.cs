@@ -203,7 +203,7 @@ namespace HeroSiege.Scenes
         private void BackToMainMenu()
         {
             if (currentSceene != Screens.MainMenu)
-                if (ButtonPress(PlayerIndex.One, PlayerInput.B) || ButtonPress(PlayerIndex.Two, PlayerInput.B))
+                if (ButtonPress(PlayerIndex.One, PlayerInput.B) | ButtonPress(PlayerIndex.Two, PlayerInput.B) && !doDoorAnimation)
                     SetNewScreen(Screens.MainMenu);
         }
         public void SetNormalDoorAnimation()

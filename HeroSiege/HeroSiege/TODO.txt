@@ -12,6 +12,14 @@ FootMan - Basic Done
 Dwarven - Basic Done
 Gnomish_Flying_Machine - Basic Done
 Knight - Basic Done
+All shall some special ability
+Mage - Whirlwind
+Archer - 
+GryphonRider -
+FootMan - 
+Dwarwen - 
+Gnome - Drop bomb
+Knight - hast(run fast) 
 __________________________________
 Enimy units:
 DeathKnight - Done

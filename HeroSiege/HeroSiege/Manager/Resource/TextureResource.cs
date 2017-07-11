@@ -15,7 +15,7 @@ namespace HeroSiege.Manager.Resource
         //Heros
         private Texture2D heroMage, heroArcher, heroFootMan, heroKnight, heroGryponRider, heroDwarven, heroGnomish;
         //Enemies
-        private Texture2D trollTrowerSpriteSheet, daemonSprite, deathKnightSprite, dragonSprite, gruntSPrite, orgeSprite, zeppelinSprite;
+        private Texture2D trollTrowerSpriteSheet, demonSprite, deathKnightSprite, dragonSprite, gruntSPrite, orgeSprite, zeppelinSprite;
         //Buildings
         private Texture2D heroBuildings, enemieBuildnings, etcBuildings, heroBalista;
         //Magic and Missiels
@@ -62,7 +62,7 @@ namespace HeroSiege.Manager.Resource
             trollTrowerSpriteSheet = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Troll_Thrower");
             deathKnightSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Death_Knight");
             zeppelinSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Zeppelin");
-            daemonSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Daemon");
+            demonSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Daemon");
             dragonSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Dragon");
             gruntSPrite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Grunt");
             orgeSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Orge");
@@ -161,7 +161,7 @@ namespace HeroSiege.Manager.Resource
             textureRegion["Death_Knight"] = new TextureRegion(deathKnightSprite, 0, 0, deathKnightSprite.Width, deathKnightSprite.Height);
             textureRegion["Zeppelin"] = new TextureRegion(zeppelinSprite, 0, 0, zeppelinSprite.Width, zeppelinSprite.Height);
             textureRegion["Dragon"] = new TextureRegion(dragonSprite, 0, 0, dragonSprite.Width, dragonSprite.Height);
-            textureRegion["Daemon"] = new TextureRegion(daemonSprite, 0, 0, daemonSprite.Width, daemonSprite.Height);
+            textureRegion["Demon"] = new TextureRegion(demonSprite, 0, 0, demonSprite.Width, demonSprite.Height);
             textureRegion["Grunt"] = new TextureRegion(gruntSPrite, 0, 0, gruntSPrite.Width, gruntSPrite.Height);
             textureRegion["Orge"] = new TextureRegion(orgeSprite, 0, 0, orgeSprite.Width, orgeSprite.Height);
 

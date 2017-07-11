@@ -485,5 +485,7 @@
   <object id="101" x="1376" y="3488" width="32" height="32"/>
   <object id="102" x="1280" y="3584" width="32" height="32"/>
  </objectgroup>
-
+ <objectgroup name="FireWall">
+  <object id="186" x="1184" y="928" width="224" height="32"/>
+ </objectgroup>
  </map>

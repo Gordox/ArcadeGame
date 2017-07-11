@@ -16,6 +16,7 @@
     {
         Harpon,
         Soul_Tornado,
+        Big_Fire_Bal,
         Fire_Bal,
         Lighing_bal,
         Big_Canon_bal,

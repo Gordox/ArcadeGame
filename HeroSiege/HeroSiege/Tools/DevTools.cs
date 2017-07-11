@@ -9,7 +9,7 @@ namespace HeroSiege.Tools
     {
         public static bool DevDebugMode = false;
 
-        public static bool DevShowFPS = false;
+        public static bool DevShowFPS = true;
         public static bool DevTopBarInfo = false;
 
         public static bool DevDrawWalkbleTiles = false;

@@ -20,6 +20,8 @@ using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.FTexture2D.SpriteEffect;
 using HeroSiege.Systems;
 using Microsoft.Xna.Framework.Graphics;
+using HeroSiege.FEntity.Enemies.Bosses;
+using HeroSiege.FGameObject.Attacks;
 
 namespace HeroSiege.GameWorld
 {
@@ -53,7 +55,7 @@ namespace HeroSiege.GameWorld
         public List<GameObject> GameObjects { get; private set; }
         public List<GameObject> EnemyObjects { get; private set; }
         public List<GameObject> DeadObjects { get; private set; }
-
+        public FireWall fireWall;
         public List<Rectangle> Hitboxes { get; private set; }
 
         //----- Effects -----//
@@ -71,6 +73,7 @@ namespace HeroSiege.GameWorld
             this.spawnController = new SpawnController(this, gameSettings);
             InitBuildings();
             InitEntitys();
+            InitGameObjects();
         }
 
         //----- Initiators -----//
@@ -94,7 +97,7 @@ namespace HeroSiege.GameWorld
             {
                 InitPlayerOne();
                 InitPlayerTwo();
-                InitGameObjects();
+                InitBosses();
             }
         }
 
@@ -168,9 +171,22 @@ namespace HeroSiege.GameWorld
                 PlayerTwo.SetControl(new HumanControler(PlayerIndex.Two, PlayerTwo, this));
         }
 
+        public void InitBosses()
+        {
+            foreach (Rectangle area in Map.MiniBossArea)
+            {
+                float x = area.X + area.Width / 2;
+                float y = area.Y + area.Height / 2;
+                Demon d = new Demon(x, y, 64, 64);
+                d.SetControl(new BossController(this, d, area));
+                EnemieBosses.Add(d);
+            }
+        }
 
         public void InitGameObjects()
         {
+            fireWall = new FireWall(Map.FireWall.X, Map.FireWall.Y, Map.FireWall.Width, Map.FireWall.Height);
+            Hitboxes.Add(fireWall.GetBounds());
             GameObjects.Add(new Portal(ResourceManager.GetTexture("Portal"), Map.Portal[0].X, Map.Portal[0].Y, 64, 64) { SetDestination = Map.Portal[1] });
             GameObjects.Add(new Portal(ResourceManager.GetTexture("Portal"), Map.Portal[1].X, Map.Portal[1].Y, 64, 64) { SetDestination = Map.Portal[0] });
         }
@@ -240,6 +256,7 @@ namespace HeroSiege.GameWorld
             foreach (Building b in GeneralBuildings)
                 Hitboxes.Add(b.GetHitbox());
         }
+
         //----- Updates-----//
         public void Update(float delta)
         {
@@ -259,7 +276,7 @@ namespace HeroSiege.GameWorld
             UpdateGameObjects(delta);
 
             //Attack collision
-            UpdateAttackCollision();
+            UpdateAttackCollision(delta);
 
             //Effects
             UpdateEffects(delta);
@@ -366,7 +383,7 @@ namespace HeroSiege.GameWorld
         }
 
         //Attack collision
-        private void UpdateAttackCollision()
+        private void UpdateAttackCollision(float delta)
         {
             foreach (GameObject obj in GameObjects)
             {
@@ -393,9 +410,36 @@ namespace HeroSiege.GameWorld
             {
 
                 if (obj is Projectile)
-                    UpdateProjectileCollision((Projectile)obj);
+                {
+                    Projectile p = (Projectile)obj;
+
+                    if (p.target == null)
+                        foreach (Hero h in new List<Hero> { PlayerOne, PlayerTwo})
+                        {
+                            if (h == null)
+                                continue;
+                            UpdateProjectileCollision(p, h);
+                        }
+                    else
+                        UpdateProjectileCollision(p);
+                }
+
+                if(obj is LavaFloor)
+                {
+                    LavaFloor lava = (LavaFloor)obj;
+                    foreach (Hero h in new List<Hero> { PlayerOne, PlayerTwo })
+                    {
+                        if (h == null)
+                            continue;
+                        if (h.GetBounds().Intersects(lava.GetBounds()))
+                        {
+                            h.Hit(lava.GetDamage(delta));
+                        }
+                    }
+                }
             }
         }
+
         //Collision Enemy Entitys
         private void UpdateProjectileCollision(Projectile pro, Entity target = null)
         {
@@ -428,7 +472,7 @@ namespace HeroSiege.GameWorld
                     SpawnEffect(pro.GetCollisionFX(), pro.Position);
             }
         }
-        //Collision Eenemy buildings
+        //Collision Enemy buildings
         private void UpdateProjectileCollision(Projectile pro, Building eBuilding)
         {
             //Set collision and hit damage
@@ -487,6 +531,14 @@ namespace HeroSiege.GameWorld
             foreach (Entity e in deadEnimies)
             {
                 Enemies.Remove(e);
+
+                if (e is Demon)
+                {
+                    fireWall.RemoveLive();
+                    if (!fireWall.IsAlive)
+                        Hitboxes.Remove(fireWall.GetBounds());         
+                }
+
                 EnemieBosses.Remove(e);
             }
             deadEnimies.Clear();

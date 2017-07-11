@@ -41,12 +41,18 @@ namespace HeroSiege.GameWorld.map
 
         public List<Vector2> HeroTowerPos { get; private set; }
         public Vector2 HeroCastle { get; private set; }
-
         public List<Vector2> HeroBalista { get; private set; }
-
-        public List<Vector2> Portal { get; private set; }
-
         public List<Vector2> Shop { get; private set; }
+
+        //----- Bosses -----//
+        public List<Rectangle> MiniBossArea { get; private set; }
+        public Rectangle FinalBossArea { get; private set; }
+
+        //----- Etc -----//
+        public Rectangle FireWall { get; private set; }
+        public List<Vector2> Portal { get; private set; }
+       
+
 
         public string MapName { get; private set; }
 
@@ -113,6 +119,7 @@ namespace HeroSiege.GameWorld.map
             this.Portal = new List<Vector2>();
             this.HeroBalista = new List<Vector2>();
             this.Shop = new List<Vector2>();
+            this.MiniBossArea = new List<Rectangle>();
         }
 
         public void LoadMapDataFromXMLFile(string mapName)
@@ -150,7 +157,7 @@ namespace HeroSiege.GameWorld.map
                 int yPos = Int32.Parse(allObjects[i].Y) + TileSize / 2;
 
                 if (allObjects[i].name.Equals("HitBoxes"))
-                    Hitboxes.Add(new Rectangle(xPos, Int32.Parse(allObjects[i].Y), //1.5 is a value to make it work
+                    Hitboxes.Add(new Rectangle(xPos, Int32.Parse(allObjects[i].Y),
                                                      Int32.Parse(allObjects[i].Width),
                                                      Int32.Parse(allObjects[i].Height)));
 
@@ -169,6 +176,13 @@ namespace HeroSiege.GameWorld.map
                     HeroBalista.Add(new Vector2(xPos, yPos));
                 if (allObjects[i].name.Equals("Shop"))
                     Shop.Add(new Vector2(xPos, yPos));
+                if (allObjects[i].name.Equals("FireWall"))
+                    FireWall = new Rectangle(xPos, yPos, Int32.Parse(allObjects[i].Width), Int32.Parse(allObjects[i].Height));
+                if (allObjects[i].name.Equals("MiniBoss_1") || allObjects[i].name.Equals("MiniBoss_2") ||
+                    allObjects[i].name.Equals("MiniBoss_3")|| allObjects[i].name.Equals("MiniBoss_4"))
+                    MiniBossArea.Add(new Rectangle(xPos, Int32.Parse(allObjects[i].Y), Int32.Parse(allObjects[i].Width),Int32.Parse(allObjects[i].Height)));
+
+
             }
         }
 

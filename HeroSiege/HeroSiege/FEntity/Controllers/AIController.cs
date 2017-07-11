@@ -141,6 +141,7 @@ namespace HeroSiege.FEntity.Controllers
             else
                 return false;
         }
+
         private bool isBuildingInRange(List<Building> heroBuildings)
         {
             enemy.BuildingTarget = null;

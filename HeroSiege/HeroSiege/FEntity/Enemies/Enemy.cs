@@ -15,6 +15,7 @@ using HeroSiege.FGameObject.Projectiles;
 using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.FEntity.Players;
 using HeroSiege.FEntity.Buildings;
+using HeroSiege.FGameObject.Attacks;
 
 namespace HeroSiege.FEntity.Enemies
 {
@@ -126,7 +127,9 @@ namespace HeroSiege.FEntity.Enemies
         //Health bar
         protected void DrawHealtBar(SpriteBatch SB)
         {
-            SB.DrawString(ResourceManager.GetFont("Arial_Font"), "lvl: "+level, new Vector2(Position.X - 48, Position.Y - 32), Color.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
+            string text = "lvl: " + level;
+            float nameLenght = ResourceManager.GetFont("Arial_Font").MeasureString(text).X;
+            SB.DrawString(ResourceManager.GetFont("Arial_Font"), text, new Vector2(Position.X - nameLenght, Position.Y - 31.5f), Color.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
             //Background
             SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 25, Position.Y - 30), new Rectangle(0, 0, 50, 8), Color.Black);
             SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 24, Position.Y - 29),
@@ -299,7 +302,10 @@ namespace HeroSiege.FEntity.Enemies
             switch (type)
             {
                 case ProjectileType.Fire_Bal:
-                    temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, MovingDirection);
+                    if (PlayerTarget != null)
+                        temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, PlayerTarget);
+                    else
+                        temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, MovingDirection);
                     break;
                 case ProjectileType.Lighing_bal:
                     if (PlayerTarget != null)
@@ -338,7 +344,41 @@ namespace HeroSiege.FEntity.Enemies
             }
             parent.EnemyObjects.Add(temp);
         }
+        public void CreateProjectiles(World parent, ProjectileType type, float degree)
+        {
+            Projectile temp = null;
+            switch (type)
+            {
+                case ProjectileType.Fire_Bal:
+                        temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, degree);
+                    break;
+                case ProjectileType.Big_Fire_Bal:
+                    temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 64, 64, degree, 40);
+                    break;
+                case ProjectileType.Lighing_bal:
+                    //temp = new Lightning_ball(ResourceManager.GetTexture("Lighing_bal"), Position.X, Position.Y, 32, 32, BuildingTarget);
+                    break;
+                case ProjectileType.Evil_Hand:
+                    //temp = new EvilHand(ResourceManager.GetTexture("Evil_Hand"), Position.X, Position.Y, 32, 32, BuildingTarget);
+                    break;
+                case ProjectileType.Dark_Eye:
+                    break;
+                case ProjectileType.Lightning_Axe:
+                    break;
+                case ProjectileType.Fire_Canon_Bal:
+                    break;
+                case ProjectileType.Normal_Axe:
+                    break;
+                default:
+                    break;
+            }
+            parent.EnemyObjects.Add(temp);
+        }
 
+        public void CreateLavaFloor(World parent, Vector2 pos)
+        {
+            parent.EnemyObjects.Add(new LavaFloor(pos.X, pos.Y));
+        }
         public int GetXPWorth
         {
             get { return 5 + 5 * level; }

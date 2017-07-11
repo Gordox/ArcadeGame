@@ -17,6 +17,10 @@ namespace HeroSiege.FGameObject.Projectiles
             : base(region, x, y, width, height, direction, dmg)
         {
         }
+        public FireBal(TextureRegion region, float x, float y, float width, float height, float degree, int dmg = 0)
+            : base(region, x, y, width, height, degree, dmg)
+        {
+        }
         protected override void Init()
         {
             base.Init();
