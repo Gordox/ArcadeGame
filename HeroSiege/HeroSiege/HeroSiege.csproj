@@ -116,6 +116,7 @@
     <Compile Include="FGameObject\Projectiles\Lightning_ball.cs" />
     <Compile Include="FGameObject\Projectiles\Projectile.cs" />
     <Compile Include="FGameObject\Projectiles\SmallCanonBall.cs" />
+    <Compile Include="FGameObject\Projectiles\Whirlwind.cs" />
     <Compile Include="FTexture2D\FAnimation\Animation.cs" />
     <Compile Include="FTexture2D\FAnimation\Animations.cs" />
     <Compile Include="FTexture2D\FAnimation\FrameAnimation.cs" />

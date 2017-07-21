@@ -2,7 +2,7 @@
 https://www.spriters-resource.com/pc_computer/warcraft2/
 __________________________________
 For Arcade machine release:
-All heros have Special attack -
+All heros have Special attack - 25.57% done
 Rebalance the tower health -
 GUI that show where enemies are commming from -
 How to play scene -
@@ -22,13 +22,13 @@ Knight - Basic Done
 Mage - Basic Done
 __________________________________
 All shall some special ability:
-Mage - Whirlwind
+Mage - Whirlwind - Done
 Archer - 
 GryphonRider -
 FootMan - 
 Dwarwen - 
 Gnome - Drop bomb
-Knight - hast(run fast)
+Knight - hast(run fast) - Done
 __________________________________
 Enemy units:
 Goblin Zepilin - Done

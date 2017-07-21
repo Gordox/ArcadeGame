@@ -29,7 +29,8 @@
         Normal_Axe,
         Blizzard,
         Fire_Canon_Bal,
-        Canon_Ball
+        Canon_Ball,
+        Whirlwind
     }
 
 }

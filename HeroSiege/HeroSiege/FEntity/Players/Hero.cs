@@ -67,7 +67,7 @@ namespace HeroSiege.FEntity.Players
             CloseToShop();
             UpdateAnimation();
         }
-        public void UpdatePlayerMovement(float delta, List<Rectangle> objects)
+        public virtual void UpdatePlayerMovement(float delta, List<Rectangle> objects)
         {
             if (isBuying)
                 return;
@@ -277,10 +277,10 @@ namespace HeroSiege.FEntity.Players
         public void CreateProjectilesTowardsTarget(World parent, ProjectileType type)
         {
             Projectile temp = null;
-
+            int x, y = 0;
             if (Targets.Count > 0)
             {
-
+                
                 for (int i = 0; i < Targets.Count; i++)
                 {
                     switch (type)
@@ -297,14 +297,14 @@ namespace HeroSiege.FEntity.Players
                             temp = new FireBal(ResourceManager.GetTexture("small_Canon_Bal"), Position.X, Position.Y, 24, 24, Targets[i], GetDamage());
                             break;
                         case ProjectileType.Lightning_Axe:
-                            int x = ResourceManager.GetTexture("Lightning_Axe").region.X;
-                            int y = ResourceManager.GetTexture("Lightning_Axe").region.Y;
+                            x = ResourceManager.GetTexture("Lightning_Axe").region.X;
+                            y = ResourceManager.GetTexture("Lightning_Axe").region.Y;
                             temp = new LightningAxe("LightningAxeAnimation", new FrameAnimation(ResourceManager.GetTexture("Lightning_Axe"), x, y, 32, 32, 3, 0.08f, new Point(3, 1)), Position.X, Position.Y, 32, 32, Targets[i], GetDamage());
                             break;
-                        case ProjectileType.Normal_Axe:
-                            //int x = ResourceManager.GetTexture("Troll_Thrower").region.X;
-                            //int y = ResourceManager.GetTexture("Troll_Thrower").region.Y;
-                            //temp = new Axe("AxeAnimation", new FrameAnimation(ResourceManager.GetTexture("Troll_Thrower"), x, y, 32, 32, 5, 0.2f, new Point(1, 5)), Position.X, Position.Y, 32, 32, Targets[i]);
+                        case ProjectileType.Whirlwind:
+                            x = ResourceManager.GetTexture("Soul_Tornado").region.X;
+                            y = ResourceManager.GetTexture("Soul_Tornado").region.Y;
+                            temp = new Whirlwind("Soul_Tornado", new FrameAnimation(ResourceManager.GetTexture("Soul_Tornado"), x, y, 64, 64, 3, 0.08f, new Point(4, 1)), Position.X, Position.Y, 64, 64, Targets[i], GetDamage());
                             break;
                         default:
                             break;
@@ -329,9 +329,14 @@ namespace HeroSiege.FEntity.Players
                         temp = new FireBal(ResourceManager.GetTexture("small_Canon_Bal"), Position.X, Position.Y, 24, 24, MovingDirection, GetDamage());
                         break;
                     case ProjectileType.Lightning_Axe:
-                        int x = ResourceManager.GetTexture("Lightning_Axe").region.X;
-                        int y = ResourceManager.GetTexture("Lightning_Axe").region.Y;
+                        x = ResourceManager.GetTexture("Lightning_Axe").region.X;
+                        y = ResourceManager.GetTexture("Lightning_Axe").region.Y;
                         temp = new LightningAxe("LightningAxeAnimation", new FrameAnimation(ResourceManager.GetTexture("Lightning_Axe"), x, y, 32, 32, 3, 0.08f, new Point(3, 1)), Position.X, Position.Y, 32, 32, MovingDirection, GetDamage());
+                        break;
+                    case ProjectileType.Whirlwind:
+                        x = ResourceManager.GetTexture("Soul_Tornado").region.X;
+                        y = ResourceManager.GetTexture("Soul_Tornado").region.Y;
+                        temp = new Whirlwind("Soul_Tornado", new FrameAnimation(ResourceManager.GetTexture("Soul_Tornado"), x, y, 64, 64, 3, 0.08f, new Point(4, 1)), Position.X, Position.Y, 64, 64, MovingDirection, GetDamage());
                         break;
                     case ProjectileType.Normal_Axe:
                         temp = new FireBal(ResourceManager.GetTexture("Normal_Axe"), Position.X, Position.Y, 32, 32, MovingDirection);
