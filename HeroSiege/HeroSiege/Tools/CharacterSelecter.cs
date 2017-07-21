@@ -72,43 +72,43 @@ namespace HeroSiege.Tools
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Elven");
                     titleText = "Elven Archer";
-                    hInfo = new HeroInfo() { name = "Horpos", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Emma", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
                     break;
                 case CharacterType.Mage:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Mage");
                     titleText = "Mage";
-                    hInfo = new HeroInfo() { name = "Horpos", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Constantine", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
                     break;
                 case CharacterType.Gryphon_Rider:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Gryphon");
                     titleText = "Gryphon Rider";
-                    hInfo = new HeroInfo() { name = "Horpos", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Gordox", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
                     break;
                 case CharacterType.FootMan:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Foot");
                     titleText = "Foot Man";
-                    hInfo = new HeroInfo() { name = "Horpos", type = "Melee", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Jakob", type = "Melee", hp = "1200", mp = "200", dif = "Easy" };
                     break;
                 case CharacterType.Dwarven:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Dwarven");
                     titleText = "Dwarven";
-                    hInfo = new HeroInfo() { name = "Gordox", type = "Melee", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Horpos", type = "Melee", hp = "1200", mp = "200", dif = "Easy" };
                     break;
                 case CharacterType.Gnomish_Flying_Machine:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Gnome");
                     titleText = "Gnomish Flying Machine";
-                    hInfo = new HeroInfo() { name = "Horpos", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Zoegas Nation", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
                     break;
                 case CharacterType.Knight:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Knight");
                     titleText = "Knight";
-                    hInfo = new HeroInfo() { name = "Horpos", type = "Melee", hp = "1200", mp = "200", dif = "Easy"};
+                    hInfo = new HeroInfo() { name = "Lucifer", type = "Melee", hp = "1200", mp = "200", dif = "Easy"};
                     break;
                 case CharacterType.None:
                     animations.SetSize(128, 128);
@@ -158,7 +158,7 @@ namespace HeroSiege.Tools
                 string infoText2 = "Hp: " + hInfo.hp + "\n" + "Mp: " + hInfo.mp;
 
                 DrawString(SB, ResourceManager.GetFont("WarFont_16"), infoText1, drawPos + new Vector2(-80, 230), Color.Gold, 1);
-                DrawString(SB, ResourceManager.GetFont("WarFont_16"), infoText2, drawPos + new Vector2(120, 230), Color.Gold, 1);
+                DrawString(SB, ResourceManager.GetFont("WarFont_16"), infoText2, drawPos + new Vector2(125, 230), Color.Gold, 1);
             }
 
 

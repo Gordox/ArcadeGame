@@ -17,7 +17,7 @@ namespace HeroSiege.FEntity.Players
         const float FRAME_DURATION_ATTACK = 0.08f;
         const float FRAME_DURATION_DEATH = 0.15f;
 
-        const string HERO_NAME = "Gordox";
+        const string HERO_NAME = "Zoegas Nation";
 
         const int START_INT = 20;
         const int START_AGI = 20;

@@ -370,10 +370,10 @@ namespace HeroSiege.FEntity.Players
         }
         public int GetInteligence()
         {
-            return Stats.Agility + Inventory.GetInteligence();
+            return Stats.Intelligens + Inventory.GetInteligence();
         }
 
-        //---- Help methods -----//
+        //----- Help methods -----//
 
 
         //----- Other -----//

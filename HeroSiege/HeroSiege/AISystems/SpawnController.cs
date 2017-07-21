@@ -40,7 +40,6 @@ namespace HeroSiege.AISystems
 
         int deathKnightLevel = 1;
         int enemiesRemainingToSpawn;
-        int enemiesRemainingAlive;
 
         //-----  -----//
         public SpawnController(World world, GameSettings gameSettings)
@@ -141,7 +140,13 @@ namespace HeroSiege.AISystems
                     enemy = new Zeppelin(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Range, lvl);
                     break;
                 case 3:
-                    //enemy = new WaterGolom(spawnPos, hp_multiplier);
+                    enemy = new Grunt(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Melee, lvl);
+                    break;
+                case 4:
+                    enemy = new Skeleton(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Melee, lvl);
+                    break;
+                case 5:
+                    enemy = new Goblin_Sappers(currentSpawner.Position.X, currentSpawner.Position.Y, 64, 64, AttackType.Melee, lvl);
                     break;
             }
             enemy.SetControl(new AIController(gameWorld, enemy));
@@ -150,7 +155,7 @@ namespace HeroSiege.AISystems
 
         private void EnemyType()
         {
-            type = rnd.Next(0,3); //Change later to 4
+            type = rnd.Next(0, 6);
         }
 
         private int EnemysToSpawn()

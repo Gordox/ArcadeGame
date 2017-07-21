@@ -64,7 +64,10 @@
     <Compile Include="FEntity\Enemies\Bosses\DeathKnight.cs" />
     <Compile Include="FEntity\Enemies\Bosses\Demon.cs" />
     <Compile Include="FEntity\Enemies\Enemy.cs" />
+    <Compile Include="FEntity\Enemies\Goblin_Sappers.cs" />
+    <Compile Include="FEntity\Enemies\Grunt.cs" />
     <Compile Include="FEntity\Enemies\Orge.cs" />
+    <Compile Include="FEntity\Enemies\Skeleton.cs" />
     <Compile Include="FEntity\Enemies\TestEnemy.cs" />
     <Compile Include="FEntity\Enemies\Troll_Axe_Thrower.cs" />
     <Compile Include="FEntity\Enemies\Zeppelin.cs" />

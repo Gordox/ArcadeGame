@@ -286,6 +286,9 @@ namespace HeroSiege.Render
                 if (obj != null)
                     obj.Draw(SB);
             }
+
+            if (World.FireWall != null)
+                World.FireWall.Draw(SB);
         }
    
         private void DrawEffects(SpriteBatch SB)

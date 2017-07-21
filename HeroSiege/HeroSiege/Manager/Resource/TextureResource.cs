@@ -15,7 +15,8 @@ namespace HeroSiege.Manager.Resource
         //Heros
         private Texture2D heroMage, heroArcher, heroFootMan, heroKnight, heroGryponRider, heroDwarven, heroGnomish;
         //Enemies
-        private Texture2D trollTrowerSpriteSheet, demonSprite, deathKnightSprite, dragonSprite, gruntSPrite, orgeSprite, zeppelinSprite;
+        private Texture2D trollTrowerSpriteSheet, demonSprite, deathKnightSprite, dragonSprite, gruntSprite, orgeSprite, zeppelinSprite, skeletonSprite,
+            goblinSprite;
         //Buildings
         private Texture2D heroBuildings, enemieBuildnings, etcBuildings, heroBalista;
         //Magic and Missiels
@@ -64,8 +65,10 @@ namespace HeroSiege.Manager.Resource
             zeppelinSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Zeppelin");
             demonSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Daemon");
             dragonSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Dragon");
-            gruntSPrite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Grunt");
+            gruntSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Grunt");
             orgeSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Orge");
+            skeletonSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Skeleton");
+            goblinSprite = content.Load<Texture2D>(@"Assets\Texture\Units\Enemies\Goblin_Sappers");
 
             //Buildings
             enemieBuildnings = content.Load<Texture2D>(@"Assets\Texture\Buildings\EnemieBuildings");
@@ -160,36 +163,38 @@ namespace HeroSiege.Manager.Resource
             textureRegion["Troll_Thrower"] = new TextureRegion(trollTrowerSpriteSheet, 0, 0, trollTrowerSpriteSheet.Width, trollTrowerSpriteSheet.Height);
             textureRegion["Death_Knight"] = new TextureRegion(deathKnightSprite, 0, 0, deathKnightSprite.Width, deathKnightSprite.Height);
             textureRegion["Zeppelin"] = new TextureRegion(zeppelinSprite, 0, 0, zeppelinSprite.Width, zeppelinSprite.Height);
+            textureRegion["Skeleton"] = new TextureRegion(skeletonSprite, 0, 0, skeletonSprite.Width, skeletonSprite.Height);
             textureRegion["Dragon"] = new TextureRegion(dragonSprite, 0, 0, dragonSprite.Width, dragonSprite.Height);
+            textureRegion["Goblin"] = new TextureRegion(goblinSprite, 0, 0, goblinSprite.Width, goblinSprite.Height);
             textureRegion["Demon"] = new TextureRegion(demonSprite, 0, 0, demonSprite.Width, demonSprite.Height);
-            textureRegion["Grunt"] = new TextureRegion(gruntSPrite, 0, 0, gruntSPrite.Width, gruntSPrite.Height);
+            textureRegion["Grunt"] = new TextureRegion(gruntSprite, 0, 0, gruntSprite.Width, gruntSprite.Height);
             textureRegion["Orge"] = new TextureRegion(orgeSprite, 0, 0, orgeSprite.Width, orgeSprite.Height);
 
             //Explosion
-            textureRegion["Big_Explosion"] = new TextureRegion(explosionSprite, 0, 0, 512, 128);
-            textureRegion["Medium_Explosion"] = new TextureRegion(explosionSprite, 0, 128, 192, 128);
             textureRegion["Light_Magic_Explosion"] = new TextureRegion(explosionSprite, 192, 128, 192, 128);
             textureRegion["Dark_Magic_Explosion"] = new TextureRegion(explosionSprite, 0, 256, 384, 64);
+            textureRegion["Medium_Explosion"] = new TextureRegion(explosionSprite, 0, 128, 192, 128);
+            textureRegion["Big_Explosion"] = new TextureRegion(explosionSprite, 0, 0, 512, 128);
             textureRegion["Frost_Hit"] = new TextureRegion(explosionSprite, 256, 192, 128, 64);
             textureRegion["Brown_Hit"] = new TextureRegion(explosionSprite, 384, 128, 64, 64);
             textureRegion["Fire_Hit"] = new TextureRegion(explosionSprite, 448, 128, 64, 64);
 
             //Projectiles
-            textureRegion["Harpon"] = new TextureRegion(projectileSprite, 0, 0, 280, 56);
-            textureRegion["Soul_Tornado"] = new TextureRegion(projectileSprite, 0, 56, 256, 64);
-            textureRegion["Fire_Bal"] = new TextureRegion(projectileSprite, 0, 120, 160, 32);
-            textureRegion["Lighing_bal"] = new TextureRegion(projectileSprite, 0, 152, 160, 32);
-            textureRegion["Big_Canon_bal"] = new TextureRegion(projectileSprite, 0, 184, 160, 32);
             textureRegion["Medium_Canon_Bal"] = new TextureRegion(projectileSprite, 160, 208, 120, 24);
             textureRegion["small_Canon_Bal"] = new TextureRegion(projectileSprite, 160, 184, 120, 24);
-            textureRegion["Evil_Hand"] = new TextureRegion(projectileSprite, 0, 216, 160, 32);
-            textureRegion["Arrow"] = new TextureRegion(projectileSprite, 0, 248, 160, 32);
-            textureRegion["Dark_Eye"] = new TextureRegion(projectileSprite, 0, 280, 160, 32);
-            textureRegion["Lightning_Axe"] = new TextureRegion(projectileSprite, 160, 120, 96, 32);
-            textureRegion["Normal_Axe"] = new TextureRegion(projectileSprite, 160, 152, 96, 32);
-            textureRegion["Blizzard"] = new TextureRegion(projectileSprite, 160, 232, 128, 32);
             textureRegion["Fire_Canon_Bal"] = new TextureRegion(projectileSprite, 160, 264, 64, 16);
+            textureRegion["Lightning_Axe"] = new TextureRegion(projectileSprite, 160, 120, 96, 32);
+            textureRegion["Big_Canon_bal"] = new TextureRegion(projectileSprite, 0, 184, 160, 32);
+            textureRegion["Soul_Tornado"] = new TextureRegion(projectileSprite, 0, 56, 256, 64);
+            textureRegion["Lighing_bal"] = new TextureRegion(projectileSprite, 0, 152, 160, 32);
+            textureRegion["Normal_Axe"] = new TextureRegion(projectileSprite, 160, 152, 96, 32);
             textureRegion["Canon_Ball"] = new TextureRegion(projectileSprite, 160, 280, 48, 16);
+            textureRegion["Evil_Hand"] = new TextureRegion(projectileSprite, 0, 216, 160, 32);
+            textureRegion["Fire_Bal"] = new TextureRegion(projectileSprite, 0, 120, 160, 32);
+            textureRegion["Dark_Eye"] = new TextureRegion(projectileSprite, 0, 280, 160, 32);
+            textureRegion["Blizzard"] = new TextureRegion(projectileSprite, 160, 232, 128, 32);
+            textureRegion["Harpon"] = new TextureRegion(projectileSprite, 0, 0, 280, 56);
+            textureRegion["Arrow"] = new TextureRegion(projectileSprite, 0, 248, 160, 32);
 
             //Effects
             textureRegion["Fire_Storm"] = new TextureRegion(effecSprite, 0, 0, 320, 128);

@@ -55,7 +55,7 @@ namespace HeroSiege.GameWorld
         public List<GameObject> GameObjects { get; private set; }
         public List<GameObject> EnemyObjects { get; private set; }
         public List<GameObject> DeadObjects { get; private set; }
-        public FireWall fireWall;
+        public FireWall FireWall { get; private set; }
         public List<Rectangle> Hitboxes { get; private set; }
 
         //----- Effects -----//
@@ -185,8 +185,8 @@ namespace HeroSiege.GameWorld
 
         public void InitGameObjects()
         {
-            fireWall = new FireWall(Map.FireWall.X, Map.FireWall.Y, Map.FireWall.Width, Map.FireWall.Height);
-            Hitboxes.Add(fireWall.GetBounds());
+            FireWall = new FireWall(Map.FireWall.X, Map.FireWall.Y, Map.FireWall.Width, Map.FireWall.Height);
+            Hitboxes.Add(FireWall.GetBounds());
             GameObjects.Add(new Portal(ResourceManager.GetTexture("Portal"), Map.Portal[0].X, Map.Portal[0].Y, 64, 64) { SetDestination = Map.Portal[1] });
             GameObjects.Add(new Portal(ResourceManager.GetTexture("Portal"), Map.Portal[1].X, Map.Portal[1].Y, 64, 64) { SetDestination = Map.Portal[0] });
         }
@@ -377,9 +377,12 @@ namespace HeroSiege.GameWorld
                 if (obj != null)
                     obj.Update(delta);
 
-                if (!obj.IsAlive)
+                if (obj != null && !obj.IsAlive)
                     DeadObjects.Add(obj);
             }
+
+            if (FireWall != null)
+                FireWall.Update(delta);
         }
 
         //Attack collision
@@ -534,9 +537,13 @@ namespace HeroSiege.GameWorld
 
                 if (e is Demon)
                 {
-                    fireWall.RemoveLive();
-                    if (!fireWall.IsAlive)
-                        Hitboxes.Remove(fireWall.GetBounds());         
+                    FireWall.RemoveLive();
+                    if (!FireWall.IsAlive)
+                    {
+                        Hitboxes.Remove(new Rectangle((int)FireWall.Position.X, (int)FireWall.Position.Y,
+                                                      FireWall.GetBounds().Width, FireWall.GetBounds().Height));
+                        FireWall = null;
+                    }      
                 }
 
                 EnemieBosses.Remove(e);

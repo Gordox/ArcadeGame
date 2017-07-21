@@ -45,6 +45,9 @@ namespace HeroSiege.AISystems.FSM.FSMStates
         }
         private float CalcDir(Enemy e)
         {
+            if (e.PlayerTarget == null)
+                return 0;
+
             Vector2 movingDirection = new Vector2(e.PlayerTarget.Position.X - e.Position.X, e.PlayerTarget.Position.Y - e.Position.Y);
             movingDirection.Normalize();
             float temp = (float)Math.Atan2(-movingDirection.Y, movingDirection.X);

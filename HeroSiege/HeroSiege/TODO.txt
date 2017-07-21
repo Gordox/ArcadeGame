@@ -1,36 +1,46 @@
 ﻿Get textures from here:
 https://www.spriters-resource.com/pc_computer/warcraft2/
+__________________________________
+For Arcade machine release:
+All heros have Special attack -
+Rebalance the tower health -
+GUI that show where enemies are commming from -
+How to play scene -
+Final boss -
+__________________________________
 
 Modes:
 easy, normal, Hard, extream
 __________________________________
 Player hero:
-Mage - Basic Done
-ElvenArcher - Basic Done
-Gryphon_Rider - Basic Done
-FootMan - Basic Done
-Dwarven - Basic Done
 Gnomish_Flying_Machine - Basic Done
+Gryphon_Rider - Basic Done
+ElvenArcher - Basic Done
+Dwarven - Basic Done
+FootMan - Basic Done
 Knight - Basic Done
-All shall some special ability
+Mage - Basic Done
+__________________________________
+All shall some special ability:
 Mage - Whirlwind
 Archer - 
 GryphonRider -
 FootMan - 
 Dwarwen - 
 Gnome - Drop bomb
-Knight - hast(run fast) 
+Knight - hast(run fast)
 __________________________________
-Enimy units:
-DeathKnight - Done
-Dragon
-Goblin sappers
+Enemy units:
 Goblin Zepilin - Done
-Grunt
-Orge - Done
-Peon
-Skeleton
+Goblin sappers - Done
+DeathKnight - Done
 AxeThrower - Done
+Skeleton - Done
+Dragon -
+Demon - Done
+Grunt - Done
+Orge - Done
+Peon -
 __________________________________
 Settings and game info:
 Volume?
@@ -47,7 +57,7 @@ Sounds & Music:
 __________________________________
 In Game: (Change name later maybe)
 Teleport to mini bosses - DONE
-mini bosses
+mini bosses - Done
 End boss
 UI - working on it
 __________________________________
@@ -55,11 +65,11 @@ Systems:
 A*(Astar) - Done
 SpawnController - Working on it(85% Done)
 SpriteFX - Done
-Particle - working on it
+Particle - no prio
 __________________________________
 Buildnings:
 Shop - Done
-Hero castle - Working on
+Hero castle - no prio
 Ballista (Deffends the hero tower) - Done
 Blockade for ballista - Done
 Enemy tower - Done
@@ -68,7 +78,7 @@ __________________________________
 HUD / UI / GUI:
 HUD - Done
 ShopWindow - Done
-InGame menu
+InGame menu - Done
 __________________________________
 Need to fix and do:
 Make a base class for the player hero and the enemies, called "Hero" & "Enemy" that inherent from entity - DONE
@@ -80,17 +90,17 @@ Mage - Done
 ElvenArcher - Done
 Gryphon_Rider - Done
 FootMan - Done
-Dwarven
-Gnomish_Flying_Machine
+Dwarven - Done
+Gnomish_Flying_Machine - Done
 Knight - Done
 
 //---Enemies---//
-Goblin sappers - not prio
+Goblin sappers - Done
 Goblin Zepilin - Done
 Grunt - Done
 Orge - Done
 Peon - not prio
-Skeleton - not prio
+Skeleton - Done
 TrollAxeThrower - Done
 
 //---Bosses---//
@@ -105,11 +115,11 @@ Portal - Done
 //--- Hero buildings ---//
 Castle lvl 1 - Done
 Castle lvl 2 - Done
-Tower -Done
+Tower - Done
 
 //--- Enemies buildings ---//
 Tower - Done
-Spwaner (Dark portal sprite or Devil sumoner sprite) - Done
+Spwaner - Done
 
 //--- Misc ---//
 Explosion - Done

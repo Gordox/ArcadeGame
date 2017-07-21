@@ -17,7 +17,7 @@ namespace HeroSiege.Tools
         public static bool DevDrawBoundingbox = false;
         public static bool DevDrawRange = false;
 
-        public static bool DevDrawAIPath = false;
+        public static bool DevDrawAIPath = true;
         //more here later
     }
 }

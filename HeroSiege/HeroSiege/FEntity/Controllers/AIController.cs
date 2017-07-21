@@ -34,7 +34,7 @@ namespace HeroSiege.FEntity.Controllers
             pathTimer += delta;
 
 
-            if (pathTimer > UPDATE_PATH_TIMER && enemy.BuildingTarget == null || pathTimer > UPDATE_PATH_TIMER && enemy.PlayerTarget == null)
+            if ((pathTimer > UPDATE_PATH_TIMER && enemy.BuildingTarget == null || pathTimer > UPDATE_PATH_TIMER && enemy.PlayerTarget == null) && hasTarget == false)
             {
                 hasTarget = isPlayerInRange(new List<Hero>() { world.PlayerOne, world.PlayerTwo });
                 if(!hasTarget)
@@ -197,6 +197,35 @@ namespace HeroSiege.FEntity.Controllers
 
 
         }
-        private void MeleeAttack() { }
+        private void MeleeAttack()
+        {
+            if (targetTimer > enemy.AttackSpeed && !enemy.isAttaking)
+            {
+                enemy.isAttaking = true;
+                if (enemy.PlayerTarget != null)
+                    enemy.CalculateDirection(enemy.PlayerTarget);
+                else
+                    enemy.CalculateDirection(enemy.BuildingTarget);
+                enemy.SetAttackAnimation();
+                enemy.ResetAnimation();
+            }
+            if (enemy.isAttaking)
+                enemy.SetPauseAnimation = false;
+
+            if (enemy.isAttaking && enemy.GetCurrentFrame == enemy.GetAttackFrame)
+            {
+                if (enemy.PlayerTarget != null)
+                    enemy.PlayerTarget.Hit(enemy.Damage);
+                else
+                    enemy.BuildingTarget.Hit(enemy.Damage);
+
+                enemy.isAttaking = false;
+                enemy.SetPauseAnimation = true;
+                hasTarget = false;
+                enemy.PlayerTarget = null;
+                enemy.BuildingTarget = null;
+                targetTimer = 0;
+            }
+        }
     }
 }

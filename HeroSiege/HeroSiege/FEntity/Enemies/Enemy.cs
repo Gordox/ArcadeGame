@@ -32,6 +32,8 @@ namespace HeroSiege.FEntity.Enemies
         public Vector2 HeroCastle { get; set; }
         protected Vector2 oldPos;
 
+        public float Damage { get; protected set; }
+        public float AttackRadius { get; private set; }
         protected int level;
 
         //--- A* ---//
@@ -49,7 +51,6 @@ namespace HeroSiege.FEntity.Enemies
             this.AttackType = attackType;
             this.level = level;
             oldPos = position;
-
         }
 
         protected void InitAStar()

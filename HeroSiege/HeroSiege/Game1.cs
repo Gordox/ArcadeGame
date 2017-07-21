@@ -48,7 +48,6 @@ namespace HeroSiege
             ResourceManager.LoadResouces(Content);
             settings = new GameSettings();
 
-
             SceneManager.Initialize(this);
             //SceneManager.AddScene(new StartScene(settings, GraphicsDevice));
             SceneManager.AddScene(new GameScene(settings, GraphicsDevice));
@@ -85,9 +84,8 @@ namespace HeroSiege
             // ----- Draw stats info ONLY! -----//
             spriteBatch.Begin();
             if (DevTools.DevDebugMode || DevTools.DevTopBarInfo || DevTools.DevShowFPS)
-            {
                 fpsCounter.DrawFpsCount(gameTime, spriteBatch);
-            }
+
             spriteBatch.End();
 
             base.Draw(gameTime);
