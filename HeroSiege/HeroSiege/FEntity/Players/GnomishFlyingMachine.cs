@@ -19,6 +19,8 @@ namespace HeroSiege.FEntity.Players
 
         const string HERO_NAME = "Zoegas Nation";
 
+        //--- Hero stats ---//
+        //Attributes
         const int START_INT = 20;
         const int START_AGI = 20;
         const int START_STR = 20;
@@ -30,6 +32,9 @@ namespace HeroSiege.FEntity.Players
         const int START_MSPEED = 400;
         const int START_SPEED = 200;
         const int ATTACK_RADIUS = 200;
+
+        //Special attack
+        const float WHIRLWIND_MANA_COST = 50;
 
         public GnomishFlyingMachine(float x, float y, float width, float height)
             : base(null, x, y, width, height)
@@ -190,10 +195,23 @@ namespace HeroSiege.FEntity.Players
             CreateProjectilesTowardsTarget(parent, ProjectileType.small_Canon_Bal);
 
         }
-        //
+        // Big canon vall
         public override void YellowButton(World parent)
         {
             base.YellowButton(parent);
+
+            if (isAttaking && IsAlive) return;
+
+            if (Stats.Mana < 0 || Stats.Mana < WHIRLWIND_MANA_COST) return;
+
+            Stats.Mana -= WHIRLWIND_MANA_COST;
+
+            SetAttckAnimations();
+            ResetAnimation();
+            isAttaking = true;
+
+            GetTargets(parent.Enemies);
+            CreateProjectilesTowardsTarget(parent, ProjectileType.Big_Canon_bal);
         }
 
         //Use Mana potion

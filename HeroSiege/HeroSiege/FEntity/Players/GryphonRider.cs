@@ -1,4 +1,5 @@
-﻿using HeroSiege.FGameObject;
+﻿using HeroSiege.FEntity.Controllers;
+using HeroSiege.FGameObject;
 using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.GameWorld;
 using HeroSiege.Manager;
@@ -19,6 +20,8 @@ namespace HeroSiege.FEntity.Players
 
         const string HERO_NAME = "Gordox";
 
+        //--- Hero stats ---//
+        //Attributes
         const int START_INT = 20;
         const int START_AGI = 20;
         const int START_STR = 20;
@@ -30,6 +33,11 @@ namespace HeroSiege.FEntity.Players
         const int START_MSPEED = 400;
         const int START_SPEED = 200;
         const int ATTACK_RADIUS = 200;
+
+        //Special attack
+        private bool hastActivated;
+        const float HAST_VALUE = 1.90f;
+        const float HAST_MANA_COST = 10.0f;
 
         public GryphonRider(float x, float y, float width, float height)
             : base(null, x, y, width, height)
@@ -44,6 +52,7 @@ namespace HeroSiege.FEntity.Players
         public override void Init()
         {
             base.Init();
+            hastActivated = false;
             HeroName = HERO_NAME;
             attackType = AttackType.Range;
         }
@@ -85,8 +94,55 @@ namespace HeroSiege.FEntity.Players
 
         public override void Update(float delta)
         {
-
             base.Update(delta);
+            if (hastActivated)
+                UpdateHast(delta);
+        }
+
+        private void UpdateHast(float delta)
+        {
+            Stats.Mana -= HAST_MANA_COST * delta;
+
+            if (Stats.Mana <= 0)
+            {
+                Stats.Mana = 0;
+                hastActivated = false;
+            }
+        }
+
+        public override void UpdatePlayerMovement(float delta, List<Rectangle> objects)
+        {
+            if (isBuying)
+                return;
+
+            velocity = Vector2.Zero;
+
+            if (Control != null && IsAlive)
+                ((HumanControler)Control).UpdateJoystick(delta);
+
+            Vector2 futurePos = Vector2.Zero;
+            //Calculate future pos
+            if (!hastActivated)
+                futurePos = (position + velocity * delta);
+            else
+                futurePos = (position + velocity * delta * HAST_VALUE);
+
+            if (MovingDirection == Direction.North_East || MovingDirection == Direction.North_West ||
+                MovingDirection == Direction.South_East || MovingDirection == Direction.South_West)
+                velocity *= 0.75f; //hard coded value so the player moves at the same speed side ways somewhat 
+
+            //Update movement if no collision will happen
+            if (!CheckCollision(new Rectangle((int)futurePos.X, (int)position.Y, this.GetBounds().Width, this.GetBounds().Height), objects))
+                if (!hastActivated)
+                    position.X += velocity.X * delta;
+                else
+                    position.X += velocity.X * delta * HAST_VALUE;
+
+            if (!CheckCollision(new Rectangle((int)position.X, (int)futurePos.Y, this.GetBounds().Width, this.GetBounds().Height), objects))
+                if (!hastActivated)
+                    position.Y += velocity.Y * delta;
+                else
+                    position.Y += velocity.Y * delta * HAST_VALUE;
         }
 
         public override void Draw(SpriteBatch SB)
@@ -190,12 +246,17 @@ namespace HeroSiege.FEntity.Players
             CreateProjectilesTowardsTarget(parent, ProjectileType.Lightning_Axe);
 
         }
-        //
+        //Hast
         public override void YellowButton(World parent)
         {
             base.YellowButton(parent);
+            if (Stats.Mana > 0)
+                hastActivated = !hastActivated;
+
+            if (Stats.Mana <= 0)
+                hastActivated = false;
         }
-        
+
         //Use Mana potion
         public override void BlueButton(World parent)
         {

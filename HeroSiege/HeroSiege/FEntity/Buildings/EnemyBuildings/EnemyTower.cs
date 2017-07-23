@@ -10,6 +10,9 @@ namespace HeroSiege.FEntity.Buildings.EnemyBuildings
 {
     class EnemyTower : Building
     {
+        const float HEALTH = 2500;
+        const int Armor = 80;
+
         public float AttackSpeed { get { return ATTACK_SPEED; } }
         const float ATTACK_SPEED = 0.8f;
 
@@ -29,8 +32,8 @@ namespace HeroSiege.FEntity.Buildings.EnemyBuildings
         {
             Stats = new StatsData();
             Stats.Radius = 250;
-            Stats.MaxHealth = 3000;
-            Stats.Armor = 110;
+            Stats.MaxHealth = HEALTH;
+            Stats.Armor = Armor;
         }
 
         public override bool LevelUp(float delta)

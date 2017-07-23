@@ -10,6 +10,9 @@ namespace HeroSiege.FEntity.Buildings.EnemyBuildings
 {
     class EnemySpawner : Building
     {
+        const float HEALTH = 3800;
+        const int Armor = 100;
+
         public EnemySpawner(float x, float y)
             : base(ResourceManager.GetTexture("Spawn_Altar"), x, y)
         {
@@ -23,8 +26,8 @@ namespace HeroSiege.FEntity.Buildings.EnemyBuildings
         {
             Stats = new StatsData();
             Stats.Radius = 250;
-            Stats.MaxHealth = 6000;
-            Stats.Armor = 200;
+            Stats.MaxHealth = HEALTH;
+            Stats.Armor = Armor;
         }
 
         public override bool LevelUp(float delta)

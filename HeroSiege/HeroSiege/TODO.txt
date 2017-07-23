@@ -2,8 +2,8 @@
 https://www.spriters-resource.com/pc_computer/warcraft2/
 __________________________________
 For Arcade machine release:
-All heros have Special attack - 25.57% done
-Rebalance the tower health -
+All heros have Special attack - 57.14% done
+Rebalance the tower health - Draft 1 test
 GUI that show where enemies are commming from -
 How to play scene -
 Final boss -
@@ -23,11 +23,11 @@ Mage - Basic Done
 __________________________________
 All shall some special ability:
 Mage - Whirlwind - Done
-Archer - 
-GryphonRider -
+Archer - Dash?
+GryphonRider - hast - Done
 FootMan - 
 Dwarwen - 
-Gnome - Drop bomb
+Gnome - big canon ball - Done
 Knight - hast(run fast) - Done
 __________________________________
 Enemy units:
@@ -40,7 +40,7 @@ Dragon -
 Demon - Done
 Grunt - Done
 Orge - Done
-Peon -
+Peon - no prio
 __________________________________
 Settings and game info:
 Volume?

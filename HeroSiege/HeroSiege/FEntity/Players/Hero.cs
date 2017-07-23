@@ -296,6 +296,9 @@ namespace HeroSiege.FEntity.Players
                         case ProjectileType.small_Canon_Bal:
                             temp = new FireBal(ResourceManager.GetTexture("small_Canon_Bal"), Position.X, Position.Y, 24, 24, Targets[i], GetDamage());
                             break;
+                        case ProjectileType.Big_Canon_bal:
+                            temp = new BigCanonBal(ResourceManager.GetTexture("Big_Canon_bal"), Position.X, Position.Y, 32, 32, Targets[i], GetDamage());
+                            break;
                         case ProjectileType.Lightning_Axe:
                             x = ResourceManager.GetTexture("Lightning_Axe").region.X;
                             y = ResourceManager.GetTexture("Lightning_Axe").region.Y;
@@ -327,6 +330,9 @@ namespace HeroSiege.FEntity.Players
                         break;
                     case ProjectileType.small_Canon_Bal:
                         temp = new FireBal(ResourceManager.GetTexture("small_Canon_Bal"), Position.X, Position.Y, 24, 24, MovingDirection, GetDamage());
+                        break;
+                    case ProjectileType.Big_Canon_bal:
+                        temp = new BigCanonBal(ResourceManager.GetTexture("Big_Canon_bal"), Position.X, Position.Y, 32, 32, MovingDirection, GetDamage());
                         break;
                     case ProjectileType.Lightning_Axe:
                         x = ResourceManager.GetTexture("Lightning_Axe").region.X;

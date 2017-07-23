@@ -29,7 +29,7 @@ namespace HeroSiege.FEntity.Players
         const int START_MANA = 200;
         const int START_MSPEED = 400;
         const int START_SPEED = 200;
-        const int ATTACK_RADIUS = 200;
+        const int ATTACK_RADIUS = 55;
 
         public Dwarven(float x, float y, float width, float height)
             : base(null, x, y, width, height)
@@ -45,7 +45,7 @@ namespace HeroSiege.FEntity.Players
         {
             base.Init();
             HeroName = HERO_NAME;
-            attackType = AttackType.Range;
+            attackType = AttackType.Melee;
         }
         protected override void InitStats()
         {

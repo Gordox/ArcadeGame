@@ -368,7 +368,7 @@ namespace HeroSiege.GameWorld
                 if(obj is Portal)
                     IntreactionPortal((Portal)obj, delta);
 
-                if (!obj.IsAlive)
+                if (obj != null && !obj.IsAlive)
                     DeadObjects.Add(obj);
             }
 
