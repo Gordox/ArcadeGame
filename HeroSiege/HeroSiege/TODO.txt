@@ -5,10 +5,10 @@ For Arcade machine release:
 All heros have Special attack - 57.14% done
 Rebalance the tower health - Draft 1 test
 GUI that show where enemies are commming from -
-How to play scene -
-Final boss -
+How to play, scene -
+Final boss - Done
+Win menu - Done
 __________________________________
-
 Modes:
 easy, normal, Hard, extream
 __________________________________
@@ -23,12 +23,12 @@ Mage - Basic Done
 __________________________________
 All shall some special ability:
 Mage - Whirlwind - Done
-Archer - Dash?
+Archer - Dash? -
 GryphonRider - hast - Done
 FootMan - 
 Dwarwen - 
 Gnome - big canon ball - Done
-Knight - hast(run fast) - Done
+Knight - hast - Done
 __________________________________
 Enemy units:
 Goblin Zepilin - Done
@@ -36,7 +36,7 @@ Goblin sappers - Done
 DeathKnight - Done
 AxeThrower - Done
 Skeleton - Done
-Dragon -
+Dragon - Done
 Demon - Done
 Grunt - Done
 Orge - Done

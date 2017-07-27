@@ -22,6 +22,7 @@ namespace HeroSiege.Scenes
 
         private InGameMenu gameMenu;
         private DefeatMenu defeatMenu;
+        private WinMenu victoryMenu;
 
         public GameScene(GameSettings gameSettings, GraphicsDeviceArcade graphics)
             : base()
@@ -31,6 +32,7 @@ namespace HeroSiege.Scenes
 
             this.gameMenu = new InGameMenu(this);
             this.defeatMenu = new DefeatMenu(this);
+            this.victoryMenu = new WinMenu(this);
         }
 
         public override void Init()
@@ -60,6 +62,8 @@ namespace HeroSiege.Scenes
             {
                 if (defeat)
                     defeatMenu.Update(delta);
+                if(victory)
+                    victoryMenu.Update(delta);
                 World.UpdateEffects(delta);
             }
         }
@@ -92,6 +96,9 @@ namespace HeroSiege.Scenes
 
             if (World.HeroCastleDestroyed)
                 defeat = true;
+
+            if (World.DragonDefeated)
+                victory = true;
         }
 
 
@@ -104,6 +111,8 @@ namespace HeroSiege.Scenes
 
             if (defeat)
                 defeatMenu.Draw(SB);
+            if (victory)
+                victoryMenu.Draw(SB);
         }
 
 
@@ -117,6 +126,7 @@ namespace HeroSiege.Scenes
         {
             this.World = new World(GameSettings);
             this.Renderer = new WorldRender(GameSettings, World, Graphics);
+            victory = defeat = false;
         }
 
         private bool ButtonPress(PlayerIndex index, PlayerInput b)

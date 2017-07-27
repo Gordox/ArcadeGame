@@ -63,6 +63,7 @@
     <Compile Include="FEntity\Controllers\HumanControler.cs" />
     <Compile Include="FEntity\Enemies\Bosses\DeathKnight.cs" />
     <Compile Include="FEntity\Enemies\Bosses\Demon.cs" />
+    <Compile Include="FEntity\Enemies\Bosses\Dragon.cs" />
     <Compile Include="FEntity\Enemies\Enemy.cs" />
     <Compile Include="FEntity\Enemies\Goblin_Sappers.cs" />
     <Compile Include="FEntity\Enemies\Grunt.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="InterFace\UIs\Menus\DefeatMenu.cs" />
     <Compile Include="InterFace\UIs\Menus\InGameMenu.cs" />
     <Compile Include="InterFace\UIs\Menus\StartMenu.cs" />
+    <Compile Include="InterFace\UIs\Menus\WinMenu.cs" />
     <Compile Include="InterFace\UIs\UI.cs" />
     <Compile Include="Manager\ResourceManager.cs" />
     <Compile Include="Manager\Resource\FontResource.cs" />

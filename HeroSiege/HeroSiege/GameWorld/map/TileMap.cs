@@ -181,7 +181,8 @@ namespace HeroSiege.GameWorld.map
                 if (allObjects[i].name.Equals("MiniBoss_1") || allObjects[i].name.Equals("MiniBoss_2") ||
                     allObjects[i].name.Equals("MiniBoss_3")|| allObjects[i].name.Equals("MiniBoss_4"))
                     MiniBossArea.Add(new Rectangle(xPos, Int32.Parse(allObjects[i].Y), Int32.Parse(allObjects[i].Width),Int32.Parse(allObjects[i].Height)));
-
+                if (allObjects[i].name.Equals("FinalBoss"))
+                    FinalBossArea = new Rectangle(xPos, yPos, Int32.Parse(allObjects[i].Width), Int32.Parse(allObjects[i].Height));
 
             }
         }

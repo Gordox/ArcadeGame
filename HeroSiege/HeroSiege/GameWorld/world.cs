@@ -28,6 +28,8 @@ namespace HeroSiege.GameWorld
     class World
     {
         public bool HeroCastleDestroyed { get; private set; }
+        public bool DragonDefeated { get; private set; }
+
         public GameSettings gameSettings { get; private set; }
 
         SpawnController spawnController;
@@ -85,6 +87,7 @@ namespace HeroSiege.GameWorld
 
         public void InitEntitys()
         {
+            DragonDefeated = false;
             Enemies = new List<Entity>();
             EnemieBosses = new List<Entity>();
             deadEnimies = new List<Entity>();
@@ -173,14 +176,22 @@ namespace HeroSiege.GameWorld
 
         public void InitBosses()
         {
+            float x = 0, y = 0;
             foreach (Rectangle area in Map.MiniBossArea)
             {
-                float x = area.X + area.Width / 2;
-                float y = area.Y + area.Height / 2;
-                Demon d = new Demon(x, y, 64, 64);
-                d.SetControl(new BossController(this, d, area));
-                EnemieBosses.Add(d);
+                x = area.X + area.Width / 2;
+                y = area.Y + area.Height / 2;
+                Demon de = new Demon(x, y, 64, 64);
+                de.SetControl(new BossController(this, de, area));
+                EnemieBosses.Add(de);
             }
+
+            x = Map.FinalBossArea.X + Map.FinalBossArea.Width / 2;
+            y = Map.FinalBossArea.Y + Map.FinalBossArea.Height / 2;
+            Dragon dr = new Dragon(x, y, 96, 96);
+            dr.SetControl(new BossController(this, dr, Map.FinalBossArea));
+            EnemieBosses.Add(dr);
+
         }
 
         public void InitGameObjects()
@@ -545,6 +556,8 @@ namespace HeroSiege.GameWorld
                         FireWall = null;
                     }      
                 }
+                if (e is Dragon)
+                    DragonDefeated = true;
 
                 EnemieBosses.Remove(e);
             }
@@ -700,7 +713,6 @@ namespace HeroSiege.GameWorld
         {
             this.Effects = new List<SpriteFX>();
             this.FXPool = new SpriteFXPool();
-
             Initmap(gameSettings.MapName);
             this.spawnController = new SpawnController(this, gameSettings);
             InitBuildings();

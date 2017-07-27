@@ -79,9 +79,10 @@ namespace HeroSiege.FEntity.Controllers
         private void SetFinalBossAttack(List<FSMState> attackList)
         {
             for (int i = 0; i < attackList.Count; i++)
-            {
-                attackList.RemoveAt(i);
-            }
+                machine.AddState(attackList[i]);
+
+            attackList.Clear();
+
         }
 
         //----- Update -----//
