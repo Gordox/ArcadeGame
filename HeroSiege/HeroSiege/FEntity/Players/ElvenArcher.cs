@@ -19,6 +19,8 @@ namespace HeroSiege.FEntity.Players
 
         const string HERO_NAME = "Emma";
 
+        //--- Hero stats ---//
+        //Attributes
         const int START_INT = 20;
         const int START_AGI = 20;
         const int START_STR = 20;
@@ -30,6 +32,9 @@ namespace HeroSiege.FEntity.Players
         const int START_MSPEED = 400;
         const int START_SPEED = 200;
         const int ATTACK_RADIUS = 200;
+
+        //Special attack
+        const float HARPON_MANA_COST = 40;
 
         public ElvenArcher(float x, float y, float width, float height)
             : base(null, x, y, width, height)
@@ -199,6 +204,19 @@ namespace HeroSiege.FEntity.Players
         public override void YellowButton(World parent)
         {
             base.YellowButton(parent);
+
+            if (isAttaking && IsAlive) return;
+
+            if (Stats.Mana < 0 || Stats.Mana < HARPON_MANA_COST) return;
+
+            Stats.Mana -= HARPON_MANA_COST;
+
+            SetAttckAnimations();
+            ResetAnimation();
+            isAttaking = true;
+
+            GetTargets(parent.Enemies);
+            CreateProjectilesTowardsTarget(parent, ProjectileType.Harpon);
         }
 
         //Use Mana potion

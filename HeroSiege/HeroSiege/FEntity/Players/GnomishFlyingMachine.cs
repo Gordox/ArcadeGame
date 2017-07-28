@@ -34,7 +34,7 @@ namespace HeroSiege.FEntity.Players
         const int ATTACK_RADIUS = 200;
 
         //Special attack
-        const float WHIRLWIND_MANA_COST = 50;
+        const float BIG_CANON_BAL_MANA_COST = 50;
 
         public GnomishFlyingMachine(float x, float y, float width, float height)
             : base(null, x, y, width, height)
@@ -202,9 +202,9 @@ namespace HeroSiege.FEntity.Players
 
             if (isAttaking && IsAlive) return;
 
-            if (Stats.Mana < 0 || Stats.Mana < WHIRLWIND_MANA_COST) return;
+            if (Stats.Mana < 0 || Stats.Mana < BIG_CANON_BAL_MANA_COST) return;
 
-            Stats.Mana -= WHIRLWIND_MANA_COST;
+            Stats.Mana -= BIG_CANON_BAL_MANA_COST;
 
             SetAttckAnimations();
             ResetAnimation();

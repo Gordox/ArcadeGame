@@ -288,7 +288,8 @@ namespace HeroSiege.FEntity.Players
                         case ProjectileType.Fire_Bal:
                             temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, Targets[i], GetDamage());
                             break;
-                        case ProjectileType.Lighing_bal:
+                        case ProjectileType.Harpon:
+                            temp = new Harpon(ResourceManager.GetTexture("Harpon"), Position.X, Position.Y, 56, 56, Targets[i], GetDamage());
                             break;
                         case ProjectileType.Arrow:
                             temp = new Arrow(ResourceManager.GetTexture("Arrow"), Position.X, Position.Y, 32, 32, Targets[i], GetDamage());
@@ -323,7 +324,8 @@ namespace HeroSiege.FEntity.Players
                     case ProjectileType.Fire_Bal:
                         temp = new FireBal(ResourceManager.GetTexture("Fire_Bal"), Position.X, Position.Y, 32, 32, MovingDirection, GetDamage());
                         break;
-                    case ProjectileType.Lighing_bal:
+                    case ProjectileType.Harpon:
+                        temp = new Harpon(ResourceManager.GetTexture("Harpon"), Position.X, Position.Y, 56, 56, MovingDirection, GetDamage());
                         break;
                     case ProjectileType.Arrow:
                         temp = new Arrow(ResourceManager.GetTexture("Arrow"), Position.X, Position.Y, 32, 32, MovingDirection, GetDamage());
@@ -354,11 +356,11 @@ namespace HeroSiege.FEntity.Players
                 parent.GameObjects.Add(temp);
             }
         }
-        public void MeleeAttack()
+        public void MeleeAttack(float bonusDmg = 0)
         {
             for (int i = 0; i < Targets.Count; i++)
             {
-                Targets[i].Hit(GetDamage());
+                Targets[i].Hit(GetDamage() + bonusDmg);
             }
             Targets.Clear();
         }

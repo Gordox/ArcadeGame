@@ -19,6 +19,8 @@ namespace HeroSiege.FEntity.Players
 
         const string HERO_NAME = "Horpos";
 
+        //--- Hero stats ---//
+        //Attributes
         const int START_INT = 20;
         const int START_AGI = 20;
         const int START_STR = 20;
@@ -30,6 +32,12 @@ namespace HeroSiege.FEntity.Players
         const int START_MSPEED = 400;
         const int START_SPEED = 200;
         const int ATTACK_RADIUS = 55;
+
+        //Special attack
+        private bool rageActivated;
+        const float RAGE_BONUS_MULTI = .15f;
+        const float RAGE_MANA_COST = 15.0f;
+        const float RAGE_SIZE_INCREASE_VALUE = 1.30f;
 
         public Dwarven(float x, float y, float width, float height)
             : base(null, x, y, width, height)
@@ -85,8 +93,22 @@ namespace HeroSiege.FEntity.Players
 
         public override void Update(float delta)
         {
-
             base.Update(delta);
+            if (rageActivated)
+                UpdateRage(delta);
+        }
+
+        private void UpdateRage(float delta)
+        {
+            Stats.Mana -= RAGE_MANA_COST * delta;
+
+            if (Stats.Mana <= 0)
+            {
+                Stats.Mana = 0;
+                rageActivated = false;
+                this.sprite.Size = this.sprite.Size / RAGE_SIZE_INCREASE_VALUE;
+                this.sprite.Color = Color.White;
+            }
         }
 
         public override void Draw(SpriteBatch SB)
@@ -176,7 +198,7 @@ namespace HeroSiege.FEntity.Players
             }
         }
 
-        //Basic Fire ball attack
+        //Melee attack
         public override void GreenButton(World parent)
         {
             base.GreenButton(parent);
@@ -186,12 +208,32 @@ namespace HeroSiege.FEntity.Players
             ResetAnimation();
             isAttaking = true;
             GetAllTargets(parent.Enemies, parent.EnemyBuildings);
-            MeleeAttack();
+            if (rageActivated)
+                MeleeAttack(GetDamage() * RAGE_BONUS_MULTI);
+            else
+                MeleeAttack();
         }
-        //
+
+        //Activate Rage mode
         public override void YellowButton(World parent)
         {
             base.YellowButton(parent);
+            if (Stats.Mana > 0)
+                rageActivated = !rageActivated;
+
+            if (Stats.Mana <= 0)
+                rageActivated = false;
+
+            if (rageActivated)
+            {
+                this.sprite.Size = this.sprite.Size * RAGE_SIZE_INCREASE_VALUE;
+                this.sprite.Color = Color.Red * 0.8f;
+            }
+            else
+            {
+                this.sprite.Size = this.sprite.Size / RAGE_SIZE_INCREASE_VALUE;
+                this.sprite.Color = Color.White;
+            }
         }
 
         //Use Mana potion

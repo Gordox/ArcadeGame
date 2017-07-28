@@ -49,8 +49,8 @@ namespace HeroSiege
             settings = new GameSettings();
 
             SceneManager.Initialize(this);
-            //SceneManager.AddScene(new StartScene(settings, GraphicsDevice));
-            SceneManager.AddScene(new GameScene(settings, GraphicsDevice));
+            SceneManager.AddScene(new StartScene(settings, GraphicsDevice));
+            //SceneManager.AddScene(new GameScene(settings, GraphicsDevice));
         }
 
       

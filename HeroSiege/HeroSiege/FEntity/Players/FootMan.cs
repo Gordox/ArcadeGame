@@ -19,6 +19,8 @@ namespace HeroSiege.FEntity.Players
 
         const string HERO_NAME = "Jakob";
 
+        //--- Hero stats ---//
+        //Attributes
         const int START_INT = 20;
         const int START_AGI = 20;
         const int START_STR = 20;
@@ -30,6 +32,12 @@ namespace HeroSiege.FEntity.Players
         const int START_MSPEED = 400;
         const int START_SPEED = 200;
         const int ATTACK_RADIUS = 55;
+
+        //Special attack
+        private bool bigHitActivated;
+        const float BIG_HIT_BONUS_MULTI = .55f;
+        const float BIG_HIT_MANA_COST = 22.0f;
+        const float BIG_HIT_SIZE_INCREASE_VALUE = 1.30f;
 
         public FootMan(float x, float y, float width, float height)
             : base(null, x, y, width, height)
@@ -86,8 +94,17 @@ namespace HeroSiege.FEntity.Players
 
         public override void Update(float delta)
         {
-
             base.Update(delta);
+            ResetBigHit();
+        }
+
+        private void ResetBigHit()
+        {
+            if(!isAttaking && bigHitActivated)
+            {
+                this.sprite.Size = this.sprite.Size / BIG_HIT_SIZE_INCREASE_VALUE;
+                bigHitActivated = false;
+            }
         }
 
         public override void Draw(SpriteBatch SB)
@@ -177,7 +194,7 @@ namespace HeroSiege.FEntity.Players
             }
         }
 
-        //Fire ball attack
+        //Melee attack
         public override void GreenButton(World parent)
         {
             base.GreenButton(parent);
@@ -188,12 +205,23 @@ namespace HeroSiege.FEntity.Players
             isAttaking = true;
             GetAllTargets(parent.Enemies, parent.EnemyBuildings);
             MeleeAttack();
-
         }
-        //
+        //Big hit
         public override void YellowButton(World parent)
         {
             base.YellowButton(parent);
+
+            if (isAttaking && IsAlive) return;
+            if (Stats.Mana < 0 || Stats.Mana < BIG_HIT_MANA_COST) return;
+
+            Stats.Mana -= BIG_HIT_MANA_COST;
+            SetAttckAnimations();
+            ResetAnimation();
+            isAttaking = bigHitActivated = true;
+
+            this.sprite.Size = this.sprite.Size * BIG_HIT_SIZE_INCREASE_VALUE;
+            GetAllTargets(parent.Enemies, parent.EnemyBuildings);
+            MeleeAttack(GetDamage() * BIG_HIT_BONUS_MULTI);
         }
 
         //Use Mana potion

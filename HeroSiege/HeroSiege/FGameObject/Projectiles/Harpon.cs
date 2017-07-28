@@ -28,6 +28,8 @@ namespace HeroSiege.FGameObject.Projectiles
         {
             if (damage == 0)
                 damage = DAMAGE;
+            else
+                damage += DAMAGE + damage / 4;
             stats = new StatsData();
             stats.MaxSpeed = 400;
             stats.Speed = 200;
