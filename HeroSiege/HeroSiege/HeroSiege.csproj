@@ -133,13 +133,13 @@
     <Compile Include="FGameObject\GameObject.cs" />
     <Compile Include="GameWorld\map\TileTypes.cs" />
     <Compile Include="GameWorld\World.cs" />
-    <Compile Include="InterFace\GUI\Button.cs" />
     <Compile Include="InterFace\GUI\HUD.cs" />
     <Compile Include="InterFace\GUI\Inventory.cs" />
     <Compile Include="InterFace\GUI\ShopWindow.cs" />
     <Compile Include="InterFace\IUI.cs" />
     <Compile Include="InterFace\UIs\Buttons\BigButton.cs" />
     <Compile Include="InterFace\UIs\Buttons\Button.cs" />
+    <Compile Include="InterFace\UIs\EnemyPathWay.cs" />
     <Compile Include="InterFace\UIs\Menus\DefeatMenu.cs" />
     <Compile Include="InterFace\UIs\Menus\InGameMenu.cs" />
     <Compile Include="InterFace\UIs\Menus\StartMenu.cs" />

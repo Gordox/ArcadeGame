@@ -4,7 +4,7 @@ __________________________________
 For Arcade machine release:
 All heros have Special attack - 57.14% done
 Rebalance the tower health - Draft 1 test
-GUI that show where enemies are commming from -
+GUI that show where enemies are commming from - Done
 How to play, scene -
 Final boss - Done
 Win menu - Done

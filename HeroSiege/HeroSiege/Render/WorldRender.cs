@@ -3,6 +3,7 @@ using HeroSiege.FEntity.Buildings;
 using HeroSiege.FGameObject;
 using HeroSiege.GameWorld;
 using HeroSiege.InterFace.GUI;
+using HeroSiege.InterFace.UIs;
 using HeroSiege.Manager;
 using HeroSiege.Tools;
 using Microsoft.Xna.Framework;
@@ -20,8 +21,11 @@ namespace HeroSiege.Render
 
         public World World { get; private set; }
         private GraphicsDeviceArcade graphicsDev;
+
         private HUD playerOneHUD, playerTwoHUD;
         private ShopWindow plOneShopWindow, plTwoShopWindow;
+        private EnemyPathWay pathWay;
+
         public Camera2D Camera { get; private set; }
         public Camera2D PlayerOneCamera { get; private set; }
         public Camera2D PlayerTwoCamera { get; private set; }
@@ -34,6 +38,7 @@ namespace HeroSiege.Render
             this.World = world;
             this.graphicsDev = graphicsDev;
 
+            InitPathWay();
             InitCameraAndViewPorts(graphicsDev);
             InitHUDwindows();
         }
@@ -99,11 +104,19 @@ namespace HeroSiege.Render
                     break;
             }
         }
+        private void InitPathWay()
+        {
+            this.pathWay = new EnemyPathWay();
+            pathWay.Init(World.Map);
+            pathWay.SetSpawnPos(World.spawnController.GetSpawnPos);
+        }
 
         //----- Updates -----//
         public void Update(float delta)
         {
             CameraUpdate();
+
+            UpdatePathWay(delta);
 
             if (plOneShopWindow != null)
                 plOneShopWindow.Update(delta);
@@ -133,6 +146,18 @@ namespace HeroSiege.Render
                     break;
             }
             
+        }
+        private void UpdatePathWay(float delta)
+        {
+            pathWay.Update(delta);
+
+            if(pathWay.SpawnPos != World.spawnController.GetSpawnPos)
+            {
+                pathWay.ClearList();
+                pathWay.SetSpawnPos(World.spawnController.GetSpawnPos);
+                pathWay.CalcNewWayPoint();
+                pathWay.PopulateList();
+            }
         }
 
         //----- Draws -----//
@@ -213,6 +238,8 @@ namespace HeroSiege.Render
 
             //--- World map ---//
             World.Map.DrawMapTexture(SB);
+
+            pathWay.Draw(SB);
 
             //--- Debug Wakeble tiles ---//
             if (DevTools.DevDebugMode || DevTools.DevDrawWalkbleTiles)

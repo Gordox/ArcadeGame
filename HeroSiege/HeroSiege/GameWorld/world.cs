@@ -32,7 +32,7 @@ namespace HeroSiege.GameWorld
 
         public GameSettings gameSettings { get; private set; }
 
-        SpawnController spawnController;
+        public SpawnController spawnController { get; private set; }
 
         public SpatialHashGrid HashGrid { get; private set; }
 

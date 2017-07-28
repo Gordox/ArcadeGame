@@ -184,5 +184,15 @@ namespace HeroSiege.AISystems
 
             deathKnightLevel++;
         }
+
+        public Vector2 GetSpawnPos
+        {
+            get {
+                if (currentSpawner != null)
+                    return currentSpawner.Position;
+                else
+                    return Vector2.Zero;
+            }
+        }
     }
 }
