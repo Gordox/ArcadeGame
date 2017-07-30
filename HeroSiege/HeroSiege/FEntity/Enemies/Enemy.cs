@@ -122,7 +122,7 @@ namespace HeroSiege.FEntity.Enemies
             if(Stats.Health < Stats.MaxHealth)
                 DrawHealtBar(SB);
             else
-                SB.DrawString(ResourceManager.GetFont("Arial_Font"), "lvl: " + level, new Vector2(Position.X - 10, Position.Y - 30), Color.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
+                SB.DrawString(ResourceManager.GetFont("Arial_Font"), "lvl: " + level, new Vector2(Position.X - 10, Position.Y - 35), Color.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
         }
 
         //Health bar
@@ -130,7 +130,7 @@ namespace HeroSiege.FEntity.Enemies
         {
             string text = "lvl: " + level;
             float nameLenght = ResourceManager.GetFont("Arial_Font").MeasureString(text).X;
-            SB.DrawString(ResourceManager.GetFont("Arial_Font"), text, new Vector2(Position.X - nameLenght, Position.Y - 31.5f), Color.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
+            SB.DrawString(ResourceManager.GetFont("Arial_Font"), text, new Vector2(Position.X - nameLenght - 5, Position.Y - 32f), Color.Black, 0, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
             //Background
             SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 25, Position.Y - 30), new Rectangle(0, 0, 50, 8), Color.Black);
             SB.Draw(ResourceManager.GetTexture("WhitePixel"), new Vector2(Position.X - 24, Position.Y - 29),

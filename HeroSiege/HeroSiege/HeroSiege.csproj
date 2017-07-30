@@ -140,8 +140,11 @@
     <Compile Include="InterFace\UIs\Buttons\BigButton.cs" />
     <Compile Include="InterFace\UIs\Buttons\Button.cs" />
     <Compile Include="InterFace\UIs\EnemyPathWay.cs" />
+    <Compile Include="InterFace\UIs\Menus\Credit.cs" />
     <Compile Include="InterFace\UIs\Menus\DefeatMenu.cs" />
+    <Compile Include="InterFace\UIs\Menus\HowToPlayMenu.cs" />
     <Compile Include="InterFace\UIs\Menus\InGameMenu.cs" />
+    <Compile Include="InterFace\UIs\Menus\Menu.cs" />
     <Compile Include="InterFace\UIs\Menus\StartMenu.cs" />
     <Compile Include="InterFace\UIs\Menus\WinMenu.cs" />
     <Compile Include="InterFace\UIs\UI.cs" />
@@ -191,7 +194,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Buildnings\" />
     <Folder Include="Globals\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

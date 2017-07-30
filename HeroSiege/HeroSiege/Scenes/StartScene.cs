@@ -20,6 +20,7 @@ namespace HeroSiege.Scenes
         SelectCharacters,
         Options,
         Credit,
+        HowToPlay,
         HighScore
     }
 
@@ -29,6 +30,8 @@ namespace HeroSiege.Scenes
         private GameSettings settings;
 
         private StartMenu startMenu;
+        private Credit credit;
+        private HowToPlayMenu howToPlay;
 
         private DoorAnimation doorAnimation;
 
@@ -46,6 +49,7 @@ namespace HeroSiege.Scenes
         {
             this.currentSceene = newSceene = Screens.MainMenu;
             this.startMenu = new StartMenu(this, graphics.Viewport);
+            this.howToPlay = new HowToPlayMenu(graphics.Viewport);
             this.settings = settings;
             this.Graphics = graphics;
 
@@ -87,6 +91,11 @@ namespace HeroSiege.Scenes
                     UpdateCharacterSelection(delta);
                     break;
                 case Screens.Options:
+                    break;
+                case Screens.HowToPlay:
+                    howToPlay.Update(delta);
+                    break;
+                case Screens.HighScore:
                     break;
                 case Screens.Credit:
                     break;
@@ -171,6 +180,11 @@ namespace HeroSiege.Scenes
                 case Screens.Credit:
                     DrawCreditSceene(SB);
                     break;
+                case Screens.HowToPlay:
+                    DrawHowToPlaySceene(SB);
+                    break;
+                case Screens.HighScore:
+                    break;
                 default:
                     break;
             }
@@ -193,6 +207,10 @@ namespace HeroSiege.Scenes
         private void DrawCreditSceene(SpriteBatch SB)
         {
 
+        }
+        private void DrawHowToPlaySceene(SpriteBatch SB)
+        {
+            howToPlay.Draw(SB);
         }
 
         private void DrawDoorAnimation(SpriteBatch SB)

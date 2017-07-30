@@ -1,6 +1,7 @@
 ﻿using HeroSiege.FTexture2D;
 using HeroSiege.FTexture2D.FAnimation;
 using HeroSiege.InterFace.UIs;
+using HeroSiege.InterFace.UIs.Menus;
 using HeroSiege.Manager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,13 +13,12 @@ using System.Text;
 
 namespace HeroSiege.Tools
 {
-    class CharacterSelecter : UI
+    class CharacterSelecter : Menu
     {
         const float FRAME_DURATION_MOVEMNT = 0.05f;
 
         public CharacterType SelectedHero { get; private set; }
         private PlayerIndex playerIndex;
-        private int selectIndex, oldIndex;
         private Vector2 drawPos;
         Sprite animations;
         private string titleText = string.Empty, bioText = string.Empty;
@@ -35,7 +35,7 @@ namespace HeroSiege.Tools
         public void Init()
         {         
             SelectedHero = CharacterType.None;
-            selectIndex = oldIndex = 7;
+            currentIndex = oldIndex = 7;
             animations.SetSize(128, 128);
             animations.SetAnimation("Looking");
         }
@@ -60,11 +60,11 @@ namespace HeroSiege.Tools
             animations.Update(delta);
 
             UpdateJoystick();
-            if (selectIndex != oldIndex)
-                UpdateSelection();
+            if (currentIndex != oldIndex)
+                UpdateSelected();
         }
 
-        private void UpdateSelection()
+        protected override void UpdateSelected()
         {
             switch (SelectedHero)
             {
@@ -108,7 +108,7 @@ namespace HeroSiege.Tools
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Knight");
                     titleText = "Knight";
-                    hInfo = new HeroInfo() { name = "Lucifer", type = "Melee", hp = "1200", mp = "200", dif = "Easy"};
+                    hInfo = new HeroInfo() { name = "Lucifer", type = "Melee", hp = "1200", mp = "200", dif = "Easy" };
                     break;
                 case CharacterType.None:
                     animations.SetSize(128, 128);
@@ -117,28 +117,28 @@ namespace HeroSiege.Tools
                 default:
                     break;
             }
-            oldIndex = selectIndex;
+            oldIndex = currentIndex;
         }
 
-        private void UpdateSelected(int i)
+        protected override void UpdateSelectIndex(int i)
         {
-            selectIndex += i;
+            currentIndex += i;
 
-            if (selectIndex > 6)
-                selectIndex -= 7;
-            else if (selectIndex < 0)
-                selectIndex += 7;
+            if (currentIndex > 6)
+                currentIndex -= 7;
+            else if (currentIndex < 0)
+                currentIndex += 7;
 
-            SelectedHero = (CharacterType)selectIndex;
+            SelectedHero = (CharacterType)currentIndex;
         }
-        private void UpdateJoystick()
+
+        protected override void UpdateJoystick()
         {
-            if (ButtonPress(PlayerInput.Right))
-                UpdateSelected(1);
-            else if (ButtonPress(PlayerInput.Left))
-                UpdateSelected(-1);
+            if (ButtonPress(playerIndex, PlayerInput.Right))
+                UpdateSelectIndex(1);
+            else if (ButtonPress(playerIndex, PlayerInput.Left))
+                UpdateSelectIndex(-1);
         }
-
 
         public override void Draw(SpriteBatch SB)
         {
@@ -170,11 +170,6 @@ namespace HeroSiege.Tools
 
                 DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), bioText, drawPos + new Vector2(65, -40), Color.Gold, 1);
             }
-        }
-
-        private bool ButtonPress(PlayerInput b)
-        {
-            return InputHandler.GetButtonState(playerIndex, b) == InputState.Released;
         }
 
         struct HeroInfo
