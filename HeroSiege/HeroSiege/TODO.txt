@@ -7,7 +7,7 @@ Rebalance the tower health - Done
 GUI that show where enemies are commming from - Done
 Final boss - Done
 Win menu - Done
-How to play, scene - working on it
+How to play, scene - Done
 Credit, scene - 
 Some balance + bugs fixes -
 __________________________________
@@ -23,7 +23,7 @@ FootMan - Basic Done
 Knight - Basic Done
 Mage - Basic Done
 __________________________________
-All shall some special ability:
+All shall have some special ability:
 Mage - Whirlwind - Done
 Archer - Shooting harpon - Done
 GryphonRider - hast - Done
