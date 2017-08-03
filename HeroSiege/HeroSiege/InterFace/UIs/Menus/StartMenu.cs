@@ -125,6 +125,9 @@ namespace HeroSiege.InterFace.UIs.Menus
                 case Buttons.Credits:
                     if (ButtonDown(PlayerIndex.One, PlayerInput.A) || ButtonDown(PlayerIndex.Two, PlayerInput.A))
                         bnCredit.ButtonState = ButtonState.pressed;
+
+                    if (ButtonPress(PlayerIndex.One, PlayerInput.A) || ButtonPress(PlayerIndex.Two, PlayerInput.A))
+                        startSceen.SetNewScreen(Screens.Credit);
                     break;
                 default:
 

@@ -573,6 +573,12 @@ namespace HeroSiege.InterFace.UIs.Menus
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_16"), "Page 1 / 7",
                centerInfoPanel + new Vector2(0, infoPanelSize.Y - 20), Color.Gold, 1);
 
+            DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Main attribute",
+                centerInfoPanel + new Vector2(-420, -infoPanelSize.Y + 180), Color.Gold, 1);
+
+            SB.Draw(ResourceManager.GetTexture("StatsIcons"), centerInfoPanel + new Vector2(-500, -infoPanelSize.Y + 250),
+               new Rectangle(112, 111, 112, 111), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
             SB.Draw(ResourceManager.GetTexture("ArcherSheet"), centerInfoPanel + new Vector2(-128, -infoPanelSize.Y + 200),
                new Rectangle(256, 0, 64, 64), Color.White, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
         }
@@ -590,6 +596,12 @@ namespace HeroSiege.InterFace.UIs.Menus
 
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_16"), "Page 2 / 7",
                centerInfoPanel + new Vector2(0, infoPanelSize.Y - 20), Color.Gold, 1);
+
+            DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Main attribute",
+                centerInfoPanel + new Vector2(-420, -infoPanelSize.Y + 180), Color.Gold, 1);
+
+            SB.Draw(ResourceManager.GetTexture("StatsIcons"), centerInfoPanel + new Vector2(-500, -infoPanelSize.Y + 250),
+               new Rectangle(0, 111, 112, 111), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
             SB.Draw(ResourceManager.GetTexture("MageSheet"), centerInfoPanel + new Vector2(-128, -infoPanelSize.Y + 200),
                new Rectangle(256, 0, 64, 64), Color.White, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
@@ -609,6 +621,12 @@ namespace HeroSiege.InterFace.UIs.Menus
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_16"), "Page 3 / 7",
                centerInfoPanel + new Vector2(0, infoPanelSize.Y - 20), Color.Gold, 1);
 
+            DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Main attribute",
+                centerInfoPanel + new Vector2(-420, -infoPanelSize.Y + 180), Color.Gold, 1);
+
+            SB.Draw(ResourceManager.GetTexture("StatsIcons"), centerInfoPanel + new Vector2(-500, -infoPanelSize.Y + 250),
+               new Rectangle(0, 111, 112, 111), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
             SB.Draw(ResourceManager.GetTexture("GryponRiderSheet"), centerInfoPanel + new Vector2(-128, -infoPanelSize.Y + 200),
                new Rectangle(384, 0, 96, 96), Color.White, 0, Vector2.Zero, 2.7f, SpriteEffects.None, 0);
         }
@@ -626,6 +644,12 @@ namespace HeroSiege.InterFace.UIs.Menus
 
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_16"), "Page 4 / 7",
                centerInfoPanel + new Vector2(0, infoPanelSize.Y - 20), Color.Gold, 1);
+
+            DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Main attribute",
+                 centerInfoPanel + new Vector2(-420, -infoPanelSize.Y + 180), Color.Gold, 1);
+
+            SB.Draw(ResourceManager.GetTexture("StatsIcons"), centerInfoPanel + new Vector2(-500, -infoPanelSize.Y + 250),
+               new Rectangle(224, 111, 112, 111), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
             SB.Draw(ResourceManager.GetTexture("FootManSheet"), centerInfoPanel + new Vector2(-128, -infoPanelSize.Y + 200),
                new Rectangle(256, 0, 64, 64), Color.White, 0, Vector2.Zero, 4, SpriteEffects.None, 0);
@@ -645,6 +669,12 @@ namespace HeroSiege.InterFace.UIs.Menus
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_16"), "Page 5 / 7",
                centerInfoPanel + new Vector2(0, infoPanelSize.Y - 20), Color.Gold, 1);
 
+            DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Main attribute",
+                centerInfoPanel + new Vector2(-420, -infoPanelSize.Y + 180), Color.Gold, 1);
+
+            SB.Draw(ResourceManager.GetTexture("StatsIcons"), centerInfoPanel + new Vector2(-500, -infoPanelSize.Y + 250),
+               new Rectangle(224, 111, 112, 111), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
             SB.Draw(ResourceManager.GetTexture("Dwarven"), centerInfoPanel + new Vector2(-128, -infoPanelSize.Y + 200),
                new Rectangle(224, 0, 56, 56), Color.White, 0, Vector2.Zero, 4.6f, SpriteEffects.None, 0);
         }
@@ -663,6 +693,12 @@ namespace HeroSiege.InterFace.UIs.Menus
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_16"), "Page 6 / 7",
                centerInfoPanel + new Vector2(0, infoPanelSize.Y - 20), Color.Gold, 1);
 
+            DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Main attribute",
+                centerInfoPanel + new Vector2(-420, -infoPanelSize.Y + 180), Color.Gold, 1);
+
+            SB.Draw(ResourceManager.GetTexture("StatsIcons"), centerInfoPanel + new Vector2(-500, -infoPanelSize.Y + 250),
+               new Rectangle(112, 111, 112, 111), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
             SB.Draw(ResourceManager.GetTexture("Gnomish"), centerInfoPanel + new Vector2(-128, -infoPanelSize.Y + 200),
                new Rectangle(320, 0, 80, 80), Color.White, 0, Vector2.Zero, 3.2f, SpriteEffects.None, 0);
         }
@@ -680,6 +716,12 @@ namespace HeroSiege.InterFace.UIs.Menus
 
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_16"), "Page 7 / 7",
                centerInfoPanel + new Vector2(0, infoPanelSize.Y - 20), Color.Gold, 1);
+
+            DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Main attribute",
+                 centerInfoPanel + new Vector2(-420, -infoPanelSize.Y + 180), Color.Gold, 1);
+
+            SB.Draw(ResourceManager.GetTexture("StatsIcons"), centerInfoPanel + new Vector2(-500, -infoPanelSize.Y + 250),
+               new Rectangle(224, 111, 112, 111), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
             SB.Draw(ResourceManager.GetTexture("KnightSheet"), centerInfoPanel + new Vector2(-128, -infoPanelSize.Y + 200),
                new Rectangle(288, 0, 72, 72), Color.White, 0, Vector2.Zero, 3.5f, SpriteEffects.None, 0);

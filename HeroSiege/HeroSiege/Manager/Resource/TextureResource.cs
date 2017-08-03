@@ -30,7 +30,7 @@ namespace HeroSiege.Manager.Resource
         private Texture2D leftDoor, rightDoor;
 
         //----- Other Textures -----//
-        private Texture2D blackPixel, whitePixel, controlls;
+        private Texture2D blackPixel, whitePixel, controlls, imgOnDev;
         //Debug
         private Texture2D debugWalkTile, debugRange;
 
@@ -94,6 +94,7 @@ namespace HeroSiege.Manager.Resource
             blackPixel = content.Load<Texture2D>(@"Assets\Other\BlackPixel");
             whitePixel = content.Load<Texture2D>(@"Assets\Other\WhitePixel");
             controlls = content.Load<Texture2D>(@"Assets\Other\Controlls");
+            imgOnDev = content.Load<Texture2D>(@"Assets\Other\Me");
             //Add all textures and sprite to Dict
             AddTextureRegionToDict();
         }
@@ -150,6 +151,7 @@ namespace HeroSiege.Manager.Resource
             textureRegion["BlackPixel"] = new TextureRegion(blackPixel, 0, 0, 1, 1);
             textureRegion["WhitePixel"] = new TextureRegion(whitePixel, 0, 0, 1, 1);
             textureRegion["Controlls"] = new TextureRegion(controlls, 0, 0, controlls.Width, controlls.Height);
+            textureRegion["ImgOnDev"] = new TextureRegion(imgOnDev, 0, 0, imgOnDev.Width, imgOnDev.Height);
 
 
             //Debug

@@ -50,6 +50,7 @@ namespace HeroSiege.Scenes
             this.currentSceene = newSceene = Screens.MainMenu;
             this.startMenu = new StartMenu(this, graphics.Viewport);
             this.howToPlay = new HowToPlayMenu(graphics.Viewport);
+            this.credit = new Credit(graphics.Viewport);
             this.settings = settings;
             this.Graphics = graphics;
 
@@ -98,6 +99,7 @@ namespace HeroSiege.Scenes
                 case Screens.HighScore:
                     break;
                 case Screens.Credit:
+                    credit.Update(delta);
                     break;
                 default:
                     break;
@@ -206,7 +208,7 @@ namespace HeroSiege.Scenes
         }
         private void DrawCreditSceene(SpriteBatch SB)
         {
-
+            credit.Draw(SB);
         }
         private void DrawHowToPlaySceene(SpriteBatch SB)
         {
