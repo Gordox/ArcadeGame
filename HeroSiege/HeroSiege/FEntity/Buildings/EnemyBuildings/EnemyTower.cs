@@ -10,8 +10,8 @@ namespace HeroSiege.FEntity.Buildings.EnemyBuildings
 {
     class EnemyTower : Building
     {
-        const float HEALTH = 2500;
-        const int Armor = 80;
+        const float HEALTH = 1500;
+        const int Armor = 20;
 
         public float AttackSpeed { get { return ATTACK_SPEED; } }
         const float ATTACK_SPEED = 0.8f;

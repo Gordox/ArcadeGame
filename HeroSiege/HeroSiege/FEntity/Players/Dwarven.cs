@@ -21,13 +21,13 @@ namespace HeroSiege.FEntity.Players
 
         //--- Hero stats ---//
         //Attributes
-        const int START_INT = 20;
-        const int START_AGI = 20;
-        const int START_STR = 20;
-        const int START_ARM = 20;
-        const int START_DMG = 20;
+        const int START_INT = 200;
+        const int START_AGI = 200;
+        const int START_STR = 5;
+        const int START_ARM = 15;
+        const int START_DMG = 30;
 
-        const int START_HEALTH = 1200;
+        const int START_HEALTH = 2800;
         const int START_MANA = 200;
         const int START_MSPEED = 400;
         const int START_SPEED = 200;
@@ -273,7 +273,7 @@ namespace HeroSiege.FEntity.Players
 
         public override int GetDmgOnStats()
         {
-            return (int)(Stats.Damage * (GetInteligence() / 100f));
+            return (int)(Stats.Damage * (GetStrenght() / 100f));
         }
     }
 }

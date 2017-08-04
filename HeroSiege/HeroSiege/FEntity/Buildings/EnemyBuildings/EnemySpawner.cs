@@ -10,8 +10,8 @@ namespace HeroSiege.FEntity.Buildings.EnemyBuildings
 {
     class EnemySpawner : Building
     {
-        const float HEALTH = 3800;
-        const int Armor = 100;
+        const float HEALTH = 2000;
+        const int Armor = 50;
 
         public EnemySpawner(float x, float y)
             : base(ResourceManager.GetTexture("Spawn_Altar"), x, y)

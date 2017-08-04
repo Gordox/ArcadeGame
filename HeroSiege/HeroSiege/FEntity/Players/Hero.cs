@@ -98,6 +98,9 @@ namespace HeroSiege.FEntity.Players
             Stats.Level++;
             Stats.MaxXP = Stats.MaxXP + Stats.MaxXP / 2;
             Stats.XP = 0;
+            Stats.MaxHealth = Stats.MaxHealth * 1.1f;
+            Stats.MaxMana = Stats.MaxMana * 1.05f;
+            Stats.Damage = (int)(Stats.Damage * 1.1f);
             IncreaceTargets();
         }
         protected void CheckXP()

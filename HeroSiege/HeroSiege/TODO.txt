@@ -9,7 +9,7 @@ Final boss - Done
 Win menu - Done
 How to play, scene - Done
 Credit, scene - Done
-Some balance + bugs fixes -
+Some balance + bugs fixes - Done
 __________________________________
 Modes:
 easy, normal, Hard, extream

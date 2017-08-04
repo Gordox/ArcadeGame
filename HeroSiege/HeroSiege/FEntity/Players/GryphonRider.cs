@@ -22,13 +22,13 @@ namespace HeroSiege.FEntity.Players
 
         //--- Hero stats ---//
         //Attributes
-        const int START_INT = 20;
-        const int START_AGI = 20;
-        const int START_STR = 20;
-        const int START_ARM = 20;
-        const int START_DMG = 20;
+        const int START_INT = 12;
+        const int START_AGI = 25;
+        const int START_STR = 5;
+        const int START_ARM = 15;
+        const int START_DMG = 18;
 
-        const int START_HEALTH = 1200;
+        const int START_HEALTH = 1350;
         const int START_MANA = 200;
         const int START_MSPEED = 400;
         const int START_SPEED = 200;

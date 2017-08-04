@@ -135,12 +135,12 @@ namespace HeroSiege.InterFace.GUI
         private void DrawHealtManaStatus(SpriteBatch SB)
         {
             //Health
-            string text = (int)player.Stats.Health + " / " + player.Stats.MaxHealth;
+            string text = (int)player.Stats.Health + " / " + (int)player.Stats.MaxHealth;
             Vector2 textposition = new Vector2(position.X - hudSize.X / 2 + 140, viewPort.Height - 38);
             DrawCenterString(SB, ResourceManager.GetFont("Arial_Font"), text, textposition, Color.Green, 0.8f);
 
             //Mana
-            text = (int)player.Stats.Mana + " / " + player.Stats.MaxMana;
+            text = (int)player.Stats.Mana + " / " + (int)player.Stats.MaxMana;
             textposition = new Vector2(position.X - hudSize.X / 2 + 140, viewPort.Height - 13);
             DrawCenterString(SB, ResourceManager.GetFont("Arial_Font"), text, textposition, Color.Blue, 0.8f);
 

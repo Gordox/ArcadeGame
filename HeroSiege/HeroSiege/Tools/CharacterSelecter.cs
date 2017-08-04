@@ -72,7 +72,7 @@ namespace HeroSiege.Tools
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Elven");
                     titleText = "Elven Archer";
-                    hInfo = new HeroInfo() { name = "Emma", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Emma", type = "Range", hp = "1200", mp = "200", dif = "Medium" };
                     break;
                 case CharacterType.Mage:
                     animations.SetSize(128, 128);
@@ -84,31 +84,31 @@ namespace HeroSiege.Tools
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Gryphon");
                     titleText = "Gryphon Rider";
-                    hInfo = new HeroInfo() { name = "Gordox", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Gordox", type = "Range", hp = "1350", mp = "200", dif = "Easy" };
                     break;
                 case CharacterType.FootMan:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Foot");
                     titleText = "Foot Man";
-                    hInfo = new HeroInfo() { name = "Jakob", type = "Melee", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Jakob", type = "Melee", hp = "1200", mp = "200", dif = "Hard" };
                     break;
                 case CharacterType.Dwarven:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Dwarven");
                     titleText = "Dwarven";
-                    hInfo = new HeroInfo() { name = "Horpos", type = "Melee", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Horpos", type = "Melee", hp = "2800", mp = "200", dif = "Easy" };
                     break;
                 case CharacterType.Gnomish_Flying_Machine:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Gnome");
                     titleText = "Gnomish Flying Machine";
-                    hInfo = new HeroInfo() { name = "Zoegas Nation", type = "Range", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Zoegas Nation", type = "Range", hp = "1500", mp = "200", dif = "Medium" };
                     break;
                 case CharacterType.Knight:
                     animations.SetSize(128, 128);
                     animations.SetAnimation("Knight");
                     titleText = "Knight";
-                    hInfo = new HeroInfo() { name = "Lucifer", type = "Melee", hp = "1200", mp = "200", dif = "Easy" };
+                    hInfo = new HeroInfo() { name = "Lucifer", type = "Melee", hp = "1500", mp = "200", dif = "Hard" };
                     break;
                 case CharacterType.None:
                     animations.SetSize(128, 128);

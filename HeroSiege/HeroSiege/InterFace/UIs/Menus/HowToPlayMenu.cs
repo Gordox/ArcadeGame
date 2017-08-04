@@ -561,7 +561,7 @@ namespace HeroSiege.InterFace.UIs.Menus
         private void DrawArcherInfo(SpriteBatch SB)
         {
             string heroInfo = "Emma a strong archer from the woods\n"+
-                "Hp: 1200\nMp: 200\nDificulty: Easy\nAgi: 20\nStrg: 20\nInt: 20\n"+
+                "Hp: 1200\nMp: 200\nDificulty: Medium\nAgi: 20\nStrg: 12\nInt: 22\n"+
                 "Special ability: Shooting harpons at enemies";
 
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Emma",
@@ -585,7 +585,7 @@ namespace HeroSiege.InterFace.UIs.Menus
         private void DrawMageInfo(SpriteBatch SB)
         {
             string heroInfo = "Constantine an aprentis the dark art of magic\n" +
-                "Hp: 1200\nMp: 200\nDificulty: Easy\nAgi: 20\nStrg: 20\nInt: 20\n" +
+                "Hp: 1200\nMp: 200\nDificulty: Easy\nAgi: 10\nStrg: 5\nInt: 25\n" +
                 "Special ability: Shooting a spirit tornados at enemies";
 
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Constantine",
@@ -609,7 +609,7 @@ namespace HeroSiege.InterFace.UIs.Menus
         private void DrawGryphonRiderInfo(SpriteBatch SB)
         {
             string heroInfo = "Gordox the thunder warrior in the sky\n" +
-                "Hp: 1200\nMp: 200\nDificulty: Easy\nAgi: 20\nStrg: 20\nInt: 20\n" +
+                "Hp: 1200\nMp: 200\nDificulty: Medium\nAgi: 25\nStrg: 5\nInt: 12\n" +
                 "Special ability: Increase the movment speed";
 
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Gordox",
@@ -633,7 +633,7 @@ namespace HeroSiege.InterFace.UIs.Menus
         private void DrawFootManInfo(SpriteBatch SB)
         {
             string heroInfo = "Jakob a nobel soldier that take pride in his work\n" +
-                "Hp: 1200\nMp: 200\nDificulty: Easy\nAgi: 20\nStrg: 20\nInt: 20\n" +
+                "Hp: 1280\nMp: 200\nDificulty: Hard\nAgi: 30\nStrg: 22\nInt: 1\n" +
                 "Special ability: Slam of Justice";
 
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Jakob",
@@ -657,7 +657,7 @@ namespace HeroSiege.InterFace.UIs.Menus
         private void DrawDwarvenInfo(SpriteBatch SB)
         {
             string heroInfo = "Horpos bros, two brothers that loves to fight and hate to lose!\n" +
-                "Hp: 1200\nMp: 200\nDificulty: Easy\nAgi: 20\nStrg: 20\nInt: 20\n" +
+                "Hp: 2800\nMp: 200\nDificulty: Easy\nAgi: 200\nStrg: 5\nInt: 200\n" +
                 "Special ability: Rage";
 
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Horpos",
@@ -681,7 +681,7 @@ namespace HeroSiege.InterFace.UIs.Menus
         private void DrawGnomeInfo(SpriteBatch SB)
         {
             string heroInfo = "Zoegas Nation is a crasy gnome that think he is in the sky\nbut is biking on the ground!\n" +
-                "Hp: 1200\nMp: 200\nDificulty: Easy\nAgi: 20\nStrg: 20\nInt: 20\n" +
+                "Hp: 1500\nMp: 200\nDificulty: Medium\nAgi: 15\nStrg: 1\nInt: 30\n" +
                 "Special ability: Big canon bal";
 
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Zoegas Nation",
@@ -705,7 +705,7 @@ namespace HeroSiege.InterFace.UIs.Menus
         private void DrawKnightInfo(SpriteBatch SB)
         {
             string heroInfo = "Lucifer, an asshole that only care about him self\n" +
-                "Hp: 1200\nMp: 200\nDificulty: Easy\nAgi: 20\nStrg: 20\nInt: 20\n" +
+                "Hp: 1800\nMp: 200\nDificulty: Hard\nAgi: 15\nStrg: 22\nInt: 8\n" +
                 "Special ability: Increase the movment speed";
 
             DrawCenterString(SB, ResourceManager.GetFont("WarFont_32"), "Lucifer",
